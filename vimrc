@@ -10,14 +10,7 @@ let g:airline_theme='bubblegum'
 
 " lightline config
 set laststatus=2
+if !has('gui_running')
+  set t_Co=256
+endif
 
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified', 'helloworld' ] ]
-      \ },
-      \ 'component': {
-      \   'helloworld': 'Hello, world!'
-      \ },
-      \ }
