@@ -1,6 +1,7 @@
-ln -sf $PWD/vimrc ~/.vimrc
-ln -sf $PWD/Xresources ~/.Xresources
-ln -sf $PWD/tmux.conf ~/.tmux.conf
+#!/usr/bin/zsh
+ln -sf "$PWD/vimrc" ~/.vimrc
+ln -sf "$PWD/Xresources" ~/.Xresources
+ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 mkdir ~/.vim
 ln -sf $PWD/bundle ~/.vim/bundle
 ln -sf $PWD/zshrc ~/.zshrc
@@ -8,5 +9,6 @@ mkdir ~/.zfunctions
 fpath=( "$HOME/.zfunctions" $fpath )
 ln -sf "$PWD/pure.zsh" "$HOME/.zfunctions/prompt_pure_setup"
 ln -sf "$PWD/async.zsh" "$HOME/.zfunctions/async"
-
+mkdir -p ~/.vim/autoload ~/.vim/bundle && \
+curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 
