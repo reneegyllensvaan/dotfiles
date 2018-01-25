@@ -1,4 +1,0 @@
-[submodule "bundle/lightline.vim"]
-	url = https://github.com/itchyny/lightline.vim
-[submodule "bundle/vim-bufferline"]
-	url = https://github.com/bling/vim-bufferline
