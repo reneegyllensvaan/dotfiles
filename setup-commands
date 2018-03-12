@@ -2,6 +2,7 @@
 #xorg configs
 ln -sf "$PWD/xinitrc" ~/.xinitrc
 ln -sf "$PWD/xsession" ~/.xsession
+ln -sf "$PWD/xres" ~/.xres
 
 #vim configs
 ln -sf "$PWD/vimrc" ~/.vimrc

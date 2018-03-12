@@ -1,16 +1,27 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/bin:/usr/local/bin:$PATH
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 export RANGER_LOAD_DEFAULT_RC=FALSE
+export GOPATH=$HOME/code/go
 
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
-alias vim='nvim'
-alias vi='nvim'
-alias cl='clear'
 alias rg='ranger'
 alias sx='startx;exit'
+
+#clipboard aliases
+alias xc='xsel -b'
+alias xs='xsel'
+
+#editor aliases
+alias vim='nvim'
+alias vi='nvim'
+alias v='nvim'
+
+#git aliases
+alias g='git'
+alias gstat='git status'
 
 fpath=( "$HOME/.zfunctions" $fpath )
 autoload -U promptinit; promptinit
