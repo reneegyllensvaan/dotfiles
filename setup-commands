@@ -24,3 +24,8 @@ ln -sf "$PWD/async.zsh" "$HOME/.zfunctions/async"
 # i3 config
 mkdir -p ~/.config/i3
 ln -sf "$PWD/i3_config" ~/.config/i3/config
+
+# ranger config
+mkdir -p ~/.config/ranger
+ln -sf "$PWD/rifle.conf" ~/.config/rifle.conf
+ln -sf "$PWD/rc.conf" ~/.config/rc.conf
