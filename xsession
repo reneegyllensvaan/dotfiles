@@ -10,7 +10,7 @@ lxqt-notificationd &
 clipmenud &
 #solaar &
 #guake &
-#feh --bg-center ~/.config/wallpaper/night-sky.jpg
+#~/.fehbg
 hsetroot &
 compton --config ~/.config/compton.conf &
 

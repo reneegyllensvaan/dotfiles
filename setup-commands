@@ -27,5 +27,5 @@ ln -sf "$PWD/i3_config" ~/.config/i3/config
 
 # ranger config
 mkdir -p ~/.config/ranger
-ln -sf "$PWD/rifle.conf" ~/.config/rifle.conf
-ln -sf "$PWD/rc.conf" ~/.config/rc.conf
+ln -sf "$PWD/rifle.conf" ~/.config/ranger/rifle.conf
+ln -sf "$PWD/rc.conf" ~/.config/ranger/rc.conf

@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/.bin:/usr/local/bin:$PATH
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 export RANGER_LOAD_DEFAULT_RC=FALSE
@@ -23,6 +23,7 @@ alias v='nvim'
 alias g='git'
 alias gstat='git status'
 
+unsetopt nomatch
 fpath=( "$HOME/.zfunctions" $fpath )
 autoload -U promptinit; promptinit
 prompt pure
