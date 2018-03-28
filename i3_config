@@ -121,19 +121,19 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # i3bar+status config
-bar {
-        status_command i3status
-	mode dock
-	colors {
-           background #1c2023
-           statusline #eeeeee
-           separator #666666
-           focused_workspace  #dc8cc3 #dc8cc3 #000000
-           active_workspace   #333333 #5f676a #ffffff
-           inactive_workspace #333333 #222222 #888888
-           urgent_workspace   #2f343a #900000 #ffffff
-        }
-}
+#bar {
+#        status_command i3status
+#	mode dock
+#	colors {
+#           background #1c2023
+#           statusline #eeeeee
+#           separator #666666
+#           focused_workspace  #dc8cc3 #dc8cc3 #000000
+#           active_workspace   #333333 #5f676a #ffffff
+#           inactive_workspace #333333 #222222 #888888
+#           urgent_workspace   #2f343a #900000 #ffffff
+#        }
+#}
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #dc8cc3 #dc8cc3 #000000 #2e9ef4   #dc8cc3

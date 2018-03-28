@@ -10,8 +10,8 @@ lxqt-notificationd &
 clipmenud &
 #solaar &
 #guake &
-#~/.fehbg
-hsetroot &
+~/.fehbg
+#hsetroot &
 compton --config ~/.config/compton.conf &
 
 #keyboard config
