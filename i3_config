@@ -4,8 +4,9 @@ font pango:monospace 8
 bindsym $mod+Shift+BackSpace restart
 bindsym $mod+Shift+Mod1+BackSpace exit
 new_window pixel 3
-hide_edge_borders smart
 #new_window normal
+hide_edge_borders smart
+gaps inner 30
 
 #floating window settings
 floating_modifier $mod
@@ -121,24 +122,26 @@ bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
 # i3bar+status config
-#bar {
-#        status_command i3status
-#	mode dock
-#	colors {
-#           background #1c2023
-#           statusline #eeeeee
-#           separator #666666
-#           focused_workspace  #dc8cc3 #dc8cc3 #000000
-#           active_workspace   #333333 #5f676a #ffffff
-#           inactive_workspace #333333 #222222 #888888
-#           urgent_workspace   #2f343a #900000 #ffffff
-#        }
-#}
+bar {
+	font xft:Noto:monospace 9
+        status_command i3status
+	mode dock
+	colors {
+           background #8f63a2
+           statusline #eeeeee
+           separator #666666
+           focused_workspace  #dc8cc3 #dc8cc3 #000000
+           active_workspace   #8f63a2 #5f676a #ffffff
+           inactive_workspace #8f63a2 #5d2e72 #ffffff
+           urgent_workspace   #2f343a #900000 #ffffff
+        }
+}
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #dc8cc3 #dc8cc3 #000000 #2e9ef4   #dc8cc3
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.focused          #49deb2 #49deb2 #000000 #49deb2   #49deb2
+client.focused_inactive #ecb4db #ecb4db #ffffff #ecb4db   #ecb4db
+#client.unfocused       #333333 #222222 #888888 #292d2e   #222222
+client.unfocused        #dc8cc3 #dc8cc3 #000000 #2e9ef4   #dc8cc3
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff

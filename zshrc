@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/.bin:/usr/local/bin:$PATH
+export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/.bin:/usr/local/bin:/opt/android-sdk/platform-tools:/opt/flutter/bin:$PATH
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 export RANGER_LOAD_DEFAULT_RC=FALSE
@@ -10,7 +10,10 @@ alias ls='ls --color=auto'
 alias rg='ranger'
 alias sx='startx;exit'
 
-#clipboard aliases
+# quick nav commands
+alias up='cd $PWD/..'
+
+# clipboard aliases
 alias xc='xsel -b'
 alias xs='xsel'
 
