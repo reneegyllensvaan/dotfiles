@@ -1,32 +1,41 @@
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/.bin:/usr/local/bin:$PATH
-export EDITOR=/usr/bin/nvim
-export VISUAL=/usr/bin/nvim
+export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
+export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+export VISUAL="/usr/local/bin/nvim"
+export EDITOR="$VISUAL"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export GOPATH=$HOME/code/go
 
-alias grep='grep --color=auto'
-alias ls='ls --color=auto'
+#alias grep='grep --color=auto'
+#alias ls='ls --color=auto'
 alias rg='ranger'
 alias sx='startx;exit'
 
 #clipboard aliases
-alias xc='xsel -b'
-alias xs='xsel'
+#alias xc='xsel -b'
+#alias xs='xsel'
+alias xc='pbcopy'
+alias xp='pbpaste'
 
 #editor aliases
-alias vim='nvim'
+#alias vim='nvim'
+alias spacevim='vim'
 alias vi='nvim'
 alias v='nvim'
 
-#git aliases
+#git settings
 alias g='git'
 alias gstat='git status'
+export GIT_EDITOR=nvim
 
 unsetopt nomatch
 fpath=( "$HOME/.zfunctions" $fpath )
+fpath=( "$HOME/.zsh-completions/src" $fpath)
+autoload -U compinit; compinit
 autoload -U promptinit; promptinit
 prompt pure
+export HISTFILE=~/.zhistory
 
 # tab completion options
 setopt automenu
@@ -52,5 +61,4 @@ setopt menucomplete
 #bindkey "^H" backward-delete-word
 
 # enable vi mode
-bindkey -v
-export KEYTIMEOUT=1
+bindkey -v;export KEYTIMEOUT=1
