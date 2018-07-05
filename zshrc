@@ -20,12 +20,16 @@ alias xp='pbpaste'
 
 #editor aliases
 #alias vim='nvim'
-alias spacevim='vim'
+alias vim='nvim'
 alias vi='nvim'
 alias v='nvim'
 
 #git settings
 alias g='git'
+alias push='git push'
+alias pull='git pull'
+alias commit='git commit'
+alias add='git add'
 alias gstat='git status'
 export GIT_EDITOR=nvim
 
