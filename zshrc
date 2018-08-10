@@ -1,68 +1,74 @@
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/.bin:/usr/local/bin:$PATH
-export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export VISUAL="/usr/local/bin/nvim"
-export EDITOR="$VISUAL"
-export RANGER_LOAD_DEFAULT_RC=FALSE
-export GOPATH=$HOME/code/go
+source "$HOME/antigen.zsh"
 
-#alias grep='grep --color=auto'
-#alias ls='ls --color=auto'
-alias rg='ranger'
-alias sx='startx;exit'
+# Load the oh-my-zsh's library.
+antigen use oh-my-zsh
 
-#clipboard aliases
-#alias xc='xsel -b'
-#alias xs='xsel'
-alias xc='pbcopy'
-alias xp='pbpaste'
+# Bundles from the default repo (robbyrussell's oh-my-zsh).
+antigen bundle git
+antigen bundle vi-mode
+antigen bundle fabric
+antigen bundle pip
+antigen bundle docker
+antigen bundle command-not-found
 
-#editor aliases
-#alias vim='nvim'
-alias vim='nvim'
-alias vi='nvim'
-alias v='nvim'
+# Syntax highlighting bundle.
+antigen bundle zsh-users/zsh-syntax-highlighting
 
-#git settings
-alias g='git'
-alias push='git push'
-alias pull='git pull'
-alias commit='git commit'
-alias add='git add'
-alias gstat='git status'
-export GIT_EDITOR=nvim
+# Load the theme.
+antigen theme frisk
+#antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
 
-unsetopt nomatch
-fpath=( "$HOME/.zfunctions" $fpath )
-fpath=( "$HOME/.zsh-completions/src" $fpath)
-autoload -U compinit; compinit
-autoload -U promptinit; promptinit
-prompt pure
-export HISTFILE=~/.zhistory
+# Tell Antigen that you're done.
+antigen apply
 
-# tab completion options
-setopt automenu
-setopt menucomplete
+# oh-my-zsh aliases git to g, but that should be curt-git
+unalias g
 
-# key bindings
-#bindkey "^[[7~" beginning-of-line
-#bindkey "^[B" beginning-of-line
-#bindkey "^[[8~" end-of-line
-#bindkey "[[5~" beginning-of-history
-#bindkey "e[6~" end-of-history
-#bindkey "^[[3~" delete-char
-#bindkey "^[D~" delete-word
-#bindkey "^[h" backward-char
-#bindkey "^[l" forward-char
-#bindkey "e[2~" quoted-insert
-#bindkey "^[w" forward-word
-#bindkey "^[e" emacs-forward-word
-#bindkey "^[b" backward-word
-#bindkey "eOd" emacs-backward-word
-#bindkey "ee[C" forward-word
-#bindkey "ee[D" backward-word
-#bindkey "^H" backward-delete-word
+# also disable shared history from OMZ
+setopt no_share_history
+unsetopt share_history
+setopt PROMPT_SUBST
 
-# enable vi mode
-bindkey -v;export KEYTIMEOUT=1
+source "$HOME/.profile"
+source "$HOME/.alias"
+
+export HISTFILE="$HOME/.zhistory"
+setopt inc_append_history
+setopt share_history
+#unsetopt nomatch
+#fpath=( "$HOME/.zfunctions" $fpath )
+#fpath=( "$HOME/.zsh-completions/src" $fpath)
+#autoload -U compinit; compinit
+#autoload -U promptinit; promptinit
+#prompt pure
+
+EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 ) 
+
+function random_emoji {
+  echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
+}
+
+function precmd {
+	random_emoji
+}
+
+PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
+$'\n$(random_emoji) '"%{$fg_bold[black]%}➜%{$reset_color%}  "
+# Colors and stuff
+#export PROMPT="\$(random_emoji)"
+#export PROMPT="%(?~%F{magenta}.%F{red})❯%f"
+export LESS="-SFXR"
+export CLICOLOR=1
+export CLICOLOR_FORCE=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+
+#export GIT_EDITOR=nvim
+export GIT_EDITOR=yi
+
+# enable legacy vi mode
+#bindkey -v;export KEYTIMEOUT=1
+export KEYTIMEOUT=1
+
+# fzf.zsh integration settings
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

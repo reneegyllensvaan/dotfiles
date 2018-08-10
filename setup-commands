@@ -15,10 +15,9 @@ ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 
 #zsh configs
 ln -sf $PWD/zshrc ~/.zshrc
+ln -sf $PWD/zfunctions ~/.zfunctions
 mkdir ~/.zfunctions
 fpath=( "$HOME/.zfunctions" $fpath )
-ln -sf "$PWD/pure.zsh" "$HOME/.zfunctions/prompt_pure_setup"
-ln -sf "$PWD/async.zsh" "$HOME/.zfunctions/async"
 
 # i3 config
 mkdir -p ~/.config/i3
