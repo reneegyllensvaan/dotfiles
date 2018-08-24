@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 #xorg configs
 ln -sf "$PWD/xinitrc" ~/.xinitrc
 ln -sf "$PWD/xsession" ~/.xsession
