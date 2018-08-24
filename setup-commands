@@ -14,6 +14,10 @@ curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
 #tmux config
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 
+#tmux config
+mkdir ~/.config/dunst
+ln -sf "$PWD/dunstrc" ~/.config/dunst/dunstrc
+
 #zsh configs
 ln -sf $PWD/zshrc ~/.zshrc
 mkdir ~/.zfunctions

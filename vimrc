@@ -1,7 +1,7 @@
 "execute pathogen#helptags()
 syntax on
 filetype plugin indent on
-call pathogen#infect()
+"call pathogen#infect()
 
 " airline config:
 let g:airline_powerline_fonts = 1

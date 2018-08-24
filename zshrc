@@ -1,9 +1,16 @@
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/.bin:/usr/local/bin:$PATH
+export PATH=$HOME/.local/bin:$HOME/.bin:$HOME/code/go/bin:$HOME/.bin:/usr/local/bin:$PATH
+export PATH=$HOME/.npm-packages/bin:$PATH
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export GOPATH=$HOME/code/go
+export NPM_PACKAGES="$HOME/.npm-packages"
+
+unset MANPATH
+export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+source "$HOME/.tiny-care-terminal"
 
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
@@ -31,25 +38,6 @@ prompt pure
 # tab completion options
 setopt automenu
 setopt menucomplete
-
-# key bindings
-#bindkey "^[[7~" beginning-of-line
-#bindkey "^[B" beginning-of-line
-#bindkey "^[[8~" end-of-line
-#bindkey "[[5~" beginning-of-history
-#bindkey "e[6~" end-of-history
-#bindkey "^[[3~" delete-char
-#bindkey "^[D~" delete-word
-#bindkey "^[h" backward-char
-#bindkey "^[l" forward-char
-#bindkey "e[2~" quoted-insert
-#bindkey "^[w" forward-word
-#bindkey "^[e" emacs-forward-word
-#bindkey "^[b" backward-word
-#bindkey "eOd" emacs-backward-word
-#bindkey "ee[C" forward-word
-#bindkey "ee[D" backward-word
-#bindkey "^H" backward-delete-word
 
 # enable vi mode
 bindkey -v
