@@ -2,24 +2,26 @@
 export DIR_MARK_PATH="$HOME/.dir-marks"
 f () {
   # if mark file isn't set, use /tmp
-  if [ -z "$CURT_MARK_PATH" ]; then
+  if [ -z "$DIR_MARK_PATH" ]; then
     echo "no mark path. setting path to /tmp/curt-marks"
-    export CURT_MARK_PATH="/tmp/curt-marks"
+    export DIR_MARK_PATH="/tmp/curt-marks"
   fi
 
   # make file if not exists
-  touch $CURT_MARK_PATH
+  touch $DIR_MARK_PATH
 
   # if no arg, do nothing
   if [[ ! $1 ]]
   then
-    exit 0
+    return
   fi
 
-  target=$(cat $CURT_MARK_PATH | sed -E -n 's|^('$1' )(.*)$|\2|p')
+  target=$(cat $DIR_MARK_PATH | sed -E -n 's|^('$1' )(.*)$|\2|p')
 
-  if [ -n $target ]
+  if [ -z $target ]
   then
+    echo "mark $1 not found"
+  else
     cd $target
   fi
 }
