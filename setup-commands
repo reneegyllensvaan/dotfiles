@@ -16,8 +16,6 @@ ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 #zsh configs
 ln -sf $PWD/zshrc ~/.zshrc
 ln -sf $PWD/zfunctions ~/.zfunctions
-mkdir ~/.zfunctions
-fpath=( "$HOME/.zfunctions" $fpath )
 
 # i3 config
 mkdir -p ~/.config/i3

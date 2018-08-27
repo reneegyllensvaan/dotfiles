@@ -31,6 +31,7 @@ setopt PROMPT_SUBST
 
 source "$HOME/.profile"
 source "$HOME/.alias"
+source "$HOME/.zfunctions/dir-marks.zsh"
 
 export HISTFILE="$HOME/.zhistory"
 setopt inc_append_history
@@ -55,15 +56,13 @@ function precmd {
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
 $'\n$(random_emoji) '"%{$fg_bold[black]%}➜%{$reset_color%}  "
 # Colors and stuff
-#export PROMPT="\$(random_emoji)"
-#export PROMPT="%(?~%F{magenta}.%F{red})❯%f"
 export LESS="-SFXR"
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 
 #export GIT_EDITOR=nvim
-export GIT_EDITOR=yi
+export GIT_EDITOR=nvim
 
 # enable legacy vi mode
 #bindkey -v;export KEYTIMEOUT=1
