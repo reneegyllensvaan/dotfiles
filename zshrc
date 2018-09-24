@@ -10,7 +10,7 @@ export NPM_PACKAGES="$HOME/.npm-packages"
 unset MANPATH
 export MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
-source "$HOME/.tiny-care-terminal"
+#source "$HOME/.tiny-care-terminal"
 
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
