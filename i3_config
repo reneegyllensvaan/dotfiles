@@ -28,7 +28,7 @@ bindsym $mod+F10 bar mode toggle
 # launcher hotkeys
 bindsym $mod+Mod1+w exec --no-startup-id "GTK_THEME=Adwaita:light firefox"
 bindsym $mod+Mod1+f exec --no-startup-id "franz-bin"
-bindsym $mod+Mod1+e exec --no-startup-id "emacs"
+bindsym $mod+Mod1+e exec --no-startup-id "emacsclient -c -a ''"
 
 # core controls 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -125,20 +125,20 @@ bar {
         status_command i3status
 	mode dock
 	colors {
-           background #1c2023
-           statusline #eeeeee
-           separator #666666
-           focused_workspace  #dc8cc3 #dc8cc3 #000000
+           background #1d262a
+           statusline #e7ebed
+           separator #e7ebed
+           focused_workspace  #adf7be #adf7be #1d262a
            active_workspace   #333333 #5f676a #ffffff
-           inactive_workspace #333333 #222222 #888888
-           urgent_workspace   #2f343a #900000 #ffffff
+           inactive_workspace #435b67 #222222 #a1b0b8
+           urgent_workspace   #fc3841 #fc3841 #000000
         }
 }
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #dc8cc3 #dc8cc3 #000000 #2e9ef4   #dc8cc3
-client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.focused          #fc669b #fc669b #000000 #fcc6db   #fc669b
+client.focused_inactive #435b67 #435b67 #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #e7ebed #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
