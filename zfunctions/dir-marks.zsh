@@ -3,8 +3,8 @@ export DIR_MARK_PATH="$HOME/.dir-marks"
 f () {
   # if mark file isn't set, use /tmp
   if [ -z "$DIR_MARK_PATH" ]; then
-    echo "no mark path. setting path to /tmp/curt-marks"
-    export DIR_MARK_PATH="/tmp/curt-marks"
+    echo "no mark path. setting path to /tmp/dir-marks"
+    export DIR_MARK_PATH="/tmp/dir-marks"
   fi
 
   # make file if not exists
