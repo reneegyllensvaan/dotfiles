@@ -1,9 +1,0 @@
-! ------------------------------------------------------------------------------
-! urxvt options
-! ------------------------------------------------------------------------------
-URxvt*font: xft:Noto Sans Mono:size=10:antialias=true
-!URxvt*font: xft:Noto Mono
-URxvt*keysym.Shift-Control-V: perl:clipboard:paste
-URxvt*iso14755: False
-URxvt*perl-ext-common: default,clipboard
-URxvt*scrollBar: false

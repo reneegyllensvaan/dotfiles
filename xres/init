@@ -1,4 +1,0 @@
-xrdb material-colors
-xrdb -merge xterm
-xrdb -merge rofi
-xrdb -merge urxvt
