@@ -1,0 +1,44 @@
+#xorg configs
+ln -sf "$PWD/xinitrc" ~/.xinitrc
+ln -sf "$PWD/xsession" ~/.xsession
+ln -sf "$PWD/xres" ~/.xres
+
+#vim directories and conf
+ln -sf "$PWD/vimrc" ~/.vimrc
+mkdir -p ~/.vim
+mkdir -p ~/.vim/blugin
+mkdir -p ~/.vim/autoload
+mkdir -p ~/.vim/files
+mkdir -p ~/.vim/files/swap
+mkdir -p ~/.vim/files/backup
+mkdir -p ~/.vim/files/info
+mkdir -p ~/.vim/files/undo
+ln -sf "$PWD/plug.vim" ~/.vim/autoload/plug.vim
+
+#tmux config
+ln -sf "$PWD/tmux.conf" ~/.tmux.conf
+
+#zsh configs
+ln -sf $PWD/zshrc ~/.zshrc
+ln -sf $PWD/zfunctions ~/.zfunctions
+
+# i3 config
+mkdir -p ~/.config/i3
+ln -sf "$PWD/i3_config" ~/.config/i3/config
+
+# ranger config
+mkdir -p ~/.config/ranger
+ln -sf "$PWD/rifle.conf" ~/.config/ranger/rifle.conf
+ln -sf "$PWD/rc.conf" ~/.config/ranger/rc.conf
+
+# various configs
+ln -sf "$PWD/spacemacs" ~/.spacemacs
+ln -sf "$PWD/antigen.zsh" ~/antigen.zsh
+ln -sf "$PWD/alias" ~/.alias
+ln -sf "$PWD/profile" ~/.profile
+
+# various directories
+mkdir -p ~/.bin
+ln -sf "$PWD/short-git" ~/.bin/short-git
+
+mkdir -p ~/.local/bin
