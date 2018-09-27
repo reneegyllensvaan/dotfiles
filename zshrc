@@ -46,7 +46,7 @@ setopt share_history
 
 EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 ) 
 
-if [[ $() ]] then
+if [[ ! $(echo $TERM | grep rxvt) ]] then
   function prepend_prompt {
     echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
   }
