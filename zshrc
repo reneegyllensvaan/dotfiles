@@ -32,7 +32,7 @@ setopt PROMPT_SUBST
 
 source "$HOME/.profile"
 source "$HOME/.alias"
-source "$HOME/.zfunctions/dir-marks.zsh"
+#source "$HOME/.zfunctions/dir-marks.zsh"
 
 export HISTFILE="$HOME/.zhistory"
 setopt inc_append_history
@@ -47,17 +47,17 @@ setopt share_history
 EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 ) 
 
 if [[ $() ]] then
-  function random_emoji {
+  function prepend_prompt {
     echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
   }
 
   function precmd {
-    random_emoji
+    prepend_prompt
   }
 fi
 
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
-$'\n$(random_emoji) '"%{$fg_bold[black]%}➜%{$reset_color%}  "
+$'\n$(prepend_prompt) '"%{$fg_bold[black]%}➜%{$reset_color%}  "
 # Colors and stuff
 export LESS="-SFXR"
 export CLICOLOR=1
