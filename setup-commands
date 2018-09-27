@@ -1,7 +1,7 @@
 #xorg configs
 ln -sf "$PWD/xinitrc" ~/.xinitrc
 ln -sf "$PWD/xsession" ~/.xsession
-ln -sf "$PWD/xres" ~/.xres
+ln -sTf "$PWD/xres" ~/.xres
 
 #vim directories and conf
 ln -sf "$PWD/vimrc" ~/.vimrc
@@ -20,7 +20,7 @@ ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 
 #zsh configs
 ln -sf $PWD/zshrc ~/.zshrc
-ln -sf $PWD/zfunctions ~/.zfunctions
+ln -sTf $PWD/zfunctions ~/.zfunctions
 
 # i3 config
 mkdir -p ~/.config/i3
