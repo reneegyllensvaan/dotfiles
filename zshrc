@@ -54,6 +54,10 @@ if [[ $() ]] then
   function precmd {
     prepend_prompt
   }
+
+else
+  function prepend_prompt {
+  }
 fi
 
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
