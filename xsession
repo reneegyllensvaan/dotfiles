@@ -11,7 +11,7 @@ clipmenud &
 #guake &
 #~/.fehbg
 hsetroot &
-compton --config ~/.config/compton.conf &
+#compton --config ~/.config/compton.conf &
 
 #keyboard config
 #setxkbmap -layout "us,se" -option "grp:caps_switch"
