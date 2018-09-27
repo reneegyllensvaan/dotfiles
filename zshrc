@@ -32,7 +32,7 @@ setopt PROMPT_SUBST
 
 source "$HOME/.profile"
 source "$HOME/.alias"
-#source "$HOME/.zfunctions/dir-marks.zsh"
+source "$HOME/.zfunctions/dir-marks.zsh"
 
 export HISTFILE="$HOME/.zhistory"
 setopt inc_append_history
@@ -77,4 +77,4 @@ bindkey -v;export KEYTIMEOUT=1
 
 # fzf.zsh integration settings
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.zfunctions/fzf.zsh ] && source ~/.zfunctions/fzf.zsh

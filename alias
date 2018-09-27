@@ -1,6 +1,7 @@
 alias rg='ranger'
 alias sx='startx;exit'
 alias up='cd ..'
+alias lass='ls --color=always -lAh | less -R'
 
 # clipboard aliases
 #alias xc='xsel -b'
