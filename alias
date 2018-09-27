@@ -20,5 +20,5 @@ alias g='short-git'
 alias v='vagrant'
 
 # command replacements
-alias sed='gsed'
-alias grep='ggrep'
+command -v gsed && alias sed='gsed'
+command -v ggrep && alias grep='ggrep'
