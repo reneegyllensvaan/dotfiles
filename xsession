@@ -1,6 +1,5 @@
 (cd ~/.xres && ./init)
 
-
 disable bell beep
 xset b off
 albert &
@@ -15,6 +14,5 @@ hsetroot &
 compton --config ~/.config/compton.conf &
 
 #keyboard config
-setxkbmap -layout "us,se" -option "grp:caps_switch"
-
-
+#setxkbmap -layout "us,se" -option "grp:caps_switch"
+setxkbmap -layout "us" -option "caps:escape"

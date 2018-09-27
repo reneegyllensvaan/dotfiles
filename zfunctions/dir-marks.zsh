@@ -1,5 +1,19 @@
-# dir-mark settings
-export DIR_MARK_PATH="$HOME/.dir-marks"
+#  Usage:
+#    
+#    m x  -  mark current directory as x
+#  
+#    f x  -  cd to directory marked as x
+#  
+#  Configuration:
+#  
+#    DIR_MARK_PATH  -  Export this variable as the path
+#                      to the file in which directory 
+#                      marks should be stored. The file
+#                      does not need to exist but the 
+#                      directory does.
+#                      ( default: /tmp/dir-marks )
+
+
 f () {
   # if mark file isn't set, use /tmp
   if [ -z "$DIR_MARK_PATH" ]; then

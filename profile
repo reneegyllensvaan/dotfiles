@@ -12,4 +12,5 @@ export GOPATH=$HOME/code/go
 export GPG_TTY=$(tty)
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
 export LDFLAGS=-L/usr/local/opt/texinfo/lib
+export DIR_MARK_PATH="$HOME/.dir-marks"
 
