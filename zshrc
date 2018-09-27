@@ -46,13 +46,15 @@ setopt share_history
 
 EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 ) 
 
-function random_emoji {
-  echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
-}
+if [[ $() ]] then
+  function random_emoji {
+    echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
+  }
 
-function precmd {
-	random_emoji
-}
+  function precmd {
+    random_emoji
+  }
+fi
 
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
 $'\n$(random_emoji) '"%{$fg_bold[black]%}➜%{$reset_color%}  "
