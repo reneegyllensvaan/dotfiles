@@ -4,6 +4,11 @@ ln -sf "$PWD/xsession" ~/.xsession
 rm ~/.xres
 ln -s "$PWD/xres" ~/.xres
 
+# urxvt conf
+mkdir -p ~/.urxvt
+rm ~/.urxvt/ext
+ln -s "$PWD/urxvt-ext" ~/.urxvt/ext
+
 #vim directories and conf
 ln -sf "$PWD/vimrc" ~/.vimrc
 mkdir -p ~/.vim
