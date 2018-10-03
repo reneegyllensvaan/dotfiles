@@ -479,10 +479,6 @@ before packages are loaded."
     :config
     (editorconfig-mode 1))
   (setq imenu-list-auto-resize nil)
-  ;; (use-package adaptive-wrap
-  ;;   :ensure t
-  ;;   :config
-  ;;   (adaptive-wrap-prefix-mode 1))
   (setq org-log-done nil)
 
   (spaceline-toggle-all-the-icons-separator-left-active-1-off)
@@ -502,9 +498,52 @@ before packages are loaded."
   (spaceline-toggle-all-the-icons-separator-right-active-2-off)
   (spaceline-toggle-all-the-icons-separator-right-inactive-off)
 
+  ;; Set up proper line wrapping
+  (spacemacs/toggle-truncate-lines-off)
+  (adaptive-wrap-prefix-mode)
+
+  ;; Use left command on osx as super key
+  (setq mac-command-modifier 'super)
+
   ;; Linter configs
   (setq flycheck-flake8rc "~/Projects/flake8rc")
   (setq flycheck-python-flake8-executable "python")
+
+  (defun my-correct-symbol-bounds (pretty-alist)
+    "Prepend a TAB character to each symbol in this alist,
+this way compose-region called by prettify-symbols-mode
+will use the correct width of the symbols
+instead of the width measured by char-width."
+    (mapcar (lambda (el)
+              (setcdr el (string ?\t (cdr el)))
+              el)
+            pretty-alist))
+
+  (defun my-ligature-list (ligatures codepoint-start)
+    "Create an alist of strings to replace with
+codepoints starting from codepoint-start."
+    (let ((codepoints (-iterate '1+ codepoint-start (length ligatures))))
+      (-zip-pair ligatures codepoints)))
+
+  (setq my-hasklig-ligatures
+        (let* ((ligs '("&&" "***" "*>" "\\\\" "||" "|>" "::"
+                       "==" "===" "==>" "=>" "=<<" "!!" ">>"
+                       ">>=" ">>>" ">>-" ">-" "->" "-<" "-<<"
+                       "<*" "<*>" "<|" "<|>" "<$>" "<>" "<-"
+                       "<<" "<<<" "<+>" ".." "..." "++" "+++"
+                       "/=" ":::" ">=>" "->>" "<=>" "<=<" "<->")))
+          (my-correct-symbol-bounds (my-ligature-list ligs #Xe100))))
+
+  ;; nice glyphs for haskell with hasklig
+  (defun my-set-hasklig-ligatures ()
+    "Add hasklig ligatures for use with prettify-symbols-mode."
+    (setq prettify-symbols-alist
+          (append my-hasklig-ligatures prettify-symbols-alist))
+    (prettify-symbols-mode))
+
+  (add-hook 'python-mode-hook 'my-set-hasklig-ligatures)
+  (add-hook 'javascript-mode-hook 'my-set-hasklig-ligatures)
+
 
   ;; (use-package helm-system-packages :ensure t)
   )
