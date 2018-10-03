@@ -1,3 +1,5 @@
+#!/bin/sh
+
 #xorg configs
 ln -sf "$PWD/xinitrc" ~/.xinitrc
 ln -sf "$PWD/xsession" ~/.xsession
