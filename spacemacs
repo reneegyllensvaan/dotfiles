@@ -498,16 +498,12 @@ before packages are loaded."
   (spaceline-toggle-all-the-icons-separator-right-active-2-off)
   (spaceline-toggle-all-the-icons-separator-right-inactive-off)
 
-  ;; Set up proper line wrapping
-  (spacemacs/toggle-truncate-lines-off)
-  (adaptive-wrap-prefix-mode)
-
   ;; Use left command on osx as super key
-  (setq mac-command-modifier 'super)
+  ;; (setq mac-command-modifier 'super)
 
   ;; Linter configs
   (setq flycheck-flake8rc "~/Projects/flake8rc")
-  (setq flycheck-python-flake8-executable "python")
+  (setq flycheck-python-flake8-executable "/usr/local/bin/flake8")
 
   (defun my-correct-symbol-bounds (pretty-alist)
     "Prepend a TAB character to each symbol in this alist,
@@ -542,7 +538,12 @@ codepoints starting from codepoint-start."
     (prettify-symbols-mode))
 
   (add-hook 'python-mode-hook 'my-set-hasklig-ligatures)
-  (add-hook 'javascript-mode-hook 'my-set-hasklig-ligatures)
+  (add-hook 'js-mode-hook 'my-set-hasklig-ligatures)
+  (add-hook 'js2-mode-hook 'my-set-hasklig-ligatures)
+
+  ;; Make Org-mode look good in small windows
+  (add-hook 'org-mode-hook 'spacemacs/toggle-truncate-lines-off)
+  ;; (add-hook 'org-mode-hook '(lambda () (adaptive-wrap-prefix-mode t)))
 
 
   ;; (use-package helm-system-packages :ensure t)
