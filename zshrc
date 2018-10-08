@@ -24,6 +24,7 @@ antigen apply
 
 # oh-my-zsh aliases git to g, but that should be curt-git
 unalias g
+unalias gb
 
 # also disable shared history from OMZ
 setopt no_share_history
@@ -33,6 +34,7 @@ setopt PROMPT_SUBST
 source "$HOME/.profile"
 source "$HOME/.alias"
 source "$HOME/.zfunctions/dir-marks.zsh"
+source "$HOME/.zfunctions/miscellaneous.zsh"
 
 export HISTFILE="$HOME/.zhistory"
 setopt inc_append_history

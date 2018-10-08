@@ -1,0 +1,20 @@
+#!/bin/sh
+
+explicit_groups="base base-devel i3 xorg"
+
+# list packages from explicit groups
+pacman -Qqg \
+  | grep -E '^'"$(echo $explicit_groups \
+    | sed 's/ / |^/g') " \
+  | awk '{print $2}' \
+  > packages-from-explicit-groups
+
+echo $explicit_groups \
+  | tr ' ' '\n' \
+  > pkglist
+
+pacman -Qqe \
+  | grep -v -f packages-from-explicit-groups \
+  >> pkglist
+
+rm packages-from-explicit-groups
