@@ -4,10 +4,10 @@ alias up='cd ..'
 alias lass='ls --color=always -lAh | less -R'
 
 # clipboard aliases
-#alias xc='xsel -b'
-#alias xs='xsel'
-alias xc='pbcopy'
-alias xp='pbpaste'
+which xsel >/dev/null && alias xc='xsel -b'
+which xsel >/dev/null && alias xs='xsel'
+which pbcopy >/dev/null && alias xc='pbcopy'
+which pbpaste >/dev/null && alias xp='pbpaste'
 
 # editor aliases
 alias vim='vim'
