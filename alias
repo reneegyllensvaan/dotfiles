@@ -9,6 +9,9 @@ which xsel >/dev/null && alias xs='xsel'
 which pbcopy >/dev/null && alias xc='pbcopy'
 which pbpaste >/dev/null && alias xp='pbpaste'
 
+# linux-specific aliases
+which yaourt >/dev/null && alias yaourt='yaourt --color'
+
 # editor aliases
 alias vim='vim'
 alias vi='vim'
