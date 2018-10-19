@@ -63,7 +63,8 @@ else
 fi
 
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
-$'\n$(prepend_prompt) '"%{$fg_bold[black]%}➜%{$reset_color%}  "
+$'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
+#$'\n$(prepend_prompt) '"%{$fg_bold[black]%}❯%{$reset_color%}  "
 # Colors and stuff
 export LESS="-SFXR"
 export CLICOLOR=1
