@@ -74,8 +74,8 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 export GIT_EDITOR=nvim
 
 # enable legacy vi mode
-bindkey -v;export KEYTIMEOUT=1
-#export KEYTIMEOUT=1
+export KEYTIMEOUT=1
+bindkey -v
 
 # fzf.zsh integration settings
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
