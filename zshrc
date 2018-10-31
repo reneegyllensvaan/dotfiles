@@ -6,7 +6,7 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
-# antigen bundle vi-mode
+antigen bundle vi-mode
 antigen bundle fabric
 antigen bundle pip
 antigen bundle docker
@@ -74,9 +74,9 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 #export GIT_EDITOR=nvim
 export GIT_EDITOR=nvim
 
-# enable legacy vi mode
+## enable legacy vi mode
 export KEYTIMEOUT=1
-bindkey -v
+#bindkey -v
 
 # fzf.zsh integration settings
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"

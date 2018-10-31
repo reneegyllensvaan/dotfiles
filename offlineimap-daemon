@@ -1,0 +1,3 @@
+#!/bin/sh
+
+while true; do offlineimap; sleep 600; done;

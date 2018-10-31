@@ -50,5 +50,8 @@ ln -sf "$PWD/profile" ~/.profile
 # various directories
 mkdir -p ~/.bin
 ln -sf "$PWD/short-git" ~/.bin/short-git
+chmod +x ~/.bin/short-git
+ln -sf "$PWD/offlineimap-daemon" ~/.bin/offlineimap-daemon
+chmod +x ~/.bin/offlineimap-daemon
 
 mkdir -p ~/.local/bin
