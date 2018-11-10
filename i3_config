@@ -29,7 +29,8 @@ bindsym $mod+F10 bar mode toggle
 # launcher hotkeys
 bindsym $mod+Mod1+w exec --no-startup-id "GTK_THEME=Adwaita:light chromium"
 bindsym $mod+Mod1+f exec --no-startup-id "franz-bin"
-bindsym $mod+Mod1+e exec --no-startup-id "emacsclient -c -a ''"
+#bindsym $mod+Mod1+e exec --no-startup-id "emacsclient -c -a ''"
+bindsym $mod+Mod1+e exec --no-startup-id "emacs"
 
 # core controls 
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
