@@ -14,3 +14,11 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Hom
 export LDFLAGS=-L/usr/local/opt/texinfo/lib
 export DIR_MARK_PATH="$HOME/.dir-marks"
 
+export BAT_CONFIG_PATH="$HOME/.batrc"
+export LESS="-SFXR"
+export CLICOLOR=1
+export CLICOLOR_FORCE=1
+export LSCOLORS=ExFxCxDxBxegedabagacad
+export GIT_EDITOR=nvim
+export KEYTIMEOUT=1
+export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"

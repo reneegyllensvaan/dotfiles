@@ -3,11 +3,16 @@ alias sx='startx;exit'
 alias up='cd ..'
 alias lass='ls --color=always -lAh | less -R'
 
+# temporary time alias as a protest against homebrew
+which brew >/dev/null && alias brew='time brew'
+
 # clipboard aliases
 which xsel >/dev/null && alias xc='xsel -b'
 which xsel >/dev/null && alias xs='xsel'
 which pbcopy >/dev/null && alias xc='pbcopy'
 which pbpaste >/dev/null && alias xp='pbpaste'
+
+which opam >/dev/null && alias op='opam'
 
 # linux-specific aliases
 which yaourt >/dev/null && alias yaourt='yaourt --color'
@@ -15,6 +20,7 @@ which yaourt >/dev/null && alias yaourt='yaourt --color'
 # editor aliases
 alias vim='vim'
 alias vi='vim'
+alias eme='emacsclient -nw --socket-name=bison'
 #alias vim='nvim'
 #alias vi='nvim'
 #alias v='nvim'
@@ -26,5 +32,5 @@ alias v='vagrant'
 # command replacements
 command -v gsed >/dev/null && alias sed='gsed'
 command -v ggrep >/dev/null && alias grep='ggrep'
-command -v bat >/dev/null && alias cat='bat --theme OneHalfDark'
+command -v bat >/dev/null && alias cat='bat'
 [[ -f /usr/local/bin/nasm ]] && alias nasm='/usr/local/bin/nasm'

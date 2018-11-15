@@ -44,6 +44,7 @@ ln -sf "$PWD/rc.conf" ~/.config/ranger/rc.conf
 
 # various configs
 ln -sf "$PWD/spacemacs" ~/.spacemacs
+ln -sf "$PWD/batrc" ~/.batrc
 ln -sf "$PWD/alias" ~/.alias
 ln -sf "$PWD/profile" ~/.profile
 

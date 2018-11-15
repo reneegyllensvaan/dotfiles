@@ -65,19 +65,8 @@ fi
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
 $'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 #$'\n$(prepend_prompt) '"%{$fg_bold[black]%}❯%{$reset_color%}  "
-# Colors and stuff
-export LESS="-SFXR"
-export CLICOLOR=1
-export CLICOLOR_FORCE=1
-export LSCOLORS=ExFxCxDxBxegedabagacad
-
-#export GIT_EDITOR=nvim
-export GIT_EDITOR=nvim
-
-## enable legacy vi mode
-export KEYTIMEOUT=1
-#bindkey -v
-
 # fzf.zsh integration settings
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 [ -f ~/.zfunctions/fzf.zsh ] && source ~/.zfunctions/fzf.zsh
+
+# opam configuration
+test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
