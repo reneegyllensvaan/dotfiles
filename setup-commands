@@ -33,6 +33,11 @@ ln -sf $PWD/zshrc ~/.zshrc
 rm ~/.zfunctions
 ln -s $PWD/zfunctions ~/.zfunctions
 
+# qutebrowser config
+mkdir -p ~/.config/
+rm ~/.config/qutebrowser
+ln -s "$PWD/qutebrowser" ~/.config/qutebrowser
+
 # i3 config
 mkdir -p ~/.config/i3
 ln -sf "$PWD/i3_config" ~/.config/i3/config
