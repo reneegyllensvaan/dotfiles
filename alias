@@ -20,7 +20,7 @@ which yaourt >/dev/null && alias yaourt='yaourt --color'
 # editor aliases
 alias vim='vim'
 alias vi='vim'
-alias eme='emacsclient -nw --socket-name=bison'
+alias eme='emacsclient -nw --socket-name=default'
 #alias vim='nvim'
 #alias vi='nvim'
 #alias v='nvim'
