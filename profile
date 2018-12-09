@@ -4,13 +4,14 @@ export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=/usr/local/opt/texinfo/bin:$PATH
+[[ -d ~/Library ]] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
 export VISUAL="$(which nvim)"
 export EDITOR="$VISUAL"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export GOPATH=$HOME/code/go
 export GPG_TTY=$(tty)
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_181.jdk/Contents/Home
+
 export LDFLAGS=-L/usr/local/opt/texinfo/lib
 export DIR_MARK_PATH="$HOME/.dir-marks"
 
@@ -22,3 +23,13 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 export GIT_EDITOR=nvim
 export KEYTIMEOUT=1
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# set the clipboard variables based on available clipboard applications
+# OSX
+which pbcopy >/dev/null && export CLIPBOARD_COPY='pbcopy'
+which pbpaste >/dev/null && export CLIPBOARD_PASTE='pbpaste'
+
+# Linux with xsel
+which xsel >/dev/null && export CLIPBOARD_COPY='xsel -b' \
+                      && export CLIPBOARD_PASTE='xsel -b'
