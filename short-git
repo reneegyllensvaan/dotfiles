@@ -139,3 +139,20 @@ then
   git log $@
 fi
 
+#################################### yanking
+#   these commands require the CLIPBOARD_COPY defined
+#   this envvar should be a command to pipe the data to
+# g ylc (yank last commit)
+if [[ "$1" = "ylc" ]]
+then
+  shift;
+  git rev-parse HEAD | tr -d '\n' | $CLIPBOARD_COPY
+fi
+# g yc (yank commit)
+if [[ "$1" = "yc" ]]
+then
+  shift;
+  git log --pretty=format:'%h %s' --abbrev-commit |fzf |awk '{print $1}' | tr -d '\n' | $CLIPBOARD_COPY
+fi
+
+
