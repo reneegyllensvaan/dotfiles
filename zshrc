@@ -70,3 +70,5 @@ $'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 
 # opam configuration
 test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
