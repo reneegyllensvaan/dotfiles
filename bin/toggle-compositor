@@ -1,0 +1,2 @@
+#!/bin/sh
+killall compton >/dev/null || (compton &)
