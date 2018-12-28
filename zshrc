@@ -40,8 +40,6 @@ export HISTFILE="$HOME/.zhistory"
 setopt inc_append_history
 setopt share_history
 #unsetopt nomatch
-#fpath=( "$HOME/.zfunctions" $fpath )
-#fpath=( "$HOME/.zsh-completions/src" $fpath)
 #autoload -U compinit; compinit
 #autoload -U promptinit; promptinit
 #prompt pure

@@ -1,4 +1,4 @@
-export PATH=$HOME/.bin:$HOME/code/go/bin:$HOME/.bin:/usr/local/bin:$PATH
+export PATH=$HOME/.bin:$HOME/code/go/bin:/usr/local/bin:$PATH
 export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
@@ -6,7 +6,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=/usr/local/opt/texinfo/bin:$PATH
 [[ -d ~/Library ]] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
-export VISUAL="$(which nvim)"
+export VISUAL="$(which vim)"
 export EDITOR="$VISUAL"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export GOPATH=$HOME/code/go
@@ -20,7 +20,7 @@ export LESS="-SFXR"
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
-export GIT_EDITOR=nvim
+export GIT_EDITOR=vim
 export KEYTIMEOUT=1
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

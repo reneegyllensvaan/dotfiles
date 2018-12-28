@@ -18,7 +18,6 @@ which opam >/dev/null && alias op='opam'
 which yaourt >/dev/null && alias yaourt='yaourt --color'
 
 # editor aliases
-alias vim='vim'
 alias vi='vim'
 alias eme='emacsclient -nw --socket-name=default'
 #alias vim='nvim'

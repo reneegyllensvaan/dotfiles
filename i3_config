@@ -124,17 +124,17 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 # i3bar+status config
 bar {
-        status_command i3status
-	mode dock
-	colors {
-           background #1d262a
-           statusline #e7ebed
-           separator #e7ebed
-           focused_workspace  #adf7be #adf7be #1d262a
-           active_workspace   #333333 #5f676a #ffffff
-           inactive_workspace #435b67 #222222 #a1b0b8
-           urgent_workspace   #fc3841 #fc3841 #000000
-        }
+  status_command i3status
+  mode dock
+  colors {
+    background #1d262a
+    statusline #e7ebed
+    separator #e7ebed
+    focused_workspace  #adf7be #adf7be #1d262a
+    active_workspace   #333333 #5f676a #ffffff
+    inactive_workspace #435b67 #222222 #a1b0b8
+    urgent_workspace   #fc3841 #fc3841 #000000
+  }
 }
 
 # class                 border  backgr. text    indicator child_border
@@ -144,3 +144,20 @@ client.unfocused        #333333 #222222 #e7ebed #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
+
+bindsym $mod+p exec --no-startup-id sh "killall compton >~/logg || (compton &)" ; mode "default"
+# Launching mode hotkeys
+mode "launcher" {
+  # Bind this as a leader for launching applications
+  bindsym q           exec qutebrowser    ; mode "default"
+  bindsym w           exec chromium       ; mode "default"
+  bindsym w           exec emacs          ; mode "default"
+  bindsym c           exec --no-startup-id sh "killall compton >/dev/null || (compton &)" ; mode "default"
+  
+  # back to normal: Enter or Escape or Mod1+r
+  bindsym Return mode "default"
+  bindsym Escape mode "default"
+  bindsym Mod1+r mode "default"
+}
+
+bindsym Mod1+Mod4+z mode "launcher"

@@ -1,4 +1,5 @@
 #!/bin/sh
+mkdir -p ~/.config/
 
 #xorg configs
 ln -sf "$PWD/xinitrc" ~/.xinitrc
@@ -34,7 +35,6 @@ rm ~/.zfunctions
 ln -s $PWD/zfunctions ~/.zfunctions
 
 # qutebrowser config
-mkdir -p ~/.config/
 rm ~/.config/qutebrowser
 ln -s "$PWD/qutebrowser" ~/.config/qutebrowser
 
@@ -53,12 +53,11 @@ ln -sf "$PWD/batrc" ~/.batrc
 ln -sf "$PWD/alias" ~/.alias
 ln -sf "$PWD/profile" ~/.profile
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
+ln -sf "$PWD/compton.conf" ~/.config/compton.conf
+ln -sf "$PWD/toggle-compositor" ~/.bin/toggle-compositor
 
 # various directories
-mkdir -p ~/.bin
-ln -sf "$PWD/short-git" ~/.bin/short-git
-chmod +x ~/.bin/short-git
-ln -sf "$PWD/offlineimap-daemon" ~/.bin/offlineimap-daemon
-chmod +x ~/.bin/offlineimap-daemon
+rm ~/.bin || echo '~/.bin should be a symlink, if it is a directory, please migrate the old files to local or remove it'
+ln -s "$PWD/bin" ~/.bin
 
 mkdir -p ~/.local/bin
