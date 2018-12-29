@@ -32,13 +32,14 @@ bindsym $mod+Mod1+f exec --no-startup-id "franz-bin"
 #bindsym $mod+Mod1+e exec --no-startup-id "emacsclient -c -a ''"
 bindsym $mod+Mod1+e exec --no-startup-id "emacs"
 
-# core controls 
+# core controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
 bindsym $mod+Shift+Delete exec --no-startup-id "i3lock-fancy"
+bindsym $mod+Shift+c exec --no-startup-id toggle-compositor
 
 # screenshot
 bindsym --release $mod+Print exec --no-startup-id "scrot 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h.png' -e 'mv $f ~/img/scrot/ && xclip -t image/png ~/img/scrot/$f -sel clip'"
@@ -145,14 +146,12 @@ client.urgent           #2f343a #900000 #ffffff #900000   #900000
 client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
-bindsym $mod+p exec --no-startup-id sh "killall compton >~/logg || (compton &)" ; mode "default"
 # Launching mode hotkeys
 mode "launcher" {
   # Bind this as a leader for launching applications
-  bindsym q           exec qutebrowser    ; mode "default"
-  bindsym w           exec chromium       ; mode "default"
-  bindsym w           exec emacs          ; mode "default"
-  bindsym c           exec --no-startup-id sh "killall compton >/dev/null || (compton &)" ; mode "default"
+  bindsym q           exec --no-startup-id qutebrowser    ; mode "default"
+  bindsym w           exec --no-startup-id chromium       ; mode "default"
+  bindsym w           exec --no-startup-id emacs          ; mode "default"
   
   # back to normal: Enter or Escape or Mod1+r
   bindsym Return mode "default"

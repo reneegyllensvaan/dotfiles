@@ -1,6 +1,6 @@
 #!/bin/sh
 
-explicit_groups="base base-devel i3 xorg"
+explicit_groups="base base-devel i3 xorg texlive-most"
 
 # list packages from explicit groups
 pacman -Qqg \
