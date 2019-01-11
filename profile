@@ -25,6 +25,9 @@ export KEYTIMEOUT=1
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
+# the following vars are supposed to be used by the user/interactively
+export Q=/dev/null
+
 # set the clipboard variables based on available clipboard applications
 # OSX
 which pbcopy >/dev/null && export CLIPBOARD_COPY='pbcopy'

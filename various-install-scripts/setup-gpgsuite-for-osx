@@ -1,0 +1,5 @@
+#!/bin/sh
+echo 'echo \'no-tty\' >> ~/.gnupg/gpg.conf'
+echo 'no-tty' >> ~/.gnupg/gpg.conf
+echo 'echo \'pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac\' >> ~/.gnupg/gpg-agent.conf'
+echo 'pinentry-program /usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac' >> ~/.gnupg/gpg-agent.conf

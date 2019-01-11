@@ -1,4 +1,4 @@
-alias rg='ranger'
+alias rr='ranger'
 alias sx='startx;exit'
 alias up='cd ..'
 alias lass='ls --color=always -lAh | less -R'
@@ -27,6 +27,11 @@ alias eme='emacsclient -nw --socket-name=default'
 # shortcut commands
 alias g='short-git'
 alias v='vagrant'
+
+# unglob some commands
+alias fd='noglob fd'
+alias rg='noglob rg'
+alias rg='noglob grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 
 # command replacements
 command -v gsed >/dev/null && alias sed='gsed'

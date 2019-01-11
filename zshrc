@@ -37,6 +37,7 @@ source "$HOME/.zfunctions/dir-marks.zsh"
 source "$HOME/.zfunctions/miscellaneous.zsh"
 
 export HISTFILE="$HOME/.zhistory"
+export HISTSIZE=1000000
 setopt inc_append_history
 setopt share_history
 #unsetopt nomatch
