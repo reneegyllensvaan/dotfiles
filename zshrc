@@ -27,7 +27,11 @@ unalias g
 unalias gb
 
 # also disable shared history from OMZ
+export HISTFILE="$HOME/.zhistory"
+export HISTSIZE=1000000
+setopt inc_append_history
 setopt no_share_history
+setopt hist_ignore_dups
 unsetopt share_history
 setopt PROMPT_SUBST
 
@@ -36,10 +40,6 @@ source "$HOME/.alias"
 source "$HOME/.zfunctions/dir-marks.zsh"
 source "$HOME/.zfunctions/miscellaneous.zsh"
 
-export HISTFILE="$HOME/.zhistory"
-export HISTSIZE=1000000
-setopt inc_append_history
-setopt share_history
 #unsetopt nomatch
 #autoload -U compinit; compinit
 #autoload -U promptinit; promptinit

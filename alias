@@ -2,6 +2,7 @@ alias rr='ranger'
 alias sx='startx;exit'
 alias up='cd ..'
 alias lass='ls --color=always -lAh | less -R'
+alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 # temporary time alias as a protest against homebrew
 which brew >/dev/null && alias brew='time brew'
