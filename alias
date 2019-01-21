@@ -16,14 +16,19 @@ which pbpaste >/dev/null && alias xp='pbpaste'
 which opam >/dev/null && alias op='opam'
 
 # linux-specific aliases
-which yaourt >/dev/null && alias yaourt='yaourt --color'
+#which yaourt >/dev/null && alias yaourt='yaourt --color'
+which yaourt >/dev/null && alias yao='yaourt'
 
 # editor aliases
 alias vi='vim'
+alias fim='vim `fzf`'
 alias eme='emacsclient -nw --socket-name=default'
 #alias vim='nvim'
 #alias vi='nvim'
 #alias v='nvim'
+
+# unglob some commands
+alias fd='noglob fd'
 
 # shortcut commands
 alias g='short-git'
