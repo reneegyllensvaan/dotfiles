@@ -37,7 +37,7 @@ alias v='vagrant'
 # unglob some commands
 alias fd='noglob fd'
 alias rg='noglob rg'
-alias rg='noglob grep  --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
+#alias rg='noglob   --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 
 # command replacements
 command -v gsed >/dev/null && alias sed='gsed'
