@@ -24,6 +24,15 @@ mkdir -p ~/.vim/files/info
 mkdir -p ~/.vim/files/undo
 ln -sf "$PWD/plug.vim" ~/.vim/autoload/plug.vim
 
+#gpg config
+mkdir -p ~/.gnupg
+[ -f ~/.gnupg/gpg.conf.bak ] && rm ~/.gnupg/gpg.conf.bak
+[ -f ~/.gnupg/gpg-agent.conf.bak ] && rm ~/.gnupg/gpg-agent.conf.bak
+[ -f ~/.gnupg/gpg.conf ] && mv ~/.gnupg/gpg.conf ~/.gnupg/gpg.conf.bak
+[ -f ~/.gnupg/gpg-agent.conf ] && mv ~/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf.bak
+cp "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
+cp "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
+
 #tmux config
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 

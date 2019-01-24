@@ -44,8 +44,9 @@ source "$HOME/.zfunctions/miscellaneous.zsh"
 #autoload -U compinit; compinit
 #autoload -U promptinit; promptinit
 #prompt pure
+compdef _keybase keybase
 
-EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 ) 
+EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 )
 
 if [[ ! $(echo $TERM | grep rxvt) ]] then
   function prepend_prompt {
@@ -64,6 +65,7 @@ fi
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
 $'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 #$'\n$(prepend_prompt) '"%{$fg_bold[black]%}❯%{$reset_color%}  "
+
 # fzf.zsh integration settings
 [ -f ~/.zfunctions/fzf.zsh ] && source ~/.zfunctions/fzf.zsh
 
@@ -71,3 +73,9 @@ $'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})${PURE_PROMPT_SYMBOL:-❯}%f "
 test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# GnuPG settings
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+# if gpg-agent is not running, start it and load env
+pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon ) 
