@@ -25,7 +25,7 @@ f () {
   touch $DIR_MARK_PATH
 
   # if no arg, do nothing
-  if [[ ! $1 ]]
+  if [ -z $1 ]
   then
     return
   fi
@@ -51,7 +51,7 @@ m () {
   touch $DIR_MARK_PATH
 
   # if no arg, print help
-  if [[ ! $1 ]]
+  if [ -z $1 ]
   then
     grep --color=auto -E "^\S* " $DIR_MARK_PATH
     return
@@ -59,7 +59,7 @@ m () {
 
   old_line=$(grep -E "^$1 " $DIR_MARK_PATH)
 
-  if [[ ! $old_line ]]
+  if [ -z $old_line ]
   then
     echo "$1 $PWD" >> $DIR_MARK_PATH
   else

@@ -48,18 +48,18 @@ compdef _keybase keybase
 
 EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 )
 
-if [[ ! $(echo $TERM | grep rxvt) ]]; then
-  function prepend_prompt {
+if [ -z $(echo $TERM | grep rxvt) ]; then
+  function prepend_prompt () {
     echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
-  }
+  };
 
-  function precmd {
-    prepend_prompt
-  }
+  function precmd () {
+    prepend_prompt;
+  };
 
 else
-  function prepend_prompt {
-  }
+  function prepend_prompt () {
+  };
 fi
 
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"\
