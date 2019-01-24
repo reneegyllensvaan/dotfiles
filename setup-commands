@@ -1,6 +1,21 @@
 #!/bin/sh
 mkdir -p ~/.config/
 
+safe_copy () {
+  which shasum >/dev/null && hash_command='shasum'
+  hash_new=`$hash_command $1 | head -c 40` 
+  hash_old=`$hash_command $2 | head -c 40` 
+  if [[ $hash_new = $hash_old ]]; then
+    echo "$2 hasn't changed, skipping..."
+  else
+    [ -f "$2.bak" ] && \
+      "$2.bak would be overwritten, please move or delete that file to prevent data loss" && exit
+    [ -f $2 ] && \
+      mv $2 "$2.bak"
+    cp $1 "$2"
+  fi
+}
+
 #xorg configs
 ln -sf "$PWD/xinitrc" ~/.xinitrc
 ln -sf "$PWD/xsession" ~/.xsession
@@ -25,13 +40,18 @@ mkdir -p ~/.vim/files/undo
 ln -sf "$PWD/plug.vim" ~/.vim/autoload/plug.vim
 
 #gpg config
+#[ -f ~/.gnupg/gpg.conf.bak ] && rm ~/.gnupg/gpg.conf.bak
+#[ -f ~/.gnupg/gpg-agent.conf.bak ] && rm ~/.gnupg/gpg-agent.conf.bak
+#[ -f ~/.gnupg/gpg.conf ] && mv ~/.gnupg/gpg.conf ~/.gnupg/gpg.conf.bak
+#[ -f ~/.gnupg/gpg-agent.conf ] && 
+
 mkdir -p ~/.gnupg
-[ -f ~/.gnupg/gpg.conf.bak ] && rm ~/.gnupg/gpg.conf.bak
-[ -f ~/.gnupg/gpg-agent.conf.bak ] && rm ~/.gnupg/gpg-agent.conf.bak
-[ -f ~/.gnupg/gpg.conf ] && mv ~/.gnupg/gpg.conf ~/.gnupg/gpg.conf.bak
-[ -f ~/.gnupg/gpg-agent.conf ] && mv ~/.gnupg/gpg-agent.conf ~/.gnupg/gpg-agent.conf.bak
-cp "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
-cp "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
+safe_copy "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
+safe_copy "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
+mkdir -p ~/.ssh
+safe_copy "$PWD/ssh_config" ~/.ssh/config
+#cp "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
+#cp "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 
 #tmux config
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf

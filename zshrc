@@ -48,7 +48,7 @@ compdef _keybase keybase
 
 EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 )
 
-if [[ ! $(echo $TERM | grep rxvt) ]] then
+if [[ ! $(echo $TERM | grep rxvt) ]]; then
   function prepend_prompt {
     echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
   }
