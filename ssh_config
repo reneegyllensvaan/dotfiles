@@ -2,6 +2,10 @@ Host *
   ForwardAgent yes
   XAuthLocation /opt/X11/bin/xauth
 
+Host gh
+  HostName github.com
+  User git
+
 # Host *
 #   ForwardAgent no
 #   ForwardX11 no

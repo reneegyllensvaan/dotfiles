@@ -10,7 +10,6 @@ export VISUAL="$(which vim)"
 export EDITOR="$VISUAL"
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export GOPATH=$HOME/code/go
-export GPG_TTY="$(tty)"
 
 export LDFLAGS=-L/usr/local/opt/texinfo/lib
 export DIR_MARK_PATH="$HOME/.dir-marks"
