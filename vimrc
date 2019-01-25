@@ -66,6 +66,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kaicataldo/material.vim'
 Plug 'christoomey/vim-system-copy'
+Plug 'jamessan/vim-gnupg'
 
 call plug#end()
 
