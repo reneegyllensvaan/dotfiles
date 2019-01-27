@@ -81,6 +81,7 @@ ln -sf "$PWD/spacemacs" ~/.spacemacs
 ln -sf "$PWD/batrc" ~/.batrc
 ln -sf "$PWD/alias" ~/.alias
 ln -sf "$PWD/profile" ~/.profile
+ln -sf "$PWD/user-profile" ~/.user-profile
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 ln -sf "$PWD/compton.conf" ~/.config/compton.conf
 ln -sf "$PWD/editorconfig" ~/.editorconfig

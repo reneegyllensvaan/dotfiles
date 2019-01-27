@@ -36,6 +36,7 @@ unsetopt share_history
 setopt PROMPT_SUBST
 
 source "$HOME/.profile"
+source "$HOME/.user-profile"
 source "$HOME/.alias"
 source "$HOME/.zfunctions/dir-marks.zsh"
 source "$HOME/.zfunctions/miscellaneous.zsh"

@@ -1,0 +1,3 @@
+export DOT_USER_NAME='Ada Lovelace'
+export DOT_USER_EMAIL='ada@example.com'
+export DOT_OPERATING_SYSTEM='osx' #valid args: osx, linux

@@ -1,0 +1,2 @@
+#!/bin/sh
+gpg --armor --export $DOT_USER_EMAIL | $CLIPBOARD_COPY
