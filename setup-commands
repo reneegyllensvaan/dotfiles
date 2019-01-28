@@ -25,6 +25,8 @@ safe_copy () {
 
 # compile shell template files
 build_template $PWD/gpg/gpg.conf
+build_template $PWD/gpg/gpg-agent.conf
+build_template $PWD/gitconfig
 
 # make the config directory and start linking/copying files
 mkdir -p ~/.config/
@@ -53,18 +55,11 @@ mkdir -p ~/.vim/files/undo
 ln -sf "$PWD/plug.vim" ~/.vim/autoload/plug.vim
 
 #gpg config
-#[ -f ~/.gnupg/gpg.conf.bak ] && rm ~/.gnupg/gpg.conf.bak
-#[ -f ~/.gnupg/gpg-agent.conf.bak ] && rm ~/.gnupg/gpg-agent.conf.bak
-#[ -f ~/.gnupg/gpg.conf ] && mv ~/.gnupg/gpg.conf ~/.gnupg/gpg.conf.bak
-#[ -f ~/.gnupg/gpg-agent.conf ] && 
-
 mkdir -p ~/.gnupg
 safe_copy "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
 safe_copy "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 mkdir -p ~/.ssh
 safe_copy "$PWD/ssh_config" ~/.ssh/config
-#cp "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
-#cp "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 
 #tmux config
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
@@ -98,6 +93,7 @@ ln -sf "$PWD/user-profile" ~/.user-profile
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 ln -sf "$PWD/compton.conf" ~/.config/compton.conf
 ln -sf "$PWD/editorconfig" ~/.editorconfig
+ln -sf "$PWD/gitconfig" ~/.gitconfig
 
 # various directories
 rm ~/.bin || echo '~/.bin should be a symlink, if it is a directory, please migrate the old files to local or remove it'

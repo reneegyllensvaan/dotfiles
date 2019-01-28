@@ -7,7 +7,7 @@ cat << EOF
 [commit]
   gpgsign = true
 [github]
-  user = reneegyllensvaan
+  user = $DOT_GITHUB_USER
 [alias]
   a   = add
   aa  = add --all

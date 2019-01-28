@@ -1,4 +1,13 @@
+# User/contact info
 export DOT_USER_NAME='Ada Lovelace'
 export DOT_USER_EMAIL='ada@example.com'
+export DOT_USER_WORK_EMAIL='contact@adalovelate.me'
+export DOT_USER_HOME_EMAIL='ada@example.com'
+export DOT_GITHUB_USER='adalovelace'
+
+# System/computer info
 export DOT_OPERATING_SYSTEM='osx' #valid args: osx, linux
-export DOT_DEFAULT_GPG_KEY='0123456789ABCDEF'
+export DOT_DEFAULT_GPG_KEY='FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
+export DOT_GIT_SIGNING_KEY='FFFFFFFFFFFFFFFF'
+# TODO: make this more general
+export DOT_GUI_GPG_PINENTRY='/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac'
