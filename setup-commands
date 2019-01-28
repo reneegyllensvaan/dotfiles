@@ -1,5 +1,5 @@
 #!/bin/sh
-# source profile and user-profile to make sure we have the latest env
+echo "Sourcing profile and user-profile to make sure we have the latest env..."
 source $PWD/profile
 source $PWD/user-profile
 
@@ -23,26 +23,26 @@ safe_copy () {
   fi
 }
 
-# compile shell template files
+echo "Building shell template files"
 build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
 build_template $PWD/gitconfig
 
-# make the config directory and start linking/copying files
+echo "Making the config directory and start linking/copying files"
 mkdir -p ~/.config/
 
-#xorg configs
+echo "xorg configs"
 ln -sf "$PWD/xinitrc" ~/.xinitrc
 ln -sf "$PWD/xsession" ~/.xsession
 rm ~/.xres
 ln -s "$PWD/xres" ~/.xres
 
-# urxvt conf
+echo  "urxvt conf"
 mkdir -p ~/.urxvt
 rm ~/.urxvt/ext
 ln -s "$PWD/urxvt-ext" ~/.urxvt/ext
 
-#vim directories and conf
+echo "vim directories and conf"
 ln -sf "$PWD/vimrc" ~/.vimrc
 mkdir -p ~/.vim
 mkdir -p ~/.vim/blugin
@@ -54,37 +54,37 @@ mkdir -p ~/.vim/files/info
 mkdir -p ~/.vim/files/undo
 ln -sf "$PWD/plug.vim" ~/.vim/autoload/plug.vim
 
-#gpg config
+echo "gpg config"
 mkdir -p ~/.gnupg
 safe_copy "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
 safe_copy "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 mkdir -p ~/.ssh
 safe_copy "$PWD/ssh_config" ~/.ssh/config
 
-#tmux config
+echo "tmux config"
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 
-#zsh configs
+echo "zsh configs"
 ln -sf "$PWD/antigen.zsh" ~/antigen.zsh
 rm -rf ~/.antigen
 ln -sf $PWD/zshrc ~/.zshrc
 rm ~/.zfunctions
 ln -s $PWD/zfunctions ~/.zfunctions
 
-# qutebrowser config
+echo "qutebrowser config"
 rm ~/.config/qutebrowser
 ln -s "$PWD/qutebrowser" ~/.config/qutebrowser
 
-# i3 config
+echo "i3 config"
 mkdir -p ~/.config/i3
 ln -sf "$PWD/i3_config" ~/.config/i3/config
 
-# ranger config
+echo "ranger config"
 mkdir -p ~/.config/ranger
 ln -sf "$PWD/rifle.conf" ~/.config/ranger/rifle.conf
 ln -sf "$PWD/rc.conf" ~/.config/ranger/rc.conf
 
-# various configs
+echo "other configs"
 ln -sf "$PWD/spacemacs" ~/.spacemacs
 ln -sf "$PWD/batrc" ~/.batrc
 ln -sf "$PWD/alias" ~/.alias
@@ -95,8 +95,11 @@ ln -sf "$PWD/compton.conf" ~/.config/compton.conf
 ln -sf "$PWD/editorconfig" ~/.editorconfig
 ln -sf "$PWD/gitconfig" ~/.gitconfig
 
-# various directories
-rm ~/.bin || echo '~/.bin should be a symlink, if it is a directory, please migrate the old files to local or remove it'
-ln -s "$PWD/bin" ~/.bin
+echo "symlinking directories"
+rm ~/.bin || echo '~/.bin should be a symlink, if it is a directory, please migrate the old files to local or remove it' &&\
+  ln -s "$PWD/bin" ~/.bin
 
+echo "making the ~/.local/bin directory"
 mkdir -p ~/.local/bin
+
+echo "...Finished!"
