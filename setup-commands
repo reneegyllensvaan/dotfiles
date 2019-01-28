@@ -1,6 +1,13 @@
 #!/bin/sh
-mkdir -p ~/.config/
+# source profile and user-profile to make sure we have the latest env
+source $PWD/profile
+source $PWD/user-profile
 
+build_template () {
+  sh "$1.tmpl.sh" > "$1"
+}
+
+# safe copy function that only updates changed files, and takes a backup of changes
 safe_copy () {
   which shasum >/dev/null && hash_command='shasum'
   hash_new=`$hash_command $1 | head -c 40` 
@@ -15,6 +22,12 @@ safe_copy () {
     cp $1 "$2"
   fi
 }
+
+# compile shell template files
+build_template $PWD/gpg/gpg.conf
+
+# make the config directory and start linking/copying files
+mkdir -p ~/.config/
 
 #xorg configs
 ln -sf "$PWD/xinitrc" ~/.xinitrc

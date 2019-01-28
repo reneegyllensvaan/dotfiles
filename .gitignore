@@ -1,1 +1,4 @@
 user-profile
+gpg/gpg.conf
+gpg/gpg-agent.conf
+gitconfig
