@@ -1,2 +1,0 @@
-#!/bin/sh
-mu index --muhome=~/email/.mu-bison --maildir=~/email/bison
