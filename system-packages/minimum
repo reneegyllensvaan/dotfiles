@@ -1,0 +1,14 @@
+``` bash
+brew install  \
+  gpg         \
+  neovim      \
+  bash        \
+  offlineimap \
+  fzf         \
+  pinentry    \
+  python      \
+  git         \
+  ranger
+brew cask install \
+  gpg-suite
+```
