@@ -72,6 +72,7 @@ echo "Building shell template files"
 build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
 build_template $PWD/gitconfig
+build_template $PWD/README.md
 
 echo "Making the config directory and linking/copying files"
 mkdir -p ~/.config/
@@ -79,7 +80,7 @@ mkdir -p ~/.config/
 echo "  Xorg configs"
 symlink file "$PWD/xinitrc" ~/.xinitrc
 symlink file "$PWD/xsession" ~/.xsession
-symlink file "$PWD/xres" ~/.xres
+symlink dir "$PWD/xres" ~/.xres
 
 echo "  Urxvt conf"
 mkdir -p ~/.urxvt
