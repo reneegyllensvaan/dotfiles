@@ -1,25 +1,52 @@
 #!/bin/sh
+if [[ ! -f "./setup-commands" ]]; then
+  echo "This script must be run from the directory it's contained in"
+  exit
+fi
+
+while [ $1 ]; do
+  case "$1" in
+    "-r"|"--remove-backups") remove_backups=true;shift;;
+    "-f"|"--force-overwrite") force_overwrite=true;shift;;
+    "-n"|"--nobuild-templates") nobuild_templates=true;shift;;
+    "-h"|"--help")
+      echo "Command line arguments:"
+      echo "  -r   --remove-backups     Remove old .bak files from safe copy"
+      echo "  -f   --force-overwrite    Force overwrite of copied files"
+      echo "  -t   --nobuild-templates  Don't rebuild .tmpl.sh files"
+      exit;;
+    *) echo "Unknown command line option $1";exit;;
+  esac
+done
+
 echo "Sourcing profile and user-profile to make sure we have the latest env..."
 source $PWD/profile
 source $PWD/user-profile
 
 build_template () {
-  sh "$1.tmpl.sh" > "$1"
+  if [ ! $nobuild_templates ]; then
+    [ -f "$1.tmpl.sh" ] || echo "        Template $1.tmpl.sh not found, skipping. Please fix this!"
+    sh "$1.tmpl.sh" > "$1"
+  fi
 }
 
 # safe copy function that only updates changed files, and takes a backup of changes
 safe_copy () {
+  # just copy and overwrite if force_overwrite is on
+  [ $force_overwrite ] && cat $1 > $2 && return 0
   which shasum >/dev/null && hash_command='shasum'
   hash_new=`$hash_command $1 | head -c 40` 
   hash_old=`$hash_command $2 | head -c 40` 
   if [[ $hash_new = $hash_old ]]; then
-    echo "$2 hasn't changed, skipping..."
+    echo "    $2 hasn't changed, skipping..."
   else
     [ -f "$2.bak" ] && \
-      "$2.bak would be overwritten, please move or delete that file to prevent data loss" && exit
-    [ -f $2 ] && \
+      "$2.bak would be overwritten, please move or delete that file to prevent data loss" && return 1
+    [ ! $remove_backups ] && \
+      [ -f $2 ] && \
       mv $2 "$2.bak"
-    cp $1 "$2"
+    [ $remove_backups ] && rm "$2.bak"
+    cp "$1" "$2"
   fi
 }
 
@@ -28,21 +55,21 @@ build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
 build_template $PWD/gitconfig
 
-echo "Making the config directory and start linking/copying files"
+echo "Making the config directory and linking/copying files"
 mkdir -p ~/.config/
 
-echo "xorg configs"
+echo "  Xorg configs"
 ln -sf "$PWD/xinitrc" ~/.xinitrc
 ln -sf "$PWD/xsession" ~/.xsession
 rm ~/.xres
 ln -s "$PWD/xres" ~/.xres
 
-echo  "urxvt conf"
+echo "  Urxvt conf"
 mkdir -p ~/.urxvt
 rm ~/.urxvt/ext
 ln -s "$PWD/urxvt-ext" ~/.urxvt/ext
 
-echo "vim directories and conf"
+echo "  Vim directories and conf"
 ln -sf "$PWD/vimrc" ~/.vimrc
 mkdir -p ~/.vim
 mkdir -p ~/.vim/blugin
@@ -54,37 +81,37 @@ mkdir -p ~/.vim/files/info
 mkdir -p ~/.vim/files/undo
 ln -sf "$PWD/plug.vim" ~/.vim/autoload/plug.vim
 
-echo "gpg config"
+echo "  GPG config"
 mkdir -p ~/.gnupg
 safe_copy "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
 safe_copy "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 mkdir -p ~/.ssh
 safe_copy "$PWD/ssh_config" ~/.ssh/config
 
-echo "tmux config"
+echo "  Tmux config"
 ln -sf "$PWD/tmux.conf" ~/.tmux.conf
 
-echo "zsh configs"
+echo "  Zsh configs"
 ln -sf "$PWD/antigen.zsh" ~/antigen.zsh
 rm -rf ~/.antigen
 ln -sf $PWD/zshrc ~/.zshrc
 rm ~/.zfunctions
 ln -s $PWD/zfunctions ~/.zfunctions
 
-echo "qutebrowser config"
+echo "  Qutebrowser config"
 rm ~/.config/qutebrowser
 ln -s "$PWD/qutebrowser" ~/.config/qutebrowser
 
-echo "i3 config"
+echo "  i3 config"
 mkdir -p ~/.config/i3
 ln -sf "$PWD/i3_config" ~/.config/i3/config
 
-echo "ranger config"
+echo "  Ranger config"
 mkdir -p ~/.config/ranger
 ln -sf "$PWD/rifle.conf" ~/.config/ranger/rifle.conf
 ln -sf "$PWD/rc.conf" ~/.config/ranger/rc.conf
 
-echo "other configs"
+echo "  Other configs"
 ln -sf "$PWD/spacemacs" ~/.spacemacs
 ln -sf "$PWD/batrc" ~/.batrc
 ln -sf "$PWD/alias" ~/.alias
@@ -95,11 +122,11 @@ ln -sf "$PWD/compton.conf" ~/.config/compton.conf
 ln -sf "$PWD/editorconfig" ~/.editorconfig
 ln -sf "$PWD/gitconfig" ~/.gitconfig
 
-echo "symlinking directories"
+echo "  Symlinking directories"
 rm ~/.bin || echo '~/.bin should be a symlink, if it is a directory, please migrate the old files to local or remove it' &&\
   ln -s "$PWD/bin" ~/.bin
 
-echo "making the ~/.local/bin directory"
+echo "  Making the ~/.local/bin directory"
 mkdir -p ~/.local/bin
 
 echo "...Finished!"

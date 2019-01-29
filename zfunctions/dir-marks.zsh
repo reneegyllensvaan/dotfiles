@@ -18,6 +18,7 @@ f () {
   # if mark file isn't set, use /tmp
   if [ -z "$DIR_MARK_PATH" ]; then
     echo "no mark path. setting path to /tmp/dir-marks"
+    echo "please add 'export DIR_MARK_PATH=<path to file>' to your .profile"
     export DIR_MARK_PATH="/tmp/dir-marks"
   fi
 
