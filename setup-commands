@@ -6,6 +6,7 @@ fi
 
 while [ $1 ]; do
   case "$1" in
+    "uninstall") uninstall=true;shift;;
     "-r"|"--remove-backups") remove_backups=true;shift;;
     "-f"|"--force-overwrite") force_overwrite=true;shift;;
     "-n"|"--nobuild-templates") nobuild_templates=true;shift;;
@@ -28,6 +29,22 @@ build_template () {
     [ -f "$1.tmpl.sh" ] || echo "        Template $1.tmpl.sh not found, skipping. Please fix this!"
     sh "$1.tmpl.sh" > "$1"
   fi
+}
+
+symlink () {
+  if [ $uninstall ]; then
+    [ -L $2 ] && rm $2
+    return 0
+  fi
+
+  case "$1" in
+    dir)
+      ln -s $2 $3
+      ;;
+    file)
+      ln -sf $2 $3
+      ;;
+  esac
 }
 
 # safe copy function that only updates changed files, and takes a backup of changes
@@ -59,18 +76,18 @@ echo "Making the config directory and linking/copying files"
 mkdir -p ~/.config/
 
 echo "  Xorg configs"
-ln -sf "$PWD/xinitrc" ~/.xinitrc
-ln -sf "$PWD/xsession" ~/.xsession
+symlink file "$PWD/xinitrc" ~/.xinitrc
+symlink file "$PWD/xsession" ~/.xsession
 rm ~/.xres
-ln -s "$PWD/xres" ~/.xres
+symlink file "$PWD/xres" ~/.xres
 
 echo "  Urxvt conf"
 mkdir -p ~/.urxvt
 rm ~/.urxvt/ext
-ln -s "$PWD/urxvt-ext" ~/.urxvt/ext
+symlink dir "$PWD/urxvt-ext" ~/.urxvt/ext
 
 echo "  Vim directories and conf"
-ln -sf "$PWD/vimrc" ~/.vimrc
+symlink file "$PWD/vimrc" ~/.vimrc
 mkdir -p ~/.vim
 mkdir -p ~/.vim/blugin
 mkdir -p ~/.vim/autoload
@@ -79,7 +96,7 @@ mkdir -p ~/.vim/files/swap
 mkdir -p ~/.vim/files/backup
 mkdir -p ~/.vim/files/info
 mkdir -p ~/.vim/files/undo
-ln -sf "$PWD/plug.vim" ~/.vim/autoload/plug.vim
+symlink file "$PWD/plug.vim" ~/.vim/autoload/plug.vim
 
 echo "  GPG config"
 mkdir -p ~/.gnupg
@@ -89,42 +106,42 @@ mkdir -p ~/.ssh
 safe_copy "$PWD/ssh_config" ~/.ssh/config
 
 echo "  Tmux config"
-ln -sf "$PWD/tmux.conf" ~/.tmux.conf
+symlink file "$PWD/tmux.conf" ~/.tmux.conf
 
 echo "  Zsh configs"
-ln -sf "$PWD/antigen.zsh" ~/antigen.zsh
+symlink file "$PWD/antigen.zsh" ~/antigen.zsh
 rm -rf ~/.antigen
-ln -sf $PWD/zshrc ~/.zshrc
+symlink file $PWD/zshrc ~/.zshrc
 rm ~/.zfunctions
-ln -s $PWD/zfunctions ~/.zfunctions
+symlink dir $PWD/zfunctions ~/.zfunctions
 
 echo "  Qutebrowser config"
 rm ~/.config/qutebrowser
-ln -s "$PWD/qutebrowser" ~/.config/qutebrowser
+symlink dir "$PWD/qutebrowser" ~/.config/qutebrowser
 
 echo "  i3 config"
 mkdir -p ~/.config/i3
-ln -sf "$PWD/i3_config" ~/.config/i3/config
+symlink file "$PWD/i3_config" ~/.config/i3/config
 
 echo "  Ranger config"
 mkdir -p ~/.config/ranger
-ln -sf "$PWD/rifle.conf" ~/.config/ranger/rifle.conf
-ln -sf "$PWD/rc.conf" ~/.config/ranger/rc.conf
+symlink file "$PWD/rifle.conf" ~/.config/ranger/rifle.conf
+symlink file "$PWD/rc.conf" ~/.config/ranger/rc.conf
 
 echo "  Other configs"
-ln -sf "$PWD/spacemacs" ~/.spacemacs
-ln -sf "$PWD/batrc" ~/.batrc
-ln -sf "$PWD/alias" ~/.alias
-ln -sf "$PWD/profile" ~/.profile
-ln -sf "$PWD/user-profile" ~/.user-profile
-ln -sf "$PWD/tmux.conf" ~/.tmux.conf
-ln -sf "$PWD/compton.conf" ~/.config/compton.conf
-ln -sf "$PWD/editorconfig" ~/.editorconfig
-ln -sf "$PWD/gitconfig" ~/.gitconfig
+symlink file "$PWD/spacemacs" ~/.spacemacs
+symlink file "$PWD/batrc" ~/.batrc
+symlink file "$PWD/alias" ~/.alias
+symlink file "$PWD/profile" ~/.profile
+symlink file "$PWD/user-profile" ~/.user-profile
+symlink file "$PWD/tmux.conf" ~/.tmux.conf
+symlink file "$PWD/compton.conf" ~/.config/compton.conf
+symlink file "$PWD/editorconfig" ~/.editorconfig
+symlink file "$PWD/gitconfig" ~/.gitconfig
 
 echo "  Symlinking directories"
 rm ~/.bin || echo '~/.bin should be a symlink, if it is a directory, please migrate the old files to local or remove it' &&\
-  ln -s "$PWD/bin" ~/.bin
+  symlink dir "$PWD/bin" ~/.bin
 
 echo "  Making the ~/.local/bin directory"
 mkdir -p ~/.local/bin
