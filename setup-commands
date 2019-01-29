@@ -33,12 +33,13 @@ build_template () {
 
 symlink () {
   if [ $uninstall ]; then
-    [ -L $2 ] && rm $2
+    [ -L $3 ] && rm $3
     return 0
   fi
 
   case "$1" in
     dir)
+      [ -L $3 ] && rm $3
       ln -s $2 $3
       ;;
     file)
@@ -78,12 +79,10 @@ mkdir -p ~/.config/
 echo "  Xorg configs"
 symlink file "$PWD/xinitrc" ~/.xinitrc
 symlink file "$PWD/xsession" ~/.xsession
-rm ~/.xres
 symlink file "$PWD/xres" ~/.xres
 
 echo "  Urxvt conf"
 mkdir -p ~/.urxvt
-rm ~/.urxvt/ext
 symlink dir "$PWD/urxvt-ext" ~/.urxvt/ext
 
 echo "  Vim directories and conf"
@@ -112,11 +111,9 @@ echo "  Zsh configs"
 symlink file "$PWD/antigen.zsh" ~/antigen.zsh
 rm -rf ~/.antigen
 symlink file $PWD/zshrc ~/.zshrc
-rm ~/.zfunctions
 symlink dir $PWD/zfunctions ~/.zfunctions
 
 echo "  Qutebrowser config"
-rm ~/.config/qutebrowser
 symlink dir "$PWD/qutebrowser" ~/.config/qutebrowser
 
 echo "  i3 config"
@@ -140,8 +137,8 @@ symlink file "$PWD/editorconfig" ~/.editorconfig
 symlink file "$PWD/gitconfig" ~/.gitconfig
 
 echo "  Symlinking directories"
-rm ~/.bin || echo '~/.bin should be a symlink, if it is a directory, please migrate the old files to local or remove it' &&\
-  symlink dir "$PWD/bin" ~/.bin
+#TODO make this check for an existing bin dir
+symlink dir "$PWD/bin" ~/.bin
 
 echo "  Making the ~/.local/bin directory"
 mkdir -p ~/.local/bin
