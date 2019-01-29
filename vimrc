@@ -62,11 +62,11 @@ call plug#begin('~/.vim/blugin')
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 Plug 'scrooloose/nerdtree'
 Plug 'mgee/lightline-bufferline'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'kaicataldo/material.vim'
 Plug 'christoomey/vim-system-copy'
 Plug 'jamessan/vim-gnupg'
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
 
 call plug#end()
 
