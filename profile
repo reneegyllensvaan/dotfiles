@@ -22,7 +22,11 @@ export LSCOLORS=ExFxCxDxBxegedabagacad
 export GIT_EDITOR=vim
 export KEYTIMEOUT=1
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-if [ -e ~/.nix-profile/etc/profile.d/nix.sh ]; then . ~/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+[ -e ~/.nix-profile/etc/profile.d/nix.sh ] && . ~/.nix-profile/etc/profile.d/nix.sh
+
+if [ `ps -o command='' -p $$ | grep zsh` ]; then
+  export FPATH="$HOME/.zfunctions:$FPATH"
+fi
 
 # the following vars are supposed to be used by the user/interactively
 export Q=/dev/null

@@ -33,7 +33,7 @@ local -a _global_args
 local -a _subcommands
 
 local IFS=$'\n'
-_global_args=($(keybase advanced | grep '^\s*--' | sed -r 's/^[\t ]*(--[^\t ,]+)( [^\t ,]*)?,? ?(--?[^\t ]+)?[\t ]*(.*)$/(\3)\1[\4]/'))
+_global_args=($(keybase advanced | grep '^\s*--' | gsed -r 's/^[\t ]*(--[^\t ,]+)( [^\t ,]*)?,? ?(--?[^\t ]+)?[\t ]*(.*)$/(\3)\1[\4]/'))
 
 _arguments -C -A "-v" -A "--version"\
   '(- 1 *)'{-v,--version}'[display version information]' \
