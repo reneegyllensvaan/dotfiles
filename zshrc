@@ -22,7 +22,7 @@ antigen theme frisk
 # Tell Antigen that you're done.
 antigen apply
 
-# oh-my-zsh aliases git to g, but that should be curt-git
+# oh-my-zsh aliases git to g, but that should be short-git
 unalias g
 unalias gb
 

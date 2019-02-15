@@ -4,5 +4,5 @@ auto-key-retrieve
 no-emit-version
 use-agent
 #no-tty
-default-key $DOT_DEFAULT_GPG_KEY
+default-key $GPG_FINGERPRINT
 EOF

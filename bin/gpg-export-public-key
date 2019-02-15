@@ -1,2 +1,6 @@
 #!/bin/sh
-gpg --armor --export $DOT_USER_EMAIL | $CLIPBOARD_COPY
+if [ -z $GPG_FINGERPRINT ]; then
+    echo 'No default GPG key is defined. Please set it in your user-profile and resource RCs.'
+    exit
+fi
+gpg --armor --export $GPG_FINGERPRINT | $CLIPBOARD_COPY

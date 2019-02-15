@@ -1,0 +1,2 @@
+#!/bin/sh
+git rm $(git status --porcelain  | sed -E 's/^\?\? (.*)$/\1/gm')
