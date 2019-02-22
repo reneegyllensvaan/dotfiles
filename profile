@@ -28,9 +28,6 @@ if [ `ps -o command='' -p $$ | grep zsh` ]; then
   export FPATH="$HOME/.zfunctions:$FPATH"
 fi
 
-# the following vars are supposed to be used by the user/interactively
-export Q=/dev/null
-
 # set the clipboard variables based on available clipboard applications
 # OSX
 which pbcopy >/dev/null && export CLIPBOARD_COPY='pbcopy'
@@ -39,3 +36,8 @@ which pbpaste >/dev/null && export CLIPBOARD_PASTE='pbpaste'
 # Linux with xsel
 which xsel >/dev/null && export CLIPBOARD_COPY='xsel -b' \
                       && export CLIPBOARD_PASTE='xsel -b'
+
+# The following vars are supposed to be used by the user/interactively
+export Q=/dev/null
+export C=$CLIPBOARD_COPY
+export P=$CLIPBOARD_PASTE
