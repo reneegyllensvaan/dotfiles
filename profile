@@ -3,11 +3,22 @@ export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.notion:$PATH"
 export PATH=/usr/local/opt/texinfo/bin:$PATH
 [[ -d ~/Library ]] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
 
+# Notion
+[ -d "$HOME/.notion" ] && export NOTION_HOME="$HOME/.notion"
+if [ $NOTION_HOME ]; then
+  [ -s "$NOTION_HOME/load.sh" ] && \. "$NOTION_HOME/load.sh"
+  export PATH="${NOTION_HOME}/bin:$PATH"
+fi
+
 export VISUAL="$(which vim)"
 export EDITOR="$VISUAL"
+export PAGER=`which bat >/dev/null && echo bat || echo less`
+export GIT_EDITOR=vim
+export GIT_PAGER=less
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export GOPATH=$HOME/code/go
 
@@ -19,11 +30,13 @@ export LESS="-SFXR"
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
-export GIT_EDITOR=vim
 export KEYTIMEOUT=1
 export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
-[ -e ~/.nix-profile/etc/profile.d/nix.sh ] && . ~/.nix-profile/etc/profile.d/nix.sh
 
+# configs for dotfile scripts
+export OFFLINEIMAP_SYNC_INTERVAL=120 # seconds
+
+# if we're a zsh, export fpath
 if [ `ps -o command='' -p $$ | grep zsh` ]; then
   export FPATH="$HOME/.zfunctions:$FPATH"
 fi

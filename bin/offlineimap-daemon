@@ -1,3 +1,2 @@
 #!/bin/sh
-
-while true; do offlineimap; sleep 600; done;
+while true; do offlineimap; sleep $OFFLINEIMAP_SYNC_INTERVAL; done;

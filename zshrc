@@ -81,3 +81,4 @@ if which gpgconf >$Q; then
   # if gpg-agent is not running, start it and load env
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon ) 
 fi
+

@@ -1,0 +1,19 @@
+#!/bin/sh
+function join { 
+  delim="$1"; 
+  shift
+  while [ "$1" ]; do
+    printf "$1"
+    shift 
+    [ "$1" ] && printf ","
+  done
+}
+cmd=$1
+shift
+if [ "$1" ]; then
+  echo "$cmd:`join , "$@"`"
+  fab "$cmd:`join , "$@"`"
+else
+  echo $cmd
+  fab $cmd
+fi

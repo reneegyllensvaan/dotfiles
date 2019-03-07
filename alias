@@ -32,10 +32,12 @@ alias fd='noglob fd'
 
 # shortcut commands
 alias g='short-git'
+alias fab='comfortable-fab'
 alias v='vagrant'
 
 # unglob some commands
 alias fd='noglob fd'
+alias fdi='noglob fd -I'
 alias rg='noglob rg'
 #alias rg='noglob   --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 

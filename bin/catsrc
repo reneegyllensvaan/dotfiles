@@ -1,0 +1,2 @@
+#!/bin/sh
+$PAGER `which $1`
