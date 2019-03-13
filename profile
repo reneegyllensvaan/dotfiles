@@ -24,6 +24,7 @@ export GOPATH=$HOME/code/go
 
 export LDFLAGS=-L/usr/local/opt/texinfo/lib
 export DIR_MARK_PATH="$HOME/.dir-marks"
+export DEFERRED_COMMANDS_FILE="$HOME/.deferred"
 
 export BAT_CONFIG_PATH="$HOME/.batrc"
 export LESS="-SFXR"

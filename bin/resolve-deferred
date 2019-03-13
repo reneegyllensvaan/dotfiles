@@ -1,0 +1,4 @@
+#!/bin/sh
+[ -f $DEFERRED_COMMANDS_FILE ] \
+  && zsh $DEFERRED_COMMANDS_FILE \
+  && rm $DEFERRED_COMMANDS_FILE

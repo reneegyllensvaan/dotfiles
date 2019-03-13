@@ -1,0 +1,4 @@
+#!/bin/sh
+# Utility script for scheduling deferred commands for later, such as on boot
+# run scheuled commands by running resolve-deferred
+[ "$1" ] && echo "$@" >> $DEFERRED_COMMANDS_FILE 

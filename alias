@@ -31,7 +31,8 @@ alias eme='emacsclient -nw --socket-name=default'
 alias fd='noglob fd'
 
 # shortcut commands
-alias g='short-git'
+#alias g='short-git'
+alias g='git'
 alias fab='comfortable-fab'
 alias v='vagrant'
 

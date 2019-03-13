@@ -1,2 +1,2 @@
 #!/bin/sh
-killall TotalSpaces2 ; (/Applications/TotalSpaces2.app/Contents/MacOS/TotalSpaces2 &)
+killall TotalSpaces2 && (/Applications/TotalSpaces2.app/Contents/MacOS/TotalSpaces2 >/dev/null 2>/dev/null &)
