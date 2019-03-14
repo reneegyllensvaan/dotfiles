@@ -75,7 +75,7 @@ test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 # GnuPG settings
-if which gpgconf >$Q; then
+if [ $GPG_FINGERPRINT ]; then
   export GPG_TTY="$(tty)"
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   # if gpg-agent is not running, start it and load env

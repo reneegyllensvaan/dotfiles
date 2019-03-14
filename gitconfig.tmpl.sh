@@ -3,9 +3,9 @@ cat << EOF
 [user]
   name = $USER_NAME
   email = $USER_EMAIL
-  signingkey = $GIT_SIGNING_KEY
+  `[ $GIT_SIGNING_KEY ] && 'signingkey = $GIT_SIGNING_KEY'`
 [commit]
-  gpgsign = true
+  `[ $GIT_SIGNING_KEY ] && 'gpgsign = true'`
 [github]
   user = $GITHUB_USER
 [alias]
