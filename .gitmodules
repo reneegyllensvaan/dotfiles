@@ -1,0 +1,3 @@
+[submodule "qmk/qmk_configs"]
+	path = qmk/qmk_configs
+	url = git@github.com:reneegyllensvaan/qmk_configs.git

@@ -82,3 +82,4 @@ if [ $GPG_FINGERPRINT ]; then
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon ) 
 fi
 
+export PATH="`npm bin -g`:$PATH"

@@ -35,6 +35,8 @@ alias fd='noglob fd'
 alias g='git'
 alias fab='comfortable-fab'
 alias v='vagrant'
+alias gz='gzip'
+alias gzd='gzip -d'
 
 # unglob some commands
 alias fd='noglob fd'
