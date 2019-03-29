@@ -1,48 +1,51 @@
 #!/usr/bin/env zsh
 source "$HOME/antigen.zsh"
 
-# Load the oh-my-zsh's library.
-antigen use oh-my-zsh
+## Load the oh-my-zsh's library.
+#antigen use oh-my-zsh
+#
+## Bundles from the default repo (robbyrussell's oh-my-zsh).
+#antigen bundle git
+#antigen bundle vi-mode
+#antigen bundle fabric
+#antigen bundle pip
+#antigen bundle docker
+#antigen bundle command-not-found
+#
+## Syntax highlighting bundle.
+#antigen bundle zsh-users/zsh-syntax-highlighting
+#
+## Load the theme.
+#antigen theme frisk
+##antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
+#
+## Tell Antigen that you're done.
+#antigen apply
+#
+## oh-my-zsh aliases git to g, but that should be short-git
+#unalias g
+#unalias gb
 
-# Bundles from the default repo (robbyrussell's oh-my-zsh).
-antigen bundle git
-antigen bundle vi-mode
-antigen bundle fabric
-antigen bundle pip
-antigen bundle docker
-antigen bundle command-not-found
-
-# Syntax highlighting bundle.
-antigen bundle zsh-users/zsh-syntax-highlighting
-
-# Load the theme.
-antigen theme frisk
-#antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
-
-# Tell Antigen that you're done.
-antigen apply
-
-# oh-my-zsh aliases git to g, but that should be short-git
-unalias g
-unalias gb
-
-# also disable shared history from OMZ
 export HISTFILE="$HOME/.zhistory"
 export HISTSIZE=1000000
+# First, set shared history to load old history entries
+setopt share_history
 setopt inc_append_history
-setopt no_share_history
-setopt hist_ignore_dups
-unsetopt share_history
+#setopt no_share_history
 setopt PROMPT_SUBST
+# Set vi mode with no timeout
+export KEYTIMEOUT=1; bindkey -v
 
 source "$HOME/.profile"
 source "$HOME/.user-profile"
 source "$HOME/.alias"
 source "$HOME/.zfunctions/dir-marks.zsh"
 source "$HOME/.zfunctions/miscellaneous.zsh"
+source "$HOME/.zfunctions/colors.zsh"
+source "$HOME/.zfunctions/git-prompt.zsh"
 
 #unsetopt nomatch
-#autoload -U compinit; compinit
+autoload -U compinit; compinit
 #autoload -U promptinit; promptinit
 #prompt pure
 
@@ -62,7 +65,7 @@ else
   };
 fi
 
-PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)$(bzr_prompt_info)"
+PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)"
 [ $SSH_CLIENT ] && PROMPT="$PROMPT [%n@%m]" # only append prompt with host over ssh
 PROMPT="$PROMPT"$'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
 
