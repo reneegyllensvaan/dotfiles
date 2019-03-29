@@ -86,3 +86,4 @@ if [ $GPG_FINGERPRINT ]; then
 fi
 
 export PATH="`npm bin -g`:$PATH"
+source "$HOME/.zmodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

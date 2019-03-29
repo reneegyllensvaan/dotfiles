@@ -1,3 +1,6 @@
 [submodule "qmk/qmk_configs"]
 	path = qmk/qmk_configs
 	url = git@github.com:reneegyllensvaan/qmk_configs.git
+[submodule "zmodules/zsh-syntax-highlighting"]
+	path = zmodules/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
