@@ -31,12 +31,14 @@ alias eme='emacsclient -nw --socket-name=default'
 alias fd='noglob fd'
 
 # shortcut commands
-#alias g='short-git'
-alias g='git'
 alias fab='comfortable-fab'
-alias v='vagrant'
+alias g='git'
+alias ypwd='pwd | $CLIPBOARD_COPY'
 alias gz='gzip'
 alias gzd='gzip -d'
+alias xz='fxz'
+alias la='ls -lAh'
+alias v='vagrant'
 
 # unglob some commands
 alias fd='noglob fd'

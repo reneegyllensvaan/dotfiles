@@ -1,40 +1,16 @@
-#!/usr/bin/env zsh
-source "$HOME/antigen.zsh"
-
-## Load the oh-my-zsh's library.
-#antigen use oh-my-zsh
-#
-## Bundles from the default repo (robbyrussell's oh-my-zsh).
-#antigen bundle git
-#antigen bundle vi-mode
-#antigen bundle fabric
-#antigen bundle pip
-#antigen bundle docker
-#antigen bundle command-not-found
-#
-## Syntax highlighting bundle.
-#antigen bundle zsh-users/zsh-syntax-highlighting
-#
-## Load the theme.
-#antigen theme frisk
-##antigen theme https://github.com/denysdovhan/spaceship-prompt spaceship
-#
-## Tell Antigen that you're done.
-#antigen apply
-#
-## oh-my-zsh aliases git to g, but that should be short-git
-#unalias g
-#unalias gb
+#source "$HOME/antigen.zsh"
 
 export HISTFILE="$HOME/.zhistory"
-export HISTSIZE=1000000
-# First, set shared history to load old history entries
-setopt share_history
-setopt inc_append_history
-#setopt no_share_history
+export HISTSIZE=100
+export SAVEHIST=1000000
+setopt SHARE_HISTORY
+setopt APPEND_HISTORY
+
 setopt PROMPT_SUBST
 # Set vi mode with no timeout
 export KEYTIMEOUT=1; bindkey -v
+# Set completion to be case-insensitive in unambiguous cases
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 source "$HOME/.profile"
 source "$HOME/.user-profile"
@@ -43,6 +19,9 @@ source "$HOME/.zfunctions/dir-marks.zsh"
 source "$HOME/.zfunctions/miscellaneous.zsh"
 source "$HOME/.zfunctions/colors.zsh"
 source "$HOME/.zfunctions/git-prompt.zsh"
+source "$HOME/.zfunctions/fzf.zsh"
+[ -f "$HOME/.zfunctions/zsh-syntax-highlighting.zsh" ] \
+  && source "$HOME/.zfunctions/zsh-syntax-highlighting.zsh"
 
 #unsetopt nomatch
 autoload -U compinit; compinit
@@ -65,12 +44,11 @@ else
   };
 fi
 
+# Set up the prompt template
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)"
 [ $SSH_CLIENT ] && PROMPT="$PROMPT [%n@%m]" # only append prompt with host over ssh
 PROMPT="$PROMPT"$'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
 
-# fzf.zsh integration settings
-[ -f ~/.zfunctions/fzf.zsh ] && source ~/.zfunctions/fzf.zsh
 
 # opam configuration
 test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
@@ -85,5 +63,4 @@ if [ $GPG_FINGERPRINT ]; then
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon ) 
 fi
 
-export PATH="`npm bin -g`:$PATH"
-source "$HOME/.zmodules/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+which npm >/dev/null && export PATH="`npm bin -g`:$PATH"

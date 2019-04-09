@@ -68,6 +68,9 @@ safe_copy () {
   fi
 }
 
+# load git submodules
+git submodule update zmodules/zsh-syntax-highlighting
+
 echo "Building shell template files"
 build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
