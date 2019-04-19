@@ -1,4 +1,0 @@
-#!/bin/sh
-echo $PWD | grep frontend >/dev/null && fab eslint && suc=true
-echo $PWD | grep backend >/dev/null && fab pre_pull_request && fab lint_affected && suc=true
-[ $succ ] && git add --all && git commit -m 'linty mcgee' && git push

@@ -1,5 +1,15 @@
+# Controlled by the dotfiles repository
+# Edit user_config if you want to add something
+# and not publish it to git
+Include ~/.ssh/user_config
+
 Host *
-  ForwardAgent yes
+  # ForwardAgent forwards the ssh auth socket to the ssh host,
+  #              which is neat in theory, but it that host is
+  #              compromised, the host root can hijack the socket
+  #              to ssh into other hosts. Keep disabled unless
+  #              really necessary.
+  ForwardAgent no
   XAuthLocation /opt/X11/bin/xauth
 
 Host gh

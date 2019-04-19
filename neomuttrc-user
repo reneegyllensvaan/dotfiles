@@ -1,0 +1,3 @@
+set folder="/Users/renee/email/work"
+set nm_default_uri="notmuch:////Users/renee/email/work" 
+set sendmail="/usr/sbin/sendmail"

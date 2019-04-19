@@ -1,5 +1,5 @@
 #!/bin/bash
-if [[ ! -f "./setup-commands" ]]; then
+if [[ ! -f "./setup" ]]; then
   echo "This script must be run from the directory it's contained in"
   exit
 fi
@@ -76,6 +76,7 @@ build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
 build_template $PWD/gitconfig
 build_template $PWD/README.md
+build_template $PWD/neomuttrc-user
 
 echo "Making the config directory and linking/copying files"
 mkdir -p ~/.config/
@@ -107,6 +108,7 @@ safe_copy "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
 safe_copy "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
 mkdir -p ~/.ssh
 safe_copy "$PWD/ssh_config" ~/.ssh/config
+touch ~/.ssh/user_config
 
 echo "  Tmux config"
 symlink file "$PWD/tmux.conf" ~/.tmux.conf
@@ -124,6 +126,11 @@ symlink dir "$PWD/qutebrowser" ~/.config/qutebrowser
 echo "  i3 config"
 mkdir -p ~/.config/i3
 symlink file "$PWD/i3_config" ~/.config/i3/config
+
+echo "  Email config"
+symlink file "$PWD/neomuttrc-user" ~/.neomutt-user
+symlink file "$PWD/neomuttrc" ~/.neomuttrc
+mkdir -p ~/email/work
 
 echo "  Ranger config"
 mkdir -p ~/.config/ranger
@@ -144,6 +151,7 @@ symlink file "$PWD/gitconfig" ~/.gitconfig
 echo "  Symlinking directories"
 #TODO make this check for an existing bin dir
 symlink dir "$PWD/bin" ~/.bin
+symlink dir "$PWD/emacs.d" ~/.emacs.d
 
 echo "  Making the ~/.local/bin directory"
 mkdir -p ~/.local/bin

@@ -1,2 +1,20 @@
 #!/bin/sh
-while true; do offlineimap; sleep $OFFLINEIMAP_SYNC_INTERVAL; done;
+while true; do 
+  # Purge everything in trash from other tags
+  notmuch tag --remove-all +trash tag:trash
+  # Do gmailieer sync (for notmuch/neomutt)
+  (cd ~/email/work && gmi sync)
+  # Get amount of new email
+  new_mail=`notmuch search tag:unnotified | wc -l | awk '{print $1}'`
+  if [ $new_mail != '0' ]; then
+    [ $OPERATING_SYSTEM = 'osx' ] && \
+      osascript -e 'display notification "'"$new_messages"'new messages" with title "notmuch"'
+  fi
+  notmuch tag -unnotified tag:unnotified
+  sleep $OFFLINEIMAP_SYNC_INTERVAL;
+done;
+
+#offlineimap
+#if notmuch new | grep -v 'No new mail\.'; then
+#  [ $OPERATING_SYSTEM = 'osx' ] && osascript -e 'display notification "New email" with title "offlineimap-notmuch"'
+#fi

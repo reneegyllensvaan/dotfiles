@@ -58,7 +58,7 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # GnuPG settings
 if [ $GPG_FINGERPRINT ]; then
   export GPG_TTY="$(tty)"
-  export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+  [ "$SSH_AUTH_SOCK" ] || export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   # if gpg-agent is not running, start it and load env
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon ) 
 fi
