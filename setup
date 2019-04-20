@@ -130,6 +130,7 @@ symlink file "$PWD/i3_config" ~/.config/i3/config
 echo "  Email config"
 symlink file "$PWD/neomuttrc-user" ~/.neomutt-user
 symlink file "$PWD/neomuttrc" ~/.neomuttrc
+symlink file "$PWD/notmuch-config" ~/.notmuch-config
 mkdir -p ~/email/work
 
 echo "  Ranger config"
