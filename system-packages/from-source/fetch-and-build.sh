@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Build fxz
-git submodule update fxz
+git submodule update --init fxz
 cd fxz
 ./autogen.sh
 ./configure

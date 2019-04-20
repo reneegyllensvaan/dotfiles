@@ -15,7 +15,7 @@ hsetroot &
 
 #keyboard config
 #setxkbmap -layout "us,se" -option "grp:caps_switch"
-setxkbmap -layout "us" -option "caps:escape"
+setxkbmap -layout "us" -variant colemak -option "caps:escape"
 
 # set key repeat rate
 xset r rate 200 35
