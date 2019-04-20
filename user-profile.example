@@ -1,14 +1,24 @@
 # User/contact info
-export DOT_USER_NAME='Ada Lovelace'
-export DOT_USER_EMAIL='ada@example.com'
-export DOT_USER_WORK_EMAIL='contact@adalovelate.me'
-export DOT_USER_HOME_EMAIL='ada@example.com'
-export DOT_GITHUB_USER='adalovelace'
+export USER_NAME='Renee Gyllensvaan'
+export USER_EMAIL='rgyllensvaan@bison.co'
+export USER_WORK_EMAIL='rgyllensvaan@bison.co'
+export USER_HOME_EMAIL='renee.gyllensvaan@gmail.com'
+export GITHUB_USER='reneegyllensvaan'
 
 # System/computer info
-export DOT_OPERATING_SYSTEM='osx' #valid args: osx, linux
-#uncomment this and set your keys to enable gpg support
-#export DOT_DEFAULT_GPG_KEY='FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF'
-#export DOT_GIT_SIGNING_KEY='FFFFFFFFFFFFFFFF'
-# TODO: make this more general
-export DOT_GUI_GPG_PINENTRY='/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac'
+export OPERATING_SYSTEM='osx' #valid args: osx, linux
+
+# GPG Settings
+export GPG_FINGERPRINT='FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4'
+export GPG_KEYID_LONG='B4F76D0CFD1B30D4'
+export GPG_KEYID_SHORT='FD1B30D4'
+export GPG_KEYGRIP='67BD0BD672F1A6C6FFE65D1CEF6A63D6BD136012'
+
+export GPG_ENCRYPTION_KEYID='923EEF94D89EFC5A'
+export GPG_SIGNING_KEYID='47EE898A014EEF1B'
+export GPG_AUTH_KEYID='C820BFAD1C9D1365'
+
+export GIT_SIGNING_KEY=$GPG_SIGNING_KEYID
+
+# TODO: make this work on linux
+export GUI_GPG_PINENTRY='/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac'
