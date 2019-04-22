@@ -18,6 +18,7 @@ cat << EOF
   d   = diff
   P   = push
   p   = pull
+  pop = stash pop
   pr  = pull --rebase
   z   = stash
 EOF

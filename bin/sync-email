@@ -1,6 +1,7 @@
 #!/bin/sh
 while true; do 
   # Purge everything in trash from other tags
+  notmuch new
   notmuch tag --remove-all +trash tag:trash
   # Do gmailieer sync (for notmuch/neomutt)
   (cd ~/email/work && gmi sync)
