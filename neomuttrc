@@ -22,7 +22,7 @@ virtual-mailboxes \
     "Github"    "notmuch://?query=tag:github"\
     "trEllo"    "notmuch://?query=tag:trello"\
     "orders"    "notmuch://?query=tag:orders"\
-    "newsletters" "notmuch://?query=tag:newsletters"\
+    "Newsletters" "notmuch://?query=tag:newsletters"\
     "lists"    "notmuch://?query=tag:lists"\
     "attachment" "notmuch://?query=tag:attachment"\
     "trash"    "notmuch://?query=tag:trash"
