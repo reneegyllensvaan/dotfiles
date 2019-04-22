@@ -1,4 +1,4 @@
-source ~/.muttrc-secret
+source ~/.neomuttrc-user
 
 # GPG Config
 set pgp_auto_decode 
