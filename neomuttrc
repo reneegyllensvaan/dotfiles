@@ -1,6 +1,9 @@
 source ~/.neomuttrc-user
 source ~/.neomuttrc-unbind
 
+set keep_flagged='yes'
+set mark_old='no'
+
 # GPG Config
 set crypt_use_gpgme = yes
 set pgp_sign_as = FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4
@@ -14,29 +17,37 @@ message-hook '!~g !~G ~b "^-----BEGIN PGP (SIGNED )?MESSAGE"' 'exec check-tradit
 tag-transforms \
     "important" "!"\
     "github" "GH"\
+    "unread" "?"\
     "newsletters" "N"\
     "trello" "T"\
     "lists" "L"\
     "inbox" "i"\
-    "trash" "D"
+    "trash" "d"\
+    "remove-all-tags" "D"
 
 set date_format='%Y-%m-%d %H:%M'
 #set index_format='%4C %Z %D %-20.20n %-8.8J (%e/%E) %s'
 set index_format='%4C %Z %D %-20.20n [%e/%E] %s (%J)'
 
-#set strict_threads="yes"
 set sort_browser="reverse-date"
 set sort_aux="last-date-received"
-macro index T "<sort-reverse>threads\n"
+macro index T "<sort-reverse>t"
+set sort=reverse-date-received
+macro index t "<sort-reverse>d"
 
 set pager_index_lines=10
-set sort=reverse-date-received
 # notmuch
-#message-hook ~A 'push "<modify-labels>-unread\n"'
-set virtual_spoolfile=yes                          # enable virtual folders
-set sendmail="/PATH/TO/bin/nm_sendmail"            # enables parsing of outgoing mail
+set virtual_spoolfile='yes'
+set hidden_tags=""
+set nm_exclude_tags = ""
+set nm_open_timeout = 5
+set nm_query_type = 'messages'
+set nm_unread_tag = "unread"
+
+#message-hook ~A "<modify-labels>-unread\n"
 virtual-mailboxes \
     "All mail"  "notmuch://?query=*"\
+    "Not trash" "notmuch://?query=NOT tag:trash"\
     "inBox"     "notmuch://?query=tag:inbox and NOT tag:archive"\
     "Unread"    "notmuch://?query=tag:unread"\
     "Important" "notmuch://?query=tag:important"\
@@ -53,11 +64,14 @@ virtual-mailboxes \
 #change-vfolder inbox
 # notmuch bindings
 macro index \\\\ "<vfolder-from-query>"
-macro index r "<modify-labels>-unread -inbox\n"
-macro index ! "<modify-labels-then-hide>!unread\n"
-macro index I "<modify-labels-then-hide>!important\n"
+macro index r "<modify-labels-then-hide>-unread -inbox -trash -strict-delete\n"
+macro index u "<modify-labels>-unread\n"
+#macro index U "<modify-labels>+unread\n"
+macro index i "<modify-labels>+inbox\n"
+macro index I "<modify-labels>!important\n"
 #macro index,pager s  "<modify-labels-then-hide>-inbox -unread\n"
-macro index,pager D  "<modify-labels-then-hide>-inbox -unread !trash\n"
+macro index,pager D  "<modify-labels-then-hide>-inbox -unread +trash +strict-delete\n"
+macro index,pager d  "<modify-labels-then-hide>-inbox -unread +trash -strict-delete\n"
 macro index,pager mo "<modify-labels-then-hide>-inbox -unread !orders\n"
 macro index + "<modify-labels>+*\n<sync-mailbox>"
 macro index - "<modify-labels>-*\n<sync-mailbox>"
@@ -98,6 +112,8 @@ bind index <Return> display-message
 bind index G last-entry
 bind index gg first-entry
 bind generic,index,pager,index q exit
+bind generic,index <Down> next-entry
+bind generic,index <Up> previous-entry
 bind generic,index j next-entry
 bind generic,index k previous-entry
 bind index \Cu previous-page

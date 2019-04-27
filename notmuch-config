@@ -47,7 +47,7 @@ primary_email=rgyllensvaan@bison.co
 #		in the mail store.
 #
 [new]
-tags=unread;unnotified;
+tags=unnotified;
 ignore=*.json
 
 # Search configuration

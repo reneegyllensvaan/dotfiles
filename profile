@@ -21,6 +21,7 @@ export GIT_EDITOR=vim
 export GIT_PAGER=less
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export GOPATH=$HOME/code/go
+export VDIRSYNCER_CONFIG="$HOME/.vdirsyncerrc"
 
 export LDFLAGS=-L/usr/local/opt/texinfo/lib
 export DIR_MARK_PATH="$HOME/.dir-marks"

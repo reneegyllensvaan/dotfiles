@@ -30,6 +30,7 @@ set report      =0                           " Always report changed lines.
 set synmaxcol   =200                         " Only highlight the first 200 columns.
 set timeoutlen=1000                          " Timeout for code updates
 set ttimeoutlen=0                            " Timeout for mode updates
+set so=999                                   " always center cursor
 
 set list                                     " Show non-printable characters.
 if has('multi_byte') && &encoding ==# 'utf-8'

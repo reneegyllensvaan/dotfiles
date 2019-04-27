@@ -1,8 +1,11 @@
 #source "$HOME/antigen.zsh"
 
-export HISTFILE="$HOME/.zhistory"
-export HISTSIZE=100
+# We're letting zsh eat plenty of space for history here,
+# it can be reduced if memory is scarce, but it's really 
+# convenient to have lots of history to search with fzf
+export HISTSIZE=1000000
 export SAVEHIST=1000000
+export HISTFILE="$HOME/.zhistory"
 setopt SHARE_HISTORY
 setopt APPEND_HISTORY
 
