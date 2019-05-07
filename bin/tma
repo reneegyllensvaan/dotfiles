@@ -1,0 +1,3 @@
+#!/bin/sh
+session=`tmux list-sessions | awk '{print substr($1, 1, length($1)-1)}' |fzf`
+[ "$?" = "0" ] && tmux attach-session -t $session
