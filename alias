@@ -20,12 +20,12 @@ which opam >/dev/null && alias op='opam'
 which yaourt >/dev/null && alias yao='yaourt'
 
 # editor aliases
-alias vi='vim'
+#alias vi='vim'
 alias fim='vim `fzf`'
 alias eme='emacsclient -nw --socket-name=default'
 #alias vim='nvim'
-#alias vi='nvim'
-#alias v='nvim'
+alias vi='nvim'
+alias v='nvim'
 
 # unglob some commands
 alias fd='noglob fd'
@@ -45,6 +45,7 @@ alias fd='noglob fd'
 alias fdi='noglob fd -I'
 alias rg='noglob rg'
 alias w3m='noglob w3m'
+alias jq='noglob jq'
 #alias rg='noglob   --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 
 # command replacements

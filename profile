@@ -16,6 +16,7 @@ fi
 
 export VISUAL="$(which vim)"
 export EDITOR="$VISUAL"
+export XDG_CONFIG_HOME="$HOME/.config"
 export PAGER=`which bat >/dev/null && echo bat || echo less`
 export GIT_EDITOR=vim
 export GIT_PAGER=less
@@ -28,7 +29,7 @@ export DIR_MARK_PATH="$HOME/.dir-marks"
 export DEFERRED_COMMANDS_FILE="$HOME/.deferred"
 
 export BAT_CONFIG_PATH="$HOME/.batrc"
-export LESS="-SFXR"
+export LESS="-SR"
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 export LSCOLORS=ExFxCxDxBxegedabagacad

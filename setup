@@ -90,8 +90,9 @@ echo "  Urxvt conf"
 mkdir -p ~/.urxvt
 symlink dir "$PWD/urxvt-ext" ~/.urxvt/ext
 
+# disabled, using vim as a more lightweight editor atm, nvim as a full editor
 echo "  Vim directories and conf"
-symlink file "$PWD/vimrc" ~/.vimrc
+symlink file "$PWD/vimrc" ~/.vimrc 
 mkdir -p ~/.vim
 mkdir -p ~/.vim/blugin
 mkdir -p ~/.vim/autoload
@@ -101,6 +102,12 @@ mkdir -p ~/.vim/files/backup
 mkdir -p ~/.vim/files/info
 mkdir -p ~/.vim/files/undo
 symlink file "$PWD/plug.vim" ~/.vim/autoload/plug.vim
+
+echo "  Neovim conf"
+mkdir -p ~/.config
+mkdir -p ~/.local/share/nvim/site/autoload
+symlink dir "$PWD/nvim" ~/.config/nvim
+symlink file "$PWD/plug.vim" ~/.local/share/nvim/site/autoload/plug.vim
 
 echo "  GPG config"
 mkdir -p ~/.gnupg
@@ -149,6 +156,7 @@ symlink file "$PWD/tmux.conf" ~/.tmux.conf
 symlink file "$PWD/compton.conf" ~/.config/compton.conf
 symlink file "$PWD/editorconfig" ~/.editorconfig
 symlink file "$PWD/gitconfig" ~/.gitconfig
+symlink file "$PWD/tigrc" ~/.tigrc
 
 echo "  Symlinking directories"
 #TODO make this check for an existing bin dir
