@@ -122,8 +122,6 @@ symlink file "$PWD/tmux.conf" ~/.tmux.conf
 symlink file "$PWD/tmux-disposable.conf" ~/.tmux-disposable.conf
 
 echo "  Zsh configs"
-symlink file "$PWD/antigen.zsh" ~/antigen.zsh
-rm -rf ~/.antigen
 symlink file $PWD/zshrc ~/.zshrc
 symlink dir $PWD/zfunctions ~/.zfunctions
 symlink dir $PWD/zmodules ~/.zmodules
