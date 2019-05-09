@@ -1,6 +1,6 @@
 #!/bin/sh
 cat << EOF
-auto-key-retrieve
+keyserver-options auto-key-retrieve
 no-emit-version
 use-agent
 #no-tty

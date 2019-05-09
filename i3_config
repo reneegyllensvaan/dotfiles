@@ -47,7 +47,7 @@ bindsym --release $mod+Shift+Print exec --no-startup-id "scrot --select 'scrot-%
 
 # workspace controls:
 bindsym $mod+Next exec --no-startup-id i3-msg "move workspace to output eDP1"
-bindsym $mod+Prior exec --no-startup-id i3-msg "move workspace to output HDMI1" 
+bindsym $mod+Prior exec --no-startup-id i3-msg "move workspace to output HDMI1"
 # open dmenu selector containing entries from ~/.screenlayout with xrandr profiles
 #bindsym $mod+Shift+F10 exec --no-startup-id sh "echo \"$(printf '~/.screenlayout/';ls ~/.screenlayout | dmenu -l 6))\" | sh 2>/dev/null"
 bindsym $mod+Shift+F10 exec --no-startup-id ~/code/cpp-c/xlib-test/xlib-test
@@ -152,7 +152,7 @@ mode "launcher" {
   bindsym q           exec --no-startup-id qutebrowser    ; mode "default"
   bindsym w           exec --no-startup-id chromium       ; mode "default"
   bindsym w           exec --no-startup-id emacs          ; mode "default"
-  
+
   # back to normal: Enter or Escape or Mod1+r
   bindsym Return mode "default"
   bindsym Escape mode "default"
