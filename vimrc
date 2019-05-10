@@ -81,3 +81,5 @@ call plug#end()
 
 nnoremap <C-w>/ <C-w>v
 nnoremap <C-w>- <C-w>s
+let g:mapleader = "\<Space>"
+

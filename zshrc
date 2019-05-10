@@ -1,12 +1,12 @@
 #source "$HOME/antigen.zsh"
 
 # We're letting zsh eat plenty of space for history here,
-# it can be reduced if memory is scarce, but it's really 
+# it can be reduced if memory is scarce, but it's really
 # convenient to have lots of history to search with fzf
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export HISTFILE="$HOME/.zhistory"
-setopt SHARE_HISTORY
+unsetopt SHARE_HISTORY
 setopt APPEND_HISTORY
 
 setopt PROMPT_SUBST
@@ -63,7 +63,7 @@ if [ $GPG_FINGERPRINT ]; then
   export GPG_TTY="$(tty)"
   [ "$SSH_AUTH_SOCK" ] || export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   # if gpg-agent is not running, start it and load env
-  pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon ) 
+  pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon )
 fi
 
 which npm >/dev/null && export PATH="`npm bin -g`:$PATH"

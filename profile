@@ -29,7 +29,7 @@ export DIR_MARK_PATH="$HOME/.dir-marks"
 export DEFERRED_COMMANDS_FILE="$HOME/.deferred"
 
 export BAT_CONFIG_PATH="$HOME/.batrc"
-export LESS="-SR"
+export LESS="-SXR"
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 export LSCOLORS=ExFxCxDxBxegedabagacad

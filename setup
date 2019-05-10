@@ -53,8 +53,8 @@ safe_copy () {
   # just copy and overwrite if force_overwrite is on
   [ $force_overwrite ] && cat $1 > $2 && return 0
   which shasum >/dev/null && hash_command='shasum'
-  hash_new=`$hash_command $1 | head -c 40` 
-  hash_old=`$hash_command $2 | head -c 40` 
+  hash_new=`$hash_command $1 | head -c 40`
+  hash_old=`$hash_command $2 | head -c 40`
   if [[ $hash_new = $hash_old ]]; then
     echo "    $2 hasn't changed, skipping..."
   else
@@ -92,7 +92,7 @@ symlink dir "$PWD/urxvt-ext" ~/.urxvt/ext
 
 # disabled, using vim as a more lightweight editor atm, nvim as a full editor
 echo "  Vim directories and conf"
-symlink file "$PWD/vimrc" ~/.vimrc 
+symlink file "$PWD/vimrc" ~/.vimrc
 mkdir -p ~/.vim
 mkdir -p ~/.vim/blugin
 mkdir -p ~/.vim/autoload
@@ -119,6 +119,7 @@ touch ~/.ssh/user_config
 
 echo "  Tmux config"
 symlink file "$PWD/tmux.conf" ~/.tmux.conf
+symlink file "$PWD/tmux-disposable.conf" ~/.tmux-disposable.conf
 
 echo "  Zsh configs"
 symlink file "$PWD/antigen.zsh" ~/antigen.zsh

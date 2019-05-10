@@ -97,9 +97,9 @@ Plug 'tpope/vim-surround'
 
 " Language Support:
 " General
-Plug 'shougo/deoplete.nvim', {'for': ['python', 'nim', 'javascript', 'jsx']}
+Plug 'shougo/deoplete.nvim' ", {'for': ['python', 'nim', 'javascript', 'jsx']}
 Plug 'shougo/neosnippet.vim', {'for': ['python', 'nim']}
-Plug 'w0rp/ale', {'for': ['python', 'nim', 'javascript', 'jsx']}
+Plug 'w0rp/ale' ", {'for': ['python', 'nim', 'javascript', 'jsx']}
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'for': 'go'}
 " Nim
@@ -109,8 +109,8 @@ Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 " Python
 Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
-Plug 'pangloss/vim-javascript', {'for': ['javascript', 'jsx']}
-Plug 'mxw/vim-jsx', {'for': 'jsx'}
+Plug 'pangloss/vim-javascript' ", {'for': ['javascript', 'jsx']}
+Plug 'mxw/vim-jsx' ", {'for': 'jsx'}
 
 
 " Plug 'klen/python-mode', {'for': 'python'}
