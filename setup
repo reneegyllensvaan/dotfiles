@@ -90,7 +90,7 @@ echo "  Urxvt conf"
 mkdir -p ~/.urxvt
 symlink dir "$PWD/urxvt-ext" ~/.urxvt/ext
 
-# disabled, using vim as a more lightweight editor atm, nvim as a full editor
+# using vim as a more lightweight editor atm, nvim as a full editor
 echo "  Vim directories and conf"
 symlink file "$PWD/vimrc" ~/.vimrc
 mkdir -p ~/.vim
@@ -106,6 +106,14 @@ symlink file "$PWD/plug.vim" ~/.vim/autoload/plug.vim
 echo "  Neovim conf"
 mkdir -p ~/.config
 mkdir -p ~/.local/share/nvim/site/autoload
+mkdir -p ~/.local/share/nvim
+mkdir -p ~/.local/share/nvim/blugin
+mkdir -p ~/.local/share/nvim/autoload
+mkdir -p ~/.local/share/nvim/files
+mkdir -p ~/.local/share/nvim/files/swap
+mkdir -p ~/.local/share/nvim/files/backup
+mkdir -p ~/.local/share/nvim/files/info
+mkdir -p ~/.local/share/nvim/files/undo
 symlink dir "$PWD/nvim" ~/.config/nvim
 symlink file "$PWD/plug.vim" ~/.local/share/nvim/site/autoload/plug.vim
 

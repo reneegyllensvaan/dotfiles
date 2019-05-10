@@ -39,7 +39,10 @@ set synmaxcol   =200                         " Only highlight the first 200 colu
 set timeoutlen=100                          " Timeout for code updates
 set ttimeoutlen=0                            " Timeout for mode updates
 " set notimeout
-set so=999                                   " always center cursor
+" always center cursor
+set so=999
+" Show :%?s///g? replacements in place
+set inccommand=nosplit
 
 set list                                     " Show non-printable characters.
 if has('multi_byte') && &encoding ==# 'utf-8'
@@ -54,16 +57,16 @@ if &shell =~# 'fish$'
   set shell=/usr/bin/bash
 endif
 
-" " Put all temporary files under the same directory.
-" set backup
-" set backupdir   =$HOME/.vim/files/backup/
-" set backupext   =-vimbackup
-" set backupskip  =
-" set directory   =$HOME/.vim/files/swap//
-" set updatecount =100
-" set undofile
-" set undodir     =$HOME/.local/share/nvim/files/undo/
-" set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+" Put all temporary files under the same directory.
+set backup
+set backupdir   =$HOME/.local/share/nvim/files/backup/
+set backupext   =-vimbackup
+set backupskip  =
+set directory   =$HOME/.local/share/nvim/files/swap//
+set updatecount =100
+set undofile
+set undodir     =$HOME/.local/share/nvim/files/undo/
+set viminfo     ='100,n$HOME/.local/share/nvim/files/info/viminfo
 
 
 " Vim plugin settings
@@ -111,10 +114,6 @@ Plug 'davidhalter/jedi-vim', {'for': 'python'}
 Plug 'zchee/deoplete-jedi', {'for': 'python'}
 Plug 'pangloss/vim-javascript' ", {'for': ['javascript', 'jsx']}
 Plug 'mxw/vim-jsx' ", {'for': 'jsx'}
-
-
-" Plug 'klen/python-mode', {'for': 'python'}
-
 
 call plug#end()
 
