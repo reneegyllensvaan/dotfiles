@@ -14,7 +14,7 @@ while [ $1 ]; do
       echo "Command line arguments:"
       echo "  -r   --remove-backups     Remove old .bak files from safe copy"
       echo "  -f   --force-overwrite    Force overwrite of copied files"
-      echo "  -t   --nobuild-templates  Don't rebuild .tmpl.sh files"
+      echo "  -n   --nobuild-templates  Don't rebuild .tmpl.sh files"
       exit;;
     *) echo "Unknown command line option $1";exit;;
   esac
@@ -52,7 +52,7 @@ symlink () {
 safe_copy () {
   # just copy and overwrite if force_overwrite is on
   [ $force_overwrite ] && cat $1 > $2 && return 0
-  which shasum >/dev/null && hash_command='shasum'
+  which shasum >/dev/null 2>/dev/null && hash_command='shasum'
   hash_new=`$hash_command $1 | head -c 40`
   hash_old=`$hash_command $2 | head -c 40`
   if [[ $hash_new = $hash_old ]]; then
