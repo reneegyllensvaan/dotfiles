@@ -17,7 +17,8 @@ fi
 export VISUAL="$(which vim)"
 export EDITOR="$VISUAL"
 export XDG_CONFIG_HOME="$HOME/.config"
-export PAGER=`which bat >/dev/null && echo bat || echo less`
+#export PAGER=`which bat >/dev/null && echo bat || echo less`
+export PAGER=less
 export GIT_EDITOR=vim
 export GIT_PAGER=less
 export RANGER_LOAD_DEFAULT_RC=FALSE
