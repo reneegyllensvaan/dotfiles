@@ -1,5 +1,5 @@
 #!/bin/sh
-while true; do 
+while true; do
   # Purge everything in trash from other tags
   notmuch new
   notmuch tag --remove-all +trash tag:trash and tag:strict-delete
@@ -7,6 +7,7 @@ while true; do
   # Do gmailieer sync (for notmuch/neomutt)
   (cd ~/email/work && gmi sync)
   # Get amount of new email
+  notmuch tag -unnotified tag:github or tag:trello
   new_mail=`notmuch search tag:unnotified | wc -l | awk '{print $1}'`
   if [ $new_mail != '0' ]; then
     [ $OPERATING_SYSTEM = 'osx' ] && \
