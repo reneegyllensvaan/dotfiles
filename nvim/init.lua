@@ -33,7 +33,7 @@ local options  =  {
   inccommand = 'nosplit',         -- Show :%?s///g? replacements in place
   list = true,                    -- Show non-printable characters
 
-  -- Put all temporary files under the same directory.
+  -- Put all internal files under the same directory.
   backup      = true,
   backupdir   = homedir..'/.local/share/nvim/files/backup/',
   backupext   = '-vimbackup',

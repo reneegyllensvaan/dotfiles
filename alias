@@ -20,11 +20,9 @@ which opam >/dev/null && alias op='opam'
 which yaourt >/dev/null && alias yao='yaourt'
 
 # editor aliases
-#alias vi='vim'
-alias fim='vim `fzf`'
+alias fim='f=`fzf` && vim $f' # use fzf to select a file but only open on return 1
 alias eme='emacsclient -nw --socket-name=default'
 #alias vim='nvim'
-alias vi='nvim'
 alias v='nvim'
 
 # unglob some commands

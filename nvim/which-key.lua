@@ -37,7 +37,7 @@ keymap.g = {
 keymap.t = {
   name='+toggle',
   { 'n', 'ToggleLineNumbers', 'toggle-line-numbers' },
-  g = {
+  g={
     name='+git',
     { 'd', 'GitGutterBufferToggle', 'gitgutter (buffer)' },
     { 'D', 'GitGutterToggle', 'gitgutter (global)' },
@@ -84,19 +84,17 @@ keymap.b = {
 }
 
 function make_which_key_tree (key, value)
-  if key == 'name' then -- make sure to preserve name key
-    return v
-  elseif type(key) == 'number' then -- if key is a number, we're processing a positional keybinding
-    -- transform key mapping
-    return { [value[1]]={value[2], value[3]} }
-  else -- should be a string, process a keybinding tree
-    -- handle tree (recurse?)
-    local subtree = {}
-    for k, v in pairs(value) do
+  local subtree = {}
+  for k, v in pairs(value) do
+    if key == 'name' then -- special case for name key
+      subtree.name = v
+    elseif type(k) == 'number' then -- positional argument: key binding
+      subtree[value[1]]={value[2], value[3]}
+    elseif type(v) == 'table' then -- value is a subtree: recurse
       subtree[k] = make_which_key_tree(k, v)
     end
-    return subtree
   end
+  return subtree
 end
 
 vim.api.nvim_set_var('which_key_map', make_which_key_tree(nil, keymap))
