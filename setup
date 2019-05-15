@@ -164,6 +164,7 @@ symlink file "$PWD/compton.conf" ~/.config/compton.conf
 symlink file "$PWD/editorconfig" ~/.editorconfig
 symlink file "$PWD/gitconfig" ~/.gitconfig
 symlink file "$PWD/tigrc" ~/.tigrc
+symlink file "$PWD/ctags" ~/.ctags
 
 echo "  Symlinking directories"
 #TODO make this check for an existing bin dir

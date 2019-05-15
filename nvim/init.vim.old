@@ -1,7 +1,6 @@
 filetype plugin indent on                    " Load plugins according to detected filetype.
 syntax on                                    " Enable syntax highlighting.
 
-luafile ~/.config/nvim/init.lua
 
 if has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
@@ -14,6 +13,17 @@ endif
 if &shell =~# 'fish$'
   set shell=/usr/bin/bash
 endif
+
+" Put all temporary files under the same directory.
+set backup
+set backupdir   =$HOME/.local/share/nvim/files/backup/
+set backupext   =-vimbackup
+set backupskip  =
+set directory   =$HOME/.local/share/nvim/files/swap//
+set updatecount =100
+set undofile
+set undodir     =$HOME/.local/share/nvim/files/undo/
+set viminfo     ='100,n$HOME/.local/share/nvim/files/info/viminfo
 
 " " Nvimux:
 " let g:nvimux_prefix = '<C-a>'
