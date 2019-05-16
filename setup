@@ -83,9 +83,9 @@ echo "Making the config directory and linking/copying files"
 mkdir -p ~/.config/
 
 echo "  Xorg configs"
-symlink file "$PWD/xinitrc" ~/.xinitrc
-symlink file "$PWD/xsession" ~/.xsession
-symlink dir "$PWD/xres" ~/.xres
+symlink file "$PWD/x11/xinitrc" ~/.xinitrc
+symlink file "$PWD/x11/xsession" ~/.xsession
+symlink dir "$PWD/x11/xres" ~/.xres
 
 echo "  Urxvt conf"
 mkdir -p ~/.urxvt
@@ -140,13 +140,13 @@ symlink dir "$PWD/qutebrowser" ~/.config/qutebrowser
 
 echo "  i3 config"
 mkdir -p ~/.config/i3
-symlink file "$PWD/i3_config" ~/.config/i3/config
+symlink file "$PWD/x11/i3_config" ~/.config/i3/config
 
 echo "  Email config"
-symlink file "$PWD/neomuttrc-user" ~/.neomuttrc-user
-symlink file "$PWD/neomuttrc-unbind" ~/.neomuttrc-unbind
-symlink file "$PWD/neomuttrc" ~/.neomuttrc
-symlink file "$PWD/notmuch-config" ~/.notmuch-config
+symlink file "$PWD/email/neomuttrc-user" ~/.neomuttrc-user
+symlink file "$PWD/email/neomuttrc-unbind" ~/.neomuttrc-unbind
+symlink file "$PWD/email/neomuttrc" ~/.neomuttrc
+symlink file "$PWD/email/notmuch-config" ~/.notmuch-config
 mkdir -p ~/email/work
 
 echo "  Ranger config"
@@ -161,7 +161,7 @@ symlink file "$PWD/alias" ~/.alias
 symlink file "$PWD/profile" ~/.profile
 symlink file "$PWD/user-profile" ~/.user-profile
 symlink file "$PWD/tmux.conf" ~/.tmux.conf
-symlink file "$PWD/compton.conf" ~/.config/compton.conf
+symlink file "$PWD/x11/compton.conf" ~/.config/compton.conf
 symlink file "$PWD/editorconfig" ~/.editorconfig
 symlink file "$PWD/gitconfig" ~/.gitconfig
 symlink file "$PWD/tigrc" ~/.tigrc
