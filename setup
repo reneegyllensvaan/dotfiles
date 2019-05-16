@@ -80,7 +80,7 @@ build_template $PWD/neomuttrc-user
 build_template $PWD/nvim/pathspec.vim
 
 echo "Making the config directory and linking/copying files"
-mkdir -p ~/.config/
+mkdir -p $HOME/.config/
 
 echo "  Xorg configs"
 symlink file "$PWD/x11/xinitrc" ~/.xinitrc
@@ -88,91 +88,91 @@ symlink file "$PWD/x11/xsession" ~/.xsession
 symlink dir "$PWD/x11/xres" ~/.xres
 
 echo "  Urxvt conf"
-mkdir -p ~/.urxvt
-symlink dir "$PWD/urxvt-ext" ~/.urxvt/ext
+mkdir -p $HOME/.urxvt
+symlink dir "$PWD/urxvt-ext" $HOME/.urxvt/ext
 
 # using vim as a more lightweight editor atm, nvim as a full editor
 echo "  Vim directories and conf"
-symlink file "$PWD/vimrc" ~/.vimrc
-mkdir -p ~/.vim
-mkdir -p ~/.vim/blugin
-mkdir -p ~/.vim/autoload
-mkdir -p ~/.vim/files
-mkdir -p ~/.vim/files/swap
-mkdir -p ~/.vim/files/backup
-mkdir -p ~/.vim/files/info
-mkdir -p ~/.vim/files/undo
-symlink file "$PWD/plug.vim" ~/.vim/autoload/plug.vim
+symlink file "$PWD/vimrc" $HOME/.vimrc
+mkdir -p $HOME/.vim
+mkdir -p $HOME/.vim/blugin
+mkdir -p $HOME/.vim/autoload
+mkdir -p $HOME/.vim/files
+mkdir -p $HOME/.vim/files/swap
+mkdir -p $HOME/.vim/files/backup
+mkdir -p $HOME/.vim/files/info
+mkdir -p $HOME/.vim/files/undo
+symlink file "$PWD/plug.vim" $HOME/.vim/autoload/plug.vim
 
 echo "  Neovim conf"
-mkdir -p ~/.config
-mkdir -p ~/.local/share/nvim/site/autoload
-mkdir -p ~/.local/share/nvim
-mkdir -p ~/.local/share/nvim/blugin
-mkdir -p ~/.local/share/nvim/autoload
-mkdir -p ~/.local/share/nvim/files
-mkdir -p ~/.local/share/nvim/files/swap
-mkdir -p ~/.local/share/nvim/files/backup
-mkdir -p ~/.local/share/nvim/files/info
-mkdir -p ~/.local/share/nvim/files/undo
-symlink dir "$PWD/nvim" ~/.config/nvim
-symlink file "$PWD/plug.vim" ~/.local/share/nvim/site/autoload/plug.vim
+mkdir -p $HOME/.config
+mkdir -p $HOME/.local/share/nvim/site/autoload
+mkdir -p $HOME/.local/share/nvim
+mkdir -p $HOME/.local/share/nvim/blugin
+mkdir -p $HOME/.local/share/nvim/autoload
+mkdir -p $HOME/.local/share/nvim/files
+mkdir -p $HOME/.local/share/nvim/files/swap
+mkdir -p $HOME/.local/share/nvim/files/backup
+mkdir -p $HOME/.local/share/nvim/files/info
+mkdir -p $HOME/.local/share/nvim/files/undo
+symlink dir "$PWD/nvim" $HOME/.config/nvim
+symlink file "$PWD/plug.vim" $HOME/.local/share/nvim/site/autoload/plug.vim
 
 echo "  GPG config"
-mkdir -p ~/.gnupg
-safe_copy "$PWD/gpg/gpg.conf" ~/.gnupg/gpg.conf
-safe_copy "$PWD/gpg/gpg-agent.conf" ~/.gnupg/gpg-agent.conf
-mkdir -p ~/.ssh
-safe_copy "$PWD/ssh_config" ~/.ssh/config
-touch ~/.ssh/user_config
+mkdir -p $HOME/.gnupg
+safe_copy "$PWD/gpg/gpg.conf" $HOME/.gnupg/gpg.conf
+safe_copy "$PWD/gpg/gpg-agent.conf" $HOME/.gnupg/gpg-agent.conf
+mkdir -p $HOME/.ssh
+safe_copy "$PWD/ssh_config" $HOME/.ssh/config
+touch $HOME/.ssh/user_config
 
 echo "  Tmux config"
-symlink file "$PWD/tmux.conf" ~/.tmux.conf
-symlink file "$PWD/tmux-disposable.conf" ~/.tmux-disposable.conf
+symlink file "$PWD/tmux.conf" $HOME/.tmux.conf
+symlink file "$PWD/tmux-disposable.conf" $HOME/.tmux-disposable.conf
 
 echo "  Zsh configs"
-symlink file $PWD/zshrc ~/.zshrc
-symlink dir $PWD/zfunctions ~/.zfunctions
-symlink dir $PWD/zmodules ~/.zmodules
+symlink file $PWD/zshrc $HOME/.zshrc
+symlink dir $PWD/zfunctions $HOME/.zfunctions
+symlink dir $PWD/zmodules $HOME/.zmodules
 
 echo "  Qutebrowser config"
-symlink dir "$PWD/qutebrowser" ~/.config/qutebrowser
+symlink dir "$PWD/qutebrowser" $HOME/.config/qutebrowser
 
 echo "  i3 config"
-mkdir -p ~/.config/i3
-symlink file "$PWD/x11/i3_config" ~/.config/i3/config
+mkdir -p $HOME/.config/i3
+symlink file "$PWD/x11/i3_config" $HOME/.config/i3/config
 
 echo "  Email config"
-symlink file "$PWD/email/neomuttrc-user" ~/.neomuttrc-user
-symlink file "$PWD/email/neomuttrc-unbind" ~/.neomuttrc-unbind
-symlink file "$PWD/email/neomuttrc" ~/.neomuttrc
-symlink file "$PWD/email/notmuch-config" ~/.notmuch-config
-mkdir -p ~/email/work
+symlink file "$PWD/neomuttrc-user" $HOME/.neomuttrc-user
+symlink file "$PWD/neomuttrc-unbind" $HOME/.neomuttrc-unbind
+symlink file "$PWD/neomuttrc" $HOME/.neomuttrc
+symlink file "$PWD/notmuch-config" $HOME/.notmuch-config
+mkdir -p $HOME/email/work
 
 echo "  Ranger config"
-mkdir -p ~/.config/ranger
-symlink file "$PWD/rifle.conf" ~/.config/ranger/rifle.conf
-symlink file "$PWD/rc.conf" ~/.config/ranger/rc.conf
+mkdir -p $HOME/.config/ranger
+symlink file "$PWD/rifle.conf" $HOME/.config/ranger/rifle.conf
+symlink file "$PWD/rc.conf" $HOME/.config/ranger/rc.conf
 
 echo "  Other configs"
-symlink file "$PWD/spacemacs" ~/.spacemacs
-symlink file "$PWD/batrc" ~/.batrc
-symlink file "$PWD/alias" ~/.alias
-symlink file "$PWD/profile" ~/.profile
-symlink file "$PWD/user-profile" ~/.user-profile
-symlink file "$PWD/tmux.conf" ~/.tmux.conf
-symlink file "$PWD/x11/compton.conf" ~/.config/compton.conf
-symlink file "$PWD/editorconfig" ~/.editorconfig
-symlink file "$PWD/gitconfig" ~/.gitconfig
-symlink file "$PWD/tigrc" ~/.tigrc
-symlink file "$PWD/ctags" ~/.ctags
+symlink file "$PWD/spacemacs" $HOME/.spacemacs
+symlink file "$PWD/batrc" $HOME/.batrc
+symlink file "$PWD/alias" $HOME/.alias
+symlink file "$PWD/profile" $HOME/.profile
+symlink file "$PWD/user-profile" $HOME/.user-profile
+symlink file "$PWD/tmux.conf" $HOME/.tmux.conf
+symlink file "$PWD/x11/compton.conf" $HOME/.config/compton.conf
+symlink file "$PWD/editorconfig" $HOME/.editorconfig
+symlink file "$PWD/gitconfig" $HOME/.gitconfig
+symlink file "$PWD/tigrc" $HOME/.tigrc
+symlink file "$PWD/ctags" $HOME/.ctags
 
 echo "  Symlinking directories"
 #TODO make this check for an existing bin dir
-symlink dir "$PWD/bin" ~/.bin
-symlink dir "$PWD/emacs.d" ~/.emacs.d
+symlink dir "$PWD/bin" $HOME/.bin
+symlink dir "$PWD/emacs.d" $HOME/.emacs.d
 
-echo "  Making the ~/.local/bin directory"
-mkdir -p ~/.local/bin
+echo "  Making the $HOME/.local/bin directory"
+mkdir -p $HOME/.local/bin
 
 echo "...Finished!"

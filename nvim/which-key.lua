@@ -1,6 +1,7 @@
 -- Root which-key mappings
 local keymap = {
   { '/', 'Rg', 'ripgrep' },
+  { ' ', 'Commands', 'fzf-commands' },
 }
 
 -- Tabs:
@@ -86,10 +87,10 @@ keymap.b = {
 function make_which_key_tree (key, value)
   local subtree = {}
   for k, v in pairs(value) do
-    if key == 'name' then -- special case for name key
-      subtree.name = v
+    if k == 'name' then -- special case for name key
+      subtree['name'] = v
     elseif type(k) == 'number' then -- positional argument: key binding
-      subtree[value[1]]={value[2], value[3]}
+      subtree[v[1]]={v[2], v[3]}
     elseif type(v) == 'table' then -- value is a subtree: recurse
       subtree[k] = make_which_key_tree(k, v)
     end
@@ -97,4 +98,20 @@ function make_which_key_tree (key, value)
   return subtree
 end
 
+local key_tree = make_which_key_tree(nil, keymap)
+
+-- -- Uncomment this paragraph to dump the table to minibuffer before applying
+-- function render_table (tb, indent)
+--   for k,v in pairs(tb) do
+--     if type(v) == 'table' then
+--       print(indent..k..': (table)')
+--       render_table(v, '    '..indent)
+--     else
+--       print(indent..k..': '..v)
+--     end
+--   end
+-- end
+-- render_table(key_tree, '')
+
 vim.api.nvim_set_var('which_key_map', make_which_key_tree(nil, keymap))
+

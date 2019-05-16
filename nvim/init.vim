@@ -3,6 +3,15 @@ syntax on                                    " Enable syntax highlighting.
 
 luafile ~/.config/nvim/init.lua
 
+" Which-key
+luafile ~/.config/nvim/which-key.lua
+command! FzfProjectFiles call fzf#run({'source': 'git ls-files', 'sink': 'e', 'down': '30%'})
+command! ToggleLineNumbers :set invnumber
+command! FZFNeigh call s:fzf_neighbouring_files()
+call which_key#register('<Space>', "g:which_key_map")
+nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
+vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
+
 if has('multi_byte') && &encoding ==# 'utf-8'
   let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
@@ -98,101 +107,10 @@ function! s:fzf_neighbouring_files()
 endfunction
 
 " Custom Commands For Leader:
-command! FzfProjectFiles call fzf#run({'source': 'git ls-files', 'sink': 'e', 'down': '30%'})
-command! ToggleLineNumbers :set invnumber
-command! FZFNeigh call s:fzf_neighbouring_files()
-
-" Root which-key mappings
-let g:which_key_map =  {
-      \ '/' : ['Rg', 'ripgrep'],
-      \ }
-
-" Tabs:
-let g:which_key_map.l = {
-      \ 'name' : '+tabs' ,
-      \ 'n' : ['tabnew'      , 'tabnew']     ,
-      \ 'k' : ['tabprevious' , 'tabprevious'],
-      \ 'j' : ['tabnext'     , 'tabnext']    ,
-      \ }
-
-" Project:
-let g:which_key_map.p = {
-      \ 'name' : '+project' ,
-      \ 'f' : ['FzfProjectFiles'    , 'fzf-project-files']            ,
-      \ }
-
-" Files:
-let g:which_key_map.f = {
-      \'name': '+file' ,
-      \'t': ['NERDTreeToggle', 'nerdtree'],
-      \}
-
-" Vim:
-let g:which_key_map.V = {
-      \'name': '+Vim' ,
-      \'e': [':@*', 'eval-region'],
-      \}
-
-let g:which_key_map.g = {
-      \'name': '+toggle' ,
-      \'s': [':!git status', 'git-status'],
-      \}
-
-let g:which_key_map.t = {
-      \'name': '+toggle' ,
-      \'n': ['ToggleLineNumbers', 'toggle-line-numbers'],
-      \'g': {
-      \   'name': '+git',
-      \   'd': ['GitGutterBufferToggle', 'gitgutter (buffer)'],
-      \   'D': ['GitGutterToggle', 'gitgutter (global)'],
-      \},
-      \'c': {
-      \   'name': 'center',
-      \   'b': ['Goyo', 'toggle-goyo'],
-      \},
-      \}
-
-let g:which_key_map.w = {
-      \ 'name' : '+windows' ,
-      \ 'w' : ['<C-W>w'     , 'other-window']          ,
-      \ 'd' : ['<C-W>c'     , 'delete-window']         ,
-      \ '-' : ['<C-W>s'     , 'split-window-below']    ,
-      \ '/' : ['<C-W>v'     , 'split-window-right']    ,
-      \ '2' : ['<C-W>v'     , 'layout-double-columns'] ,
-      \ 'h' : ['<C-W>h'     , 'window-left']           ,
-      \ 'j' : ['<C-W>j'     , 'window-below']          ,
-      \ 'l' : ['<C-W>l'     , 'window-right']          ,
-      \ 'k' : ['<C-W>k'     , 'window-up']             ,
-      \ 'H' : ['<C-W>5<'    , 'expand-window-left']    ,
-      \ 'G' : ['GoldenRatioToggle', 'expand-window-left']    ,
-      \ 'J' : ['resize +5'  , 'expand-window-below']   ,
-      \ 'L' : ['<C-W>5>'    , 'expand-window-right']   ,
-      \ 'K' : ['resize -5'  , 'expand-window-up']      ,
-      \ '=' : ['<C-W>='     , 'balance-window']        ,
-      \ 's' : ['<C-W>s'     , 'split-window-below']    ,
-      \ 'v' : ['<C-W>v'     , 'split-window-below']    ,
-      \ '?' : ['Windows'    , 'fzf-window']            ,
-      \ }
-
-let g:which_key_map.b = {
-      \ 'name' : '+buffer' ,
-      \ '1' : ['b1'        , 'buffer 1']        ,
-      \ '2' : ['b2'        , 'buffer 2']        ,
-      \ 'd' : [':bp\|bd'   , 'delete-buffer']   ,
-      \ 'f' : ['bfirst'    , 'first-buffer']    ,
-      \ 'h' : ['Startify'  , 'home-buffer']     ,
-      \ 'l' : ['blast'     , 'last-buffer']     ,
-      \ 'n' : ['bnext'     , 'next-buffer']     ,
-      \ 'p' : ['bprevious' , 'previous-buffer'] ,
-      \ 'b' : ['Buffers'   , 'fzf-buffer']      ,
-      \ }
-
-call which_key#register('<Space>', "g:which_key_map")
-nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
-vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
 " Use tab as the autocomplete key
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <expr><M-x>  Commands
 " C-n to escape to normal mode in terminal
 tnoremap <C-n> <C-\><C-n>
 
