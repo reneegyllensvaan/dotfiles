@@ -51,7 +51,7 @@ local swaps = {
   ['Dir'] = 'dir',
   ['On'] = 'on',
 }
-vim.api.nvim_call_function('plug#begin', {plugin_directory})
+vim.api.nvim_call_function('plug#begin', {PLUGIN_DIRECTORY})
 for i,v in pairs(plugins) do
   if type(v) == 'string' then
     vim.api.nvim_call_function('plug#', {v})

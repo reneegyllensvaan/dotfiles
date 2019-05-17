@@ -3,16 +3,8 @@ export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="$HOME/.notion:$PATH"
 export PATH=/usr/local/opt/texinfo/bin:$PATH
 [[ -d ~/Library ]] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
-
-# # Notion
-# [ -d "$HOME/.notion" ] && export NOTION_HOME="$HOME/.notion"
-# if [ $NOTION_HOME ]; then
-#   [ -s "$NOTION_HOME/load.sh" ] && \. "$NOTION_HOME/load.sh"
-#   export PATH="${NOTION_HOME}/bin:$PATH"
-# fi
 
 export VISUAL="vim"
 export EDITOR="$VISUAL"
@@ -46,12 +38,12 @@ fi
 
 # set the clipboard variables based on available clipboard applications
 # OSX
-which pbcopy 2>&1 >/dev/null && export CLIPBOARD_COPY='pbcopy'
-which pbpaste 2>&1 >/dev/null && export CLIPBOARD_PASTE='pbpaste'
+which pbcopy  >/dev/null 2>&1 && export CLIPBOARD_COPY='pbcopy'
+which pbpaste >/dev/null 2>&1 && export CLIPBOARD_PASTE='pbpaste'
 
 # Linux with xsel
-which xsel 2>&1 >/dev/null && export CLIPBOARD_COPY='xsel -b' \
-                      && export CLIPBOARD_PASTE='xsel -b'
+which xsel >/dev/null 2>&1 && export CLIPBOARD_COPY='xsel -b' \
+                           && export CLIPBOARD_PASTE='xsel -b'
 
 # The following vars are supposed to be used by the user/interactively
 export Q=/dev/null

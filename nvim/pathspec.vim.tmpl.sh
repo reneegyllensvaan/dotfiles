@@ -13,7 +13,7 @@ if [ "$rust_sysroot" ]; then
   rust_src_dir="$rust_sysroot/lib/rustlib/src/rust/src/"
   [ -d "$rust_src_dir" ] \
     && rust_src_var="let g:deoplete#sources#rust#rust_source_path = '$rust_src_dir'" \
-    || rust_src_var="# rust-src not found"
+    || rust_src_var="\" rust-src not found"
 fi
 
 # Coalesce for available grep commands. Bottom line = highest priority

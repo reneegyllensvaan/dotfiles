@@ -35,6 +35,6 @@ alias jq='noglob jq'
 #alias rg='noglob   --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}'
 
 # command replacements
-`which 2>&1 >/dev/null gsed && echo "alias sed='gsed'"`
-`which 2>&1 >/dev/null ggrep && echo "alias grep='ggrep'"`
-`which 2>&1 >/dev/null bat && echo "alias cat='bat'"`
+`which >/dev/null 2>/dev/null gsed && echo "alias sed='gsed'"`
+`which >/dev/null 2>/dev/null ggrep && echo "alias grep='ggrep'"`
+`which >/dev/null 2>/dev/null bat && echo "alias cat='bat'"`
