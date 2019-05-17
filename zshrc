@@ -25,8 +25,17 @@ source "$HOME/.zfunctions/fzf.zsh"
 [ -f "$HOME/.zfunctions/zsh-syntax-highlighting.zsh" ] \
   && source "$HOME/.zfunctions/zsh-syntax-highlighting.zsh"
 
-#unsetopt nomatch
-autoload -U compinit; compinit
+autoload -U compinit
+# cache zsh completions for 22 hours
+completion_cache_time=`noglob expr 22 * 3600`
+noglob \
+  expr `date '+%s'` \
+  - `date -r ~/.zcompdump '+%s'` \
+  - $completion_cache_time \
+  | grep '-' >/dev/null \
+  && compinit -C \
+  || compinit
+
 #autoload -U promptinit; promptinit
 #prompt pure
 
@@ -53,10 +62,9 @@ PROMPT="$PROMPT"$'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
 
 
 # opam configuration
-test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
+#test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
 # GnuPG settings
 if [ $GPG_FINGERPRINT ]; then
   export GPG_TTY="$(tty)"
@@ -65,4 +73,4 @@ if [ $GPG_FINGERPRINT ]; then
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon )
 fi
 
-which npm >/dev/null && export PATH="`npm bin -g`:$PATH"
+#which npm >/dev/null && export PATH="`npm bin -g`:$PATH"

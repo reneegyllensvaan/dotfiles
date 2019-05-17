@@ -4,10 +4,10 @@ syntax on                                    " Enable syntax highlighting.
 luafile ~/.config/nvim/init.lua
 
 " Which-key
-luafile ~/.config/nvim/which-key.lua
 command! FzfProjectFiles call fzf#run({'source': 'git ls-files', 'sink': 'e', 'down': '30%'})
 command! ToggleLineNumbers :set invnumber
 command! FZFNeigh call s:fzf_neighbouring_files()
+luafile ~/.config/nvim/which-key.lua
 call which_key#register('<Space>', "g:which_key_map")
 nnoremap <silent> <leader> :<c-u>WhichKey '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>WhichKeyVisual '<Space>'<CR>
@@ -57,7 +57,7 @@ let g:deoplete#sources#rust#show_duplicates=1
 " let g:deoplete#ignore_sources._ = ['buffer', 'around']
 
 " Python:
-let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_command = "<leader>gg"
 let g:jedi#goto_assignments_command = "<leader>ga"
 let g:jedi#goto_definitions_command = "<leader>gd"
 let g:jedi#documentation_command = "K"
