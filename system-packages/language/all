@@ -1,19 +1,23 @@
+#!/bin/sh
+# Python2/pip
 pip install `cat << EOF
 neovim
 pynvim
 EOF
 `
 
+# Python3/pip3
 pip3 install `cat << EOF
 neovim
 pynvim
 EOF
 `
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-cargo install `cat << EOF
-fd-find
-ripgrep
-bat
-EOF
-`
+# Rust/cargo
+if ! which rustup >/dev/null ; then
+	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+fi
+source ~/.cargo/env
+cargo install fd-find \
+              ripgrep \
+              bat
