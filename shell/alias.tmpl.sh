@@ -16,9 +16,6 @@ alias eme='emacsclient -nw --socket-name=default'
 #alias vim='nvim'
 alias v='nvim'
 
-# unglob some commands
-alias fd='noglob fd'
-
 # shortcut commands
 alias fab='comfortable-fab'
 alias g='git'
