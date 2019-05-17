@@ -1,0 +1,3 @@
+#!/bin/sh
+which xsel 2>&1 >/dev/null && exec xsel -b
+which pbcopy 2>&1 >/dev/null && exec pbcopy

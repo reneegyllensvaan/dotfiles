@@ -38,6 +38,7 @@ keymap.g = {
 keymap.t = {
   name='+toggle',
   { 'n', 'ToggleLineNumbers', 'toggle-line-numbers' },
+  { 'E', 'ALEToggle', 'toggle-linter' },
   g={
     name='+git',
     { 'd', 'GitGutterBufferToggle', 'gitgutter (buffer)' },

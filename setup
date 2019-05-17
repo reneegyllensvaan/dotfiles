@@ -21,8 +21,8 @@ while [ $1 ]; do
 done
 
 echo "Sourcing profile and user-profile to make sure we have the latest env..."
-source $PWD/profile
-source $PWD/user-profile
+source $PWD/shell/profile
+source $PWD/shell/user-profile
 
 build_template () {
   if [ ! $nobuild_templates ]; then
@@ -69,15 +69,16 @@ safe_copy () {
 }
 
 # load git submodules
-git submodule update zmodules/zsh-syntax-highlighting
+git submodule update --init zmodules/zsh-syntax-highlighting
 
 echo "Building shell template files"
 build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
 build_template $PWD/gitconfig
 build_template $PWD/README.md
-build_template $PWD/neomuttrc-user
+build_template $PWD/email/neomuttrc-user
 build_template $PWD/nvim/pathspec.vim
+build_template $PWD/shell/alias
 
 echo "Making the config directory and linking/copying files"
 mkdir -p $HOME/.config/
@@ -131,7 +132,7 @@ symlink file "$PWD/tmux.conf" $HOME/.tmux.conf
 symlink file "$PWD/tmux-disposable.conf" $HOME/.tmux-disposable.conf
 
 echo "  Zsh configs"
-symlink file $PWD/zshrc $HOME/.zshrc
+symlink file $PWD/shell/zshrc $HOME/.zshrc
 symlink dir $PWD/zfunctions $HOME/.zfunctions
 symlink dir $PWD/zmodules $HOME/.zmodules
 
@@ -143,10 +144,10 @@ mkdir -p $HOME/.config/i3
 symlink file "$PWD/x11/i3_config" $HOME/.config/i3/config
 
 echo "  Email config"
-symlink file "$PWD/neomuttrc-user" $HOME/.neomuttrc-user
-symlink file "$PWD/neomuttrc-unbind" $HOME/.neomuttrc-unbind
-symlink file "$PWD/neomuttrc" $HOME/.neomuttrc
-symlink file "$PWD/notmuch-config" $HOME/.notmuch-config
+symlink file "$PWD/email/neomuttrc-user" $HOME/.neomuttrc-user
+symlink file "$PWD/email/neomuttrc-unbind" $HOME/.neomuttrc-unbind
+symlink file "$PWD/email/neomuttrc" $HOME/.neomuttrc
+symlink file "$PWD/email/notmuch-config" $HOME/.notmuch-config
 mkdir -p $HOME/email/work
 
 echo "  Ranger config"
@@ -157,9 +158,9 @@ symlink file "$PWD/rc.conf" $HOME/.config/ranger/rc.conf
 echo "  Other configs"
 symlink file "$PWD/spacemacs" $HOME/.spacemacs
 symlink file "$PWD/batrc" $HOME/.batrc
-symlink file "$PWD/alias" $HOME/.alias
-symlink file "$PWD/profile" $HOME/.profile
-symlink file "$PWD/user-profile" $HOME/.user-profile
+symlink file "$PWD/shell/alias" $HOME/.alias
+symlink file "$PWD/shell/profile" $HOME/.profile
+symlink file "$PWD/shell/user-profile" $HOME/.user-profile
 symlink file "$PWD/tmux.conf" $HOME/.tmux.conf
 symlink file "$PWD/x11/compton.conf" $HOME/.config/compton.conf
 symlink file "$PWD/editorconfig" $HOME/.editorconfig
