@@ -76,6 +76,7 @@ Plug 'christoomey/vim-system-copy'
 Plug 'jamessan/vim-gnupg'
 Plug 'tomtom/tcomment_vim'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'flazz/vim-colorschemes',
 
 call plug#end()
 

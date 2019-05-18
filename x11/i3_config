@@ -60,15 +60,15 @@ bindsym $mod+F12 gaps inner current plus 15
 bindsym $mod+q layout splith
 bindsym $mod+a layout splitv
 bindsym $mod+w layout tabbed
-bindsym $mod+s layout stacked
-bindsym $mod+e split h
-bindsym $mod+d split v
+bindsym $mod+r layout stacked
+bindsym $mod+f split h
+bindsym $mod+s split v
 
 # window controls
 bindsym $mod+Shift+q kill
 bindsym $mod+v fullscreen toggle
-bindsym $mod+f focus parent
-bindsym $mod+r focus child
+bindsym $mod+t focus parent
+bindsym $mod+p focus child
 
 # change focus
 bindsym $mod+h focus left
