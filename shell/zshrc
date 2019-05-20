@@ -33,8 +33,8 @@ noglob \
   - `date -r ~/.zcompdump '+%s'` \
   - $completion_cache_time \
   | grep '-' >/dev/null \
-  && compinit -C \
-  || compinit
+  && compinit -C ~/.zcompdump \
+  || compinit ~/.zcompdump
 
 #autoload -U promptinit; promptinit
 #prompt pure
