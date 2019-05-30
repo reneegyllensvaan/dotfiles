@@ -74,7 +74,7 @@ git submodule update --init zmodules/zsh-syntax-highlighting
 echo "Building shell template files"
 build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
-build_template $PWD/gitconfig
+build_template $PWD/other/gitconfig
 build_template $PWD/README.md
 build_template $PWD/email/neomuttrc-user
 build_template $PWD/nvim/pathspec.vim
@@ -103,7 +103,7 @@ mkdir -p $HOME/.vim/files/swap
 mkdir -p $HOME/.vim/files/backup
 mkdir -p $HOME/.vim/files/info
 mkdir -p $HOME/.vim/files/undo
-symlink file "$PWD/plug.vim" $HOME/.vim/autoload/plug.vim
+symlink file "$PWD/other/plug.vim" $HOME/.vim/autoload/plug.vim
 
 echo "  Neovim conf"
 mkdir -p $HOME/.config
@@ -117,19 +117,19 @@ mkdir -p $HOME/.local/share/nvim/files/backup
 mkdir -p $HOME/.local/share/nvim/files/info
 mkdir -p $HOME/.local/share/nvim/files/undo
 symlink dir "$PWD/nvim" $HOME/.config/nvim
-symlink file "$PWD/plug.vim" $HOME/.local/share/nvim/site/autoload/plug.vim
+symlink file "$PWD/other/plug.vim" $HOME/.local/share/nvim/site/autoload/plug.vim
 
 echo "  GPG config"
 mkdir -p $HOME/.gnupg
 safe_copy "$PWD/gpg/gpg.conf" $HOME/.gnupg/gpg.conf
 safe_copy "$PWD/gpg/gpg-agent.conf" $HOME/.gnupg/gpg-agent.conf
 mkdir -p $HOME/.ssh
-safe_copy "$PWD/ssh_config" $HOME/.ssh/config
+safe_copy "$PWD/other/ssh_config" $HOME/.ssh/config
 touch $HOME/.ssh/user_config
 
 echo "  Tmux config"
-symlink file "$PWD/tmux.conf" $HOME/.tmux.conf
-symlink file "$PWD/tmux-disposable.conf" $HOME/.tmux-disposable.conf
+symlink file "$PWD/other/tmux.conf" $HOME/.tmux.conf
+symlink file "$PWD/other/tmux-disposable.conf" $HOME/.tmux-disposable.conf
 
 echo "  Zsh configs"
 symlink file $PWD/shell/zshrc $HOME/.zshrc
@@ -150,23 +150,22 @@ symlink file "$PWD/email/neomuttrc" $HOME/.neomuttrc
 symlink file "$PWD/email/notmuch-config" $HOME/.notmuch-config
 mkdir -p $HOME/email/work
 
-echo "  Ranger config"
-mkdir -p $HOME/.config/ranger
-symlink file "$PWD/rifle.conf" $HOME/.config/ranger/rifle.conf
-symlink file "$PWD/rc.conf" $HOME/.config/ranger/rc.conf
+# echo "  Ranger config"
+# mkdir -p $HOME/.config/ranger
+# symlink file "$PWD/other/rifle.conf" $HOME/.config/ranger/rifle.conf
+# symlink file "$PWD/other/rc.conf" $HOME/.config/ranger/rc.conf
 
 echo "  Other configs"
-symlink file "$PWD/spacemacs" $HOME/.spacemacs
-symlink file "$PWD/batrc" $HOME/.batrc
+symlink file "$PWD/other/spacemacs" $HOME/.spacemacs
+symlink file "$PWD/other/batrc" $HOME/.batrc
 symlink file "$PWD/shell/alias" $HOME/.alias
 symlink file "$PWD/shell/profile" $HOME/.profile
 symlink file "$PWD/shell/user-profile" $HOME/.user-profile
-symlink file "$PWD/tmux.conf" $HOME/.tmux.conf
 symlink file "$PWD/x11/compton.conf" $HOME/.config/compton.conf
-symlink file "$PWD/editorconfig" $HOME/.editorconfig
-symlink file "$PWD/gitconfig" $HOME/.gitconfig
-symlink file "$PWD/tigrc" $HOME/.tigrc
-symlink file "$PWD/ctags" $HOME/.ctags
+symlink file "$PWD/other/editorconfig" $HOME/.editorconfig
+symlink file "$PWD/other/gitconfig" $HOME/.gitconfig
+symlink file "$PWD/other/tigrc" $HOME/.tigrc
+symlink file "$PWD/other/ctags" $HOME/.ctags
 
 echo "  Symlinking directories"
 #TODO make this check for an existing bin dir

@@ -22,4 +22,5 @@ cat << EOF
   pr  = pull --rebase
   z   = stash
   ls-files-root = "! git ls-files"
+  root = "! git rev-parse --show-toplevel"
 EOF

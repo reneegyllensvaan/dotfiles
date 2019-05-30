@@ -22,6 +22,7 @@ keymap.p = {
 keymap.f = {
   name='+file',
   { 't', 'NERDTreeToggle', 'nerdtree' },
+  { 'f', 'Fd', 'fzf-dir' },
 }
 
 -- Vim:
@@ -33,6 +34,7 @@ keymap.V = {
 keymap.g = {
   name='+toggle',
   {'s',':!git status', 'git-status' },
+  {'b',':GB', 'git-blame' },
 }
 
 keymap.t = {
