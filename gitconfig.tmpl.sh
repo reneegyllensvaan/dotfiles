@@ -21,4 +21,5 @@ cat << EOF
   pop = stash pop
   pr  = pull --rebase
   z   = stash
+  ls-files-root = "! git ls-files"
 EOF

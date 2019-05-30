@@ -3,44 +3,47 @@ local plugins = {
   { 'scrooloose/nerdtree', On='NERDTreeToggle' },
   'flazz/vim-colorschemes',
   'airblade/vim-gitgutter',
-
-  -- Statusline:
+  'liuchengxu/vim-which-key', -- spacemacs-style leader hints
   'itchyny/lightline.vim',
-  'mgee/lightline-bufferline',
+  'majutsushi/tagbar',
 
   -- Utilies:
   'christoomey/vim-system-copy',
   'jamessan/vim-gnupg',
   { 'junegunn/fzf', Dir='~/.fzf', Do='./install --all' },
   'junegunn/fzf.vim', -- General-purpose fuzzy-matching
-
-  -- Toolbox:
-  'liuchengxu/vim-which-key', -- spacemacs-style leader hints
   { 'junegunn/goyo.vim', On='Goyo' }, -- `:Goyo` to enter distraction-free mode
   { 'vim-scripts/loremipsum', On='Lorem' }, -- `:Lorem [words]` to generate placeholder text
   'tomtom/tcomment_vim', -- `gc` as a comment operator
+  'scrooloose/nerdcommenter',
+  'tommcdo/vim-lion',
   'editorconfig/editorconfig-vim', -- Use .editorconfig files
+
+  -- Editing
   'michaeljsmith/vim-indent-object', -- enables `vii` and `vai`
   'tpope/vim-surround',
+  'terryma/vim-multiple-cursors',
 
   -- Language Support:
-  -- General
-  { 'shougo/deoplete.nvim' }, --, For={'python', 'nim', 'javascript', 'jsx'} },
-  { 'shougo/neosnippet.vim', For={'python', 'nim'} },
-  { 'w0rp/ale' }, --, For={'python', 'nim', 'javascript', 'jsx'} },
-  -- Go
-  { 'fatih/vim-go', Do=':GoUpdateBinaries', For='go' },
-  -- Nim
+  -- Language Support Plugins
+  'jceb/vim-orgmode',
+  { 'rust-lang/rust.vim', For='rust' },
+  { 'mxw/vim-jsx', },
   { 'zah/nim.vim', For='nim' },
-  -- Latex
-  { 'xuhdev/vim-latex-live-preview', For='tex' },
-  -- Python
+  { 'fatih/vim-go', Do=':GoUpdateBinaries', For='go' },
+  { 'pangloss/vim-javascript', For={'javascript', 'javascript.jsx'} },
   { 'davidhalter/jedi-vim', For='python' },
+  -- Deoplete (completion)
+  { 'shougo/deoplete.nvim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
   { 'zchee/deoplete-jedi', For='python' },
-  { 'pangloss/vim-javascript' }, --, For={'javascript', 'jsx'} },
-  { 'mxw/vim-jsx' },--, For='jsx' },
-  { 'rust-lang/rust.vim' },
-  { 'racer-rust/vim-racer' },
+  { 'carlitux/deoplete-ternjs', For={'javascript', 'javascript.jsx'} },
+  { 'racer-rust/vim-racer', For='rust' },
+  -- Other
+  { 'shougo/neosnippet.vim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
+  { 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
+  -- Other, but language specific
+  { 'xuhdev/vim-latex-live-preview', For='tex' },
+  { 'mattn/emmet-vim'},
 
 }
 

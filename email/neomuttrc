@@ -161,7 +161,7 @@ color attachment      yellow    default
 color signature     green   default
 color search        brightred black
 
-color indicator     cyan    brightblack
+color indicator     cyan    green
 color error       brightred default
 color status        brightcyan  brightblack
 color tree        brightcyan  default

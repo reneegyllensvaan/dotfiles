@@ -45,8 +45,9 @@ keymap.t = {
     { 'D', 'GitGutterToggle', 'gitgutter (global)' },
   }, -- g
   c={
-    name='center',
+    name='center/cursor',
     {  'b', 'Goyo', 'toggle-goyo' },
+    {  'l', ':set cursorline!', 'toggle-cursorline' },
   }, -- c
 }
 

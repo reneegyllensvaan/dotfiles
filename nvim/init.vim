@@ -29,6 +29,11 @@ let g:deoplete#sources#rust#show_duplicates=1
 " ignore buffer and surrounding lines
 " let g:deoplete#ignore_sources = {}
 " let g:deoplete#ignore_sources._ = ['buffer', 'around']
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue',
+                \ ]
 
 " Python:
 let g:jedi#goto_command = "<leader>gg"
@@ -43,7 +48,7 @@ let g:jedi#rename_command = "<leader>r"
 " Airline:
 let g:airline_powerline_fonts = 0
 let g:airline_theme = 'material'
-colorscheme space-vim-dark
+" colorscheme space-vim-dark
 
 " Neosnippet:
 let g:neosnippet#disable_runtime_snippets = { '_' : 1 } " don't try to load default snippets
@@ -59,3 +64,4 @@ inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
 inoremap <expr><M-x>  Commands
 " C-n to escape to normal mode in terminal
 tnoremap <C-n> <C-\><C-n>
+nnoremap <silent> <C-_> :set ignorecase!<CR>

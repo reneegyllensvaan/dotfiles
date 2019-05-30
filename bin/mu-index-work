@@ -1,2 +1,2 @@
 #!/bin/sh
-mu index --muhome=~/email/.mu-work --maildir=~/email/work
+mu index --muhome=~/email/.mu-work-imap --maildir=~/email/work-imap
