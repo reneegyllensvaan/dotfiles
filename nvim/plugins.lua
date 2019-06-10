@@ -1,11 +1,11 @@
 local plugins = {
-  -- UI:
-  { 'scrooloose/nerdtree', On='NERDTreeToggle' },
+  -- UI: { 'scrooloose/nerdtree', On='NERDTreeToggle' },
   'flazz/vim-colorschemes',
   'airblade/vim-gitgutter',
   'liuchengxu/vim-which-key', -- spacemacs-style leader hints
   'itchyny/lightline.vim',
   'majutsushi/tagbar',
+  'chriskempson/base16-vim',
 
   -- Utilies:
   'christoomey/vim-system-copy',
@@ -23,8 +23,9 @@ local plugins = {
   'michaeljsmith/vim-indent-object', -- enables `vii` and `vai`
   'tpope/vim-surround',
   'terryma/vim-multiple-cursors',
+  'jiangmiao/auto-pairs',
 
-  -- Language Support:
+  -- Language:
   -- Language Support Plugins
   'jceb/vim-orgmode',
   { 'rust-lang/rust.vim', For='rust' },

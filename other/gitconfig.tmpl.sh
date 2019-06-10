@@ -10,17 +10,17 @@ cat << EOF
   user = $GITHUB_USER
 [alias]
   a   = add
-  l   = log
-  s   = status
+  b   = diff
   c   = commit
-  aa  = add --all
-  o   = checkout
   d   = diff
-  P   = push
+  l   = log
+  o   = checkout
   p   = pull
-  pop = stash pop
-  pr  = pull --rebase
+  s   = status
   z   = stash
-  ls-files-root = "! git ls-files"
+  aa  = add --all
+  pr  = pull --rebase
+  pop = stash pop
   root = "! git rev-parse --show-toplevel"
+  ls-files-root = "! git ls-files"
 EOF

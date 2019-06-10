@@ -57,7 +57,6 @@ imap <C-t>     <Plug>(neosnippet_expand_or_jump)
 smap <C-t>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-t>     <Plug>(neosnippet_expand_target)
 
-" Custom Commands For Leader:
 " Use tab as the autocomplete key
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
@@ -65,3 +64,10 @@ inoremap <expr><M-x>  Commands
 " C-n to escape to normal mode in terminal
 tnoremap <C-n> <C-\><C-n>
 nnoremap <silent> <C-_> :set ignorecase!<CR>
+
+" " Keybindings to navigate between changed hunks
+" nnoremap <expr> <M-]> NextGitHunk()
+" nnoremap <expr> <M-[> PrevGitHunk()
+" inoremap <expr> <M-]> NextGitHunk()
+" inoremap <expr> <M-[> PrevGitHunk()
+
