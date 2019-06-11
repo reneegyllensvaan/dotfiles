@@ -20,8 +20,11 @@ export LDFLAGS=-L/usr/local/opt/texinfo/lib
 export DIR_MARK_PATH="$HOME/.dir-marks"
 export DEFERRED_COMMANDS_FILE="$HOME/.deferred"
 
+# nnn (file manager) settings
+NNN_USE_EDITOR=1
+
 export BAT_CONFIG_PATH="$HOME/.batrc"
-export LESS="-SXR"
+export LESS="-SXRF"
 export CLICOLOR=1
 export CLICOLOR_FORCE=1
 export LSCOLORS=ExFxCxDxBxegedabagacad

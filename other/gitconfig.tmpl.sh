@@ -10,7 +10,7 @@ cat << EOF
   user = $GITHUB_USER
 [alias]
   a   = add
-  b   = diff
+  b   = branch
   c   = commit
   d   = diff
   l   = log
