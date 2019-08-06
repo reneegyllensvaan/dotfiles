@@ -1,6 +1,7 @@
 local options  =  {
   -- guioptions = '',                -- Remove scrollbars in gvim
   -- Indentation
+  --  Most of this is overridden by the editorconfig plugin
   autoindent = true,              -- Indent according to previous line.
   expandtab = true,               -- Use spaces instead of tabs.
   softtabstop = 2,                -- Tab key indents by 2 spaces.
@@ -15,12 +16,13 @@ local options  =  {
   incsearch = true,               -- Highlight while searching with / or ?.
   hlsearch = true,                -- Keep matches highlighted.
   infercase = true,               -- Case-insensitive completion
-  ignorecase = true,              -- Case-insensitive search
+  ignorecase = true,              -- Case-insensitive search (required for smartcase)
+  smartcase = true,               -- Ignore case for searches in all lowercase
   ttyfast = true,                 -- Faster redrawing.
   lazyredraw = true,              -- Only redraw when necessary.
   splitbelow = true,              -- Open new windows below the current window.
   splitright = true,              -- Open new windows right of the current window.
-  cursorline = false,              -- Underline the selected line
+  cursorline = false,             -- Underline the selected line
   wrapscan = true,                -- Searches wrap around end-of-file.
   report = 0,                     -- Always report changed lines.
   synmaxcol = 200,                -- Only highlight the first 200 columns.

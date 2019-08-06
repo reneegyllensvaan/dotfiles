@@ -10,8 +10,12 @@ local plugins = {
   -- Utilies:
   'christoomey/vim-system-copy',
   'jamessan/vim-gnupg',
-  { 'junegunn/fzf', Dir='~/.fzf', Do='./install --all' },
-  'junegunn/fzf.vim', -- General-purpose fuzzy-matching
+
+  -- { 'junegunn/fzf', Dir='~/.fzf', Do='./install --all' },
+  -- 'junegunn/fzf.vim', -- General-purpose fuzzy-matching
+  { 'lotabout/skim', Dir='~/.skim', Do='./install' },
+  'lotabout/skim.vim',
+
   { 'junegunn/goyo.vim', On='Goyo' }, -- `:Goyo` to enter distraction-free mode
   { 'vim-scripts/loremipsum', On='Lorem' }, -- `:Lorem [words]` to generate placeholder text
   'tomtom/tcomment_vim', -- `gc` as a comment operator
@@ -35,13 +39,17 @@ local plugins = {
   { 'pangloss/vim-javascript', For={'javascript', 'javascript.jsx'} },
   { 'davidhalter/jedi-vim', For='python' },
   -- Deoplete (completion)
-  { 'shougo/deoplete.nvim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
+  { 'shougo/deoplete.nvim', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust'} },
   { 'zchee/deoplete-jedi', For='python' },
   { 'carlitux/deoplete-ternjs', For={'javascript', 'javascript.jsx'} },
   { 'racer-rust/vim-racer', For='rust' },
+  { 'sebastianmarkow/deoplete-rust', For='rust' },
+  { 'reasonml-editor/vim-reason-plus', For='reason' },
+  {  'suan/vim-instant-markdown', For='markdown' },
+
   -- Other
   { 'shougo/neosnippet.vim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
-  { 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
+  { 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust'} },
   -- Other, but language specific
   { 'xuhdev/vim-latex-live-preview', For='tex' },
   { 'mattn/emmet-vim'},

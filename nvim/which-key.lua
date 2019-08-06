@@ -1,7 +1,16 @@
 -- Root which-key mappings
 local keymap = {
-  { '/', 'Rg', 'ripgrep' },
-  { ' ', 'Commands', 'fzf-commands' },
+  -- RgInteractive is disabled until it starts working in skim.vim again
+  { '/', 'RgInteractive', 'skim-ripgrep-interactive' },
+  { ' ', 'Commands', 'skim-commands' },
+}
+
+-- `lcd` bookmarks:
+keymap[';'] = {
+  name='+bookmarks',
+  {'b', ':lcd ~/Projects/backend/repo', 'backend' },
+  {'f', ':lcd ~/Projects/frontend/repo', 'frontend' },
+  {'d', ':lcd ~/code/dotfiles', 'dotfiles' },
 }
 
 -- Tabs:
@@ -15,14 +24,14 @@ keymap.l = {
 -- Project:
 keymap.p = {
   name='+project',
-  { 'f', 'FzfProjectFiles', 'fzf-project-files' },
+  { 'f', 'FzfProjectFiles', 'skim-project-files' },
 }
 
 -- Files:
 keymap.f = {
   name='+file',
   { 't', 'NERDTreeToggle', 'nerdtree' },
-  { 'f', 'Fd', 'fzf-dir' },
+  { 'f', 'Fd', 'skim-dir' },
 }
 
 -- Vim:
@@ -31,10 +40,13 @@ keymap.V = {
   { 'e', ':@*', 'eval-region'},
 }
 
+-- Git:
 keymap.g = {
   name='+toggle',
   {'s',':!git status', 'git-status' },
   {'b',':GB', 'git-blame' },
+  {'j','GitGutterNextHunk', 'git-next-hunk' },
+  {'k','GitGutterPrevHunk', 'git-prev-hunk' },
 }
 
 keymap.t = {
@@ -72,7 +84,7 @@ keymap.w = {
   { '=' , '<C-W>=', 'balance-window' },
   { 's' , '<C-W>s', 'split-window-below' },
   { 'v' , '<C-W>v', 'split-window-below' },
-  { '?' , 'Windows', 'fzf-window' },
+  { '?' , 'Windows', 'skim-window' },
 }
 
 keymap.b = {
@@ -85,7 +97,7 @@ keymap.b = {
   { 'l' , 'blast', 'last-buffer' },
   { 'n' , 'bnext', 'next-buffer' },
   { 'p' , 'bprevious', 'previous-buffer' },
-  { 'b' , 'Buffers', 'fzf-buffer' },
+  { 'b' , 'Buffers', 'skim-buffer' },
 }
 
 function make_which_key_tree (key, value)

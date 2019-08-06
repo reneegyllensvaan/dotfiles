@@ -44,6 +44,9 @@ let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 
+" skim
+let g:rg_opts = "--smart-case"
+
 
 " Airline:
 let g:airline_powerline_fonts = 0
@@ -70,4 +73,3 @@ nnoremap <silent> <C-_> :set ignorecase!<CR>
 " nnoremap <expr> <M-[> PrevGitHunk()
 " inoremap <expr> <M-]> NextGitHunk()
 " inoremap <expr> <M-[> PrevGitHunk()
-

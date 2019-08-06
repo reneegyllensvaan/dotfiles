@@ -7,3 +7,6 @@
 [submodule "system-packages/from-source/fxz"]
 	path = system-packages/from-source/fxz
 	url = git@github.com:conor42/fxz.git
+[submodule "steno/steno-dictionaries"]
+	path = steno/steno-dictionaries
+	url = https://github.com/didoesdigital/steno-dictionaries.git

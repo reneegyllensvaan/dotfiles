@@ -1,15 +1,15 @@
 #  Usage:
-#    
+#
 #    m x  -  mark current directory as x
-#  
+#
 #    f x  -  cd to directory marked as x
-#  
+#
 #  Configuration:
-#  
+#
 #    DIR_MARK_PATH  -  Export this variable as the path
-#                      to the file in which directory 
+#                      to the file in which directory
 #                      marks should be stored. The file
-#                      does not need to exist but the 
+#                      does not need to exist but the
 #                      directory does.
 #                      ( default: /tmp/dir-marks )
 
@@ -54,7 +54,7 @@ m () {
   # if no arg, print help
   if [ -z $1 ]
   then
-    grep --color=auto -E "^\S* " $DIR_MARK_PATH
+    grep --color=always -E "^\S* " $DIR_MARK_PATH | column -t
     return
   fi
 

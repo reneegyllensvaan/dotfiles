@@ -4,7 +4,8 @@ export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=/usr/local/opt/texinfo/bin:$PATH
-[[ -d ~/Library ]] && export PATH="$PATH:$HOME/Library/Python/2.7/bin"
+[[ -d ~/Library ]] && export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+[[ -d ~/.skim ]] && export PATH="$HOME/.skim/bin:$PATH"
 
 export VISUAL="vim"
 export EDITOR="$VISUAL"

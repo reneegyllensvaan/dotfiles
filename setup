@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 if [[ ! -f "./setup" ]]; then
   echo "This script must be run from the directory it's contained in"
   exit
@@ -70,8 +70,9 @@ safe_copy () {
 
 # load git submodules
 git submodule update --init zmodules/zsh-syntax-highlighting
+git submodule update --init steno/steno-dictionaries
 
-echo "Building shell template files"
+ echo "Building shell template files"
 build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
 build_template $PWD/other/gitconfig
@@ -154,6 +155,14 @@ mkdir -p $HOME/email/work
 # mkdir -p $HOME/.config/ranger
 # symlink file "$PWD/other/rifle.conf" $HOME/.config/ranger/rifle.conf
 # symlink file "$PWD/other/rc.conf" $HOME/.config/ranger/rc.conf
+
+echo "  Making sure we have a plover dictionary"
+if which node >/dev/null 2>&1; then
+
+  cd steno
+  [ -f dict.json ] || node merge-dictionaries.js > dict.json
+  cd -
+fi
 
 echo "  Other configs"
 symlink file "$PWD/other/spacemacs" $HOME/.spacemacs
