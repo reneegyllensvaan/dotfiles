@@ -10,6 +10,8 @@ local plugins = {
   -- Utilies:
   'christoomey/vim-system-copy',
   'jamessan/vim-gnupg',
+  'mattn/webapi-vim',
+  'mattn/gist-vim',
 
   -- { 'junegunn/fzf', Dir='~/.fzf', Do='./install --all' },
   -- 'junegunn/fzf.vim', -- General-purpose fuzzy-matching
@@ -50,7 +52,7 @@ local plugins = {
 
   -- Other
   { 'shougo/neosnippet.vim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
-  { 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust'} },
+  { 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust', 'go'} },
   -- Other, but language specific
   { 'xuhdev/vim-latex-live-preview', For='tex' },
   { 'mattn/emmet-vim'},
