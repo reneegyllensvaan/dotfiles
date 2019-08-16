@@ -39,29 +39,29 @@ noglob \
 #autoload -U promptinit; promptinit
 #prompt pure
 
-# EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 )
-#
-# if [ -z $(echo $TERM | grep rxvt) ]; then
-#   function prepend_prompt () {
-#     echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
-#   };
-#
-#   function precmd () {
-#     prepend_prompt;
-#   };
-#
-# else
-#   function prepend_prompt () {
-#   };
-# fi
+EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 )
+
+if [ -z $(echo $TERM | grep rxvt) ]; then
+  function prepend_prompt () {
+    echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
+  };
+
+  function precmd () {
+    prepend_prompt;
+  };
+
+else
+  function prepend_prompt () {
+  };
+fi
 
 [ $RANGER_LEVEL ] && ranger_prompt="(ranger)" #
 
 # Set up the prompt template
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)"
 [ $SSH_CLIENT ] && PROMPT="$PROMPT [%n@%m]" # only append prompt with host over ssh
-PROMPT="$PROMPT"$'\n'"$ranger_prompt%(?.%F{green}.%F{red})>%f "
-#PROMPT="$PROMPT"$'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
+#PROMPT="$PROMPT"$'\n'"$ranger_prompt%(?.%F{green}.%F{red})>%f "
+PROMPT="$PROMPT"$'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
 
 
 # opam configuration
