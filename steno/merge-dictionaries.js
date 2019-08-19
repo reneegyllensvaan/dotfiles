@@ -8,6 +8,9 @@ dictionaryList.forEach(name => {
     dictionary = require(basePath + '/' + name);
     Object.entries(dictionary).forEach(([stroke, word]) => {
         maxStrokeLength = Math.max(stroke.length, maxStrokeLength);
+        if (dict[stroke] && dict[stroke] !== word) {
+            console.warn(`overriding entry ${dict[stroke]} with ${word}. (${stroke})`)
+        }
         dict[stroke] = word;
     });
 });
