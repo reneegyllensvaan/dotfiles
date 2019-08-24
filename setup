@@ -144,6 +144,10 @@ echo "  i3 config"
 mkdir -p $HOME/.config/i3
 symlink file "$PWD/x11/i3_config" $HOME/.config/i3/config
 
+echo "  zathura config"
+mkdir -p $HOME/.config/zathura
+symlink file "$PWD/x11/zathurarc" $HOME/.config/zathura/zathurarc
+
 echo "  Email config"
 symlink file "$PWD/email/neomuttrc-user" $HOME/.neomuttrc-user
 symlink file "$PWD/email/neomuttrc-unbind" $HOME/.neomuttrc-unbind

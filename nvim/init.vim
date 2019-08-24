@@ -47,6 +47,9 @@ let g:jedi#rename_command = "<leader>r"
 " skim
 let g:rg_opts = "--smart-case"
 
+" Latex:
+let g:livepreview_previewer = 'zathura'
+au FileType markdown vmap <Leader><Bslash> :EasyAlign*<Bar><Enter>
 
 " Airline:
 let g:airline_powerline_fonts = 0

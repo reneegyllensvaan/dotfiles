@@ -1,13 +1,13 @@
 #!/bin/sh
 # Python2/pip
-pip install `cat << EOF
+pip install --user `cat << EOF
 neovim
 pynvim
 EOF
 `
 
 # Python3/pip3
-pip3 install `cat << EOF
+pip3 install --user `cat << EOF
 neovim
 pynvim
 EOF

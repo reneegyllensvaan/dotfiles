@@ -28,6 +28,7 @@ local plugins = {
   'tpope/vim-surround',
   'terryma/vim-multiple-cursors',
   'jiangmiao/auto-pairs',
+  'junegunn/vim-easy-align',
 
   -- Language:
   -- Language Support Plugins
