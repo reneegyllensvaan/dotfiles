@@ -41,14 +41,17 @@ local plugins = {
   { 'fatih/vim-go', Do=':GoUpdateBinaries', For='go' },
   { 'pangloss/vim-javascript', For={'javascript', 'javascript.jsx'} },
   { 'davidhalter/jedi-vim', For='python' },
+  { 'evanleck/vim-svelte' },
   -- Deoplete (completion)
-  { 'shougo/deoplete.nvim', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust'} },
-  { 'zchee/deoplete-jedi', For='python' },
-  { 'carlitux/deoplete-ternjs', For={'javascript', 'javascript.jsx'} },
-  { 'racer-rust/vim-racer', For='rust' },
-  { 'sebastianmarkow/deoplete-rust', For='rust' },
-  { 'reasonml-editor/vim-reason-plus', For='reason' },
-  {  'suan/vim-instant-markdown', For='markdown' },
+  --{ 'shougo/deoplete.nvim', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust'} },
+  --{ 'zchee/deoplete-jedi', For='python' },
+  --{ 'carlitux/deoplete-ternjs', For={'javascript', 'javascript.jsx'} },
+  --{ 'racer-rust/vim-racer', For='rust' },
+  --{ 'sebastianmarkow/deoplete-rust', For='rust' },
+  --{ 'reasonml-editor/vim-reason-plus', For='reason' },
+  --{  'suan/vim-instant-markdown', For='markdown' },
+  -- CoC (completion)
+  {'neoclide/coc.nvim', branch='release' },
 
   -- Other
   { 'shougo/neosnippet.vim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },

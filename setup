@@ -1,4 +1,8 @@
 #!/bin/zsh
+log () {
+  printf "\r$1"
+}
+
 if [[ ! -f "./setup" ]]; then
   echo "This script must be run from the directory it's contained in"
   exit
@@ -20,13 +24,13 @@ while [ $1 ]; do
   esac
 done
 
-echo "Sourcing profile and user-profile to make sure we have the latest env..."
+log "Sourcing profile and user-profile to make sure we have the latest env..."
 source $PWD/shell/profile
 source $PWD/shell/user-profile
 
 build_template () {
   if [ ! $nobuild_templates ]; then
-    [ -f "$1.tmpl.sh" ] || echo "        Template $1.tmpl.sh not found, skipping. Please fix this!"
+    [ -f "$1.tmpl.sh" ] || echo "\nTemplate $1.tmpl.sh not found, skipping. Please fix this!"
     sh "$1.tmpl.sh" > "$1"
   fi
 }
@@ -56,7 +60,7 @@ safe_copy () {
   hash_new=`$hash_command $1 | head -c 40`
   hash_old=`$hash_command $2 | head -c 40`
   if [[ $hash_new = $hash_old ]]; then
-    echo "    $2 hasn't changed, skipping..."
+    echo "$2 hasn't changed, skipping..."
   else
     [ -f "$2.bak" ] && \
       "$2.bak would be overwritten, please move or delete that file to prevent data loss" && return 1
@@ -72,7 +76,7 @@ safe_copy () {
 git submodule update --init zmodules/zsh-syntax-highlighting
 git submodule update --init steno/steno-dictionaries
 
- echo "Building shell template files"
+ log "Building shell template files"
 build_template $PWD/gpg/gpg.conf
 build_template $PWD/gpg/gpg-agent.conf
 build_template $PWD/other/gitconfig
@@ -81,20 +85,20 @@ build_template $PWD/email/neomuttrc-user
 build_template $PWD/nvim/pathspec.vim
 build_template $PWD/shell/alias
 
-echo "Making the config directory and linking/copying files"
+log "Making the config directory and linking/copying files"
 mkdir -p $HOME/.config/
 
-echo "  Xorg configs"
+log "  Xorg configs"
 symlink file "$PWD/x11/xinitrc" ~/.xinitrc
 symlink file "$PWD/x11/xsession" ~/.xsession
 symlink dir "$PWD/x11/xres" ~/.xres
 
-echo "  Urxvt conf"
+log "  Urxvt conf"
 mkdir -p $HOME/.urxvt
 symlink dir "$PWD/urxvt-ext" $HOME/.urxvt/ext
 
 # using vim as a more lightweight editor atm, nvim as a full editor
-echo "  Vim directories and conf"
+log "  Vim directories and conf"
 symlink file "$PWD/vimrc" $HOME/.vimrc
 mkdir -p $HOME/.vim
 mkdir -p $HOME/.vim/blugin
@@ -106,7 +110,7 @@ mkdir -p $HOME/.vim/files/info
 mkdir -p $HOME/.vim/files/undo
 symlink file "$PWD/other/plug.vim" $HOME/.vim/autoload/plug.vim
 
-echo "  Neovim conf"
+log "  Neovim conf"
 mkdir -p $HOME/.config
 mkdir -p $HOME/.local/share/nvim/site/autoload
 mkdir -p $HOME/.local/share/nvim
@@ -120,7 +124,7 @@ mkdir -p $HOME/.local/share/nvim/files/undo
 symlink dir "$PWD/nvim" $HOME/.config/nvim
 symlink file "$PWD/other/plug.vim" $HOME/.local/share/nvim/site/autoload/plug.vim
 
-echo "  GPG config"
+log "  GPG config"
 mkdir -p $HOME/.gnupg
 safe_copy "$PWD/gpg/gpg.conf" $HOME/.gnupg/gpg.conf
 safe_copy "$PWD/gpg/gpg-agent.conf" $HOME/.gnupg/gpg-agent.conf
@@ -128,27 +132,28 @@ mkdir -p $HOME/.ssh
 safe_copy "$PWD/other/ssh_config" $HOME/.ssh/config
 touch $HOME/.ssh/user_config
 
-echo "  Tmux config"
+log "  Tmux config"
 symlink file "$PWD/other/tmux.conf" $HOME/.tmux.conf
 symlink file "$PWD/other/tmux-disposable.conf" $HOME/.tmux-disposable.conf
 
-echo "  Zsh configs"
+log "  Zsh configs"
 symlink file $PWD/shell/zshrc $HOME/.zshrc
 symlink dir $PWD/zfunctions $HOME/.zfunctions
 symlink dir $PWD/zmodules $HOME/.zmodules
 
-echo "  Qutebrowser config"
+log "  Qutebrowser config"
 symlink dir "$PWD/qutebrowser" $HOME/.config/qutebrowser
 
-echo "  i3 config"
+log "  i3 config"
 mkdir -p $HOME/.config/i3
 symlink file "$PWD/x11/i3_config" $HOME/.config/i3/config
 
+<<<<<<< HEAD
 echo "  zathura config"
 mkdir -p $HOME/.config/zathura
 symlink file "$PWD/x11/zathurarc" $HOME/.config/zathura/zathurarc
 
-echo "  Email config"
+log "  Email config"
 symlink file "$PWD/email/neomuttrc-user" $HOME/.neomuttrc-user
 symlink file "$PWD/email/neomuttrc-unbind" $HOME/.neomuttrc-unbind
 symlink file "$PWD/email/neomuttrc" $HOME/.neomuttrc
@@ -160,7 +165,7 @@ mkdir -p $HOME/email/work
 # symlink file "$PWD/other/rifle.conf" $HOME/.config/ranger/rifle.conf
 # symlink file "$PWD/other/rc.conf" $HOME/.config/ranger/rc.conf
 
-echo "  Making sure we have a plover dictionary"
+log "  Making sure we have a plover dictionary"
 if which node >/dev/null 2>&1; then
 
   cd steno
@@ -168,24 +173,25 @@ if which node >/dev/null 2>&1; then
   cd -
 fi
 
-echo "  Other configs"
+log "  Other configs"
 symlink file "$PWD/other/spacemacs" $HOME/.spacemacs
 symlink file "$PWD/other/batrc" $HOME/.batrc
 symlink file "$PWD/shell/alias" $HOME/.alias
 symlink file "$PWD/shell/profile" $HOME/.profile
 symlink file "$PWD/shell/user-profile" $HOME/.user-profile
 symlink file "$PWD/x11/compton.conf" $HOME/.config/compton.conf
+symlink file "$PWD/x11/kitty.conf" $HOME/.config/kitty/kitty.conf
 symlink file "$PWD/other/editorconfig" $HOME/.editorconfig
 symlink file "$PWD/other/gitconfig" $HOME/.gitconfig
 symlink file "$PWD/other/tigrc" $HOME/.tigrc
 symlink file "$PWD/other/ctags" $HOME/.ctags
 
-echo "  Symlinking directories"
+log "  Symlinking directories"
 #TODO make this check for an existing bin dir
 symlink dir "$PWD/bin" $HOME/.bin
 symlink dir "$PWD/emacs.d" $HOME/.emacs.d
 
-echo "  Making the $HOME/.local/bin directory"
+log "  Making the $HOME/.local/bin directory"
 mkdir -p $HOME/.local/bin
 
-echo "...Finished!"
+echo "\n...Finished!"

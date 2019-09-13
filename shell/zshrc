@@ -55,19 +55,14 @@ else
   };
 fi
 
-[ $RANGER_LEVEL ] && ranger_prompt="(ranger)" #
+[ $RANGER_LEVEL ] && ranger_prompt="(rr $RANGER_LEVEL) " #
 
 # Set up the prompt template
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)"
 [ $SSH_CLIENT ] && PROMPT="$PROMPT [%n@%m]" # only append prompt with host over ssh
 #PROMPT="$PROMPT"$'\n'"$ranger_prompt%(?.%F{green}.%F{red})>%f "
-PROMPT="$PROMPT"$'\n$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
+PROMPT="$PROMPT"$'\n$ranger_prompt$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
 
-
-# opam configuration
-#test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # GnuPG settings
 export GPG_TTY="$(tty)"
 if [ $GPG_FINGERPRINT ]; then
@@ -77,4 +72,3 @@ if [ $GPG_FINGERPRINT ]; then
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon )
 fi
 
-#which npm >/dev/null && export PATH="`npm bin -g`:$PATH"

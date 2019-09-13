@@ -25,7 +25,8 @@ tag-transforms \
     "trash" "d"\
     "remove-all-tags" "D"
 
-set date_format='%Y-%m-%d %H:%M'
+#set date_format='%Y-%m-%d %H:%M'
+set date_format='%Y-%m-%d'
 #set index_format='%4C %Z %D %-20.20n %-8.8J (%e/%E) %s'
 set index_format='%4C %Z %D %-20.20n [%e/%E] %s (%J)'
 

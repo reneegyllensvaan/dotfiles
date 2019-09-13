@@ -1,10 +1,10 @@
 #!/bin/sh
-function join { 
-  delim="$1"; 
+function join {
+  delim="$1";
   shift
   while [ "$1" ]; do
     printf "$1"
-    shift 
+    shift
     [ "$1" ] && printf ","
   done
 }
@@ -12,8 +12,12 @@ cmd=$1
 shift
 if [ "$1" ]; then
   echo "$cmd:`join , "$@"`"
-  fab "$cmd:`join , "$@"`"
+  command="$cmd:`join , "$@"`"
 else
   echo $cmd
-  fab $cmd
+  command=$cmd
 fi
+
+[ `echo $command | grep 'command:api'` ] \
+  && cd ~/Projects/backend/repo
+fab $command

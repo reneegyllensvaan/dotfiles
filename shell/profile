@@ -6,6 +6,8 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=/usr/local/opt/texinfo/bin:$PATH
 [[ -d ~/Library ]] && export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 [[ -d ~/.skim ]] && export PATH="$HOME/.skim/bin:$PATH"
+which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
+which python2 >/dev/null 2>&1 && PATH="$PATH:`python2 -m site --user-base`/bin"
 
 export VISUAL="vim"
 export EDITOR="$VISUAL"

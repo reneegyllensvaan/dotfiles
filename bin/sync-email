@@ -3,6 +3,12 @@ while true; do
   # Purge everything in trash from other tags
   notmuch new
   notmuch tag --remove-all +trash tag:trash and tag:strict-delete
+  notmuch tag +trash -killed tag:killed
+
+  # Manually apply some tagging rules gmail doesn't
+  notmuch tag -important tag:github
+  notmuch tag +trash tag:github and not tag:unread and not tag:trash
+
   #notmuch tag -defer-delete tag:defer-delete and not tag:trash
   # Do gmailieer sync (for notmuch/neomutt)
   (cd ~/email/work && gmi sync)

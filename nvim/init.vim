@@ -7,6 +7,7 @@ syntax on                                    " Enable syntax highlighting.
 
 luafile ~/.config/nvim/options.lua
 luafile ~/.config/nvim/plugins.lua
+source ~/.config/nvim/coc-config.vim
 
 " Which-key
 let g:mapleader = "\<Space>"

@@ -25,6 +25,7 @@ alias gzd='gzip -d'
 alias xz='fxz'
 alias la='ls -lAh'
 alias v='vagrant'
+#alias skim='sk -i -c 'rg --column --line-number --color=always --smart-case "{}" . --ansi --color
 
 # unglob some commands
 alias fd='noglob fd'
