@@ -1,8 +1,8 @@
 #  Usage:
 #
-#    m x  -  mark current directory as x
+#    mark-dir x  -  mark current directory as x
 #
-#    f x  -  cd to directory marked as x
+#    pop-mark x  -  cd to directory marked as x
 #
 #  Configuration:
 #
@@ -14,7 +14,7 @@
 #                      ( default: /tmp/dir-marks )
 
 
-f () {
+pop-mark () {
   # if mark file isn't set, use /tmp
   if [ -z "$DIR_MARK_PATH" ]; then
     echo "no mark path. setting path to /tmp/dir-marks"
@@ -41,7 +41,7 @@ f () {
   fi
 }
 
-m () {
+mark-dir () {
   # if mark file isn't set, use /tmp
   if [ -z "$DIR_MARK_PATH" ]; then
     echo "no mark path. setting path to /tmp/dir-marks"
@@ -68,4 +68,35 @@ m () {
     rm $DIR_MARK_PATH
     mv "$DIR_MARK_PATH"'.tmp' "$DIR_MARK_PATH"
   fi
+}
+
+# Let's make a completion!
+#compdef _pop-mark pop-mark
+function _pop-mark {
+    local line
+
+    _arguments -C \
+        "-h[Show help information]" \
+        "--h[Show help information]" \
+        "1: :(quietly loudly)" \
+        "*::arg:->args"
+
+    case $line[1] in
+        loudly)
+            _hello_loudly
+        ;;
+        quietly)
+            _hello_quietly
+        ;;
+    esac
+}
+
+function _hello_quietly {
+    _arguments \
+        "--silent[Dont output anything]"
+}
+
+function _hello_loudly {
+    _arguments \
+        "--repeat=[Repat the <message> any number of times]"
 }
