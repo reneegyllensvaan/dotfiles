@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Quick statement
+# key: n
+# --
+\\$1{$2}

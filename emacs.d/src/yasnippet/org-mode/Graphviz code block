@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Graphviz code block
+# key: GRAPHVIZ
+# --
+#+BEGIN_SRC dot :file $1 :results graphics
+digraph G {
+    $2 -> $3;
+}
+#+END_SRC
+#+RESULTS:

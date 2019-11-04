@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: From X import Y
+# key: FRIM
+# --
+from $1 import $2
