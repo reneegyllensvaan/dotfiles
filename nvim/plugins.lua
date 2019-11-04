@@ -49,15 +49,15 @@ local plugins = {
   --{ 'racer-rust/vim-racer', For='rust' },
   --{ 'sebastianmarkow/deoplete-rust', For='rust' },
   --{ 'reasonml-editor/vim-reason-plus', For='reason' },
-  --{  'suan/vim-instant-markdown', For='markdown' },
+  {  'suan/vim-instant-markdown', On='InstantMarkdownPreview' },
   -- CoC (completion)
   {'neoclide/coc.nvim', branch='release' },
 
   -- Other
   { 'shougo/neosnippet.vim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
-  { 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust', 'go'} },
+  --{ 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust', 'go'} },
   -- Other, but language specific
-  { 'xuhdev/vim-latex-live-preview', For='tex' },
+  --{ 'xuhdev/vim-latex-live-preview', For='tex' },
   { 'mattn/emmet-vim'},
 
 }

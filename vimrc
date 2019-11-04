@@ -1,8 +1,6 @@
 """ This is my .vimrc
 " It's meant to be a stripped-down version of my regular neovim rc that is
-" quick, simple, and lightweight, for one-off editing of random files here and
-" there, and only has some simple/transparent plugins for things such as gpg
-" editing and system clipboard yanking.
+" lightweight, so it starts quicker. i.e. nvim is the 'ide', vim is the editor
 
 filetype plugin indent on         " Load plugins according to detected filetype.
 syntax on                         " Enable syntax highlighting.

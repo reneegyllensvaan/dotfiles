@@ -1,0 +1,7 @@
+# Enable hold-for-special-character-menu
+defaults write -g ApplePressAndHoldEnabled -bool true
+# # Disable hold-for-special-character-menu
+# defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Specifically for vscode
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false

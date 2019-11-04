@@ -7,10 +7,8 @@ cat << EOF
 alias f='pop-mark'
 alias m='mark-dir'
 
-alias rr='ranger'
-alias sx='startx;exit'
-alias up='cd ..'
 alias lass='ls --color=always -lAh | less -R'
+alias arst='asdf'
 alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 
 # editor aliases
@@ -30,6 +28,9 @@ alias la='ls -lAh'
 alias v='vagrant'
 alias splines="tr ' ' '\\n'"
 #alias skim='sk -i -c 'rg --column --line-number --color=always --smart-case "{}" . --ansi --color
+alias rr='ranger'
+alias sx='startx;exit'
+alias up='cd ..'
 
 # unglob some commands
 alias fd='noglob fd'

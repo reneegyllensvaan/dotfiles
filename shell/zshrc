@@ -39,7 +39,8 @@ noglob \
 #autoload -U promptinit; promptinit
 #prompt pure
 
-EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶 🥞 🍬 💎 🔮 🎁 💜 💞 )
+#EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 🥥 🥝 🥑 🥦 🌶' '🥞 🍬 💎 🔮 🎁 💜 💞 )
+EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 '🥥 ' 🥝 🥑 🥦 '🌶 '🥞 🍬 💎 🔮 🎁 💜 💞 )
 
 if [ -z $(echo $TERM | grep rxvt) ]; then
   function prepend_prompt () {
@@ -72,3 +73,5 @@ if [ $GPG_FINGERPRINT ]; then
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon )
 fi
 
+# opam configuration
+#test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
