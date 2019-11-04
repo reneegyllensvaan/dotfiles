@@ -44,3 +44,4 @@ alias jq='noglob jq'
 `which >/dev/null 2>/dev/null gsed && echo "alias sed='gsed'"`
 `which >/dev/null 2>/dev/null ggrep && echo "alias grep='ggrep'"`
 `which >/dev/null 2>/dev/null bat && echo "alias cat='bat'"`
+EOF

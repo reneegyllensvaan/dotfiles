@@ -1,6 +1,7 @@
 #!/bin/zsh
 log () {
-  printf "\r$1"
+  #printf "\r$1"
+  echo $@
 }
 
 if [[ ! -f "./setup" ]]; then
@@ -172,6 +173,11 @@ if which node >/dev/null 2>&1; then
   cd -
 fi
 
+log "  Kitty config"
+mkdir -p $HOME/.config/kitty
+symlink file "$PWD/x11/kitty.conf" $HOME/.config/kitty/kitty.conf
+
+
 log "  Other configs"
 symlink file "$PWD/other/spacemacs" $HOME/.spacemacs
 symlink file "$PWD/other/batrc" $HOME/.batrc
@@ -179,7 +185,7 @@ symlink file "$PWD/shell/alias" $HOME/.alias
 symlink file "$PWD/shell/profile" $HOME/.profile
 symlink file "$PWD/shell/user-profile" $HOME/.user-profile
 symlink file "$PWD/x11/compton.conf" $HOME/.config/compton.conf
-symlink file "$PWD/x11/kitty.conf" $HOME/.config/kitty/kitty.conf
+
 symlink file "$PWD/other/editorconfig" $HOME/.editorconfig
 symlink file "$PWD/other/gitconfig" $HOME/.gitconfig
 symlink file "$PWD/other/tigrc" $HOME/.tigrc

@@ -9,3 +9,4 @@ right now i'm working on these dotfiles to get them where i want them, i have ki
 # Recommended dependencies on OSX
 `cat system-packages/osx/recommended`
 
+EOF

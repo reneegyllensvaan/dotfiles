@@ -39,7 +39,7 @@ export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 export OFFLINEIMAP_SYNC_INTERVAL=120 # seconds
 
 # if we're a zsh, export fpath
-if [ `ps -o command='' -p $$ | grep zsh` ]; then
+if ps -o command='' -p $$ | grep zsh >/dev/null 2>&1; then
   export FPATH="$HOME/.zfunctions:$FPATH"
 fi
 
