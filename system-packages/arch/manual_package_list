@@ -1,0 +1,86 @@
+#!/bin/sh
+pacman -S `cat << EOF | grep -v -E '^#'
+
+# System essentials
+ed
+base base-devel
+bzip2 gzip zip unzip
+efibootmgr
+git
+
+# Dev stuff/languages/compilers
+docker
+docker-compose
+go
+
+curl
+gparted
+grub
+hsetroot
+htop
+iftop
+intel-ucode
+lshw
+lsof
+lxappearance
+mlocate
+nodejs
+npm
+openssh
+rofi
+rxvt-unicode
+scrot
+strace
+ttf-dejavu
+ttf-liberation
+vagrant
+
+
+# Shell/CLI stuff
+termdown
+the_silver_searcher
+zsh
+mc
+tmux
+tree
+ranger
+bat
+moreutils
+ncdu
+ctags
+fzf
+
+# Multimedia/browser
+vlc
+zathura
+chromium
+firefox
+feh
+
+# Desktop
+xclip
+xf86-video-intel
+xorg-server
+xorg-xbacklight
+xorg-xinit
+pulseaudio
+pulseaudio-bluetooth
+pulsemixer
+i3
+compton
+clipmenu
+
+# Fonts
+adobe-source-code-pro-fonts
+noto-fonts
+noto-fonts-emoji
+noto-fonts-extra
+
+# Wireless device support/laptop essentials
+wpa_supplicant
+dhcpcd
+bluez
+bluez-utils
+acpi 
+
+EOF`

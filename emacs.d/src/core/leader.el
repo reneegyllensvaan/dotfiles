@@ -35,10 +35,10 @@
     ("," . nil) )
   (:map help-mode-map
     ("SPC" . nil))
-  (:map magit-mode-map
-    ("SPC" . nil))
-  (:map magit-diff-mode-map
-    ("SPC" . nil))
+  ;(:map magit-mode-map
+  ;  ("SPC" . nil))
+  ;(:map magit-diff-mode-map
+  ;  ("SPC" . nil))
   (:map compilation-mode-map
     ("SPC" . nil))
   (:map mu4e-view-mode-map
@@ -247,25 +247,25 @@
    "q"    '(nil                             :which-key "exec-bin")
    "qsl"  '(comma-line-split                :which-key "comma-line-split")
    )
-  ;;;;;;;;; Rename which-key keybindings
-  ;;;;;;;;; (Stolen with love from spacemacs)
-  ;; Rename the entry for M-1 in the SPC h k Top-level bindings,
-  ;; and for 1 in the SPC- Spacemacs root, to 1..9
-  (push '(("\\(.*\\)1" . "winum-select-window-1") .
-	  ("\\11..9" . "winum-select-window1..9"))
-	which-key-replacement-alist)
+  ; ;;;;;;;;; Rename which-key keybindings
+  ; ;;;;;;;;; (Stolen with love from spacemacs)
+  ; ;; Rename the entry for M-1 in the SPC h k Top-level bindings,
+  ; ;; and for 1 in the SPC- Spacemacs root, to 1..9
+  ; (push '(("\\(.*\\)1" . "winum-select-window-1") .
+  ;         ("\\11..9" . "winum-select-window1..9"))
+  ;       which-key-replacement-alist)
 
-  ;; Hide the entries for M-[2-9] in the SPC h k Top-level bindings,
-  ;; and for [2-9] in the SPC- Spacemacs root
-  (push '((nil . "winum-select-window-[2-9]") . t)
-       which-key-replacement-alist)
+  ; ;; Hide the entries for M-[2-9] in the SPC h k Top-level bindings,
+  ; ;; and for [2-9] in the SPC- Spacemacs root
+  ; (push '((nil . "winum-select-window-[2-9]") . t)
+  ;      which-key-replacement-alist)
 
-  (push '(("\\(.*\\)1" . "eyebrowse-switch-to-window-config-1") .
-	  ("\\11..9" . "eyebrowse-switch-1..9"))
-	which-key-replacement-alist)
+  ; (push '(("\\(.*\\)1" . "eyebrowse-switch-to-window-config-1") .
+  ;         ("\\11..9" . "eyebrowse-switch-1..9"))
+  ;       which-key-replacement-alist)
 
-  ;; Hide the entries for M-[2-9] in the SPC h k Top-level bindings,
-  ;; and for [2-9] in the SPC- Spacemacs root
-  (push '((nil . "eyebrowse-switch-to-window-config-[2-9]") . t)
-       which-key-replacement-alist)
+  ; ;; Hide the entries for M-[2-9] in the SPC h k Top-level bindings,
+  ; ;; and for [2-9] in the SPC- Spacemacs root
+  ; (push '((nil . "eyebrowse-switch-to-window-config-[2-9]") . t)
+  ;      which-key-replacement-alist)
   )

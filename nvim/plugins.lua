@@ -57,7 +57,7 @@ local plugins = {
   { 'shougo/neosnippet.vim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
   --{ 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust', 'go'} },
   -- Other, but language specific
-  --{ 'xuhdev/vim-latex-live-preview', For='tex' },
+  { 'xuhdev/vim-latex-live-preview', For='tex' },
   { 'mattn/emmet-vim'},
 
 }
