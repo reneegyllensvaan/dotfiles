@@ -139,7 +139,7 @@ bar {
 }
 
 # class                 border  backgr. text    indicator child_border
-client.focused          #fc669b #fc669b #000000 #fcc6db   #fc669b
+client.focused          #98ff98 #98ff98 #000000 #fcc6db   #98ff98
 client.focused_inactive #435b67 #435b67 #ffffff #484e50   #5f676a
 client.unfocused        #333333 #222222 #e7ebed #292d2e   #222222
 client.urgent           #2f343a #900000 #ffffff #900000   #900000
