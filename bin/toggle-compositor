@@ -1,2 +1,2 @@
 #!/bin/sh
-killall compton >/dev/null || (compton &)
+killall picom >/dev/null || (picom &)

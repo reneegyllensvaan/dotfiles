@@ -184,7 +184,7 @@ symlink file "$PWD/other/batrc" $HOME/.batrc
 symlink file "$PWD/shell/alias" $HOME/.alias
 symlink file "$PWD/shell/profile" $HOME/.profile
 symlink file "$PWD/shell/user-profile" $HOME/.user-profile
-symlink file "$PWD/x11/compton.conf" $HOME/.config/compton.conf
+symlink file "$PWD/x11/picom.conf" $HOME/.config/picom.conf
 
 symlink file "$PWD/other/editorconfig" $HOME/.editorconfig
 symlink file "$PWD/other/gitconfig" $HOME/.gitconfig
