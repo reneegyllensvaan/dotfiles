@@ -10,6 +10,7 @@ alias m='mark-dir'
 alias lass='ls --color=always -lAh | less -R'
 alias arst='asdf'
 alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+alias nim="nim --outdir:$HOME/.nimble/_out"
 
 # editor aliases
 alias fim='f=\`fzf\` && vim \$f' # use fzf to select a file but only open on return 1
