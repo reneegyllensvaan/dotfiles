@@ -53,12 +53,15 @@ local plugins = {
   -- CoC (completion)
   {'neoclide/coc.nvim', branch='release' },
 
+
   -- Other
   { 'shougo/neosnippet.vim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
   --{ 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust', 'go'} },
   -- Other, but language specific
   { 'xuhdev/vim-latex-live-preview', For='tex' },
   { 'mattn/emmet-vim'},
+  {'Vigemus/iron.nvim'},
+  {'clojure-vim/acid.nvim'}
 
 }
 

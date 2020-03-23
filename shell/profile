@@ -18,6 +18,7 @@ export PAGER=less
 export GIT_EDITOR=vim
 export GIT_PAGER=less
 
+export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"
 export GOPATH=$HOME/code/go
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export LDFLAGS=-L/usr/local/opt/texinfo/lib

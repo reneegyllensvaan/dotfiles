@@ -161,9 +161,9 @@ symlink file "$PWD/email/notmuch-config" $HOME/.notmuch-config
 mkdir -p $HOME/email/work
 
 # echo "  Ranger config"
-# mkdir -p $HOME/.config/ranger
-# symlink file "$PWD/other/rifle.conf" $HOME/.config/ranger/rifle.conf
-# symlink file "$PWD/other/rc.conf" $HOME/.config/ranger/rc.conf
+ mkdir -p $HOME/.config/ranger
+symlink file "$PWD/ranger/rifle.conf" $HOME/.config/ranger/rifle.conf
+symlink file "$PWD/ranger/rc.conf" $HOME/.config/ranger/rc.conf
 
 log "  Making sure we have a plover dictionary"
 if which node >/dev/null 2>&1; then

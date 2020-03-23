@@ -22,8 +22,8 @@
 ;  :config
 ;  (projectile-mode 1))
 
-(use-package olivetti :ensure t
-  :init (setq-default olivetti-minimum-body-width whitespace-line-column))
+; (use-package olivetti :ensure t
+;   :init (setq-default olivetti-minimum-body-width whitespace-line-column))
 (use-package perspective :ensure t
   :config (persp-mode +1))
 ;(use-package origami :ensure t
@@ -39,7 +39,7 @@
 ;	   (symbol-value 'hecate-config-use-editorconfig)))
 (use-package winum :ensure t :config (winum-mode +1))
 (use-package auto-highlight-symbol :ensure t
-  :config (setq ahs-idle-interval 0.5))
+             :config (setq ahs-idle-interval 0.5))
 
 ;; Bracket stuff
 ;(use-package rainbow-delimiters :ensure t

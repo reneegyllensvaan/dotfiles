@@ -1,22 +1,22 @@
 
 ;; Leader key bindings
 (use-package general
-  :ensure t
-  :bind
-  ("C-k" . nil)
-  ("M-1" . winum-select-window-1)
-  ("M-2" . winum-select-window-2)
-  ("M-3" . winum-select-window-3)
-  ("M-4" . winum-select-window-4)
-  ("M-5" . winum-select-window-5)
-  ("M-6" . winum-select-window-6)
-  ("M-7" . winum-select-window-7)
-  ("M-8" . winum-select-window-8)
-  ("M-9" . winum-select-window-9)
-  ;; zoom
-  ("M-=" . text-scale-increase)
-  ("M--" . text-scale-decrease)
-  ("M-0" . text-scale-set)
+             :ensure t
+             :bind
+             ("C-k" . nil)
+             ("M-1" . winum-select-window-1)
+             ("M-2" . winum-select-window-2)
+             ("M-3" . winum-select-window-3)
+             ("M-4" . winum-select-window-4)
+             ("M-5" . winum-select-window-5)
+             ("M-6" . winum-select-window-6)
+             ("M-7" . winum-select-window-7)
+             ("M-8" . winum-select-window-8)
+             ("M-9" . winum-select-window-9)
+             ;; zoom
+             ("M-=" . text-scale-increase)
+             ("M--" . text-scale-decrease)
+             ("M-0" . text-scale-set)
 
   ;; M-Shift-_ bindings for global non-editing commands
   ("M-B" . helm-mini)
@@ -26,47 +26,33 @@
   ("C-x C-c" . nil)
   ;; Do all SPC unbinding here
   (:map evil-normal-state-map
-	("," . nil)
-	("zu" . vimish-fold-delete)
-	)
+        ("," . nil)
+        ("zu" . vimish-fold-delete))
   (:map evil-motion-state-map
-    ("SPC" . nil)
-    ("RET" . nil)
-    ("," . nil) )
+        ("SPC" . nil)
+        ("RET" . nil)
+        ("," . nil))
   (:map help-mode-map
-    ("SPC" . nil))
-  ;(:map magit-mode-map
-  ;  ("SPC" . nil))
-  ;(:map magit-diff-mode-map
-  ;  ("SPC" . nil))
+        ("SPC" . nil))
   (:map compilation-mode-map
-    ("SPC" . nil))
-  (:map mu4e-view-mode-map
-    ("SPC" . nil))
-  (:map mu4e-main-mode-map
-    ("SPC" . nil))
+        ("SPC" . nil))
   :config
   (general-def :states '(normal motion emacs) "SPC" nil)
   (general-create-definer
     hecate-major-mode-def
     :global-prefix "SPC m"
-    :prefix ","
-    )
+    :prefix ",")
   (general-define-key
-   :states '(
-     normal
-     visual
-     motion
-     emacs
-   )
-   :keymaps '(
-     normal
-     visual
-     motion
-     global
-   )
-   ;; override)
-   :prefix "SPC"
+    :states '(normal
+              visual
+              motion
+              emacs)
+    :keymaps '(normal
+               visual
+               motion
+               global)
+    ;; override)
+    :prefix "SPC"
 
    ;; Quick commands
    "TAB"  '(evil-switch-to-windows-last-buffer :which-key "last-buffer")
@@ -80,23 +66,13 @@
 
    ;;;; Applications
    "a"    '(nil                             :which-key "applications")
-   "aM"   'mu4e
-   "aC"   'helm-mu-contacts
-   "am"   '(nil                             :which-key "music")
-   "ams"  '(nil                             :which-key "spotify")
-   "amsN" 'spotify-previous
-   "amsg" '(helm-spotify-plus               :which-key "helm-spotify")
-   "amsn" 'spotify-next
-   "amsp" 'spotify-playpause
    "at"   'ansi-term
 
    ;;;; Buffers
    "b"    '(nil                             :which-key "buffer")
    "b/"   'helm-do-ag-buffers
-   "bI"   'ibuffer
    "bb"   'helm-mini
    "bd"   'kill-this-buffer
-   "bi"   'imenu-list-smart-toggle
    "bn"   'next-buffer
    "bN"   '(previous-buffer                 :which-key "prev-buffer")
    "bp"   '(previous-buffer                 :which-key "prev-buffer")
@@ -123,16 +99,8 @@
 
    ;;;; Git/magit
    "g"    '(nil                             :which-key "git")
-   "gG"   'magit-status
-   "gb"   'magit-blame
-   "gd"   'magit-diff-buffer-file
    "gf"   '(helm-ls-git-ls                  :which-key "helm-ls-git")
    "gg"   '(nil                             :which-key "github-gist")
-   "ggB"  'gist-buffer-private
-   "ggR"  'gist-region-private
-   "ggb"  'gist-buffer
-   "ggr"  'gist-region
-   "gr"   'magit-refresh
    "gs"   '(minibuffer-git-status           :which-key "git-status")
 
    ;;;; Help
@@ -170,16 +138,11 @@
    ;;;; Toggles
    "t"    '(nil                             :which-key "toggles")
    "tE"   'emacs-word-mode
-   "tF"   'focus-mode
-   "tR"   'ruler-mode
    "tV"   'vim-word-mode
    "tW"   '(toggle-word-wrap                :which-key "word-wrap")
    "taw"  '(adaptive-wrap-prefix-mode       :which-key "adaptive-wrap")
    "tcC"  '(global-centered-cursor-mode     :which-key "global-centered-cursor")
-   "tcb"  '(olivetti-mode                   :which-key "centered-buffer")
    "tcc"  '(centered-cursor-mode            :which-key "centered-cursor")
-   "tdM"  'dark-magic-on
-   "tdm"  'dark-magic-off
    "tg"   '(nil                             :which-key "VCS")
    "tgd"  'diff-hl-mode
    "tgmd" 'diff-hl-master
@@ -196,8 +159,6 @@
    "tl"   '(toggle-truncate-lines           :which-key "truncate-lines")
    "tn"   'linum-mode
    "tpF"  '(nil                             :which-key "pin-focus")
-   "tpF"  'focus-pin
-   "tpf"  'focus-unpin
    "tpr"  '(rainbow-delimiters-mode         :which-key "rainbow-delimiters")
    "tr"   '(linum-relative-mode             :which-key "linum-relative")
    "tsb"  'scroll-bar-mode
@@ -242,10 +203,6 @@
    "wd"   'delete-window
    "wm"   'toggle-maximize-buffer
    "wu"   'winner-undo
-
-   ;; Handy macros / Binaries
-   "q"    '(nil                             :which-key "exec-bin")
-   "qsl"  '(comma-line-split                :which-key "comma-line-split")
    )
   ; ;;;;;;;;; Rename which-key keybindings
   ; ;;;;;;;;; (Stolen with love from spacemacs)

@@ -33,13 +33,13 @@
 ;; Apply config variables
 (global-hl-line-mode (symbol-value 'hecate-config-highlight-current-line))
 
-(use-package dashboard
-  :ensure t
-  :init
-  (setq dashboard-banner-logo-title hecate-config-welcome-message)
-  (setq dashboard-startup-banner hecate-config-welcome-image)
-  (setq dashboard-image-banner-max-height 1)
-  :config
-  (dashboard-setup-startup-hook))
+;(use-package dashboard
+;  :ensure t
+;  :init
+;  (setq dashboard-banner-logo-title hecate-config-welcome-message)
+;  (setq dashboard-startup-banner hecate-config-welcome-image)
+;  (setq dashboard-image-banner-max-height 1)
+;  :config
+;  (dashboard-setup-startup-hook))
 
-(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+;(setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))

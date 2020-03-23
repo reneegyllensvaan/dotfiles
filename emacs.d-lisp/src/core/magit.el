@@ -8,10 +8,10 @@
 ;  ;;   )
 ;  )
 ;(require 'magithub)
-(use-package magit :ensure t)
-(use-package gist :ensure t)
-(use-package diff-hl :ensure t)
-
-(defun minibuffer-git-status () (interactive)
-       (message (shell-command-to-string "git status"))
-       )
+;(use-package magit :ensure t)
+;(use-package gist :ensure t)
+;(use-package diff-hl :ensure t)
+;
+;(defun minibuffer-git-status () (interactive)
+;       (message (shell-command-to-string "git status"))
+;       )
