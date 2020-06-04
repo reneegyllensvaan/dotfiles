@@ -10,16 +10,13 @@ local plugins = {
   -- Utilies:
   'christoomey/vim-system-copy',
   'jamessan/vim-gnupg',
-  'mattn/webapi-vim',
-  'mattn/gist-vim',
+  'vimwiki/vimwiki',
 
   -- { 'junegunn/fzf', Dir='~/.fzf', Do='./install --all' },
-  -- 'junegunn/fzf.vim', -- General-purpose fuzzy-matching
+  --'junegunn/fzf.vim', -- General-purpose fuzzy-matching
   { 'lotabout/skim', Dir='~/.skim', Do='./install' },
-  'lotabout/skim.vim',
+  { 'lotabout/skim.vim' },
 
-  { 'junegunn/goyo.vim', On='Goyo' }, -- `:Goyo` to enter distraction-free mode
-  { 'vim-scripts/loremipsum', On='Lorem' }, -- `:Lorem [words]` to generate placeholder text
   'tomtom/tcomment_vim', -- `gc` as a comment operator
   'scrooloose/nerdcommenter',
   'tommcdo/vim-lion',
@@ -30,27 +27,17 @@ local plugins = {
   'tpope/vim-surround',
   'terryma/vim-multiple-cursors',
   'jiangmiao/auto-pairs',
-  'junegunn/vim-easy-align',
+  { 'eraserhd/parinfer-rust', For={'janet'} },
 
   -- Language:
   -- Language Support Plugins
   'jceb/vim-orgmode',
-  { 'rust-lang/rust.vim', For='rust' },
-  { 'mxw/vim-jsx', },
   { 'zah/nim.vim', For='nim' },
-  { 'fatih/vim-go', Do=':GoUpdateBinaries', For='go' },
-  { 'pangloss/vim-javascript', For={'javascript', 'javascript.jsx'} },
-  { 'davidhalter/jedi-vim', For='python' },
-  { 'evanleck/vim-svelte' },
-  -- Deoplete (completion)
-  --{ 'shougo/deoplete.nvim', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust'} },
-  --{ 'zchee/deoplete-jedi', For='python' },
-  --{ 'carlitux/deoplete-ternjs', For={'javascript', 'javascript.jsx'} },
-  --{ 'racer-rust/vim-racer', For='rust' },
-  --{ 'sebastianmarkow/deoplete-rust', For='rust' },
-  --{ 'reasonml-editor/vim-reason-plus', For='reason' },
-  {  'suan/vim-instant-markdown', On='InstantMarkdownPreview' },
-  -- CoC (completion)
+  -- { 'pangloss/vim-javascript', For={'javascript', 'javascript.jsx'} },
+  -- { 'rust-lang/rust.vim', For='rust' },
+  { 'mxw/vim-jsx', },
+  -- { 'davidhalter/jedi-vim', For='python' },
+
   {'neoclide/coc.nvim', branch='release' },
 
 
@@ -58,10 +45,11 @@ local plugins = {
   { 'shougo/neosnippet.vim', For={'python', 'nim', 'javascript', 'javascript.jsx'} },
   --{ 'w0rp/ale', For={'python', 'nim', 'javascript', 'javascript.jsx', 'rust', 'go'} },
   -- Other, but language specific
-  { 'xuhdev/vim-latex-live-preview', For='tex' },
-  { 'mattn/emmet-vim'},
-  {'Vigemus/iron.nvim'},
-  {'clojure-vim/acid.nvim'}
+  --{ 'mattn/emmet-vim'},
+
+  --{ 'git@github.com:janet-lang/janet.vim.git' },
+  --{'Vigemus/iron.nvim'},
+  --{'clojure-vim/acid.nvim'}
 
 }
 

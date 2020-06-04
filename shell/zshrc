@@ -44,6 +44,9 @@ noglob \
 #autoload -U promptinit; promptinit
 #prompt pure
 
+#EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 '🥥 ' 🥝 🥑 🥦 '🌶 ' 🥞 🍬 💎 🔮 🎁 💜 💞 )
+FAILURE_EMOJI=(  👅 💅 🎀 👛 💗 💓 💕 💖 💞 💘 💋 💝 🌺 🌷 🌸 🐷 💒 👄 👠 🌹 🎈 ⏰ 📮 📌 📛 🎯 🍎 🍒 📍 ♨️🚒 🚨 🚗 🚀 )
+SUCCESS_EMOJI=( 💚 👒 🐸 🐍 🐢 🐉 🍀 🌵 🍃 🌲 🌴 🌳 🍏 🎾 🔋 🏡 🚛 ✅ )
 EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 '🥥 ' 🥝 🥑 🥦 '🌶 ' 🥞 🍬 💎 🔮 🎁 💜 💞 )
 
 if [ -z $(echo $TERM | grep rxvt) ]; then
@@ -76,6 +79,8 @@ if [ $GPG_FINGERPRINT ]; then
   # if gpg-agent is not running, start it and load env
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon )
 fi
+
+[ $ASDF_DIR ] && . $ASDF_DIR/asdf.sh
 
 # opam configuration
 #test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

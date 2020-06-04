@@ -11,6 +11,7 @@ keymap[';'] = {
   {'b', ':lcd ~/Projects/backend/repo', 'backend' },
   {'f', ':lcd ~/Projects/frontend/repo', 'frontend' },
   {'d', ':lcd ~/code/dotfiles', 'dotfiles' },
+  {'s', ':lcd ~/sunday', 'sunday' },
 }
 
 -- Tabs:
@@ -67,7 +68,7 @@ keymap.t = {
 
 keymap.w = {
   name='+windows',
-  { 'w' , '<C-W>w', 'other-window' },
+  -- { 'w' , '<C-W>w', 'other-window' },
   { 'd' , '<C-W>c', 'delete-window' },
   { '-' , '<C-W>s', 'split-window-below' },
   { '/' , '<C-W>v', 'split-window-right' },

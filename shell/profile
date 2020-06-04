@@ -5,6 +5,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH=/usr/local/opt/texinfo/bin:$PATH
 export PATH=$HOME/.nimble/bin:$PATH
+export PATH="/usr/local/Cellar/janet/1.8.1/lib/janet/bin:$PATH"
 [[ -d ~/Library ]] && export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 [[ -d ~/.skim ]] && export PATH="$HOME/.skim/bin:$PATH"
 which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"

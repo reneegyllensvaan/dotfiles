@@ -22,5 +22,6 @@ cat << EOF
   pr  = pull --rebase
   pop = stash pop
   root = "! git rev-parse --show-toplevel"
+  canoe = commit --amend --no-edit
   ls-files-root = "! git ls-files"
 EOF

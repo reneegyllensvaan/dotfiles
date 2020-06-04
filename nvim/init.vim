@@ -1,4 +1,6 @@
-source ~/.config/nvim/pathspec.vim "
+set nocompatible
+
+source ~/.config/nvim/pathspec.vim
 luafile ~/.config/nvim/globals.lua
 source ~/.config/nvim/commands.vim
 
@@ -7,7 +9,7 @@ syntax on                                    " Enable syntax highlighting.
 
 luafile ~/.config/nvim/options.lua
 luafile ~/.config/nvim/plugins.lua
-luafile ~/.config/nvim/iron.lua
+"luafile ~/.config/nvim/iron.lua
 source ~/.config/nvim/coc-config.vim
 
 " Which-key
@@ -23,35 +25,8 @@ if &shell =~# 'fish$'
   set shell=/usr/bin/zsh
 endif
 
-" Completion:
-let g:deoplete#enable_at_startup=1
-let g:deoplete#auto_complete_delay=0
-let g:auto_refresh_delay=0
-let g:deoplete#sources#rust#show_duplicates=1
-" ignore buffer and surrounding lines
-" let g:deoplete#ignore_sources = {}
-" let g:deoplete#ignore_sources._ = ['buffer', 'around']
-let g:deoplete#sources#ternjs#filetypes = [
-                \ 'jsx',
-                \ 'javascript.jsx',
-                \ 'vue',
-                \ ]
-
-" Python:
-let g:jedi#goto_command = "<leader>gg"
-let g:jedi#goto_assignments_command = "<leader>ga"
-let g:jedi#goto_definitions_command = "<leader>gd"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-
 " Skim:
 let g:rg_opts = "--smart-case"
-" Gist:
-let g:gist_show_privates = 1
-let g:gist_post_private = 1
-let g:gist_detect_filetype = 1
 
 " Latex:
 let g:livepreview_previewer = 'zathura'
@@ -82,3 +57,8 @@ nnoremap <silent> <C-_> :set ignorecase!<CR>
 " nnoremap <expr> <M-[> PrevGitHunk()
 " inoremap <expr> <M-]> NextGitHunk()
 " inoremap <expr> <M-[> PrevGitHunk()
+
+
+" Vimwiki:
+let g:vimwiki_list = [{'path': '~/org/vimwiki',
+                      \ 'syntax': 'markdown', 'ext': '.md'}]
