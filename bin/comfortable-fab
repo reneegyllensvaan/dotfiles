@@ -18,6 +18,5 @@ else
   command=$cmd
 fi
 
-[ `echo $command | grep 'command:api'` ] \
-  && cd ~/Projects/backend/repo
+[ `echo $command | grep 'command:api'` ] && cd ~/Projects/backend/repo
 fab $command

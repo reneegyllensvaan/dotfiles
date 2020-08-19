@@ -1,0 +1,10 @@
+#!/usr/bin/awk -f
+BEGIN { code_block = 0; include_comments = 1 }
+/```/ { code_block = (code_block+1) % 2; print "" }
+!/```/ {
+  if (code_block)
+    print $0
+  else if (include_comments) {
+    print "# "$0
+    }
+}

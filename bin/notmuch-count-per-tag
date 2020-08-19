@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+tags = `notmuch search --output=tags '*'`.split
+
+puts 'Total: '+`notmuch count`
+tags.each do |tag|
+  puts tag+': '+`notmuch count tag:'#{tag}'`
+end
