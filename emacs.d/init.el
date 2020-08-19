@@ -45,9 +45,9 @@
 
 ;; add mu4e directory to load path and require it
 ;; TODO generalize this
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
-(add-to-list 'load-path "/usr/local/Cellar/mu/1.2.0_1/share/emacs/site-lisp/mu/mu4e")
-(require 'mu4e)
+;(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+;(add-to-list 'load-path "/usr/local/Cellar/mu/1.2.0_1/share/emacs/site-lisp/mu/mu4e")
+;(require 'mu4e)
 
 ;; The default maximum number of recommended characters per line
 ;; Default is 80, I've got it at 90 bc that's what we have at my job

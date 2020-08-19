@@ -20,24 +20,24 @@
   (evil-set-initial-state 'mu4e-view-mode    'motion)
   (evil-set-initial-state 'mu4e-main-mode    'emacs)
   (evil-set-initial-state 'mu4e-headers-mode 'emacs)
-  ;(evil-set-initial-state 'magit-popup-mode  'emacs)
+  (evil-set-initial-state 'magit-popup-mode  'emacs)
   (evil-mode 1))
 
 (setq scroll-step 1
       scroll-conservatively  10000)
 
 ;; Evil-ify other packages
-;(use-package evil-magit :ensure t
-;  :bind
-;   (:map magit-popup-mode-map
-;   ("<escape>" . 'kill-this-buffer))
-;)
+(use-package evil-magit :ensure t
+  :bind
+   (:map magit-popup-mode-map
+   ("<escape>" . 'kill-this-buffer))
+)
 
-;(use-package vimish-fold :ensure t
-;  :bind
-;  (:map evil-normal-state-map
-;	("zf" . 'vimish-fold))
-;  :config (vimish-fold-global-mode +1))
+(use-package vimish-fold :ensure t
+  :bind
+  (:map evil-normal-state-map
+	("zf" . 'vimish-fold))
+  :config (vimish-fold-global-mode +1))
 (use-package evil-mu4e :ensure t
   :bind
   (:map mu4e-headers-mode-map
@@ -53,13 +53,13 @@
  )
 
 (use-package evil-org :ensure t)
-;(use-package evil-nerd-commenter :ensure t)
-;(use-package anzu :ensure t)
-;(use-package evil-anzu :ensure t)
-;(use-package evil-indent-plus :ensure t)
-;(use-package evil-surround :ensure t
-;  :config (evil-surround-mode +1))
-;(use-package evil-lion :ensure t
-;  :config (evil-lion-mode +1))
-;(use-package evil-matchit :ensure t
-;  :config (evil-matchit-mode +1))
+(use-package evil-nerd-commenter :ensure t)
+(use-package anzu :ensure t)
+(use-package evil-anzu :ensure t)
+(use-package evil-indent-plus :ensure t)
+(use-package evil-surround :ensure t
+  :config (evil-surround-mode +1))
+(use-package evil-lion :ensure t
+  :config (evil-lion-mode +1))
+(use-package evil-matchit :ensure t
+  :config (evil-matchit-mode +1))
