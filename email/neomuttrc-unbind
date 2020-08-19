@@ -50,7 +50,7 @@ bind generic,pager,editor,index W noop
 bind generic,pager,editor,index X noop
 bind generic,pager,editor,index Y noop
 bind generic,pager,editor,index Z noop
-bind generic,pager,editor,index <Tab>      noop
+#bind generic,pager,editor,index <Tab>      noop
 bind generic,pager,editor,index <Space>    noop
 bind generic,pager,editor,index <PageUp>   noop
 bind generic,pager,editor,index <PageDown> noop
@@ -60,8 +60,8 @@ bind generic,pager,editor,index <Insert>   noop
 bind generic,pager,editor,index <Delete>   noop
 bind generic,pager,editor,index <Up>       noop
 bind generic,pager,editor,index <Down>     noop
-bind generic,pager,editor,index <Left>     noop
-bind generic,pager,editor,index <Right>    noop
+#bind generic,pager,editor,index <Left>     noop
+#bind generic,pager,editor,index <Right>    noop
 bind generic,pager,editor,index <Enter>    noop
 bind generic,pager,editor,index <Return>   noop
 #bind generic,pager,editor,index 1 noop

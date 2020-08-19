@@ -41,20 +41,25 @@ noglob \
   && compinit -C ~/.zcompdump \
   || compinit ~/.zcompdump
 
-#autoload -U promptinit; promptinit
-#prompt pure
-
-#EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 '🥥 ' 🥝 🥑 🥦 '🌶 ' 🥞 🍬 💎 🔮 🎁 💜 💞 )
 FAILURE_EMOJI=(  👅 💅 🎀 👛 💗 💓 💕 💖 💞 💘 💋 💝 🌺 🌷 🌸 🐷 💒 👄 👠 🌹 🎈 ⏰ 📮 📌 📛 🎯 🍎 🍒 📍 ♨️🚒 🚨 🚗 🚀 )
 SUCCESS_EMOJI=( 💚 👒 🐸 🐍 🐢 🐉 🍀 🌵 🍃 🌲 🌴 🌳 🍏 🎾 🔋 🏡 🚛 ✅ )
 EMOJI=( 💅 💋 💍 🐱 👻 💄 👑 👒 🐶 🐹 🦊 🐰 🦆 🦄 🦋 🐳 🐍 🐢 ✨ 💫 🌈 💧 🍋 🍉 🍓 '🥥 ' 🥝 🥑 🥦 '🌶 ' 🥞 🍬 💎 🔮 🎁 💜 💞 )
 
 if [ -z $(echo $TERM | grep rxvt) ]; then
   function prepend_prompt () {
-    echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
+    if [ -z $SUCCESS_CODED_EMOJI ]; then
+      echo -n "$EMOJI[$RANDOM%$#EMOJI+1]"
+    else
+      if [ $cmd_status = '0' ]; then
+        echo -n "$SUCCESS_EMOJI[$RANDOM%$#SUCCESS_EMOJI+1]"
+      else
+        echo -n "$FAILURE_EMOJI[$RANDOM%$#FAILURE_EMOJI+1]"
+      fi
+    fi
   };
 
   function precmd () {
+    cmd_status="$?"
     prepend_prompt;
   };
 
@@ -68,8 +73,7 @@ fi
 # Set up the prompt template
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)"
 [ $SSH_CLIENT ] && PROMPT="$PROMPT [%n@%m]" # only append prompt with host over ssh
-#PROMPT="$PROMPT"$'\n'"$ranger_prompt%(?.%F{green}.%F{red})>%f "
-PROMPT="$PROMPT"$'\n$ranger_prompt$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
+PROMPT="$PROMPT"$'\n$ranger_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})❯%f "
 
 # GnuPG settings
 export GPG_TTY="$(tty)"
@@ -79,8 +83,3 @@ if [ $GPG_FINGERPRINT ]; then
   # if gpg-agent is not running, start it and load env
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon )
 fi
-
-[ $ASDF_DIR ] && . $ASDF_DIR/asdf.sh
-
-# opam configuration
-#test -r /Users/renee/.opam/opam-init/init.zsh && . /Users/renee/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true

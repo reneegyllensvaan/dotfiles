@@ -31,7 +31,6 @@ local plugins = {
 
   -- Language:
   -- Language Support Plugins
-  'jceb/vim-orgmode',
   { 'zah/nim.vim', For='nim' },
   -- { 'pangloss/vim-javascript', For={'javascript', 'javascript.jsx'} },
   -- { 'rust-lang/rust.vim', For='rust' },

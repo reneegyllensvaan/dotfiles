@@ -100,7 +100,7 @@ symlink dir "$PWD/urxvt-ext" $HOME/.urxvt/ext
 
 # using vim as a more lightweight editor atm, nvim as a full editor
 log "  Vim directories and conf"
-symlink file "$PWD/vimrc" $HOME/.vimrc
+symlink file "$PWD/vimrc_coc" $HOME/.vimrc
 mkdir -p $HOME/.vim
 mkdir -p $HOME/.vim/blugin
 mkdir -p $HOME/.vim/autoload
@@ -161,9 +161,10 @@ symlink file "$PWD/email/notmuch-config" $HOME/.notmuch-config
 mkdir -p $HOME/email/work
 
 # echo "  Ranger config"
- mkdir -p $HOME/.config/ranger
-symlink file "$PWD/ranger/rifle.conf" $HOME/.config/ranger/rifle.conf
-symlink file "$PWD/ranger/rc.conf" $HOME/.config/ranger/rc.conf
+mkdir -p $HOME/.config/ranger
+symlink dir "$PWD/ranger" $HOME/.config/ranger
+# symlink file "$PWD/ranger/rifle.conf" $HOME/.config/ranger/rifle.conf
+# symlink file "$PWD/ranger/rc.conf" $HOME/.config/ranger/rc.conf
 
 log "  Making sure we have a plover dictionary"
 if which node >/dev/null 2>&1; then

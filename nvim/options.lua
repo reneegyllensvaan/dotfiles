@@ -32,6 +32,7 @@ local options  =  {
   so          = 999,                -- Always center cursor
   inccommand  = 'nosplit',          -- Show :%?s///g? replacements in place
   list        = true,               -- Show non-printable characters
+  wildignorecase = true,            -- Ignore case in :e file completion
 
   -- Put all internal files under the same directory.
   backup      = true,

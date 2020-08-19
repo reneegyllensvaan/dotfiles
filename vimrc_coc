@@ -1,0 +1,187 @@
+" vim:fdm=marker
+""" This is my .vimrc
+" It's meant to be a stripped-down version of my regular neovim rc that is
+" lightweight, so it starts quicker. i.e. nvim is the 'ide', vim is the editor
+
+filetype plugin indent on         " Load plugins according to detected filetype.
+syntax on                         " Enable syntax highlighting.
+
+" Use System Clipboard:
+"set clipboard=unnamedplus
+
+" Use Terminal Controls In Gui Mod
+set guioptions=
+
+set autoindent                    " Indent according to previous line.
+set expandtab                     " Use spaces instead of tabs.
+set softtabstop =2                " Tab key indents by 2 spaces.
+set shiftwidth  =2                " >> indents by 2 spaces.
+set shiftround                    " >> indents to next multiple of 'shiftwidth'.
+
+set backspace   =indent,eol,start " Make backspace work as you would expect.
+set hidden                        " Switch between buffers without having to save first.
+"set laststatus  =2               " Always show statusline.
+"set display     =lastline         " Show as much as possible of the last line.
+
+set foldmethod=syntax
+
+set showmode                      " Show current mode in command-line.
+set showcmd                       " Show already typed keys when more are expected.
+
+set incsearch                     " Highlight while searching with / or ?.
+set hlsearch                      " Keep matches highlighted.
+
+set ttyfast                       " Faster redrawing.
+set lazyredraw                    " Only redraw when necessary.
+
+set splitbelow                    " Open new windows below the current window.
+set splitright                    " Open new windows right of the current window.
+
+"set cursorline                   " Find the current line quickly.
+set wrapscan                      " Searches wrap around end-of-file.
+set report      =0                " Always report changed lines.
+set synmaxcol   =200              " Only highlight the first 200 columns.
+set timeoutlen=2000                " Timeout for code updates
+set ttimeoutlen=0                 " Timeout for mode updates
+" set notimeout
+set so=999                        " always center cursor
+
+set ignorecase                    " Case insensitive grep
+set infercase                     " Case insensitive tab completion
+
+set list                          " Show non-printable characters.
+if has('multi_byte') && &encoding ==# 'utf-8'
+  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+else
+  let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
+endif
+
+" The fish shell is not very compatible to other shells and unexpectedly
+" breaks things that use 'shell'.
+if &shell =~# 'fish$'
+  set shell=/usr/bin/bash
+endif
+
+" Put all temporary files under the same directory.
+set backup
+set backupdir   =$HOME/.vim/files/backup/
+set backupext   =-vimbackup
+set backupskip  =
+set directory   =$HOME/.vim/files/swap//
+set updatecount =100
+set undofile
+set undodir     =$HOME/.vim/files/undo/
+set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+
+" Vim plugin settings
+call plug#begin('~/.vim/plugged')
+
+Plug 'christoomey/vim-system-copy'
+Plug 'jamessan/vim-gnupg'
+"Plug 'tomtom/tcomment_vim'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'flazz/vim-colorschemes'
+Plug 'lotabout/skim', {'dir': '~/.skim', 'do': './install' },
+Plug 'lotabout/skim.vim'
+
+
+
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocEnable'}
+
+call plug#end()
+
+noremap <Space> <Nop>
+nnoremap <Space> <Nop>
+let mapleader = "\<Space>"
+let g:mapleader = "\<Space>"
+"let maplocalleader = ','
+
+" Commands For Leaders:
+command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': 'e', 'down': '30%'})
+command! -bang -nargs=* RgInteractive call fzf#vim#rg_interactive(<q-args>)
+command! -bang -nargs=* RgSkim call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+
+command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
+
+" Non-leader Bindings:
+
+nnoremap <C-w>/ <C-w>v
+nnoremap <C-w>- <C-w>s
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Window Bindings:
+
+nnoremap <Leader>wl <C-w>l
+nnoremap <Leader>wh <C-w>h
+nnoremap <Leader>wj <C-w>j
+nnoremap <Leader>wk <C-w>k
+nnoremap <Leader>w- <C-w>s
+nnoremap <Leader>w/ <C-w>v
+nnoremap <Leader>wd <C-w>c
+
+nnoremap <Leader>ff :FzfProjectFiles<Enter>
+nnoremap <Leader>/ :RgInteractive<Enter>
+nnoremap <Leader>? :RgSkim<Enter>
+
+nnoremap <Leader>ta :CocEnable<Enter>
+nnoremap <Leader>tA :CocDisable<Enter>
+
+nnoremap <Leader>bb :Buffers<Enter>
+nnoremap <Leader>bp :bprevious<Enter>
+nnoremap <Leader>bn :bNext<Enter>
+nnoremap <Leader>bd :bp\|bd #<Enter>
+
+" TODOS:
+" - b: buffers
+" - l: tabs
+" - t: toggles
+" - b: buffers
+" - /: grep
+" - f: fzf files
+" - space: Commands
+
+
+
+" UI Customization: {{{
+
+hi Search ctermbg=11 ctermfg=black
+hi Visual ctermbg=238 ctermfg=NONE
+
+"" statusline
+hi User1 ctermbg=darkgray ctermfg=white guibg=black guifg=grey
+hi User2 ctermbg=green ctermfg=black guibg=green guifg=black
+hi User3 ctermbg=darkgray ctermfg=lightgreen guibg=black guifg=lightgreen
+set laststatus=2
+set statusline=                          " left align
+set statusline+=%2*\ %{StatuslineMode()}
+set statusline+=\ %1*\ %f                  " short filename
+set statusline+=%=                       " right align
+set statusline+=%*
+set statusline+=%3*\%h%m%r               " file flags (help, read-only, modified)
+set statusline+=%3*\%.25F                " long filename (trimmed to 25 chars)
+set statusline+=%3*\::
+set statusline+=%3*\%l/%L\\|             " line count
+set statusline+=%3*\%y                   " file type
+
+"" statusline
+function! StatuslineMode()
+    let l:mode=mode()
+    if l:mode==#"n"
+        hi User2 ctermbg=green ctermfg=black guibg=green guifg=black
+        return "NORMAL"
+    elseif l:mode==?"v"
+        hi User2 ctermbg=magenta ctermfg=black guibg=green guifg=black
+        return "VISUAL"
+    elseif l:mode==#"i"
+        hi User2 ctermbg=cyan ctermfg=black guibg=green guifg=black
+        return "INSERT"
+    elseif l:mode==#"R"
+        hi User2 ctermbg=red ctermfg=black guibg=green guifg=black
+        return "REPLACE"
+    endif
+endfunction
+" }}} UI Customization
+

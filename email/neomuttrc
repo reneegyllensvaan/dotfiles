@@ -33,7 +33,8 @@ set index_format='%4C %Z %D %-20.20n [%e/%E] %s (%J)'
 set sort_browser="reverse-date"
 set sort_aux="last-date-received"
 macro index T "<sort-reverse>t"
-set sort=reverse-date-received
+set sort=reverse-threads
+#set sort=reverse-date-received
 macro index t "<sort-reverse>d"
 
 set pager_index_lines=10
@@ -55,17 +56,19 @@ virtual-mailboxes \
     "Saved"     "notmuch://?query=tag:saved"\
     "senT"      "notmuch://?query=tag:sent"\
     "Github"    "notmuch://?query=tag:github"\
-    "trEllo"    "notmuch://?query=tag:trello"\
+    "asana"    "notmuch://?query=tag:asana"\
     "orders"    "notmuch://?query=tag:orders"\
     "Newsletters" "notmuch://?query=tag:newsletters"\
     "lists"    "notmuch://?query=tag:lists"\
     "attachment" "notmuch://?query=tag:attachment"\
     "trash"    "notmuch://?query=tag:trash"
+
 # set the default vfolder
-#change-vfolder inbox
+push "<change-vfolder>inBox<Enter>"
 # notmuch bindings
 macro index \\\\ "<vfolder-from-query>"
-macro index r "<modify-labels-then-hide>-unread -inbox -trash -strict-delete\n"
+macro index r "<modify-labels>-unread -inbox -trash -strict-delete\n"
+#macro index r "<modify-labels-then-hide>-unread -inbox -trash -strict-delete\n"
 macro index u "<modify-labels>-unread\n"
 #macro index U "<modify-labels>+unread\n"
 macro index i "<modify-labels>+inbox\n"
@@ -94,7 +97,7 @@ macro index bi "<change-vfolder>Important\n"
 # threading keybindings
 bind index - collapse-thread
 bind index _ collapse-all
-#set sort="threads"
+set collapse_all
 
 # sidebar
 set sidebar_width   = 20
@@ -119,10 +122,18 @@ bind generic,index j next-entry
 bind generic,index k previous-entry
 bind index \Cu previous-page
 bind index \Cd next-page
+
+# Pager settings
 bind pager j next-line
 bind pager k previous-line
 bind pager \CJ next-entry
 bind pager \CK previous-entry
+bind pager d next-page
+bind pager u previous-page
+bind pager A view-attachments
+# don't go to next page on <next-page>
+set pager_stop
+
 
 # color setup
 # #
@@ -162,7 +173,7 @@ color attachment      yellow    default
 color signature     green   default
 color search        brightred black
 
-color indicator     cyan    brightblue
+color indicator     black    cyan
 color error       brightred default
 color status        brightcyan  brightblack
 color tree        brightcyan  default
