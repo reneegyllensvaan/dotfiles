@@ -75,7 +75,7 @@ safe_copy () {
 
 # load git submodules
 git submodule update --init zmodules/zsh-syntax-highlighting
-git submodule update --init steno/steno-dictionaries
+#git submodule update --init steno/steno-dictionaries
 
  log "Building shell template files"
 build_template $PWD/gpg/gpg.conf
@@ -166,13 +166,13 @@ symlink dir "$PWD/ranger" $HOME/.config/ranger
 # symlink file "$PWD/ranger/rifle.conf" $HOME/.config/ranger/rifle.conf
 # symlink file "$PWD/ranger/rc.conf" $HOME/.config/ranger/rc.conf
 
-log "  Making sure we have a plover dictionary"
-if which node >/dev/null 2>&1; then
-
-  cd steno
-  [ -f dict.json ] || node merge-dictionaries.js > dict.json
-  cd -
-fi
+#log "  Making sure we have a plover dictionary"
+#if which node >/dev/null 2>&1; then
+#
+#  cd steno
+#  [ -f dict.json ] || node merge-dictionaries.js > dict.json
+#  cd -
+#fi
 
 log "  Kitty config"
 mkdir -p $HOME/.config/kitty
