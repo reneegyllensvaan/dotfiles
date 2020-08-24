@@ -1,18 +1,4 @@
 #!/bin/sh
-# Python2/pip
-pip install --user `cat << EOF
-neovim
-pynvim
-EOF
-`
-
-# Python3/pip3
-pip3 install --user `cat << EOF
-neovim
-pynvim
-EOF
-`
-
 # Rust/cargo
 if ! which rustup >/dev/null ; then
 	curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh

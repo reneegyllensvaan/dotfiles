@@ -6,7 +6,24 @@ log () {
 
 if [[ ! -f "./setup" ]]; then
   echo "This script must be run from the directory it's contained in"
-  exit
+  exit 1
+fi
+
+if [[ ! -f "./shell/user-profile" ]]; then
+  echo "Couldn't find a valid user-profile file, let's make one"
+  echo "# Couldn't find 'shell/user-profile' in current directory." > ./shell/user-profile
+  echo "# Please set one up based on user-profile.example\n" >> ./shell/user-profile
+  cat ./shell/user-profile.example >> ./shell/user-profile
+
+  vim shell/user-profile
+  if [ "$?" != "0" ]; then
+    echo "  Error: Vim exited with a non-zero exit code, canceling." | grep --color=auto '.*'
+    exit 1
+  elif [ "$?" != "0" ]; then
+    echo "  Vim exited but can't find a user-profile file, canceling." | grep --color=auto '.*'
+    exit
+  fi
+  echo "    Sweet! Let's continue."
 fi
 
 while [ $1 ]; do
@@ -21,7 +38,7 @@ while [ $1 ]; do
       echo "  -f   --force-overwrite    Force overwrite of copied files"
       echo "  -n   --nobuild-templates  Don't rebuild .tmpl.sh files"
       exit;;
-    *) echo "Unknown command line option $1";exit;;
+    *) echo "Unknown command line option $1";exit 1;;
   esac
 done
 
@@ -31,8 +48,9 @@ source $PWD/shell/user-profile
 
 build_template () {
   if [ ! $nobuild_templates ]; then
-    [ -f "$1.tmpl.sh" ] || echo "\nTemplate $1.tmpl.sh not found, skipping. Please fix this!"
-    sh "$1.tmpl.sh" > "$1"
+    [ -f "$PWD/$1.tmpl.sh" ] || echo "\nTemplate $1.tmpl.sh not found, skipping. Please fix this!"
+    echo "  Building $1.tmpl.sh -> $1"
+    sh "$PWD/$1.tmpl.sh" > "$PWD/$1"
   fi
 }
 
@@ -43,12 +61,25 @@ symlink () {
   fi
 
   case "$1" in
-    dir)
-      [ -L $3 ] && rm $3
-      ln -s $2 $3
+    "dir")
+      if [ -L "$3" ]; then
+        rm $3
+      elif rmdir "$3" >/dev/null 2>&1; then
+        echo "    Found empty directory $3, removing it."
+      elif [ -e "$3" ]; then
+        echo "  Error: Found non-empty directory $3, please remove or back it up." | grep --color=auto '.*'
+        exit 1
+      fi
+      echo "    Symlinking $2 -> $3"
+      ln -sf "$PWD/$2" "$3"
       ;;
-    file)
-      ln -sf $2 $3
+    "file")
+      if [ -e "$3" ] && [ ! -L "$3" ]; then
+        echo "    Found existing file '$3', backing it up as '$3.bak'"
+        mv "$PWD/$3" "$PWD/$3.bak"
+      fi
+      echo "    Symlinking $2 -> $3";
+      ln -sf "$PWD/$2" "$3";
       ;;
   esac
 }
@@ -61,7 +92,7 @@ safe_copy () {
   hash_new=`$hash_command $1 | head -c 40`
   hash_old=`$hash_command $2 | head -c 40`
   if [[ $hash_new = $hash_old ]]; then
-    echo "$2 hasn't changed, skipping..."
+    echo "    $2 hasn't changed, skipping..."
   else
     [ -f "$2.bak" ] && \
       "$2.bak would be overwritten, please move or delete that file to prevent data loss" && return 1
@@ -78,38 +109,30 @@ git submodule update --init zmodules/zsh-syntax-highlighting
 #git submodule update --init steno/steno-dictionaries
 
  log "Building shell template files"
-build_template $PWD/gpg/gpg.conf
-build_template $PWD/gpg/gpg-agent.conf
-build_template $PWD/other/gitconfig
-build_template $PWD/README.md
-build_template $PWD/email/neomuttrc-user
-build_template $PWD/nvim/pathspec.vim
-build_template $PWD/shell/alias
+build_template gpg/gpg.conf
+build_template gpg/gpg-agent.conf
+build_template other/gitconfig
+build_template README.md
+build_template email/neomuttrc-user
+build_template nvim/pathspec.vim
+build_template shell/alias
 
 log "Making the config directory and linking/copying files"
 mkdir -p $HOME/.config/
 
 log "  Xorg configs"
-symlink file "$PWD/x11/xinitrc" ~/.xinitrc
-symlink file "$PWD/x11/xsession" ~/.xsession
-symlink dir "$PWD/x11/xres" ~/.xres
+symlink file "x11/xinitrc" ~/.xinitrc
+symlink file "x11/xsession" ~/.xsession
+symlink dir "x11/xres" ~/.xres
 
 log "  Urxvt conf"
 mkdir -p $HOME/.urxvt
-symlink dir "$PWD/urxvt-ext" $HOME/.urxvt/ext
+symlink dir "urxvt-ext" $HOME/.urxvt/ext
 
 # using vim as a more lightweight editor atm, nvim as a full editor
 log "  Vim directories and conf"
-symlink file "$PWD/vimrc_coc" $HOME/.vimrc
-mkdir -p $HOME/.vim
-mkdir -p $HOME/.vim/blugin
-mkdir -p $HOME/.vim/autoload
-mkdir -p $HOME/.vim/files
-mkdir -p $HOME/.vim/files/swap
-mkdir -p $HOME/.vim/files/backup
-mkdir -p $HOME/.vim/files/info
-mkdir -p $HOME/.vim/files/undo
-symlink file "$PWD/other/plug.vim" $HOME/.vim/autoload/plug.vim
+symlink file "vimrc_coc" $HOME/.vimrc
+symlink dir "vim" $HOME/.vim
 
 log "  Neovim conf"
 mkdir -p $HOME/.config
@@ -122,49 +145,49 @@ mkdir -p $HOME/.local/share/nvim/files/swap
 mkdir -p $HOME/.local/share/nvim/files/backup
 mkdir -p $HOME/.local/share/nvim/files/info
 mkdir -p $HOME/.local/share/nvim/files/undo
-symlink dir "$PWD/nvim" $HOME/.config/nvim
-symlink file "$PWD/other/plug.vim" $HOME/.local/share/nvim/site/autoload/plug.vim
+symlink dir "nvim" $HOME/.config/nvim
+symlink file "other/plug.vim" $HOME/.local/share/nvim/site/autoload/plug.vim
 
 log "  GPG config"
 mkdir -p $HOME/.gnupg
-safe_copy "$PWD/gpg/gpg.conf" $HOME/.gnupg/gpg.conf
-safe_copy "$PWD/gpg/gpg-agent.conf" $HOME/.gnupg/gpg-agent.conf
+safe_copy "gpg/gpg.conf" $HOME/.gnupg/gpg.conf
+safe_copy "gpg/gpg-agent.conf" $HOME/.gnupg/gpg-agent.conf
 mkdir -p $HOME/.ssh
-safe_copy "$PWD/other/ssh_config" $HOME/.ssh/config
+safe_copy "other/ssh_config" $HOME/.ssh/config
 touch $HOME/.ssh/user_config
 
 log "  Tmux config"
-symlink file "$PWD/other/tmux.conf" $HOME/.tmux.conf
-symlink file "$PWD/other/tmux-disposable.conf" $HOME/.tmux-disposable.conf
+symlink file "other/tmux.conf" $HOME/.tmux.conf
+symlink file "other/tmux-disposable.conf" $HOME/.tmux-disposable.conf
 
 log "  Zsh configs"
-symlink file $PWD/shell/zshrc $HOME/.zshrc
-symlink dir $PWD/zfunctions $HOME/.zfunctions
-symlink dir $PWD/zmodules $HOME/.zmodules
+symlink file shell/zshrc $HOME/.zshrc
+symlink dir zfunctions $HOME/.zfunctions
+symlink dir zmodules $HOME/.zmodules
 
 log "  Qutebrowser config"
-symlink dir "$PWD/qutebrowser" $HOME/.config/qutebrowser
+symlink dir "qutebrowser" $HOME/.config/qutebrowser
 
 log "  i3 config"
 mkdir -p $HOME/.config/i3
-symlink file "$PWD/x11/i3_config" $HOME/.config/i3/config
+symlink file "x11/i3_config" $HOME/.config/i3/config
 
 echo "  zathura config"
 mkdir -p $HOME/.config/zathura
-symlink file "$PWD/x11/zathurarc" $HOME/.config/zathura/zathurarc
+symlink file "x11/zathurarc" $HOME/.config/zathura/zathurarc
 
 log "  Email config"
-symlink file "$PWD/email/neomuttrc-user" $HOME/.neomuttrc-user
-symlink file "$PWD/email/neomuttrc-unbind" $HOME/.neomuttrc-unbind
-symlink file "$PWD/email/neomuttrc" $HOME/.neomuttrc
-symlink file "$PWD/email/notmuch-config" $HOME/.notmuch-config
+symlink file "email/neomuttrc-user" $HOME/.neomuttrc-user
+symlink file "email/neomuttrc-unbind" $HOME/.neomuttrc-unbind
+symlink file "email/neomuttrc" $HOME/.neomuttrc
+symlink file "email/notmuch-config" $HOME/.notmuch-config
 mkdir -p $HOME/email/work
 
 # echo "  Ranger config"
 mkdir -p $HOME/.config/ranger
-symlink dir "$PWD/ranger" $HOME/.config/ranger
-# symlink file "$PWD/ranger/rifle.conf" $HOME/.config/ranger/rifle.conf
-# symlink file "$PWD/ranger/rc.conf" $HOME/.config/ranger/rc.conf
+symlink dir "ranger" $HOME/.config/ranger
+# symlink file "ranger/rifle.conf" $HOME/.config/ranger/rifle.conf
+# symlink file "ranger/rc.conf" $HOME/.config/ranger/rc.conf
 
 #log "  Making sure we have a plover dictionary"
 #if which node >/dev/null 2>&1; then
@@ -176,26 +199,26 @@ symlink dir "$PWD/ranger" $HOME/.config/ranger
 
 log "  Kitty config"
 mkdir -p $HOME/.config/kitty
-symlink file "$PWD/x11/kitty.conf" $HOME/.config/kitty/kitty.conf
+symlink file "x11/kitty.conf" $HOME/.config/kitty/kitty.conf
 
 
 log "  Other configs"
-symlink file "$PWD/other/spacemacs" $HOME/.spacemacs
-symlink file "$PWD/other/batrc" $HOME/.batrc
-symlink file "$PWD/shell/alias" $HOME/.alias
-symlink file "$PWD/shell/profile" $HOME/.profile
-symlink file "$PWD/shell/user-profile" $HOME/.user-profile
-symlink file "$PWD/x11/picom.conf" $HOME/.config/picom.conf
+symlink file "other/spacemacs" $HOME/.spacemacs
+symlink file "other/batrc" $HOME/.batrc
+symlink file "shell/alias" $HOME/.alias
+symlink file "shell/profile" $HOME/.profile
+symlink file "shell/user-profile" $HOME/.user-profile
+symlink file "x11/picom.conf" $HOME/.config/picom.conf
 
-symlink file "$PWD/other/editorconfig" $HOME/.editorconfig
-symlink file "$PWD/other/gitconfig" $HOME/.gitconfig
-symlink file "$PWD/other/tigrc" $HOME/.tigrc
-symlink file "$PWD/other/ctags" $HOME/.ctags
+symlink file "other/editorconfig" $HOME/.editorconfig
+symlink file "other/gitconfig" $HOME/.gitconfig
+symlink file "other/tigrc" $HOME/.tigrc
+symlink file "other/ctags" $HOME/.ctags
 
 log "  Symlinking directories"
 #TODO make this check for an existing bin dir
-symlink dir "$PWD/bin" $HOME/.bin
-symlink dir "$PWD/emacs.d" $HOME/.emacs.d
+symlink dir "bin" $HOME/.bin
+symlink dir "emacs.d" $HOME/.emacs.d
 
 log "  Making the $HOME/.local/bin directory"
 mkdir -p $HOME/.local/bin

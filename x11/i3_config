@@ -28,7 +28,6 @@ bindsym $mod+F10 bar mode toggle
 
 # launcher hotkeys
 bindsym $mod+Mod1+w exec --no-startup-id "GTK_THEME=Adwaita:light chromium"
-bindsym $mod+Mod1+f exec --no-startup-id "franz-bin"
 #bindsym $mod+Mod1+e exec --no-startup-id "emacsclient -c -a ''"
 bindsym $mod+Mod1+e exec --no-startup-id "emacs"
 
@@ -36,8 +35,10 @@ bindsym $mod+Mod1+e exec --no-startup-id "emacs"
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
+#bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
+bindsym $mod+F6 exec --no-startup-id xbacklight -inc 10 # increase screen brightness
+bindsym $mod+F5 exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
 bindsym $mod+Shift+Delete exec --no-startup-id "i3lock-fancy"
 bindsym $mod+Shift+c exec --no-startup-id toggle-compositor
 
@@ -50,7 +51,6 @@ bindsym $mod+Next exec --no-startup-id i3-msg "move workspace to output eDP1"
 bindsym $mod+Prior exec --no-startup-id i3-msg "move workspace to output HDMI1"
 # open dmenu selector containing entries from ~/.screenlayout with xrandr profiles
 #bindsym $mod+Shift+F10 exec --no-startup-id sh "echo \"$(printf '~/.screenlayout/';ls ~/.screenlayout | dmenu -l 6))\" | sh 2>/dev/null"
-bindsym $mod+Shift+F10 exec --no-startup-id ~/code/cpp-c/xlib-test/xlib-test
 bindsym $mod+F11 gaps inner current minus 15
 bindsym $mod+F12 gaps inner current plus 15
 
