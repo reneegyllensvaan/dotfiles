@@ -42,4 +42,5 @@ fetch_email () {
   done
 }
 
-fetch_email & stretch_notification
+#fetch_email & stretch_notification
+fetch_email

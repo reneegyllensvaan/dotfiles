@@ -1,29 +1,46 @@
 #!/bin/zsh
 log () {
-  #printf "\r$1"
-  echo $@
+  if echo "$@" | grep "hasn't changed" >/dev/null 2>&1; then
+    printf '\033[1;30m'"$@"'\033[0m'" \n"
+  elif echo "$@" | grep '\(overwrite\)' >/dev/null 2>&1; then
+    printf '\033[1;30m'"$@"'\033[0m'" \n"
+  else
+    echo $@
+  fi
+}
+fatal () {
+  printf '\033[0;31m'"$@"'\033[0m'
+  FATAL=1
+}
+prompt () {
+  printf '\033[0;34m'"$@"'\033[0m '
+  read result
+  if [ 'y' = "$result" ]; then
+    return 0
+  fi
+  return 1
 }
 
 if [[ ! -f "./setup" ]]; then
-  echo "This script must be run from the directory it's contained in"
+  fatal "This script must be run from the directory it's contained in"
   exit 1
 fi
 
 if [[ ! -f "./shell/user-profile" ]]; then
-  echo "Couldn't find a valid user-profile file, let's make one"
-  echo "# Couldn't find 'shell/user-profile' in current directory." > ./shell/user-profile
-  echo "# Please set one up based on user-profile.example\n" >> ./shell/user-profile
+  log "Couldn't find a valid user-profile file, let's make one"
+  log "# Couldn't find 'shell/user-profile' in current directory." > ./shell/user-profile
+  log "# Please set one up based on user-profile.example\n" >> ./shell/user-profile
   cat ./shell/user-profile.example >> ./shell/user-profile
 
   vim shell/user-profile
   if [ "$?" != "0" ]; then
-    echo "  Error: Vim exited with a non-zero exit code, canceling." | grep --color=auto '.*'
-    exit 1
+    fatal "  Error: Vim exited with a non-zero exit code"
+    exit $?
   elif [ "$?" != "0" ]; then
-    echo "  Vim exited but can't find a user-profile file, canceling." | grep --color=auto '.*'
+    fatal "  Vim exited but we can't find a user-profile file"
     exit
   fi
-  echo "    Sweet! Let's continue."
+  log "    Sweet! Let's continue."
 fi
 
 while [ $1 ]; do
@@ -46,11 +63,16 @@ log "Sourcing profile and user-profile to make sure we have the latest env..."
 source $PWD/shell/profile
 source $PWD/shell/user-profile
 
+CMDS=()
+push_cmd () {
+  CMDS+=("$1")
+}
+
 build_template () {
   if [ ! $nobuild_templates ]; then
-    [ -f "$PWD/$1.tmpl.sh" ] || echo "\nTemplate $1.tmpl.sh not found, skipping. Please fix this!"
-    echo "  Building $1.tmpl.sh -> $1"
+    [ -f "$PWD/$1.tmpl.sh" ] || log "\nTemplate $1.tmpl.sh not found, skipping. Please fix this!"
     sh "$PWD/$1.tmpl.sh" > "$PWD/$1"
+    log "  Built $1.tmpl.sh -> $1"
   fi
 }
 
@@ -60,26 +82,33 @@ symlink () {
     return 0
   fi
 
+  overwrite=''
   case "$1" in
     "dir")
-      if [ -L "$3" ]; then
-        rm $3
-      elif rmdir "$3" >/dev/null 2>&1; then
-        echo "    Found empty directory $3, removing it."
+      if [ ! -d "$2" ]; then
+        fatal "  Error: Couldn't find file $2, check setup script." | grep --color=auto '.*'
+      elif [ -L "$3" ]; then
+        overwrite=' (overwrite)'
+        push_cmd "rm '$3'"
+      elif [ -d "$3" ] && [ '' = `ls $3` ]; then
+        push_cmd "rmdir '$3' >/dev/null 2>&1"
+        log "    Found empty directory $3, will remove it"
       elif [ -e "$3" ]; then
-        echo "  Error: Found non-empty directory $3, please remove or back it up." | grep --color=auto '.*'
-        exit 1
+        fatal "  Error: Found non-empty directory or file $3, please remove or back it up."
       fi
-      echo "    Symlinking $2 -> $3"
-      ln -sf "$PWD/$2" "$3"
+      log "    Symlinking $2 -> $3$overwrite"
+      push_cmd "ln -sf '$PWD/$2' '$3'"
       ;;
     "file")
       if [ -e "$3" ] && [ ! -L "$3" ]; then
-        echo "    Found existing file '$3', backing it up as '$3.bak'"
-        mv "$PWD/$3" "$PWD/$3.bak"
+        log "    Found existing file or directory '$3', backing it up as '$3.bak'"
+        push_cmd "mv '$PWD/$3' '$PWD/$3.bak'"
+      elif [ -L "$3" ]; then
+        overwrite=' (overwrite)'
+        push_cmd "rm '$3'"
       fi
-      echo "    Symlinking $2 -> $3";
-      ln -sf "$PWD/$2" "$3";
+      log "    Symlinking $2 -> $3$overwrite";
+      push_cmd "ln -sf '$PWD/$2' '$3'"
       ;;
   esac
 }
@@ -88,25 +117,53 @@ symlink () {
 safe_copy () {
   # just copy and overwrite if force_overwrite is on
   [ $force_overwrite ] && cat $1 > $2 && return 0
-  which shasum >/dev/null 2>/dev/null && hash_command='shasum'
+  which shasum >/dev/null 2>&1 && hash_command='shasum'
   hash_new=`$hash_command $1 | head -c 40`
   hash_old=`$hash_command $2 | head -c 40`
   if [[ $hash_new = $hash_old ]]; then
-    echo "    $2 hasn't changed, skipping..."
+    log "    $2 hasn't changed, skipping..."
   else
     [ -f "$2.bak" ] && \
       "$2.bak would be overwritten, please move or delete that file to prevent data loss" && return 1
     [ ! $remove_backups ] && \
       [ -f $2 ] && \
-      mv $2 "$2.bak"
-    [ $remove_backups ] && rm "$2.bak"
-    cp "$1" "$2"
+      push_cmd "mv $2 '$2.bak'"
+    [ $remove_backups ] && \
+      push_cmd "rm '$2.bak'"
+    push_cmd "cp '$1' '$2'"
+  fi
+}
+
+ensure_git_repo () {
+  grep "$1" .gitignore || log "$1" >> .gitignore
+  if [ ! -d "$1" ]; then
+    log "  Couldn't find a folder at $1, will clone $2 there"
+    push_cmd "git clone '$2' '$1'"
+  fi
+}
+
+ensure_directory () {
+  if [ -e "$1" ] && [ ! -d "$1" ]; then
+    fatal "  Error: Found something at $1, but it's not a directory like we want. Please move or delete it"
+  elif [ ! -e "$1" ]; then
+    log "  Will create new directory '$1'"
+    push_cmd "mkdir -p '$1'"
+  fi
+}
+
+ensure_file () {
+  if [ ! -e "$1" ]; then
+    log "Create file $1"
+    push_cmd "touch '$1'"
+  elif [ ! -f "$1" ]; then
+    fatal "Found something at $1, but it's not a file. Please check and re-run"
   fi
 }
 
 # load git submodules
-git submodule update --init zmodules/zsh-syntax-highlighting
-#git submodule update --init steno/steno-dictionaries
+ensure_git_repo zmodules/zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting
+ensure_git_repo steno/steno-dictionaries https://github.com/didoesdigital/steno-dictionaries
+#ensure_git_repo system-packages/from-source/fxz https://github.com/conor42/fxz
 
  log "Building shell template files"
 build_template gpg/gpg.conf
@@ -118,47 +175,46 @@ build_template nvim/pathspec.vim
 build_template shell/alias
 
 log "Making the config directory and linking/copying files"
-mkdir -p $HOME/.config/
+ensure_directory $HOME/.config/
 
 log "  Xorg configs"
-symlink file "x11/xinitrc" ~/.xinitrc
-symlink file "x11/xsession" ~/.xsession
-symlink dir "x11/xres" ~/.xres
+symlink file x11/xinitrc ~/.xinitrc
+symlink file x11/xsession ~/.xsession
+symlink dir x11/xres ~/.xres
 
 log "  Urxvt conf"
-mkdir -p $HOME/.urxvt
-symlink dir "urxvt-ext" $HOME/.urxvt/ext
+ensure_directory $HOME/.urxvt
+symlink dir urxvt-ext $HOME/.urxvt/ext
 
-# using vim as a more lightweight editor atm, nvim as a full editor
 log "  Vim directories and conf"
-symlink file "vimrc_coc" $HOME/.vimrc
-symlink dir "vim" $HOME/.vim
+symlink file vim/rc/vimrc_coc $HOME/.vimrc
+symlink dir vim $HOME/.vim
 
 log "  Neovim conf"
-mkdir -p $HOME/.config
-mkdir -p $HOME/.local/share/nvim/site/autoload
-mkdir -p $HOME/.local/share/nvim
-mkdir -p $HOME/.local/share/nvim/blugin
-mkdir -p $HOME/.local/share/nvim/autoload
-mkdir -p $HOME/.local/share/nvim/files
-mkdir -p $HOME/.local/share/nvim/files/swap
-mkdir -p $HOME/.local/share/nvim/files/backup
-mkdir -p $HOME/.local/share/nvim/files/info
-mkdir -p $HOME/.local/share/nvim/files/undo
+ensure_directory $HOME/.config
+ensure_directory $HOME/.local/share/nvim/site/autoload
+ensure_directory $HOME/.local/share/nvim
+ensure_directory $HOME/.local/share/nvim/blugin
+ensure_directory $HOME/.local/share/nvim/autoload
+ensure_directory $HOME/.local/share/nvim/files
+ensure_directory $HOME/.local/share/nvim/files/swap
+ensure_directory $HOME/.local/share/nvim/files/backup
+ensure_directory $HOME/.local/share/nvim/files/info
+ensure_directory $HOME/.local/share/nvim/files/undo
 symlink dir "nvim" $HOME/.config/nvim
 symlink file "other/plug.vim" $HOME/.local/share/nvim/site/autoload/plug.vim
 
 log "  GPG config"
-mkdir -p $HOME/.gnupg
-safe_copy "gpg/gpg.conf" $HOME/.gnupg/gpg.conf
-safe_copy "gpg/gpg-agent.conf" $HOME/.gnupg/gpg-agent.conf
-mkdir -p $HOME/.ssh
-safe_copy "other/ssh_config" $HOME/.ssh/config
-touch $HOME/.ssh/user_config
+ensure_directory $HOME/.gnupg
+safe_copy gpg/gpg.conf $HOME/.gnupg/gpg.conf
+safe_copy gpg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
+ensure_directory $HOME/.ssh
+safe_copy other/ssh_config $HOME/.ssh/config
+ensure_file $HOME/.ssh/user_config
 
 log "  Tmux config"
-symlink file "other/tmux.conf" $HOME/.tmux.conf
-symlink file "other/tmux-disposable.conf" $HOME/.tmux-disposable.conf
+symlink file other/tmux.conf $HOME/.tmux.conf
+symlink file other/tmux-disposable.conf $HOME/.tmux-disposable.conf
 
 log "  Zsh configs"
 symlink file shell/zshrc $HOME/.zshrc
@@ -166,61 +222,67 @@ symlink dir zfunctions $HOME/.zfunctions
 symlink dir zmodules $HOME/.zmodules
 
 log "  Qutebrowser config"
-symlink dir "qutebrowser" $HOME/.config/qutebrowser
+symlink dir qutebrowser $HOME/.config/qutebrowser
 
 log "  i3 config"
-mkdir -p $HOME/.config/i3
-symlink file "x11/i3_config" $HOME/.config/i3/config
+ensure_directory $HOME/.config/i3
+symlink file x11/i3_config $HOME/.config/i3/config
 
-echo "  zathura config"
-mkdir -p $HOME/.config/zathura
-symlink file "x11/zathurarc" $HOME/.config/zathura/zathurarc
+log "  zathura config"
+ensure_directory $HOME/.config/zathura
+symlink file x11/zathurarc $HOME/.config/zathura/zathurarc
 
 log "  Email config"
-symlink file "email/neomuttrc-user" $HOME/.neomuttrc-user
-symlink file "email/neomuttrc-unbind" $HOME/.neomuttrc-unbind
-symlink file "email/neomuttrc" $HOME/.neomuttrc
-symlink file "email/notmuch-config" $HOME/.notmuch-config
-mkdir -p $HOME/email/work
-
-# echo "  Ranger config"
-mkdir -p $HOME/.config/ranger
-symlink dir "ranger" $HOME/.config/ranger
-# symlink file "ranger/rifle.conf" $HOME/.config/ranger/rifle.conf
-# symlink file "ranger/rc.conf" $HOME/.config/ranger/rc.conf
-
-#log "  Making sure we have a plover dictionary"
-#if which node >/dev/null 2>&1; then
-#
-#  cd steno
-#  [ -f dict.json ] || node merge-dictionaries.js > dict.json
-#  cd -
-#fi
+symlink file email/neomuttrc-user $HOME/.neomuttrc-user
+symlink file email/neomuttrc-unbind $HOME/.neomuttrc-unbind
+symlink file email/neomuttrc $HOME/.neomuttrc
+symlink file email/notmuch-config $HOME/.notmuch-config
+ensure_directory $HOME/email/work
 
 log "  Kitty config"
-mkdir -p $HOME/.config/kitty
-symlink file "x11/kitty.conf" $HOME/.config/kitty/kitty.conf
+ensure_directory $HOME/.config/kitty
+symlink file x11/kitty.conf $HOME/.config/kitty/kitty.conf
 
+log "  Symlinked directories"
+symlink dir bin $HOME/.bin
+symlink dir emacs.d $HOME/.emacs.d
+symlink dir ranger $HOME/.config/ranger
 
 log "  Other configs"
-symlink file "other/spacemacs" $HOME/.spacemacs
-symlink file "other/batrc" $HOME/.batrc
-symlink file "shell/alias" $HOME/.alias
-symlink file "shell/profile" $HOME/.profile
-symlink file "shell/user-profile" $HOME/.user-profile
-symlink file "x11/picom.conf" $HOME/.config/picom.conf
+symlink file other/spacemacs $HOME/.spacemacs
+symlink file other/batrc $HOME/.batrc
+symlink file shell/alias $HOME/.alias
+symlink file shell/profile $HOME/.profile
+symlink file shell/user-profile $HOME/.user-profile
+symlink file x11/picom.conf $HOME/.config/picom.conf
 
-symlink file "other/editorconfig" $HOME/.editorconfig
-symlink file "other/gitconfig" $HOME/.gitconfig
-symlink file "other/tigrc" $HOME/.tigrc
-symlink file "other/ctags" $HOME/.ctags
-
-log "  Symlinking directories"
-#TODO make this check for an existing bin dir
-symlink dir "bin" $HOME/.bin
-symlink dir "emacs.d" $HOME/.emacs.d
+symlink file other/editorconfig $HOME/.editorconfig
+symlink file other/gitconfig $HOME/.gitconfig
+symlink file other/tigrc $HOME/.tigrc
+symlink file other/ctags $HOME/.ctags
 
 log "  Making the $HOME/.local/bin directory"
-mkdir -p $HOME/.local/bin
+ensure_directory $HOME/.local/bin
 
-echo "\n...Finished!"
+if [ '' != "$FATAL" ]; then
+  fatal "There were errors during setup, please fix them and re-run"
+  exit $FATAL
+fi
+
+prompt "Look over these changes, do they look ok? [y/N]"\
+  || exit
+
+# Finally, reconcile commands
+[ -e last_install.log ] && rm last_install.log
+[ -e last_install_errors.log ] && rm last_install_errors.log
+for cmd in $CMDS; do
+  printf "$cmd"
+  echo "$cmd" >> last_install.log
+  sh -c "$cmd" 2>last_install_errors.log
+  printf "\r\033[2K"
+done
+echo "Log written to ./last_install.log"
+[ `cat last_install_errors.log` ] \
+  && fatal "./last_install_errors.log was not empty, please check it for errors"
+
+log "\n...Finished!"

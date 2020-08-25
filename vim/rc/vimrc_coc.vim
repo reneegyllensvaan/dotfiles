@@ -100,6 +100,7 @@ let g:mapleader = "\<Space>"
 "let maplocalleader = ','
 
 " Commands For Leaders:
+let g:rg_opts = '--smart-case'
 command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': 'e', 'down': '30%'})
 command! -bang -nargs=* RgInteractive call fzf#vim#rg_interactive(<q-args>)
 command! -bang -nargs=* RgSkim call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
@@ -129,6 +130,7 @@ nnoremap <Leader>wd <C-w>c
 nnoremap <Leader>w= <C-w>=
 
 " Searching:
+nnoremap <Leader>ft :Tags<CR>
 nnoremap <Leader>fp :FzfProjectFiles<CR>
 nnoremap <Leader>ff :Fd<CR>
 nnoremap <Leader>fw :w<CR>

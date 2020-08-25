@@ -18,5 +18,18 @@ else
   command=$cmd
 fi
 
-[ `echo $command | grep 'command:api'` ] && cd ~/Projects/backend/repo
+BACKEND_TRIGGERS=(
+  'command:api'
+  'db_(restore\|upgrade\|revision\|downgrade)'
+)
+FRONTEND_TRIGGERS=(
+  'watcher:'
+)
+for t in $BACKEND_TRIGGERS; do
+  [ `echo $command | grep "$t"` ] && cd ~/Projects/backend/repo
+done
+for t in $FRONTEND_TRIGGERS; do
+  [ `echo $command | grep "$t"` ] && cd ~/Projects/frontend/repo
+done
+
 fab $command

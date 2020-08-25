@@ -21,7 +21,6 @@ alias v='nvim'
 # shortcut commands
 alias fab='comfortable-fab'
 alias g='git'
-alias ypwd='echo \$PWD | \$CLIPBOARD_COPY'
 alias gz='gzip'
 alias gzd='gzip -d'
 alias xz='fxz'

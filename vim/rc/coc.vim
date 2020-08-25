@@ -6,6 +6,7 @@ nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
 " Mappings For CoCList:
+nnoremap <silent><nowait> <space>ss  :<C-u>CocList<cr>
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>sd  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
@@ -15,7 +16,7 @@ nnoremap <silent><nowait> <space>sc  :<C-u>CocList commands<cr>
 " Find symbol of current document.
 nnoremap <silent><nowait> <space>so  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>ss  :<C-u>CocList -I symbols<cr>
+nnoremap <silent><nowait> <space>sy  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
 nnoremap <silent><nowait> <space>sj  :<C-u>CocNext<CR>
 " Do default action for previous item.
@@ -102,8 +103,8 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
+xmap <silent> <leader>F <Plug>(coc-format-selected)
+nmap <silent> <leader>F <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
