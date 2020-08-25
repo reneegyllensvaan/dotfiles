@@ -201,8 +201,8 @@ ensure_directory $HOME/.local/share/nvim/files/swap
 ensure_directory $HOME/.local/share/nvim/files/backup
 ensure_directory $HOME/.local/share/nvim/files/info
 ensure_directory $HOME/.local/share/nvim/files/undo
-symlink dir "nvim" $HOME/.config/nvim
-symlink file "other/plug.vim" $HOME/.local/share/nvim/site/autoload/plug.vim
+symlink dir nvim $HOME/.config/nvim
+symlink file other/plug.vim $HOME/.local/share/nvim/site/autoload/plug.vim
 
 log "  GPG config"
 ensure_directory $HOME/.gnupg
