@@ -158,6 +158,7 @@ $RECYCLE.BIN/
 # End of https://www.gitignore.io/api/git,vim,linux,macos,emacs,windows
 
 last_install.log
+last_install_errors.log
 # Pseudo-submodules:
 zmodules/zsh-syntax-highlighting
 steno/steno-dictionaries

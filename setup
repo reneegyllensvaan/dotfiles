@@ -283,6 +283,7 @@ for cmd in $CMDS; do
 done
 echo "Log written to ./last_install.log"
 [ `cat last_install_errors.log` ] \
-  && fatal "./last_install_errors.log was not empty, please check it for errors"
+  && fatal "./last_install_errors.log was not empty, please check it for errors" \
+  || rm last_install_errors.log
 
 log "\n...Finished!"
