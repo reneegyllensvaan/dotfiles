@@ -188,6 +188,7 @@ symlink dir urxvt-ext $HOME/.urxvt/ext
 
 log "  Vim directories and conf"
 symlink file vim/rc/vimrc_coc.vim $HOME/.vimrc
+symlink file vim/rc/gvimrc.vim $HOME/.gvimrc
 symlink dir vim $HOME/.vim
 
 log "  Neovim conf"
