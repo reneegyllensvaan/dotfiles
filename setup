@@ -86,7 +86,7 @@ symlink () {
   case "$1" in
     "dir")
       if [ ! -d "$2" ]; then
-        fatal "  Error: Couldn't find file $2, check setup script." | grep --color=auto '.*'
+        fatal "  Error: Couldn't find file $2, check setup script."
       elif [ -L "$3" ]; then
         overwrite=' (overwrite)'
         push_cmd "rm '$3'"
@@ -187,7 +187,7 @@ ensure_directory $HOME/.urxvt
 symlink dir urxvt-ext $HOME/.urxvt/ext
 
 log "  Vim directories and conf"
-symlink file vim/rc/vimrc_coc $HOME/.vimrc
+symlink file vim/rc/vimrc_coc.vim $HOME/.vimrc
 symlink dir vim $HOME/.vim
 
 log "  Neovim conf"
@@ -247,6 +247,7 @@ log "  Symlinked directories"
 symlink dir bin $HOME/.bin
 symlink dir emacs.d $HOME/.emacs.d
 symlink dir ranger $HOME/.config/ranger
+symlink dir shell/fish $HOME/.config/fish
 
 log "  Other configs"
 symlink file other/spacemacs $HOME/.spacemacs
