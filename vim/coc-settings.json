@@ -1,4 +1,9 @@
 
 {
-  "python.venvFolders": ["~/Projects/backend/venv"]
+  "python.venvFolders": ["~/Projects/backend/venv"],
+  "snippets.ultisnips.enable": false,
+  "snippets.snipmate.enable": false,
+  "snippets.textmateSnippetsRoots": [
+    "/home/renee/code/dotfiles/textmateSnippets",
+  ],
 }

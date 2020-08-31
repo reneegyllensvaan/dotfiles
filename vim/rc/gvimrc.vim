@@ -3,7 +3,7 @@ set guioptions=
 echo "HASGUI"
 colorscheme onedark
 
-set guifont=Source\ Code\ Pro\ 10
+set guifont=Inconsolata\ 12
 
 hi User1 guibg=#22252b
 hi User2 guibg=#98C379 guifg=black
