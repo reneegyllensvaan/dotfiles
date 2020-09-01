@@ -1,5 +1,5 @@
 " vim:fdm=marker
-
+let loaded_matchparen = 1
 filetype plugin indent on         " Load plugins according to detected filetype.
 syntax on                         " Enable syntax highlighting.
 set nocompatible
@@ -40,13 +40,14 @@ set splitright                    " Open new windows right of the current window
 "set cursorline                   " Find the current line quickly.
 set wrapscan                      " Searches wrap around end-of-file.
 set report      =0                " Always report changed lines.
-set synmaxcol   =200              " Only highlight the first 200 columns.
+set synmaxcol   =800              " Only highlight the first 200 columns.
 set timeoutlen=2000                " Timeout for code updates
 set ttimeoutlen=0                 " Timeout for mode updates
 " set notimeout
 set so=999                        " always center cursor
 
 set ignorecase                    " Case insensitive grep
+set smartcase
 set infercase                     " Case insensitive tab completion
 
 set nolist                          " Show non-printable characters.
@@ -78,7 +79,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'christoomey/vim-system-copy'
 Plug 'jamessan/vim-gnupg'
-Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary', {'on': 'Commentary'}
+"Plug 'tomtom/tcomment_vim'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'lotabout/skim', {'dir': '~/.skim', 'do': './install' },
 Plug 'lotabout/skim.vim'
@@ -88,6 +90,8 @@ Plug 'sheerun/vim-polyglot'
 if has('gui_running')
   Plug 'joshdick/onedark.vim'
 endif
+Plug 'jupyter-vim/jupyter-vim'
+", {'on': 'JupyterConnect'}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocEnable'}
 
@@ -133,7 +137,6 @@ nnoremap <Leader>w= <C-w>=
 nnoremap <Leader>ft :Tags<CR>
 nnoremap <Leader>fp :FzfProjectFiles<CR>
 nnoremap <Leader>ff :Fd<CR>
-nnoremap <Leader>fw :w<CR>
 nnoremap <Leader>/ :RgInteractive<CR>
 nnoremap <Leader>? :RgSkim<CR>
 
@@ -142,7 +145,14 @@ nnoremap <Leader>tA :CocDisable<CR>
 nnoremap <Leader>tn :set number!<CR>
 nnoremap <Leader>tr :set relativenumber!<CR>
 nnoremap <Leader>tw :set list!<CR>
+nnoremap <Leader>tV :source ~/.vimrc<CR>
 
+" Bookmarks:
+nnoremap <Leader>;f :lcd ~/Projects/frontend/repo<CR>
+nnoremap <Leader>;b :lcd ~/Projects/backend/repo<CR>
+
+" File Actions:
+nnoremap <Leader>fw :w<CR>
 
 nnoremap <Leader>bb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
@@ -155,11 +165,14 @@ nnoremap <Leader>ln :tabnew<CR>
 
 nnoremap <silent> <Leader>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 
+source ~/.vim/rc/fzy.vim
+
 " UI Customization: {{{
 
 hi Pmenu ctermbg=16
 hi Search ctermbg=11 ctermfg=black
 hi Visual ctermbg=238 ctermfg=NONE
+hi CocHighlightText ctermbg=0
 
 "" statusline
 hi User1 ctermbg=darkgray ctermfg=white guibg=#98C379 guifg=grey
@@ -208,6 +221,7 @@ let g:netrw_altv=1
 let g:netrw_liststyle=3
 let g:netrw_list_hide=netrw_gitignore#Hide()
 let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide.=',\.(pyc)$'
 
 function! ToggleVExplorer()
   if exists("t:expl_buf_num")
@@ -234,3 +248,11 @@ let g:netrw_fastbrowse = 0
 autocmd FileType netrw setl bufhidden=wipe
 
 " }}} UI Customization
+
+autocmd BufReadPost * :call writefile([getcwd().";".expand("%:p")], "/Users/renee/.vim/files/recent.log", "a")
+
+if has('gui_running')
+  colorscheme onedark
+  set guioptions=
+  set guifont=Menlo-Regular:h11
+end

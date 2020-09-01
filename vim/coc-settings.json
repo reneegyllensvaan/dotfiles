@@ -4,6 +4,8 @@
   "snippets.ultisnips.enable": false,
   "snippets.snipmate.enable": false,
   "snippets.textmateSnippetsRoots": [
-    "/home/renee/code/dotfiles/textmateSnippets",
+    "/home/renee/code/dotfiles/textmateSnippets"
   ],
+  "clangd.semanticHighlighting": false,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": false
 }

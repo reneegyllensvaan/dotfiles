@@ -22,7 +22,6 @@ export GIT_PAGER=less
 export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"
 export GOPATH=$HOME/code/go
 export RANGER_LOAD_DEFAULT_RC=FALSE
-export LDFLAGS=-L/usr/local/opt/texinfo/lib
 export NNN_USE_EDITOR=1
 export ASDF_DIR=/usr/local/opt/asdf
 
