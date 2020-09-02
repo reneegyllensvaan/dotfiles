@@ -48,12 +48,16 @@ function! FzyBuffers()
   call FzyCommandInBuffer("cat ~/.tmp/vim-buffers", ":b ", "\| awk '{print $1}'")
 endfunction
 
-nnoremap <Leader>? :call FzyCommandInBuffer("fd .", ":e ", "")<CR>
+" Find File:
 nnoremap <silent> <leader>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<cr>
+" Find Directory:
 nnoremap <silent> <leader>fd :call FzyCommandInBuffer("fd . --type d", ":e ", "")<cr>
-nnoremap <silent> <leader>fb :call FzyBuffers()<cr>
-" nnoremap <silent> <leader>s :call FzyCommand("find . -type f", ":sp")<cr>
-" nnoremap <silent> <leader>/ :call FzyCommand("rg . ''", ":e")<cr>
-" nnoremap <silent> <leader>v :call FzyCommand("ag . --silent -l -g ''", ":vs")<cr>
-" nnoremap <silent> <leader>s :call FzyCommand("ag . --silent -l -g ''", ":sp")<cr>
+" Fuzzy Home Lcd:
+nnoremap <silent> <leader>lcd :call FzyCommandInBuffer("fd . --type d --base-directory ~", ":lcd ~/", "")<cr>
+" Find Git Status Edit:
+nnoremap <silent> <leader>fg :call FzyCommandInBuffer("git status --porcelain", ":e ", "\| awk '{print $2}'")<cr>
+" Find Vimwiki File:
+nnoremap <silent> <leader>fv :call FzyCommandInBuffer("fd . ~/org/vimwiki \| sd '".$HOME."' '~'", ":e ", "")<cr>
+" Fuzzy Buffers:
+nnoremap <silent> <leader>bb :call FzyBuffers()<cr>
 

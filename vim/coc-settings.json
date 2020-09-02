@@ -7,5 +7,7 @@
     "/home/renee/code/dotfiles/textmateSnippets"
   ],
   "clangd.semanticHighlighting": false,
-  "coc.preferences.currentFunctionSymbolAutoUpdate": false
+  "coc.preferences.currentFunctionSymbolAutoUpdate": false,
+  "tsserver.enableJavascript": true,
+  "tsserver.log": "normal"
 }

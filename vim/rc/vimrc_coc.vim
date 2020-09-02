@@ -52,7 +52,7 @@ set infercase                     " Case insensitive tab completion
 
 set nolist                          " Show non-printable characters.
 if has('multi_byte') && &encoding ==# 'utf-8'
-  let &listchars = 'tab:ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¸ ,extends:ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¯,precedes:ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ¢ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ®,nbsp:ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ±'
+  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
 else
   let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif
@@ -90,6 +90,7 @@ Plug 'sheerun/vim-polyglot'
 if has('gui_running')
   Plug 'joshdick/onedark.vim'
 endif
+" Plug 'vimwiki/vimwiki', {'branch': 'release', 'on': 'idk if i will add this'}
 Plug 'jupyter-vim/jupyter-vim'
 ", {'on': 'JupyterConnect'}
 
@@ -121,6 +122,16 @@ function! LoadCoc()
   endif
 endfunction
 
+let g:center_cursor_disabled_scrolloff = 4
+function! ToggleCenterCursor()
+  if &so == 999
+    exec 'set so=' . g:center_cursor_disabled_scrolloff
+    let g:center_cursor_disabled_scrolloff = &so
+  else
+    set so=999
+  end
+endfunction
+
 " Window Bindings:
 nnoremap <C-w>/ <C-w>v
 nnoremap <C-w>- <C-w>s
@@ -146,15 +157,16 @@ nnoremap <Leader>tn :set number!<CR>
 nnoremap <Leader>tr :set relativenumber!<CR>
 nnoremap <Leader>tw :set list!<CR>
 nnoremap <Leader>tV :source ~/.vimrc<CR>
+nnoremap <Leader>tcc :call ToggleCenterCursor()<CR>
 
 " Bookmarks:
-nnoremap <Leader>;f :lcd ~/Projects/frontend/repo<CR>
-nnoremap <Leader>;b :lcd ~/Projects/backend/repo<CR>
+nnoremap <Leader>;E :e ~/.vim/files/bookmarks.vim<CR>
+source ~/.vim/files/bookmarks.vim
 
 " File Actions:
 nnoremap <Leader>fw :w<CR>
 
-nnoremap <Leader>bb :Buffers<CR>
+nnoremap <Leader>fb :Buffers<CR>
 nnoremap <Leader>bp :bprevious<CR>
 nnoremap <Leader>bn :bNext<CR>
 nnoremap <Leader>bd :bp\|bd #<CR>
