@@ -24,7 +24,7 @@ function! FzyCommandInBuffer(choice_command, vim_command, post_command)
       " Switch back to the window we started from so we change the right one
       exec s:returnwindow . 'wincmd w'
     end
-    let s:fzy_out = readfile("/Users/renee/.tmp/fzy-out")
+    let s:fzy_out = readfile(glob("~/.tmp/fzy-out"))
     if len(s:fzy_out) > 0
       exec s:vim_command . (s:fzy_out[0])
     end
