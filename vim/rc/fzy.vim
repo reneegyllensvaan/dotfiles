@@ -18,7 +18,7 @@ function! FzyCommandInBuffer(choice_command, vim_command, post_command)
   function! s:CleanBuffer(pid, code)
     if exists('s:fzybuffer')
       " When command finishes, don't keep the terminal around
-      exec 'bd! ' s:fzybuffer
+      silent exec 'bd! ' s:fzybuffer
     end
     if exists('s:returnwindow')
       " Switch back to the window we started from so we change the right one
@@ -36,6 +36,7 @@ function! FzyCommandInBuffer(choice_command, vim_command, post_command)
   startinsert
 endfunction
 
+let g:fzy_actions = ['Files', 'Buffers']
 
 function! DumpBuffers()
   redir! > ~/.tmp/vim-buffers

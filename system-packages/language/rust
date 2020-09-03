@@ -6,4 +6,5 @@ fi
 source ~/.cargo/env
 cargo install fd-find \
               ripgrep \
+              sd \
               bat

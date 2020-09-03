@@ -158,6 +158,7 @@ nnoremap <Leader>tr :set relativenumber!<CR>
 nnoremap <Leader>tw :set list!<CR>
 nnoremap <Leader>tV :source ~/.vimrc<CR>
 nnoremap <Leader>tcc :call ToggleCenterCursor()<CR>
+nnoremap <Leader>tcl :set cursorline!<CR>
 
 " Bookmarks:
 nnoremap <Leader>;E :e ~/.vim/files/bookmarks.vim<CR>
@@ -268,3 +269,10 @@ if has('gui_running')
   set guioptions=
   set guifont=Menlo-Regular:h11
 end
+
+command! RC edit ~/.vimrc
+command! RCFzy edit ~/.vim/rc/fzy.vim
+command! RCSurround edit ~/.vim/rc/surround.vim
+command! RCWorkMode edit ~/workmode.vim
+command! WorkMode source ~/workmode.vim
+

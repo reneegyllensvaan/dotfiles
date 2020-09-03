@@ -3,23 +3,22 @@ function join {
   delim="$1";
   shift
   while [ "$1" ]; do
-    printf "$1"
+    printf "`echo "$1" | gsed -E 's/ /\\ /g'`"
     shift
-    [ "$1" ] && printf ","
+    [ "$1" ] && printf $delim
   done
 }
 cmd=$1
 shift
 if [ "$1" ]; then
-  echo "$cmd:`join , "$@"`"
-  command="$cmd:`join , "$@"`"
+  command="$cmd:`join ',' "$@"`"
 else
-  echo $cmd
   command=$cmd
 fi
 
 BACKEND_TRIGGERS=(
   'command:api'
+  'webserver:'
   'db_(restore\|upgrade\|revision\|downgrade)'
 )
 FRONTEND_TRIGGERS=(
@@ -32,4 +31,6 @@ for t in $FRONTEND_TRIGGERS; do
   [ `echo $command | grep "$t"` ] && cd ~/Projects/frontend/repo
 done
 
-fab $command
+
+echo "fab '$command'"
+fab "$command"
