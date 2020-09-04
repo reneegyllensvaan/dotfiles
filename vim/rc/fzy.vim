@@ -25,13 +25,18 @@ function! FzyCommandInBuffer(choice_command, vim_command, post_command)
       exec s:returnwindow . 'wincmd w'
     end
     let s:fzy_out = readfile(glob("~/.tmp/fzy-out"))
+    if !(a:code)
+      for line in s:fzy_out
+        exec s:vim_command . line
+      endfor
+    end
     if len(s:fzy_out) > 0
-      exec s:vim_command . (s:fzy_out[0])
     end
   endfunction
   exec 'botright 20new'
   let s:fzybuffer = term_start(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'], {'curwin': 1, 'exit_cb': function('s:CleanBuffer')})
   setlocal nospell bufhidden=wipe nobuflisted nonumber
+  setlocal statusline=fzy
   setf fzy
   startinsert
 endfunction
@@ -44,9 +49,9 @@ function! DumpBuffers()
   redir END
 endfunction
 
-function! FzyBuffers()
+function! FzyBuffers(cmd)
   call DumpBuffers()
-  call FzyCommandInBuffer("cat ~/.tmp/vim-buffers", ":b ", "\| awk '{print $1}'")
+  call FzyCommandInBuffer("cat ~/.tmp/vim-buffers", a:cmd, "\| awk '{print $1}'")
 endfunction
 
 " Find File:
@@ -55,10 +60,16 @@ nnoremap <silent> <leader>ff :call FzyCommandInBuffer("fd . --type f", ":e ", ""
 nnoremap <silent> <leader>fd :call FzyCommandInBuffer("fd . --type d", ":e ", "")<cr>
 " Fuzzy Home Lcd:
 nnoremap <silent> <leader>lcd :call FzyCommandInBuffer("fd . --type d --base-directory ~", ":lcd ~/", "")<cr>
-" Find Git Status Edit:
-nnoremap <silent> <leader>fg :call FzyCommandInBuffer("git status --porcelain", ":e ", "\| awk '{print $2}'")<cr>
 " Find Vimwiki File:
 nnoremap <silent> <leader>fv :call FzyCommandInBuffer("fd . ~/org/vimwiki \| sd '".$HOME."' '~'", ":e ", "")<cr>
 " Fuzzy Buffers:
-nnoremap <silent> <leader>bb :call FzyBuffers()<cr>
+nnoremap <silent> <leader>bb :call FzyBuffers(":b ")<cr>
+" Fuzzy Buffer Delete:
+nnoremap <silent> <leader>bD :call FzyBuffers(":bd ")<cr>
 
+" Git Status:
+nnoremap <silent> <leader>gs :!git status<cr>
+" Find Git Status Edit:
+nnoremap <silent> <leader>gf :call FzyCommandInBuffer("git status --porcelain", ":e ", "\| awk '{print $2}'")<cr>
+" Find Git Status Edit:
+nnoremap <silent> <leader>ga :call FzyCommandInBuffer("git status --porcelain", ":!git add ", "\| awk '{print $2}'")<cr>

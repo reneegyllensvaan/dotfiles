@@ -79,20 +79,16 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'christoomey/vim-system-copy'
 Plug 'jamessan/vim-gnupg'
-Plug 'tpope/vim-commentary', {'on': 'Commentary'}
-"Plug 'tomtom/tcomment_vim'
+Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'lotabout/skim', {'dir': '~/.skim', 'do': './install' },
-Plug 'lotabout/skim.vim'
+"Plug 'lotabout/skim.vim'
 
 Plug 'sheerun/vim-polyglot'
 
 if has('gui_running')
   Plug 'joshdick/onedark.vim'
 endif
-" Plug 'vimwiki/vimwiki', {'branch': 'release', 'on': 'idk if i will add this'}
-Plug 'jupyter-vim/jupyter-vim'
-", {'on': 'JupyterConnect'}
 
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocEnable'}
 
@@ -104,33 +100,10 @@ let mapleader = "\<Space>"
 let g:mapleader = "\<Space>"
 "let maplocalleader = ','
 
-" Commands For Leaders:
-let g:rg_opts = '--smart-case'
-command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': 'e', 'down': '30%'})
-command! -bang -nargs=* RgInteractive call fzf#vim#rg_interactive(<q-args>)
-command! -bang -nargs=* RgSkim call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
-command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
-
-function! LoadCoc()
-  execute 'CocEnable'
-  if !exists("g:coc_is_sourced")
-      let g:coc_is_sourced = 1
-      execute 'source' "~/.vim/rc/coc.vim"
-      if has('gui_running')
-        execute 'CocStart'
-      endif
-  endif
-endfunction
-
-let g:center_cursor_disabled_scrolloff = 4
-function! ToggleCenterCursor()
-  if &so == 999
-    exec 'set so=' . g:center_cursor_disabled_scrolloff
-    let g:center_cursor_disabled_scrolloff = &so
-  else
-    set so=999
-  end
-endfunction
+source ~/.vim/rc/commands.vim
+source ~/.vim/rc/fzy.vim
+source ~/.vim/rc/look_and_feel.vim
+source ~/.vim/rc/surround.vim
 
 " Window Bindings:
 nnoremap <C-w>/ <C-w>v
@@ -145,11 +118,7 @@ nnoremap <Leader>wd <C-w>c
 nnoremap <Leader>w= <C-w>=
 
 " Searching:
-nnoremap <Leader>ft :Tags<CR>
-nnoremap <Leader>fp :FzfProjectFiles<CR>
-nnoremap <Leader>ff :Fd<CR>
 nnoremap <Leader>/ :RgInteractive<CR>
-nnoremap <Leader>? :RgSkim<CR>
 
 nnoremap <Leader>ta :call LoadCoc()<CR>
 nnoremap <Leader>tA :CocDisable<CR>
@@ -158,7 +127,7 @@ nnoremap <Leader>tr :set relativenumber!<CR>
 nnoremap <Leader>tw :set list!<CR>
 nnoremap <Leader>tV :source ~/.vimrc<CR>
 nnoremap <Leader>tcc :call ToggleCenterCursor()<CR>
-nnoremap <Leader>tcl :set cursorline!<CR>
+nnoremap <Leader>tcl :call ToggleCursorLine()<CR>
 
 " Bookmarks:
 nnoremap <Leader>;E :e ~/.vim/files/bookmarks.vim<CR>
@@ -178,101 +147,8 @@ nnoremap <Leader>ln :tabnew<CR>
 
 nnoremap <silent> <Leader>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 
-source ~/.vim/rc/fzy.vim
-
-" UI Customization: {{{
-
-hi Pmenu ctermbg=16
-hi Search ctermbg=11 ctermfg=black
-hi Visual ctermbg=238 ctermfg=NONE
-hi CocHighlightText ctermbg=0
-
-"" statusline
-hi User1 ctermbg=darkgray ctermfg=white guibg=#98C379 guifg=grey
-hi User2 ctermbg=green ctermfg=black guibg=#C678DD guifg=black
-hi User3 ctermbg=darkgray ctermfg=lightgreen guibg=#ffffff guifg=lightgreen
-set laststatus=2
-set statusline=                          " left align
-set statusline+=%2*\ %{StatuslineMode()}
-set statusline+=\ %1*\ %f                  " short filename
-set statusline+=%=                       " right align
-set statusline+=%*
-set statusline+=%3*\%h%m%r               " file flags (help, read-only, modified)
-set statusline+=%3*\%.25F                " long filename (trimmed to 25 chars)
-set statusline+=%3*\::
-set statusline+=%3*\%l/%L\\|             " line count
-set statusline+=%3*\%y                   " file type
-
-"" statusline
-function! StatuslineMode()
-    let l:mode=mode()
-    if l:mode==#"n"
-        hi User2 ctermbg=green ctermfg=black guibg=#98C379 guifg=black
-        return "NORMAL"
-    elseif l:mode==?"v"
-        hi User2 ctermbg=magenta ctermfg=black guibg=#C678DD guifg=black
-        return "VISUAL"
-    elseif l:mode==#"i"
-        hi User2 ctermbg=cyan ctermfg=black guibg=#56B6C2 guifg=black
-        return "INSERT"
-    elseif l:mode==#"R"
-        hi User2 ctermbg=red ctermfg=black guibg=#E06C75 guifg=black
-        return "REPLACE"
-    endif
-endfunction
-
-"hi CursorLine cterm=NONE ctermbg=238
-"augroup CursorLine
-"  au!
-"  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"  au WinLeave * setlocal nocursorline
-"augroup END
-
-let g:netrw_banner=0
-let g:netrw_browse_split=4
-let g:netrw_altv=1
-let g:netrw_liststyle=3
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_list_hide.=',\.(pyc)$'
-
-function! ToggleVExplorer()
-  if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
-  else
-      exec '1wincmd w'
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
-  endif
-endfunction
-
-let g:netrw_winsize = -28
-nnoremap <silent> <Leader>tf :call ToggleVExplorer()<CR>
-let g:netrw_fastbrowse = 0
-autocmd FileType netrw setl bufhidden=wipe
-
-" }}} UI Customization
-
-autocmd BufReadPost * :call writefile([getcwd().";".expand("%:p")], "/Users/renee/.vim/files/recent.log", "a")
-
-if has('gui_running')
-  colorscheme onedark
-  set guioptions=
-  set guifont=Menlo-Regular:h11
-end
-
-command! RC edit ~/.vimrc
-command! RCFzy edit ~/.vim/rc/fzy.vim
-command! RCSurround edit ~/.vim/rc/surround.vim
-command! RCWorkMode edit ~/workmode.vim
-command! WorkMode source ~/workmode.vim
+" This isn't really used for anything in my vim config currently, i'm just
+" logging all files so i can experiment with a 'recent files' type of scoring
+" for fuzzy matchers.
+autocmd BufReadPost * :call writefile([localtime().";".getcwd().";".expand("%:p")], glob("~/.vim/files/recent.log"), "a")
 

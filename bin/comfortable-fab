@@ -31,6 +31,5 @@ for t in $FRONTEND_TRIGGERS; do
   [ `echo $command | grep "$t"` ] && cd ~/Projects/frontend/repo
 done
 
-
 echo "fab '$command'"
 fab "$command"

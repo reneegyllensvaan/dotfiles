@@ -6,7 +6,7 @@
 " endfunction
 " vnoremap <Leader>S :call SurroundSelection()<CR>
 
-" Hacky vmap-based solution below
+" Hacky Vmap Solution Below:
 " FIXME: a bug in multiline
 vmap S( A)<Esc>lm>`<i(<Esc>m<gv
 vmap s( A)<Esc>m>`<i(<Esc>lm<gv
@@ -19,4 +19,7 @@ vmap s{ A}<Esc>m>`<i{<Esc>lm<gv
 
 vmap S{ A}<Esc>lm>`<i{<Esc>m<gv
 vmap s{ A}<Esc>m>`<i{<Esc>lm<gv
+
+" Surround Function:
+vmap sf A)<Esc>`<i(<Left>
 

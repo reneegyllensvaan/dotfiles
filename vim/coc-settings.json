@@ -1,6 +1,9 @@
 
 {
   "python.venvFolders": ["~/Projects/backend/venv"],
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true,
+  "python.linting.flake8Enabled": true,
   "snippets.ultisnips.enable": false,
   "snippets.snipmate.enable": false,
   "snippets.textmateSnippetsRoots": [
