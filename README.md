@@ -1,4 +1,9 @@
 # Renee's dotfiles
-Some assorted configurations of mine. It's undocumented, contains unmaintained
-and fizzled projects, and very opinionatedly fitted to my workflows, but feel
-free to look at it and grab any code or conf you'd like.
+right now i'm working on these dotfiles to get them where i want them, i have kind of a long-term spare time project to make sure these work as a regular getting-started set of dotfiles
+
+# Minimum dependencies on OSX
+
+
+# Recommended dependencies on OSX
+
+

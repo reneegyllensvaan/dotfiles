@@ -1,7 +1,7 @@
 " vim: fdm=marker
 " Use Terminal Controls In Gui Mod
 
-set guifont=Inconsolata\ 12
+set guifont=Iosevka\ Fixed\ 12
 
 hi User1 guibg=#22252b
 hi User2 guibg=#98C379 guifg=black

@@ -91,7 +91,7 @@ endif
 
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocEnable'}
 
-Plug 'justinmk/vim-sneak'
+"Plug 'justinmk/vim-sneak'
 
 call plug#end()
 

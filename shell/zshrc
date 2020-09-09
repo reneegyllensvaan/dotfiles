@@ -29,7 +29,7 @@ source "$HOME/.zfunctions/git-prompt.zsh"
 source "$HOME/.zfunctions/fzf.zsh"
 [ -f "$HOME/.zfunctions/zsh-syntax-highlighting.zsh" ] \
   && source "$HOME/.zfunctions/zsh-syntax-highlighting.zsh"
-source "$HOME/.fzy.zsh"
+[ -f "$HOME/.fzy.zsh" ] && source "$HOME/.fzy.zsh"
 
 autoload -U compinit
 # cache zsh completions for 22 hours

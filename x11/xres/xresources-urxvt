@@ -1,12 +1,14 @@
 ! ------------------------------------------------------------------------------
 ! urxvt options
 ! ------------------------------------------------------------------------------
-URxvt.perl-ext-common: default,clipboard,font-size
+URxvt.perl-ext-common: default,clipboard,url-select,keyboard-select
 
-URxvt*font: xft:Source Code Pro:size=10:antialias=true
-!URxvt*font: xft:Source Code Pro
-URxvt*iso14755: False
-URxvt*scrollBar: false
+URxvt.font: xft:Iosevka Fixed:Regular:size=10
+
+URxvt.iso14755: false
+URxvt.scrollBar: false
+URxvt.internalBorder: 0
+
 
 ! scale fonts
 URxvt.keysym.C-equal: font-size:increase
@@ -19,7 +21,6 @@ URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 
 URxvt*keysym.Shift-Control-V: perl:clipboard:paste
-URxvt.perl-ext-common:        default,clipboard,url-select,keyboard-select
 URxvt.url-select.launcher:    chromium
 URxvt.url-select.underline:   true
 URxvt.keysym.M-u:             perl:url-select:select_next
