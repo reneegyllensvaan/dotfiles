@@ -77,12 +77,11 @@ set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 " Vim plugin settings
 call plug#begin('~/.vim/plugged')
 
-Plug 'christoomey/vim-system-copy'
 Plug 'jamessan/vim-gnupg'
 Plug 'tpope/vim-commentary'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'lotabout/skim', {'dir': '~/.skim', 'do': './install' },
-"Plug 'lotabout/skim.vim'
+Plug 'lotabout/skim.vim'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -91,6 +90,8 @@ if has('gui_running')
 endif
 
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocEnable'}
+
+Plug 'justinmk/vim-sneak'
 
 call plug#end()
 
@@ -105,49 +106,60 @@ source ~/.vim/rc/fzy.vim
 source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/surround.vim
 
+" Special Bindings:
+nnoremap # *NN
+
+" Visual Mappings:
+nnoremap <Space>y "+y
+vnoremap <Space>y "+y
+nnoremap <Space>p "+p
+vnoremap <Space>p "+p
+
 " Window Bindings:
 nnoremap <C-w>/ <C-w>v
 nnoremap <C-w>- <C-w>s
-nnoremap <Leader>wl <C-w>l
-nnoremap <Leader>wh <C-w>h
-nnoremap <Leader>wj <C-w>j
-nnoremap <Leader>wk <C-w>k
-nnoremap <Leader>w- <C-w>s
-nnoremap <Leader>w/ <C-w>v
-nnoremap <Leader>wd <C-w>c
-nnoremap <Leader>w= <C-w>=
+nnoremap <Space>wl <C-w>l
+nnoremap <Space>wh <C-w>h
+nnoremap <Space>wj <C-w>j
+nnoremap <Space>wk <C-w>k
+nnoremap <Space>w- <C-w>s
+nnoremap <Space>w/ <C-w>v
+nnoremap <Space>wd <C-w>c
+nnoremap <Space>w= <C-w>=
 
 " Searching:
-nnoremap <Leader>/ :RgInteractive<CR>
+nnoremap <Space>/ :RgInteractive<CR>
 
-nnoremap <Leader>ta :call LoadCoc()<CR>
-nnoremap <Leader>tA :CocDisable<CR>
-nnoremap <Leader>tn :set number!<CR>
-nnoremap <Leader>tr :set relativenumber!<CR>
-nnoremap <Leader>tw :set list!<CR>
-nnoremap <Leader>tV :source ~/.vimrc<CR>
-nnoremap <Leader>tcc :call ToggleCenterCursor()<CR>
-nnoremap <Leader>tcl :call ToggleCursorLine()<CR>
+nnoremap <Space>ta :call LoadCoc()<CR>
+nnoremap <Space>tA :CocDisable<CR>
+nnoremap <Space>tn :set number!<CR>
+nnoremap <Space>tr :set relativenumber!<CR>
+nnoremap <Space>tw :set list!<CR>
+nnoremap <Space>tV :source ~/.vimrc<CR>
+nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
+nnoremap <Space>tcl :call ToggleCursorLine()<CR>
 
 " Bookmarks:
-nnoremap <Leader>;E :e ~/.vim/files/bookmarks.vim<CR>
+nnoremap <Space>;E :e ~/.vim/files/bookmarks.vim<CR>
 source ~/.vim/files/bookmarks.vim
 
 " File Actions:
-nnoremap <Leader>fw :w<CR>
+nnoremap <Space>fw :w<CR>
 
-nnoremap <Leader>fb :Buffers<CR>
-nnoremap <Leader>bp :bprevious<CR>
-nnoremap <Leader>bn :bNext<CR>
-nnoremap <Leader>bd :bp\|bd #<CR>
+" Buffers:
+nnoremap <Space>fb :Buffers<CR>
+nnoremap <Space>bp :bprevious<CR>
+nnoremap <Space>bn :bNext<CR>
+nnoremap <Space>bd :bp\|bd #<CR>
+nnoremap <Space>b? :w !diff % -<CR>
 
-nnoremap <Leader>lj :tabnext<CR>
-nnoremap <Leader>lk :tabprevious<CR>
-nnoremap <Leader>ln :tabnew<CR>
+nnoremap <Space>lj :tabnext<CR>
+nnoremap <Space>lk :tabprevious<CR>
+nnoremap <Space>ln :tabnew<CR>
 
-nnoremap <silent> <Leader>e :call feedkeys(":e \<Tab>", 'tn')<CR>
+nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 
-" This isn't really used for anything in my vim config currently, i'm just
+" This isn't really used for anything in my vim config currently, I'm just
 " logging all files so i can experiment with a 'recent files' type of scoring
 " for fuzzy matchers.
 autocmd BufReadPost * :call writefile([localtime().";".getcwd().";".expand("%:p")], glob("~/.vim/files/recent.log"), "a")

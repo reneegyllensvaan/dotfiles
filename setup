@@ -216,6 +216,7 @@ ensure_file $HOME/.ssh/user_config
 log "  Tmux config"
 symlink file other/tmux.conf $HOME/.tmux.conf
 symlink file other/tmux-disposable.conf $HOME/.tmux-disposable.conf
+ensure_git_repo other/tmux-extrakto https://github.com/laktak/extrakto
 
 log "  Zsh configs"
 symlink file shell/zshrc $HOME/.zshrc

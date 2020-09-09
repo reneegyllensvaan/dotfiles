@@ -55,21 +55,23 @@ function! FzyBuffers(cmd)
 endfunction
 
 " Find File:
-nnoremap <silent> <leader>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<cr>
+nnoremap <silent> <Space>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<CR>
+" Find Recent:
+nnoremap <silent> <Space>fr :call FzyCommandInBuffer("digest-recentf.sh", ":e ", "")<CR>
 " Find Directory:
-nnoremap <silent> <leader>fd :call FzyCommandInBuffer("fd . --type d", ":e ", "")<cr>
+nnoremap <silent> <Space>fd :call FzyCommandInBuffer("fd . --type d", ":e ", "")<CR>
 " Fuzzy Home Lcd:
-nnoremap <silent> <leader>lcd :call FzyCommandInBuffer("fd . --type d --base-directory ~", ":lcd ~/", "")<cr>
+nnoremap <silent> <Space>lcd :call FzyCommandInBuffer("fd . --type d --base-directory ~", ":lcd ~/", "")<CR>
 " Find Vimwiki File:
-nnoremap <silent> <leader>fv :call FzyCommandInBuffer("fd . ~/org/vimwiki \| sd '".$HOME."' '~'", ":e ", "")<cr>
+nnoremap <silent> <Space>fv :call FzyCommandInBuffer("fd . ~/org/vimwiki \| sd '".$HOME."' '~'", ":e ", "")<CR>
 " Fuzzy Buffers:
-nnoremap <silent> <leader>bb :call FzyBuffers(":b ")<cr>
+nnoremap <silent> <Space>bb :call FzyBuffers(":b ")<CR>
 " Fuzzy Buffer Delete:
-nnoremap <silent> <leader>bD :call FzyBuffers(":bd ")<cr>
+nnoremap <silent> <Space>bD :call FzyBuffers(":bd ")<CR>
 
 " Git Status:
-nnoremap <silent> <leader>gs :!git status<cr>
+nnoremap <silent> <Space>gs :!git status<CR>
 " Find Git Status Edit:
-nnoremap <silent> <leader>gf :call FzyCommandInBuffer("git status --porcelain", ":e ", "\| awk '{print $2}'")<cr>
+nnoremap <silent> <Space>gf :call FzyCommandInBuffer("git status --porcelain", ":e ", "\| awk '{print $2}'")<CR>
 " Find Git Status Edit:
-nnoremap <silent> <leader>ga :call FzyCommandInBuffer("git status --porcelain", ":!git add ", "\| awk '{print $2}'")<cr>
+nnoremap <silent> <Space>ga :call FzyCommandInBuffer("git status --porcelain", ":!git add ", "\| awk '{print $2}'")<CR>

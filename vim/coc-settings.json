@@ -1,6 +1,6 @@
 
 {
-  "python.venvFolders": ["~/Projects/backend/venv"],
+  "python.venvFolders": ["venv"],
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.flake8Enabled": true,

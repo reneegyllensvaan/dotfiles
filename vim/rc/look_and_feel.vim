@@ -8,27 +8,34 @@ hi User1 ctermbg=darkgray ctermfg=white guibg=#98C379 guifg=grey
 hi User2 ctermbg=green ctermfg=black guibg=#C678DD guifg=black
 hi User3 ctermbg=darkgray ctermfg=lightgreen guibg=#ffffff guifg=lightgreen
 
-" This is the prettier version of the statusline below
-"set laststatus=2
-"set statusline=                          " left align
-"set statusline+=%2*\ %{StatuslineMode()}
-"set statusline+=\ %1*\ %f                  " short filename
-"set statusline+=%=                       " right align
-"set statusline+=%*
-"set statusline+=%3*\%h%m%r               " file flags (help, read-only, modified)
-"set statusline+=%3*\%.25F                " long filename (trimmed to 25 chars)
-"set statusline+=%3*\::
-"set statusline+=%3*\%l/%L\\|             " line count
-"set statusline+=%3*\%y                   " file type
+" " This is the prettier version of the statusline below
+" set laststatus=2
+" set statusline=                          " left align
+" set statusline+=%2*\ %{StatuslineMode()}
+" set statusline+=\ %1*\ %f                  " short filename
+" set statusline+=%=                       " right align
+" set statusline+=%*
+" set statusline+=%3*\%h%m%r               " file flags (help, read-only, modified)
+" set statusline+=%3*\%.25F                " long filename (trimmed to 25 chars)
+" set statusline+=%3*\::
+" set statusline+=%3*\%l/%L\\|             " line count
+" set statusline+=%3*\%y                   " file type
 
-augroup vimrc-statusline
-    autocmd!
-augroup END
+function! ActiveStatusLine()
+  if has('g:coc_enabled')
+    setlocal statusline=%2*\ %{StatuslineMode()}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y%{coc#status()}%{get(b:,'coc_current_function','')}
+  else
+    setlocal statusline=%2*\ %{StatuslineMode()}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
+  end
+endfunction
+function! InactiveStatusLine()
+  setlocal statusline=%5*\ \ \ \ \ \ \ \ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
+endfunction
 
 augroup statusline-toggler
     autocmd!
-    autocmd WinEnter * :setlocal statusline=%2*\ %{StatuslineMode()}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
-    autocmd WinLeave * :setlocal statusline=%5*\ \ \ \ \ \ \ \ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
+    autocmd WinEnter * :call ActiveStatusLine()
+    autocmd WinLeave * :call InactiveStatusLine()
 augroup END
 
 function! MaybeEnableCursorline()

@@ -162,3 +162,4 @@ last_install_errors.log
 # Pseudo-submodules:
 zmodules/zsh-syntax-highlighting
 steno/steno-dictionaries
+other/tmux-extrakto
