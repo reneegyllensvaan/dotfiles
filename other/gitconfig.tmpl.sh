@@ -1,7 +1,7 @@
 #!/bin/sh
 cat << EOF
 [core]
-  excludesfile = $HOME/.gitignore
+  excludesfile = $HOME/.gitignore_global
 [user]
   name = $USER_NAME
   email = $USER_EMAIL

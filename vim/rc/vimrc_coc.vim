@@ -91,8 +91,6 @@ endif
 
 Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocEnable'}
 
-"Plug 'justinmk/vim-sneak'
-
 call plug#end()
 
 noremap <Space> <Nop>
@@ -105,6 +103,7 @@ source ~/.vim/rc/commands.vim
 source ~/.vim/rc/fzy.vim
 source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/surround.vim
+source ~/.vim/rc/snipe.vim
 
 " Special Bindings:
 nnoremap # *NN
@@ -159,8 +158,12 @@ nnoremap <Space>ln :tabnew<CR>
 
 nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 
+" WorkMode:
+nnoremap <Space>o :WorkMode<CR>
+
 " This isn't really used for anything in my vim config currently, I'm just
 " logging all files so i can experiment with a 'recent files' type of scoring
 " for fuzzy matchers.
 autocmd BufReadPost * :call writefile([localtime().";".getcwd().";".expand("%:p")], glob("~/.vim/files/recent.log"), "a")
+autocmd BufWritePost * :call writefile([localtime().";".getcwd().";".expand("%:p")], glob("~/.vim/files/recent-write.log"), "a")
 

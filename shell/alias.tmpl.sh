@@ -18,7 +18,6 @@ try_override sed gsed
 try_override grep ggrep
 try_override cat bat
 try_override ls exa
-try_override fab comfortable-fab
 
 cat << EOF
 
@@ -48,6 +47,7 @@ alias splines="tr ' ' '\\n'"
 alias rr='ranger'
 alias sx='startx;exit'
 alias up='cd ..'
+alias fab=comfortable-fab
 
 # unglob some commands
 alias fd='noglob fd'

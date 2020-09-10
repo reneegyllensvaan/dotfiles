@@ -30,8 +30,6 @@ function! FzyCommandInBuffer(choice_command, vim_command, post_command)
         exec s:vim_command . line
       endfor
     end
-    if len(s:fzy_out) > 0
-    end
   endfunction
   exec 'botright 20new'
   let s:fzybuffer = term_start(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'], {'curwin': 1, 'exit_cb': function('s:CleanBuffer')})
@@ -57,13 +55,13 @@ endfunction
 " Find File:
 nnoremap <silent> <Space>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<CR>
 " Find Recent:
-nnoremap <silent> <Space>fr :call FzyCommandInBuffer("digest-recentf.sh", ":e ", "")<CR>
+nnoremap <silent> <Space>fr :call FzyCommandInBuffer("digest-recentf.sh Projects", ":e ", "\| awk '{print $2}'")<CR>
 " Find Directory:
 nnoremap <silent> <Space>fd :call FzyCommandInBuffer("fd . --type d", ":e ", "")<CR>
 " Fuzzy Home Lcd:
 nnoremap <silent> <Space>lcd :call FzyCommandInBuffer("fd . --type d --base-directory ~", ":lcd ~/", "")<CR>
-" Find Vimwiki File:
-nnoremap <silent> <Space>fv :call FzyCommandInBuffer("fd . ~/org/vimwiki \| sd '".$HOME."' '~'", ":e ", "")<CR>
+" Find Notes File:
+nnoremap <silent> <Space>fn :call FzyCommandInBuffer("fd . ~/notes \| sd '".$HOME."' '~'", ":e ", "")<CR>
 " Fuzzy Buffers:
 nnoremap <silent> <Space>bb :call FzyBuffers(":b ")<CR>
 " Fuzzy Buffer Delete:
@@ -75,3 +73,10 @@ nnoremap <silent> <Space>gs :!git status<CR>
 nnoremap <silent> <Space>gf :call FzyCommandInBuffer("git status --porcelain", ":e ", "\| awk '{print $2}'")<CR>
 " Find Git Status Edit:
 nnoremap <silent> <Space>ga :call FzyCommandInBuffer("git status --porcelain", ":!git add ", "\| awk '{print $2}'")<CR>
+" Git Commit:
+nnoremap <silent> <Space>gc :!git commit<CR>
+
+function! GitCommand()
+  let resp = confirm("git ...", "&status\n&commit\ncheck&out\n&add")
+  echo "git " . resp
+endfunction

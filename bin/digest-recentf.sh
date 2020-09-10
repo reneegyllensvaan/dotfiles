@@ -1,8 +1,9 @@
 #!/bin/sh
 
-< ~/.vim/files/recent.log \
-  mawk \
-  -v re="$HOME/Projects" \
+< ~/.vim/files/recent-write.log \
+  grep -v '/\.git/' \
+  | mawk \
+  -v re="$HOME/$1" \
   '-F;' \
   -v home="$HOME" \
   '$3 ~ re {
@@ -12,4 +13,4 @@
   | sort \
   | uniq -c \
   | sort -nr \
-  | grep -vE '^\s*(1|2)'
+  | grep -vE '^\s*(1|2) '

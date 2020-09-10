@@ -190,8 +190,13 @@ log "  Vim directories and conf"
 symlink file vim/rc/vimrc_coc.vim $HOME/.vimrc
 symlink file vim/rc/gvimrc.vim $HOME/.gvimrc
 symlink dir vim $HOME/.vim
+<<<<<<< HEAD
 ensure_file ~/.vim/files/recent.log
 ensure_file ~/.vim/files/recent-write.log
+=======
+ensure_file $HOME/.vim/files/recent.log
+ensure_file $HOME/.vim/files/recent-write.log
+>>>>>>> f6f31d2... various updates
 
 log "  Neovim conf"
 ensure_directory $HOME/.config

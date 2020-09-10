@@ -5,8 +5,6 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-inoremap <silent><nowait> () ()<Left>
-
 " Mappings For CoCList:
 nnoremap <silent><nowait> <Space>ss  :<C-u>CocList<cr>
 " Show all diagnostics.
