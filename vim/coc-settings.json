@@ -4,11 +4,9 @@
   "python.linting.enabled": true,
   "python.linting.pylintEnabled": true,
   "python.linting.flake8Enabled": true,
-  "snippets.ultisnips.enable": false,
-  "snippets.snipmate.enable": false,
-  "snippets.textmateSnippetsRoots": [
-    "/home/renee/code/dotfiles/textmateSnippets"
-  ],
+  "python.formatting.provider": "black",
+  "coc.preferences.formatOnSaveFiletypes": [],
+  "python.formatting.blackPath": "/usr/local/bin/black",
   "clangd.semanticHighlighting": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
   "tsserver.enableJavascript": true,

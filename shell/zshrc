@@ -73,12 +73,13 @@ else
   function prepend_prompt () { };
 fi
 
-[ $RANGER_LEVEL ] && ranger_prompt="(rr $RANGER_LEVEL) " #
+[ $RANGER_LEVEL ] && nesting_prompt="(rr $RANGER_LEVEL) " #
+[ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
 
 # Set up the prompt template
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)"
 [ $SSH_CLIENT ] && PROMPT="$PROMPT [%n@%m]" # only append prompt with host over ssh
-PROMPT="$PROMPT"$'\n$ranger_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
+PROMPT="$PROMPT"$'\n$nesting_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
 
 # GnuPG settings
 export GPG_TTY="$(tty)"

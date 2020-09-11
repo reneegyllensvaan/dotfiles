@@ -50,11 +50,6 @@ augroup cursorline-toggler
     autocmd WinLeave * :setlocal nocursorline
 augroup END
 
-if has('gui_running')
-  set guioptions=
-  colorscheme onedark
-end
-
 hi User5 ctermbg=3 ctermfg=black guibg=#ADC39D guifg=black
 "" statusline
 function! StatuslineMode()

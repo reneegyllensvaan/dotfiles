@@ -14,6 +14,7 @@ cat << EOF
   a   = add
   b   = branch
   c   = commit
+  ca  = commit --amend
   d   = diff
   l   = log
   o   = checkout
@@ -21,6 +22,9 @@ cat << EOF
   s   = status
   z   = stash
   aa  = add --all
+  r   = rebase
+  ri  = rebase -i
+  cp  = cherry-pick
   pr  = pull --rebase
   pop = stash pop
   root = "! git rev-parse --show-toplevel"

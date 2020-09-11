@@ -61,7 +61,7 @@ nnoremap <silent> <Space>fd :call FzyCommandInBuffer("fd . --type d", ":e ", "")
 " Fuzzy Home Lcd:
 nnoremap <silent> <Space>lcd :call FzyCommandInBuffer("fd . --type d --base-directory ~", ":lcd ~/", "")<CR>
 " Find Notes File:
-nnoremap <silent> <Space>fn :call FzyCommandInBuffer("fd . ~/notes \| sd '".$HOME."' '~'", ":e ", "")<CR>
+nnoremap <silent> <Space>fn :call FzyCommandInBuffer("fd . ~/documents/notes \| sd '".$HOME."' '~'", ":e ", "")<CR>
 " Fuzzy Buffers:
 nnoremap <silent> <Space>bb :call FzyBuffers(":b ")<CR>
 " Fuzzy Buffer Delete:
@@ -74,7 +74,7 @@ nnoremap <silent> <Space>gf :call FzyCommandInBuffer("git status --porcelain", "
 " Find Git Status Edit:
 nnoremap <silent> <Space>ga :call FzyCommandInBuffer("git status --porcelain", ":!git add ", "\| awk '{print $2}'")<CR>
 " Git Commit:
-nnoremap <silent> <Space>gc :!git commit<CR>
+nnoremap <silent> <Space>gc :term git commit<CR>
 
 function! GitCommand()
   let resp = confirm("git ...", "&status\n&commit\ncheck&out\n&add")

@@ -1,7 +1,14 @@
 " vim: fdm=marker
 " Use Terminal Controls In Gui Mod
 
-set guifont=Iosevka\ Fixed\ 12
+set guioptions=c
+colorscheme onedark
+
+if has('gui_macvim')
+  set guifont=Iosevka-Fixed:h13
+else
+  set guifont=Iosevka\ Fixed\ 12
+end
 
 hi User1 guibg=#22252b
 hi User2 guibg=#98C379 guifg=black

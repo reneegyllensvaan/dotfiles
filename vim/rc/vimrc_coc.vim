@@ -104,6 +104,7 @@ source ~/.vim/rc/fzy.vim
 source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/surround.vim
 source ~/.vim/rc/snipe.vim
+source ~/.vim/rc/textobject.vim
 
 " Special Bindings:
 nnoremap # *NN
@@ -117,6 +118,7 @@ vnoremap <Space>p "+p
 " Window Bindings:
 nnoremap <C-w>/ <C-w>v
 nnoremap <C-w>- <C-w>s
+nnoremap <C-w>m :tab split<CR>
 nnoremap <Space>wl <C-w>l
 nnoremap <Space>wh <C-w>h
 nnoremap <Space>wj <C-w>j
@@ -125,6 +127,9 @@ nnoremap <Space>w- <C-w>s
 nnoremap <Space>w/ <C-w>v
 nnoremap <Space>wd <C-w>c
 nnoremap <Space>w= <C-w>=
+nnoremap <Space>wm :tab split<CR>
+nnoremap <Space>wt/ :vert term<CR>
+nnoremap <Space>wt- :term<CR>
 
 " Searching:
 nnoremap <Space>/ :RgInteractive<CR>

@@ -20,6 +20,11 @@ vmap s{ A}<Esc>m>`<i{<Esc>lm<gv
 vmap S{ A}<Esc>lm>`<i{<Esc>m<gv
 vmap s{ A}<Esc>m>`<i{<Esc>lm<gv
 
+vmap S' A'<Esc>lm>`<i'<Esc>m<gv
+vmap s' A'<Esc>m>`<i'<Esc>lm<gv
+vmap S" A"<Esc>lm>`<i"<Esc>m<gv
+vmap s" A"<Esc>m>`<i"<Esc>lm<gv
+
 " Surround Function:
 vmap sf A)<Esc>`<i(<Left>
 

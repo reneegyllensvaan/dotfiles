@@ -5,6 +5,7 @@ set keep_flagged='yes'
 set mark_old='no'
 
 # GPG Config
+set editor = "vim"
 set crypt_use_gpgme = yes
 set pgp_sign_as = FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4
 set pgp_self_encrypt_as = FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4
@@ -67,6 +68,7 @@ virtual-mailboxes \
 push "<change-vfolder>inBox<Enter>"
 # notmuch bindings
 macro index \\\\ "<vfolder-from-query>"
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro index r "<modify-labels>-unread -inbox -trash -strict-delete\n"
 #macro index r "<modify-labels-then-hide>-unread -inbox -trash -strict-delete\n"
 macro index u "<modify-labels>-unread\n"
