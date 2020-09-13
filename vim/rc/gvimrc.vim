@@ -13,6 +13,8 @@ end
 hi User1 guibg=#22252b
 hi User2 guibg=#98C379 guifg=black
 hi User3 guibg=#22252b
+hi User5 guibg=#ADC39D guifg=black
+hi SnipeMatch guibg=cyan guifg=black
 
 " Font Resizing: (macvim has this by default) {{{
 if !has('gui_macvim')

@@ -2,6 +2,7 @@ hi Pmenu ctermbg=16
 hi Search ctermbg=11 ctermfg=black
 hi Visual ctermbg=238 ctermfg=NONE
 hi CocHighlightText ctermbg=0
+hi SnipeMatch ctermbg=cyan ctermfg=black
 
 "" statusline
 hi User1 ctermbg=darkgray ctermfg=white guibg=#98C379 guifg=grey
@@ -50,7 +51,7 @@ augroup cursorline-toggler
     autocmd WinLeave * :setlocal nocursorline
 augroup END
 
-hi User5 ctermbg=3 ctermfg=black guibg=#ADC39D guifg=black
+hi User5 ctermbg=3 ctermfg=black
 "" statusline
 function! StatuslineMode()
     let l:mode=mode()

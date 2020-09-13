@@ -10,5 +10,6 @@
   "clangd.semanticHighlighting": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
   "tsserver.enableJavascript": true,
-  "tsserver.log": "normal"
+  "tsserver.log": "normal",
+  "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"]
 }

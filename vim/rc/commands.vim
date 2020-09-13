@@ -1,7 +1,8 @@
 let g:rg_opts = '--smart-case'
 command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': 'e', 'down': '30%'})
 command! -bang -nargs=* RgInteractive call fzf#vim#rg_interactive(<q-args>)
-command! -bang -nargs=* RgSkim call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+" call fzf#vim#grep_interactive("sh -c \'rg --column --line-number --color=always \"{}\" . \| head -n 10'", 1)
+command! RgSkim call fzf#vim#rg_interactive("", fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
 
 function! LoadCoc()
@@ -12,6 +13,14 @@ function! LoadCoc()
       if has('gui_running')
         execute 'CocStart'
       endif
+  endif
+endfunction
+
+function! ToggleSyntax()
+  if !exists("g:syntax_on") || !g:syntax_on
+    syntax on
+  else
+    syntax off
   endif
 endfunction
 
@@ -34,6 +43,8 @@ command! RC edit ~/.vimrc
 command! RCGvim edit ~/.gvimrc
 command! RCFzy edit ~/.vim/rc/fzy.vim
 command! RCSurround edit ~/.vim/rc/surround.vim
+command! RCSnipe edit ~/.vim/rc/snipe.vim
+command! RCCoc edit ~/.vim/rc/coc.vim
 command! RCWorkMode edit ~/workmode.vim
 command! WorkMode source ~/workmode.vim
 

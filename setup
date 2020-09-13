@@ -12,6 +12,9 @@ fatal () {
   printf '\033[0;31m'"$@"'\033[0m'
   FATAL=1
 }
+warn () {
+  printf '\033[0;33m'"$@"'\033[0m'
+}
 prompt () {
   printf '\033[0;34m'"$@"'\033[0m '
   read result
@@ -165,7 +168,7 @@ ensure_git_repo zmodules/zsh-syntax-highlighting https://github.com/zsh-users/zs
 ensure_git_repo steno/steno-dictionaries https://github.com/didoesdigital/steno-dictionaries
 #ensure_git_repo system-packages/from-source/fxz https://github.com/conor42/fxz
 
- log "Building shell template files"
+log "Building shell template files"
 build_template gpg/gpg.conf
 build_template gpg/gpg-agent.conf
 build_template other/gitconfig
@@ -173,6 +176,17 @@ build_template README.md
 build_template email/neomuttrc-user
 build_template nvim/pathspec.vim
 build_template shell/alias
+
+if which yq >/dev/null 2>&1; then
+  if [ -e ~/.config/textmateSnippets ]; then
+    log "Rebuilding textmate snippets from yaml"
+    (cd ~/.config/textmateSnippets && ./build.sh)
+  else
+    warn "No directory found in ~/.config/textMateSnippets, not attempting to build"
+  fi
+else
+  warn "Could not find 'yq' executable, not rebuilding textmate snippets"
+fi
 
 log "Making the config directory and linking/copying files"
 ensure_directory $HOME/.config/

@@ -93,11 +93,24 @@ Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocEnable'}
 
 call plug#end()
 
+" Unbind space from movement so we can use it as a second leader
 noremap <Space> <Nop>
 nnoremap <Space> <Nop>
-let mapleader = "\<Space>"
-let g:mapleader = "\<Space>"
+"let mapleader = "\<Space>"
+"let g:mapleader = "\<Space>"
 "let maplocalleader = ','
+
+" This is a special hack because some functions need to know if they're part
+" of a repeated command. An example is the `sneak` functions, which use it to
+" determine whether they should prompt for new text, or re-use the same input
+" from the last command.
+let g:is_repeating = 0
+function! DoRepeat()
+  let g:is_repeating = 1
+  exec 'normal! .'
+  let g:is_repeating = 0
+endfunction
+nnoremap <silent> . :call DoRepeat()<CR>
 
 source ~/.vim/rc/commands.vim
 source ~/.vim/rc/fzy.vim
@@ -135,6 +148,7 @@ nnoremap <Space>wt- :term<CR>
 nnoremap <Space>/ :RgInteractive<CR>
 
 nnoremap <Space>ta :call LoadCoc()<CR>
+nnoremap <Space>ts :call ToggleSyntax()<CR>
 nnoremap <Space>tA :CocDisable<CR>
 nnoremap <Space>tn :set number!<CR>
 nnoremap <Space>tr :set relativenumber!<CR>
