@@ -7,7 +7,7 @@
 " vnoremap <Leader>S :call SurroundSelection()<CR>
 
 " Hacky Vmap Solution Below:
-" FIXME: a bug in multiline
+" FIXME: there's an off-by-one bug in multiline that breaks repetition
 vmap S( A)<Esc>lm>`<i(<Esc>m<gv
 vmap s( A)<Esc>m>`<i(<Esc>lm<gv
 
@@ -24,6 +24,12 @@ vmap S' A'<Esc>lm>`<i'<Esc>m<gv
 vmap s' A'<Esc>m>`<i'<Esc>lm<gv
 vmap S" A"<Esc>lm>`<i"<Esc>m<gv
 vmap s" A"<Esc>m>`<i"<Esc>lm<gv
+
+" Markdown:
+vmap S_ A_<Esc>lm>`<i_<Esc>m<gv
+vmap s_ A_<Esc>m>`<i_<Esc>lm<gv
+vmap S* A*<Esc>lm>`<i*<Esc>m<gv
+vmap s* A*<Esc>m>`<i*<Esc>lm<gv
 
 " Surround Function:
 vmap sf A)<Esc>`<i(<Left>
