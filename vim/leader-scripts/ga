@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$1" = "pre" ]; then
+  git status --porcelain
+elif [ "$1" = "post" ]; then
+  awk "{print \"`git rev-parse --show-toplevel`/\"\$2}"
+fi

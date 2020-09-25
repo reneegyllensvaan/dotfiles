@@ -141,8 +141,10 @@ ensure_git_repo () {
   grep "$1" .gitignore || log "$1" >> .gitignore
   if [ ! -d "$1" ]; then
     log "  Couldn't find a folder at $1, will clone $2 there"
-    push_cmd "git clone '$2' '$1'"
+    push_cmd "git clone --single-branch $3 '$2' '$1'"
+    return 1
   fi
+  return 0
 }
 
 ensure_directory () {
@@ -167,6 +169,18 @@ ensure_file () {
 ensure_git_repo zmodules/zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting
 ensure_git_repo steno/steno-dictionaries https://github.com/didoesdigital/steno-dictionaries
 #ensure_git_repo system-packages/from-source/fxz https://github.com/conor42/fxz
+
+ensure_git_repo vim/blugin/gnupg https://github.com/jamessan/vim-gnupg
+ensure_git_repo vim/blugin/commentary https://github.com/tpope/vim-commentary
+ensure_git_repo vim/blugin/editorconfig https://github.com/editorconfig/editorconfig-vim
+ensure_git_repo ~/.skim https://github.com/lotabout/skim \
+  || push_cmd 'cd ~/.skim && ./install'
+ensure_git_repo vim/blugin/skim https://github.com/lotabout/skim.vim
+ensure_git_repo vim/blugin/polyglot https://github.com/sheerun/vim-polyglot
+ensure_git_repo vim/blugin/floaterm https://github.com/voldikss/vim-floaterm
+ensure_git_repo vim/blugin/onedark https://github.com/joshdick/onedark.vim
+ensure_git_repo vim/blugin/coc https://github.com/neoclide/coc.nvim '--branch release'
+# , {'branch': 'release', 'on': 'CocEnable'}
 
 log "Building shell template files"
 build_template gpg/gpg.conf
@@ -282,6 +296,7 @@ symlink file other/ctags $HOME/.ctags
 
 log "  Making the $HOME/.local/bin directory"
 ensure_directory $HOME/.local/bin
+ensure_directory $HOME/.local/share
 ensure_directory $HOME/.tmp
 
 if [ '' != "$FATAL" ]; then

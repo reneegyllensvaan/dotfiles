@@ -10,7 +10,7 @@ function! FzyCommand(choice_command, vim_command)
   endif
 endfunction
 
-function! FzyCommandInBuffer(choice_command, vim_command, post_command)
+function! FzyCommandInBuffer(choice_command, vim_command, post_command) abort
   let s:choice_command = a:choice_command
   let s:vim_command = a:vim_command
   let s:post_command = a:post_command
@@ -39,6 +39,10 @@ function! FzyCommandInBuffer(choice_command, vim_command, post_command)
   startinsert
 endfunction
 
+function! FzyScript(key_sequence, run) abort
+  call FzyCommandInBuffer(glob("~/.vim/leader-scripts/".a:key_sequence)." pre", a:run, "\| ".glob("~/.vim/leader-scripts/".a:key_sequence)." post")
+endfunction
+
 let g:fzy_actions = ['Files', 'Buffers']
 
 function! DumpBuffers()
@@ -51,30 +55,6 @@ function! FzyBuffers(cmd)
   call DumpBuffers()
   call FzyCommandInBuffer("cat ~/.tmp/vim-buffers", a:cmd, "\| awk '{print $1}'")
 endfunction
-
-" Find File:
-nnoremap <silent> <Space>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<CR>
-" Find Recent:
-nnoremap <silent> <Space>fr :call FzyCommandInBuffer("digest-recentf.sh Projects", ":e ", "\| awk '{print $2}'")<CR>
-" Find Directory:
-nnoremap <silent> <Space>fd :call FzyCommandInBuffer("fd . --type d", ":e ", "")<CR>
-" Fuzzy Home Lcd:
-nnoremap <silent> <Space>lcd :call FzyCommandInBuffer("fd . --type d --base-directory ~", ":lcd ~/", "")<CR>
-" Find Notes File:
-nnoremap <silent> <Space>fn :call FzyCommandInBuffer("fd . ~/documents/notes \| sd '".$HOME."' '~'", ":e ", "")<CR>
-" Fuzzy Buffers:
-nnoremap <silent> <Space>bb :call FzyBuffers(":b ")<CR>
-" Fuzzy Buffer Delete:
-nnoremap <silent> <Space>bD :call FzyBuffers(":bd ")<CR>
-
-" Git Status:
-nnoremap <silent> <Space>gs :!git status<CR>
-" Find Git Status Edit:
-nnoremap <silent> <Space>gf :call FzyCommandInBuffer("git status --porcelain", ":e ", "\| awk '{print $2}'")<CR>
-" Find Git Status Edit:
-nnoremap <silent> <Space>ga :call FzyCommandInBuffer("git status --porcelain", ":!git add ", "\| awk '{print $2}'")<CR>
-" Git Commit:
-nnoremap <silent> <Space>gc :term git commit<CR>
 
 function! GitCommand()
   let resp = confirm("git ...", "&status\n&commit\ncheck&out\n&add")

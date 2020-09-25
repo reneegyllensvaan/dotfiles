@@ -1,30 +1,31 @@
+" vim: fdm=marker
+
+if has('gui_running') && has('gui_macvim')
+  colorscheme onedark
+end
+
 hi Pmenu ctermbg=16
 hi Search ctermbg=11 ctermfg=black
 hi Visual ctermbg=238 ctermfg=NONE
 hi CocHighlightText ctermbg=0
-hi SnipeMatch ctermbg=cyan ctermfg=black
+hi SnipeMatch ctermbg=cyan ctermfg=black guibg=#365A6F
 
-"" statusline
-hi User1 ctermbg=darkgray ctermfg=white guibg=#98C379 guifg=grey
-hi User2 ctermbg=green ctermfg=black guibg=#C678DD guifg=black
-hi User3 ctermbg=darkgray ctermfg=lightgreen guibg=#ffffff guifg=lightgreen
+" Emit cursor shape control chars
+let &t_SI = "\<Esc>[6 q"
+let &t_SR = "\<Esc>[4 q"
+let &t_EI = "\<Esc>[2 q"
 
-" " This is the prettier version of the statusline below
-" set laststatus=2
-" set statusline=                          " left align
-" set statusline+=%2*\ %{StatuslineMode()}
-" set statusline+=\ %1*\ %f                  " short filename
-" set statusline+=%=                       " right align
-" set statusline+=%*
-" set statusline+=%3*\%h%m%r               " file flags (help, read-only, modified)
-" set statusline+=%3*\%.25F                " long filename (trimmed to 25 chars)
-" set statusline+=%3*\::
-" set statusline+=%3*\%l/%L\\|             " line count
-" set statusline+=%3*\%y                   " file type
+"" statusline {{{
+hi User1 ctermbg=darkgray ctermfg=white guibg=#22252b
+hi User2 ctermbg=green ctermfg=black guibg=#98C379 guifg=black
+hi User3 ctermbg=darkgray ctermfg=lightgreen guibg=#22252b
+  " guibg=#ffffff guifg=lightgreen
+hi User5 ctermbg=3 ctermfg=black guibg=#ADC39D guifg=black
 
+set statusline=%5*\ \ \ \ \ \ \ \ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
 function! ActiveStatusLine()
   if has('g:coc_enabled')
-    setlocal statusline=%2*\ %{StatuslineMode()}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y%{coc#status()}%{get(b:,'coc_current_function','')}
+    setlocal statusline=%2*\ %{StatuslineMode()}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y\%{coc#status()}%{get(b:,'coc_current_function','')}
   else
     setlocal statusline=%2*\ %{StatuslineMode()}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
   end
@@ -39,19 +40,6 @@ augroup statusline-toggler
     autocmd WinLeave * :call InactiveStatusLine()
 augroup END
 
-function! MaybeEnableCursorline()
-  if g:cursorline_enabled
-    setlocal cursorline
-  end
-endfunction
-
-augroup cursorline-toggler
-    autocmd!
-    autocmd WinEnter * :call MaybeEnableCursorline()
-    autocmd WinLeave * :setlocal nocursorline
-augroup END
-
-hi User5 ctermbg=3 ctermfg=black
 "" statusline
 function! StatuslineMode()
     let l:mode=mode()
@@ -69,13 +57,19 @@ function! StatuslineMode()
         return "REPLACE"
     endif
 endfunction
+"" statusline }}}
 
-"hi CursorLine cterm=NONE ctermbg=238
-"augroup CursorLine
-"  au!
-"  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-"  au WinLeave * setlocal nocursorline
-"augroup END
+function! MaybeEnableCursorline()
+  if g:cursorline_enabled
+    setlocal cursorline
+  end
+endfunction
+
+augroup cursorline-toggler
+    autocmd!
+    autocmd WinEnter * :call MaybeEnableCursorline()
+    autocmd WinLeave * :setlocal nocursorline
+augroup END
 
 let g:netrw_banner=0
 let g:netrw_browse_split=4
@@ -105,7 +99,5 @@ function! ToggleVExplorer()
 endfunction
 
 let g:netrw_winsize = -28
-nnoremap <silent> <Leader>tf :call ToggleVExplorer()<CR>
 let g:netrw_fastbrowse = 0
 autocmd FileType netrw setl bufhidden=wipe
-

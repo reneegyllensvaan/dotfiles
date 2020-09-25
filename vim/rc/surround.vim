@@ -24,6 +24,8 @@ vmap S' A'<Esc>lm>`<i'<Esc>m<gv
 vmap s' A'<Esc>m>`<i'<Esc>lm<gv
 vmap S" A"<Esc>lm>`<i"<Esc>m<gv
 vmap s" A"<Esc>m>`<i"<Esc>lm<gv
+vmap S` A`<Esc>lm>`<i`<Esc>m<gv
+vmap s` A`<Esc>m>`<i`<Esc>lm<gv
 
 " Markdown:
 vmap S_ A_<Esc>lm>`<i_<Esc>m<gv

@@ -1,0 +1,13 @@
+#!/bin/sh
+if [ "$1" = "pre" ]; then
+  hub pr list --color -f '%pC%>(8)%i%Creset %t% l %Cblue (%H)%Creset%n'
+elif [ "$1" = "post" ]; then
+  if which gsed >/dev/null 2>&1; then
+    sed=gsed
+  else
+    sed=sed
+  fi
+
+  $sed -r "s/\x1B\[([0-9]{1,2}(;[0-9]{1,2})?)?[m|K]//g" \
+    | $sed -E 's/^[^0-9]*([0-9]+).*?$/\1/g'
+fi

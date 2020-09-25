@@ -1,10 +1,5 @@
 
 {
-  "python.venvFolders": ["venv"],
-  "python.linting.enabled": true,
-  "python.linting.pylintEnabled": true,
-  "python.linting.flake8Enabled": true,
-  "python.formatting.provider": "black",
   "coc.preferences.formatOnSaveFiletypes": [],
   "python.formatting.blackPath": "/usr/local/bin/black",
   "clangd.semanticHighlighting": false,

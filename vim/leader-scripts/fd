@@ -1,0 +1,6 @@
+#!/bin/sh
+if [ "$1" = "pre" ]; then
+  fd . --type d
+elif [ "$1" = "post" ]; then
+  cat
+fi

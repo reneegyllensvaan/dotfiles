@@ -1,3 +1,20 @@
+# vim: fdm=marker
+
+# misc {{{
+
+# Set vi mode with no timeout
+export KEYTIMEOUT=1; bindkey -v
+
+# Set completion to be case-insensitive in unambiguous cases
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+# autocd makes a directory name in the position of a command implicitly mean
+# "cd <directory>"
+setopt autocd
+
+# misc }}}
+
+# history {{{
 export HISTSIZE=1000000
 export SAVEHIST=1000000
 export HISTFILE="$HOME/.zhistory"
@@ -12,12 +29,10 @@ setopt HIST_IGNORE_SPACE
 setopt HIST_FIND_NO_DUPS
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_BEEP
+# }}}
 
+# prompt {{{
 setopt PROMPT_SUBST
-# Set vi mode with no timeout
-export KEYTIMEOUT=1; bindkey -v
-# Set completion to be case-insensitive in unambiguous cases
-zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
 source "$HOME/.profile"
 source "$HOME/.user-profile"
@@ -80,6 +95,8 @@ fi
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)"
 [ $SSH_CLIENT ] && PROMPT="$PROMPT [%n@%m]" # only append prompt with host over ssh
 PROMPT="$PROMPT"$'\n$nesting_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
+
+# prompt }}}
 
 # GnuPG settings
 export GPG_TTY="$(tty)"

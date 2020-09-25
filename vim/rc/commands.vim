@@ -7,6 +7,7 @@ command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': 
 
 function! LoadCoc()
   execute 'CocEnable'
+  call EnsureLoaded('coc')
   if !exists("g:coc_is_sourced")
       let g:coc_is_sourced = 1
       execute 'source' "~/.vim/rc/coc.vim"
@@ -37,14 +38,10 @@ endfunction
 let g:cursorline_enabled = 0
 function! ToggleCursorLine()
   let g:cursorline_enabled = !g:cursorline_enabled
+  if g:cursorline_enabled
+    setlocal cursorline
+  else
+    setlocal nocursorline
+  end
 endfunction
-
-command! RC edit ~/.vimrc
-command! RCGvim edit ~/.gvimrc
-command! RCFzy edit ~/.vim/rc/fzy.vim
-command! RCSurround edit ~/.vim/rc/surround.vim
-command! RCSnipe edit ~/.vim/rc/snipe.vim
-command! RCCoc edit ~/.vim/rc/coc.vim
-command! RCWorkMode edit ~/workmode.vim
-command! WorkMode source ~/workmode.vim
 

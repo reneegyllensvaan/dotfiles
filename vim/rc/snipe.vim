@@ -35,9 +35,6 @@ function! SnipeClearMatch()
 endfunction
 
 function! SnipeNext(b)
-  let s:count = v:count1
-  let s:register = v:register
-  let s:operator = v:operator
   let q = (stridx("tn", s:snipe_op)+1 ? "." : "")
         \.s:snipe_query
         \.(stridx("foTn", s:snipe_op)+1 ? "\\(.\\|$\\)" : "")
@@ -118,7 +115,9 @@ onoremap <silent> t :call Snipe(1, "to")<CR>
 onoremap <silent> T :call Snipe(1, "To")<CR>
 
 nnoremap <silent> ; :call SnipeNext(0)<CR>
+onoremap <silent> ; :call SnipeNext(0)<CR>
 nnoremap <silent> , :call SnipeNext(1)<CR>
+onoremap <silent> , :call SnipeNext(1)<CR>
 
 augroup snipe-unhighlight
   autocmd!
