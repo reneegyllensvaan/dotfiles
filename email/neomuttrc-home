@@ -1,0 +1,81 @@
+# vim: ft=neomuttrc
+
+unvirtual-mailboxes *
+set folder="/home/renee/email/home"
+set nm_default_uri="notmuch:///home/renee/email/home"
+set sendmail=""
+
+# virtual-mailboxes \
+#     "backlog" "notmuch://?query=not tag:trash and not tag:TheNewPaper and not tag:keep"\
+
+virtual-mailboxes \
+    "all_mail"  "notmuch://?query=*"\
+    "Not trash" "notmuch://?query=NOT tag:trash"\
+    "inBox"     "notmuch://?query=tag:inbox and NOT tag:archive"\
+    "Unread"    "notmuch://?query=tag:unread"\
+    "Important" "notmuch://?query=tag:important"\
+    "Saved"     "notmuch://?query=tag:saved"\
+    "senT"      "notmuch://?query=tag:sent"\
+    "Github"    "notmuch://?query=tag:github"\
+    "asana"    "notmuch://?query=tag:asana"\
+    "orders"    "notmuch://?query=tag:orders"\
+    "Newsletters" "notmuch://?query=tag:newsletters"\
+    "lists"    "notmuch://?query=tag:lists"\
+    "attachment" "notmuch://?query=tag:attachment"\
+    "trash"    "notmuch://?query=tag:trash"
+
+# Vfolder keybindings
+macro index ba "<change-vfolder>all_mail\n"
+macro index bb "<change-vfolder>inBox\n"
+macro index be "<change-vfolder>trEllo\n"
+macro index bo "<change-vfolder>Old\n"
+macro index bt "<change-vfolder>senT\n"
+macro index bu "<change-vfolder>Unread\n"
+macro index bg "<change-vfolder>Github\n"
+macro index bl "<change-vfolder>Lists\n"
+macro index bn "<change-vfolder>Newsletters\n"
+macro index bN "<change-vfolder>Not trash\n"
+macro index bi "<change-vfolder>Important\n"
+
+# virtual-mailboxes \
+#     "backlog" "notmuch://?query=not tag:trash and not tag:TheNewPaper and not tag:keep"\
+#     "a: all mail"  "notmuch://?query=*"\
+#     "Not trash" "notmuch://?query=NOT tag:trash"\
+#     "inBox"     "notmuch://?query=tag:inbox and NOT tag:archive"\
+#     "Unread"    "notmuch://?query=tag:unread"\
+#     "Important" "notmuch://?query=tag:important"\
+#     "Saved"     "notmuch://?query=tag:saved"\
+#     "senT"      "notmuch://?query=tag:sent"\
+#     "Github"    "notmuch://?query=tag:github"\
+#     "asana"    "notmuch://?query=tag:asana"\
+#     "orders"    "notmuch://?query=tag:orders"\
+#     "Newsletters" "notmuch://?query=tag:newsletters"\
+#     "lists"    "notmuch://?query=tag:lists"\
+#     "attachment" "notmuch://?query=tag:attachment"\
+#     "trash"    "notmuch://?query=tag:trash"
+
+# # Vfolder keybindings
+# macro index ba "<change-vfolder>All mail\n"
+# macro index bb "<change-vfolder>inBox\n"
+# macro index be "<change-vfolder>trEllo\n"
+# macro index bo "<change-vfolder>Old\n"
+# macro index bt "<change-vfolder>senT\n"
+# macro index bu "<change-vfolder>Unread\n"
+# macro index bg "<change-vfolder>Github\n"
+# macro index bl "<change-vfolder>Lists\n"
+# macro index bn "<change-vfolder>Newsletters\n"
+# macro index bN "<change-vfolder>Not trash\n"
+# macro index bi "<change-vfolder>Important\n"
+
+
+# Tagging commands
+macro index R "<modify-labels>+unread +inbox\n"
+macro index r "<modify-labels>-unread -inbox\n"
+macro index u "<modify-labels>-unread\n"
+macro index i "<modify-labels>+inbox\n"
+macro index I "<modify-labels>!important\n"
+macro index,pager K  "<modify-labels-then-hide>+keep\n"
+macro index,pager D  "<modify-labels-then-hide>-trash\n"
+macro index,pager d  "<modify-labels-then-hide>-inbox -unread +trash\n"
+macro index,pager mo "<modify-labels-then-hide>-inbox -unread !orders\n"
+

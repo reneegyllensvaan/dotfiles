@@ -1,3 +1,5 @@
+#!/bin/sh
+cat << EOF
 # .notmuch-config - Configuration file for the notmuch mail system
 #
 # For more information about notmuch, see https://notmuchmail.org
@@ -11,7 +13,7 @@
 # configured here named ".notmuch".
 #
 [database]
-path=/home/renee/email/home
+path=$HOME/email/$USER_PROFILE_ENV
 
 # User configuration
 #
@@ -29,8 +31,8 @@ path=/home/renee/email/home
 # address to which the original email was addressed.
 #
 [user]
-name=Renee Gyllensvaan
-primary_email=renee.gyllensvaan@gmail.com
+name=$USER_NAME
+primary_email=$USER_EMAIL
 
 # Configuration for "notmuch new"
 #
@@ -85,3 +87,4 @@ exclude_tags=deleted;spam;
 #
 [maildir]
 synchronize_flags=true
+EOF

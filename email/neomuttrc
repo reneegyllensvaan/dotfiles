@@ -39,62 +39,59 @@ set sort=reverse-threads
 macro index t "<sort-reverse>d"
 
 set pager_index_lines=10
+# set mbox_type = Maildir
+
 # notmuch
-set virtual_spoolfile='yes'
+# set virtual_spoolfile='yes'
+set virtual_spoolfile = yes
 set hidden_tags=""
-set nm_exclude_tags = ""
+set nm_exclude_tags = "spam"
 set nm_open_timeout = 5
 set nm_query_type = 'messages'
 set nm_unread_tag = "unread"
 
-#message-hook ~A "<modify-labels>-unread\n"
-virtual-mailboxes \
-    "All mail"  "notmuch://?query=*"\
-    "Not trash" "notmuch://?query=NOT tag:trash"\
-    "inBox"     "notmuch://?query=tag:inbox and NOT tag:archive"\
-    "Unread"    "notmuch://?query=tag:unread"\
-    "Important" "notmuch://?query=tag:important"\
-    "Saved"     "notmuch://?query=tag:saved"\
-    "senT"      "notmuch://?query=tag:sent"\
-    "Github"    "notmuch://?query=tag:github"\
-    "asana"    "notmuch://?query=tag:asana"\
-    "orders"    "notmuch://?query=tag:orders"\
-    "Newsletters" "notmuch://?query=tag:newsletters"\
-    "lists"    "notmuch://?query=tag:lists"\
-    "attachment" "notmuch://?query=tag:attachment"\
-    "trash"    "notmuch://?query=tag:trash"
+set nm_db_limit = 0
+set nm_default_url = ""
+set nm_query_type = messages
+# Tags that should be removed or added to the to the messages stored in the NeoMutt record.
+# example:
+#   set record = "~/sent-mails"
+#   set nm_record = yes
+#   set nm_record_tags = "-inbox,archive,me"
+set nm_record = no
+set nm_record_tags = ""
+# This variable specifies notmuch tag which is used for unread messages.
+set nm_unread_tag = unread
+# This variable allows you to customize the file browser display for virtual
+# folders to your personal taste.
+# %C   current folder number
+# %f   folder name (description)
+# %m   number of messages in the mailbox *
+# %n   number of unread messages in the mailbox *
+# %N   N if mailbox has new mail, blank otherwise
+# %>X  right justify the rest of the string and pad with character ``X''
+# %|X  pad to the end of the line with character ``X''
+# %*X  soft-fill with character ``X'' as pad
+set vfolder_format = "%6n(%6N) %f"
+# # setup time window preferences
+# # first setup the duration, and then the time unit of that duration
+# # when set to 0 (the default) the search window feature is disabled
+# set nm_query_window_duration=2
+# set nm_query_window_timebase="week" # or "hour", "day", "week", "month", "year"
 
+#message-hook ~A "<modify-labels>-unread\n"
 # set the default vfolder
-push "<change-vfolder>inBox<Enter>"
+push "<change-vfolder>all_mail<Enter>"
 # notmuch bindings
+source ~/.neomuttrc-mbox-primary
+
 macro index \\\\ "<vfolder-from-query>"
-macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
-macro index r "<modify-labels>-unread -inbox -trash -strict-delete\n"
-#macro index r "<modify-labels-then-hide>-unread -inbox -trash -strict-delete\n"
-macro index u "<modify-labels>-unread\n"
-#macro index U "<modify-labels>+unread\n"
-macro index i "<modify-labels>+inbox\n"
-macro index I "<modify-labels>!important\n"
-#macro index,pager s  "<modify-labels-then-hide>-inbox -unread\n"
-macro index,pager D  "<modify-labels-then-hide>-inbox -unread +trash +strict-delete\n"
-macro index,pager d  "<modify-labels-then-hide>-inbox -unread +trash -strict-delete\n"
-macro index,pager mo "<modify-labels-then-hide>-inbox -unread !orders\n"
+macro index,pager zx "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
 macro index + "<modify-labels>+*\n<sync-mailbox>"
 macro index - "<modify-labels>-*\n<sync-mailbox>"
 bind index L modify-labels
 bind index Y edit-label
-
-# Vfolder keybindings
-macro index ba "<change-vfolder>All mail\n"
-macro index bb "<change-vfolder>inBox\n"
-macro index be "<change-vfolder>trEllo\n"
-macro index bo "<change-vfolder>Old\n"
-macro index bt "<change-vfolder>senT\n"
-macro index bu "<change-vfolder>Unread\n"
-macro index bg "<change-vfolder>Github\n"
-macro index bl "<change-vfolder>Lists\n"
-macro index bn "<change-vfolder>Newsletters\n"
-macro index bi "<change-vfolder>Important\n"
 
 # threading keybindings
 bind index - collapse-thread

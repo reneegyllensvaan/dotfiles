@@ -187,7 +187,9 @@ build_template gpg/gpg.conf
 build_template gpg/gpg-agent.conf
 build_template other/gitconfig
 build_template README.md
-build_template email/neomuttrc-user
+build_template email/neomuttrc-env-home
+build_template email/neomuttrc-env-work
+build_template email/notmuch-config
 build_template nvim/pathspec.vim
 build_template shell/alias
 
@@ -265,8 +267,16 @@ ensure_directory $HOME/.config/zathura
 symlink file x11/zathurarc $HOME/.config/zathura/zathurarc
 
 log "  Email config"
-symlink file email/neomuttrc-user $HOME/.neomuttrc-user
+symlink file email/neomuttrc-env-home $HOME/.neomuttrc-home
+symlink file email/neomuttrc-env-work $HOME/.neomuttrc-work
 symlink file email/neomuttrc-unbind $HOME/.neomuttrc-unbind
+if [ "$USER_PROFILE_ENV" = "home" ]; then
+  symlink file email/neomuttrc-home $HOME/.neomuttrc-mbox-primary
+  symlink file email/neomuttrc-work $HOME/.neomuttrc-mbox-secondary
+else
+  symlink file email/neomuttrc-work $HOME/.neomuttrc-mbox-primary
+  symlink file email/neomuttrc-home $HOME/.neomuttrc-mbox-secondary
+fi
 symlink file email/neomuttrc $HOME/.neomuttrc
 symlink file email/notmuch-config $HOME/.notmuch-config
 ensure_directory $HOME/email/work
