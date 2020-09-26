@@ -267,9 +267,10 @@ ensure_directory $HOME/.config/zathura
 symlink file x11/zathurarc $HOME/.config/zathura/zathurarc
 
 log "  Email config"
-symlink file email/neomuttrc-env-home $HOME/.neomuttrc-home
-symlink file email/neomuttrc-env-work $HOME/.neomuttrc-work
+symlink file email/neomuttrc-env-home $HOME/.neomuttrc-env-home
+symlink file email/neomuttrc-env-work $HOME/.neomuttrc-env-work
 symlink file email/neomuttrc-unbind $HOME/.neomuttrc-unbind
+symlink file email/neomuttrc-colors $HOME/.neomuttrc-colors
 if [ "$USER_PROFILE_ENV" = "home" ]; then
   symlink file email/neomuttrc-home $HOME/.neomuttrc-mbox-primary
   symlink file email/neomuttrc-work $HOME/.neomuttrc-mbox-secondary

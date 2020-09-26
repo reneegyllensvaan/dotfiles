@@ -16,20 +16,24 @@ set crypt_opportunistic_encrypt = yes
 message-hook '!~g !~G ~b "^-----BEGIN PGP (SIGNED )?MESSAGE"' 'exec check-traditional-pgp'
 
 tag-transforms \
-    "important" "!"\
+    "TheNewPaper" "TNP"\
     "github" "GH"\
-    "unread" "?"\
     "newsletters" "N"\
     "trello" "T"\
     "lists" "L"\
     "inbox" "i"\
-    "trash" "d"\
-    "remove-all-tags" "D"
+    "attachment" "A"\
+    "important" "!"\
+    "unread" "?"\
+    "trash" "d"
 
-#set date_format='%Y-%m-%d %H:%M'
-set date_format='%Y-%m-%d'
-#set index_format='%4C %Z %D %-20.20n %-8.8J (%e/%E) %s'
-set index_format='%4C %Z %D %-20.20n [%e/%E] %s (%J)'
+# set date_format='%Y-%m-%d'
+# set index_format='%4C %Z %D %-20.20n [%e/%E] %s (%J)'
+
+# set index_format='%4C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-20.20n %-7.7J (%e/%E) %s'
+set index_format='%4C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-20.20n [%e/%E] %s (%J)'
+
+
 
 set sort_browser="reverse-date"
 set sort_aux="last-date-received"
@@ -45,7 +49,7 @@ set pager_index_lines=10
 # set virtual_spoolfile='yes'
 set virtual_spoolfile = yes
 set hidden_tags=""
-set nm_exclude_tags = "spam"
+set nm_exclude_tags = "spam,keep"
 set nm_open_timeout = 5
 set nm_query_type = 'messages'
 set nm_unread_tag = "unread"
@@ -81,7 +85,6 @@ set vfolder_format = "%6n(%6N) %f"
 
 #message-hook ~A "<modify-labels>-unread\n"
 # set the default vfolder
-push "<change-vfolder>all_mail<Enter>"
 # notmuch bindings
 source ~/.neomuttrc-mbox-primary
 
@@ -96,17 +99,18 @@ bind index Y edit-label
 # threading keybindings
 bind index - collapse-thread
 bind index _ collapse-all
-set collapse_all
+unset collapse_all
 
 # sidebar
 set sidebar_width   = 20
 set sidebar_visible = no
 color sidebar_new yellow default
-# sidebar bindings
+# set sidebar_format="%B%> (%Nn %Ff %S)"
+set sidebar_format = "%D%* %?N?%N/?%S"
+set mail_check_stats
 bind index <left> sidebar-prev          # got to previous folder in sidebar
 bind index <right> sidebar-next         # got to next folder in sidebar
 bind index <space> sidebar-open         # open selected folder from sidebar
-# sidebar toggle
 macro index ,@) "<enter-command> set sidebar_visible=no; macro index ~ ,@( 'Toggle sidebar'<Enter>"
 macro index ,@( "<enter-command> set sidebar_visible=yes; macro index ~ ,@) 'Toggle sidebar'<Enter>"
 macro index ~ ,@( 'Toggle sidebar'      # toggle the sidebar
@@ -115,6 +119,7 @@ bind index <Return> display-message
 bind index G last-entry
 bind index gg first-entry
 bind generic,index,pager,index q exit
+bind generic,index n search-next
 bind generic,index <Down> next-entry
 bind generic,index <Up> previous-entry
 bind generic,index j next-entry
@@ -133,75 +138,4 @@ bind pager A view-attachments
 # don't go to next page on <next-page>
 set pager_stop
 
-
-# color setup
-# #
-# # ======================================================================
-# # INDEX OBJECT     PATTERN?      pattern description
-# # index            pattern               default highlighting of the entire index line
-# # index_date                             the date field
-# # index_flags      pattern       %S %Z   the message flags
-# # index_number                   %C      the message number
-# # index_collapsed                %M      the number of messages in a collapsed thread
-# # index_author     pattern       %AaFLn  the author name
-# # index_subject    pattern       %s      the subject line
-# # index_size                     %c %l   the message size
-# # index_label                    %y %Y   the message label
-# # index_tags                     %g      the transformed message tags
-# # index_tag        pattern/tag   %G      an individual message tag
-# # ======================================================================
-
-color normal        default   default
-color index_number      default default
-color index_date      magenta   default
-color index_flags     yellow    default   .
-color index_collapsed     cyan    default
-color index       green   default   ~N
-color index       green   default   ~v~(~N)
-color index       red   default   ~F
-color index       cyan    default   ~T
-color index       blue    default   ~D
-color index_label     brightred default
-color index_tags      red   default
-color index_tag     brightmagenta default   "encrypted"
-color index_tag     brightgreen default   "signed"
-color index_tag     yellow    default   "attachment"
-color body        brightwhite default   ([a-zA-Z\+]+)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+ # urls
-color body        green   default   [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+   # mail addresses
-color attachment      yellow    default
-color signature     green   default
-color search        brightred black
-
-color indicator     black    cyan
-color error       brightred default
-color status        brightcyan  brightblack
-color tree        brightcyan  default
-color tilde       cyan    default
-color progress      white   red
-
-color sidebar_indicator   brightred default
-color sidebar_highlight   cyan    brightblack
-color sidebar_divider     red   default
-color sidebar_flagged     red   default
-color sidebar_new     green   default
-
-color hdrdefault      color81   default
-color header        green   default   "^Subject: .*"
-color header        yellow    default   "^Date: .*"
-color header        red   default   "^Tags: .*"
-
-color quoted        color60   default
-color quoted1       yellow    default
-
-color body        brightgreen default   "Good signature from.*"
-color body        green   default   "Fingerprint:( [A-Z0-9]{4}){5} ( [A-Z0-9]{4}){5}"
-color body        brightred default   "Bad signature from.*"
-color body        brightred default   "Note: This key has expired!"
-color body        brightmagenta default   "Problem signature from.*"
-color body        brightmagenta default   "WARNING: .*"
-
-color compose header      color81   default
-color compose security_both   brightgreen default
-color compose security_sign   brightmagenta default
-color compose security_encrypt  brightyellow  default
-color compose security_none brightred default
+source ~/.neomuttrc-colors
