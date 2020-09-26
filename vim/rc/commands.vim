@@ -6,8 +6,9 @@ command! RgSkim call fzf#vim#rg_interactive("", fzf#vim#with_preview('right:50%:
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
 
 function! LoadCoc()
-  execute 'CocEnable'
   call EnsureLoaded('coc')
+  runtime plugin/coc.vim
+  execute 'CocEnable'
   if !exists("g:coc_is_sourced")
       let g:coc_is_sourced = 1
       execute 'source' "~/.vim/rc/coc.vim"

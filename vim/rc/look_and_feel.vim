@@ -1,6 +1,6 @@
 " vim: fdm=marker
 
-if has('gui_running') && has('gui_macvim')
+if has('gui_running')
   colorscheme onedark
 end
 

@@ -73,6 +73,7 @@ function! EnsureLoaded(name) abort
   let plugin_path = expand('~/.vim/blugin/'.a:name)
   if !(&rtp =~ plugin_path)
     let &rtp.=','.plugin_path
+    " exec ''.a:name.'.vim'
   endif
 endfunction
 let &rtp.=','.expand('~/.skim')
@@ -138,7 +139,6 @@ nnoremap # *NN
 nnoremap <C-w>/ <C-w>v
 nnoremap <C-w>_ <C-w>s
 nnoremap <C-w>m :tab split<CR>
-tnoremap <silent> <C-u> <C-w>N
 
 if exists('$SPACELAB')
   source ~/.vim/rc/space.vim

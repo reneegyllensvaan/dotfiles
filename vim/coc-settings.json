@@ -6,5 +6,12 @@
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
   "tsserver.enableJavascript": true,
   "tsserver.log": "normal",
-  "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"]
+  "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"],
+  "languageserver": {
+    "nim": {
+      "command": "nimlsp",
+      "filetypes": ["nim"],
+      "trace.server": "verbose"
+    }
+  }
 }

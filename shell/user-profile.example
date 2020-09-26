@@ -1,12 +1,12 @@
 # User/contact info
 export USER_NAME='Renee Gyllensvaan'
-export USER_EMAIL='rgyllensvaan@cobaltgp.com'
 export USER_WORK_EMAIL='rgyllensvaan@cobaltgp.com'
 export USER_HOME_EMAIL='renee.gyllensvaan@gmail.com'
 export GITHUB_USER='reneegyllensvaan'
 
-# System/computer info
-export OPERATING_SYSTEM='osx' #valid args: osx, linux
+export USER_EMAIL="$USER_HOME_EMAIL"
+export USER_PROFILE_ENV='home'  # home | work
+export OPERATING_SYSTEM='osx' # osx | linux
 
 # GPG Settings
 export GPG_FINGERPRINT='FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4'

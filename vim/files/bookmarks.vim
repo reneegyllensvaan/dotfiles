@@ -1,4 +1,5 @@
-nnoremap <Space>;d :lcd ~/code<CR>
+nnoremap <Space>;d :lcd ~/dotfiles<CR>
+nnoremap <Space>;s :lcd ~/sunday<CR>
 nnoremap <Space>;o :lcd ~/org<CR>
 nnoremap <Space>;n :lcd ~/org/vimwiki<CR>
 
