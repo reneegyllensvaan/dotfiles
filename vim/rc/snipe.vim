@@ -15,9 +15,6 @@
 
 let g:snipe_min_highlight_length = 1
 
-if !exists('s:snipe_highlights')
-  let s:snipe_highlights = []
-end
 let s:snipe_just_moved = 0
 let s:snipe_op = ""
 let s:snipe_ops = {}
@@ -25,11 +22,14 @@ let s:snipe_query = ""
 let s:count_pump = 0
 
 function! SnipeClearMatch()
+  if !exists('w:snipe_highlights')
+    let w:snipe_highlights = []
+  end
   if !s:snipe_just_moved
-    for match_ix in s:snipe_highlights
+    for match_ix in w:snipe_highlights
       call matchdelete(match_ix)
     endfor
-    let s:snipe_highlights = []
+    let w:snipe_highlights = []
   end
   let s:snipe_just_moved = 0
 endfunction
@@ -44,7 +44,10 @@ function! SnipeNext(b)
         \.(stridx("foTn", s:snipe_op)>-1 ? "e" : "")
   call searchpos(q, flags)
   if len(s:snipe_query) >= g:snipe_min_highlight_length
-    call add(s:snipe_highlights, matchadd("SnipeMatch", s:snipe_query))
+    if !exists('w:snipe_highlights')
+      let w:snipe_highlights = []
+    end
+    call add(w:snipe_highlights, matchadd("SnipeMatch", s:snipe_query))
   end
   let s:snipe_just_moved = 1
 endfunction
@@ -53,14 +56,9 @@ function! s:PromptInput(n)
   let query = ""
   let q_len = 0
   while q_len < a:n
-    let c = getchar()
-    if c == 27
-      return
-    elseif c == 46  " '.' should be escaped
-      let query .= "\\."
-    else
-      let query .= nr2char(c)
-    end
+    let c = nr2char(getchar())
+    if c == 27 | return | end
+    let query .= (stridx(".$", c)+1 ? "\\" : "").c
     let q_len += 1
   endwhile
   return query

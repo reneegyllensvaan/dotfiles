@@ -1,7 +1,7 @@
 # User/contact info
 export USER_NAME='Renee Gyllensvaan'
-export USER_WORK_EMAIL='rgyllensvaan@cobaltgp.com'
-export USER_HOME_EMAIL='renee.gyllensvaan@gmail.com'
+# export USER_WORK_EMAIL='rgyllensvaan@cobaltgp.com'
+# export USER_HOME_EMAIL='renee.gyllensvaan@gmail.com'
 export GITHUB_USER='reneegyllensvaan'
 
 export USER_EMAIL="$USER_HOME_EMAIL"

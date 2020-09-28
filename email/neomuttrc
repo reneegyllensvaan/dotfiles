@@ -22,16 +22,20 @@ tag-transforms \
     "trello" "T"\
     "lists" "L"\
     "inbox" "i"\
+    "signed" "s"\
     "attachment" "A"\
     "important" "!"\
     "unread" "?"\
-    "trash" "d"
+    "deleted" "d"
 
 # set date_format='%Y-%m-%d'
 # set index_format='%4C %Z %D %-20.20n [%e/%E] %s (%J)'
 
 # set index_format='%4C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-20.20n %-7.7J (%e/%E) %s'
-set index_format='%4C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-20.20n [%e/%E] %s (%J)'
+
+# With flags:
+# set index_format='%3C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-20.20n [%e/%E] %s (%J)'
+set index_format='%3C %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-14.14n [%e/%E] %s (%J)'
 
 
 
@@ -49,7 +53,7 @@ set pager_index_lines=10
 # set virtual_spoolfile='yes'
 set virtual_spoolfile = yes
 set hidden_tags=""
-set nm_exclude_tags = "spam,keep"
+set nm_exclude_tags = "spam,keep,deleted"
 set nm_open_timeout = 5
 set nm_query_type = 'messages'
 set nm_unread_tag = "unread"
@@ -118,8 +122,9 @@ macro index ~ ,@( 'Toggle sidebar'      # toggle the sidebar
 bind index <Return> display-message
 bind index G last-entry
 bind index gg first-entry
-bind generic,index,pager,index q exit
-bind generic,index n search-next
+bind generic,index,pager q exit
+bind generic,index,pager n search-next
+bind generic,index,pager N search-opposite
 bind generic,index <Down> next-entry
 bind generic,index <Up> previous-entry
 bind generic,index j next-entry

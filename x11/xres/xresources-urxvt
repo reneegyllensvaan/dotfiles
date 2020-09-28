@@ -8,6 +8,8 @@ URxvt.font: xft:Iosevka Fixed:Regular:size=10
 URxvt.iso14755: false
 URxvt.scrollBar: false
 URxvt.internalBorder: 0
+! Disable scrollback
+URxvt*saveLines:0
 
 
 ! scale fonts

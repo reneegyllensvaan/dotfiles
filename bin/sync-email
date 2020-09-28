@@ -29,7 +29,8 @@ fetch_email () {
     notmuch tag +trash tag:asana and not tag:unread and not tag:trash
 
     # Do gmailieer sync (for notmuch/neomutt)
-    (cd ~/email/work && gmi sync)
+    [ "$USER_WORK_EMAIL" ] && (cd ~/email/work && gmi sync)
+    [ "$USER_HOME_EMAIL" ] && (cd ~/email/home && gmi sync)
     # Get amount of new email
     notmuch tag -unnotified tag:github or tag:trello
     new_mail=`notmuch search tag:unnotified | wc -l | awk '{print $1}'`
@@ -38,7 +39,7 @@ fetch_email () {
     #     osascript -e 'display notification "'"$new_messages"'new messages" with title "notmuch"'
     # fi
     notmuch tag -unnotified tag:unnotified
-    sleep $OFFLINEIMAP_SYNC_INTERVAL;
+    sleep $EMAIL_SYNC_INTERVAL;
   done
 }
 

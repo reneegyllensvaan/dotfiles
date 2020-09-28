@@ -15,7 +15,8 @@ for_window [instance="Gnome-pie"] floating enable
 #for_window [title="pye-launcher-window"] floating enable
 
 # launching programs
-bindsym $mod+Return exec --no-startup-id urxvtc
+bindsym $mod+Return exec --no-startup-id "urxvtc -e 'urxvtmux'"
+# bindsym $mod+Return exec --no-startup-id urxvtc
 bindsym $mod+z exec --no-startup-id "rofi -modi run,drun,ssh,window -show drun"
 bindsym $mod+Shift+z exec --no-startup-id "rofi -modi run,drun,ssh,window -show run"
 bindsym $mod+Shift+w exec --no-startup-id "rofi -modi window -show window"
