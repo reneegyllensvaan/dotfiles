@@ -69,11 +69,15 @@ set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 
 " ['gnupg','commentary','editorconfig','skim','polyglot','floaterm','onedark','coc']
 "   .map(v => `/Users/renee/.vim/blugin/${v}`).join(',')+'/Users/renee/.skim';
-function! EnsureLoaded(name) abort
+function! EnsureLoaded(name, ...) abort
   let plugin_path = expand('~/.vim/blugin/'.a:name)
   if !(&rtp =~ plugin_path)
     let &rtp.=','.plugin_path
     " exec ''.a:name.'.vim'
+  endif
+  if !empty(a:000)
+    echo "refresh!"
+    exec "runtime plugin/".a:name.".vim"
   endif
 endfunction
 let &rtp.=','.expand('~/.skim')
