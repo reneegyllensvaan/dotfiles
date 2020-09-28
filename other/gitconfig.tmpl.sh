@@ -12,22 +12,23 @@ cat << EOF
   user = $GITHUB_USER
 [alias]
   a   = add
+  aa  = add --all
   b   = branch
   c   = commit
   ca  = commit --amend
+  canoe = commit --amend --no-edit
+  cp  = cherry-pick
   d   = diff
   l   = log
+  ls-files-root = "! git ls-files"
   o   = checkout
   p   = pull
+  pop = stash pop
+  pr  = pull --rebase
+  r   = rebase
+  rc  = rebase --continue
+  ri  = rebase -i
+  root = "! git rev-parse --show-toplevel"
   s   = status
   z   = stash
-  aa  = add --all
-  r   = rebase
-  ri  = rebase -i
-  cp  = cherry-pick
-  pr  = pull --rebase
-  pop = stash pop
-  root = "! git rev-parse --show-toplevel"
-  canoe = commit --amend --no-edit
-  ls-files-root = "! git ls-files"
 EOF
