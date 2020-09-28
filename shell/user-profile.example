@@ -4,9 +4,9 @@ export USER_NAME='Renee Gyllensvaan'
 # export USER_HOME_EMAIL='renee.gyllensvaan@gmail.com'
 export GITHUB_USER='reneegyllensvaan'
 
-export USER_EMAIL="$USER_HOME_EMAIL"
 export USER_PROFILE_ENV='home'  # home | work
 export OPERATING_SYSTEM='osx' # osx | linux
+export USER_EMAIL=`[ "$USER_PROFILE_ENV" = "work" ] && echo "$USER_WORK_EMAIL" || echo "$USER_HOME_EMAIL"`
 
 # GPG Settings
 export GPG_FINGERPRINT='FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4'
