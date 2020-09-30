@@ -207,10 +207,20 @@ fi
 log "Making the config directory and linking/copying files"
 ensure_directory $HOME/.config/
 
-log "  Xorg configs"
+log "  Xorg applications"
 symlink file x11/xinitrc ~/.xinitrc
 symlink file x11/xsession ~/.xsession
 symlink dir x11/xres ~/.xres
+ensure_directory ~/.config/dunst
+symlink file x11/dunstrx ~/.dunst/dunstrc
+ensure_directory $HOME/.config/i3
+symlink file x11/i3_config $HOME/.config/i3/config
+ensure_directory $HOME/.config/zathura
+symlink file x11/zathurarc $HOME/.config/zathura/zathurarc
+ensure_directory $HOME/.config/kitty
+symlink file x11/kitty.conf $HOME/.config/kitty/kitty.conf
+symlink file x11/picom.conf $HOME/.config/picom.conf
+
 
 log "  Urxvt conf"
 ensure_directory $HOME/.urxvt
@@ -259,14 +269,6 @@ symlink dir zmodules $HOME/.zmodules
 log "  Qutebrowser config"
 symlink dir qutebrowser $HOME/.config/qutebrowser
 
-log "  i3 config"
-ensure_directory $HOME/.config/i3
-symlink file x11/i3_config $HOME/.config/i3/config
-
-log "  zathura config"
-ensure_directory $HOME/.config/zathura
-symlink file x11/zathurarc $HOME/.config/zathura/zathurarc
-
 log "  Email config"
 symlink file email/neomuttrc-env-home $HOME/.neomuttrc-env-home
 symlink file email/neomuttrc-env-work $HOME/.neomuttrc-env-work
@@ -283,10 +285,6 @@ symlink file email/neomuttrc $HOME/.neomuttrc
 symlink file email/notmuch-config $HOME/.notmuch-config
 ensure_directory $HOME/email/work
 
-log "  Kitty config"
-ensure_directory $HOME/.config/kitty
-symlink file x11/kitty.conf $HOME/.config/kitty/kitty.conf
-
 log "  Symlinked directories"
 symlink dir bin $HOME/.bin
 symlink dir emacs.d $HOME/.emacs.d
@@ -299,7 +297,6 @@ symlink file other/batrc $HOME/.batrc
 symlink file shell/alias $HOME/.alias
 symlink file shell/profile $HOME/.profile
 symlink file shell/user-profile $HOME/.user-profile
-symlink file x11/picom.conf $HOME/.config/picom.conf
 
 symlink file other/editorconfig $HOME/.editorconfig
 symlink file other/gitconfig $HOME/.gitconfig

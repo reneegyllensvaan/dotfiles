@@ -34,15 +34,17 @@ function! SnipeClearMatch()
   let s:snipe_just_moved = 0
 endfunction
 
-function! SnipeNext(b)
+function! SnipeNext(b,flags)
+  let ignorecase_previous = &ignorecase
+  set noignorecase
   let q = (stridx("tn", s:snipe_op)+1 ? "." : "")
         \.s:snipe_query
         \.(stridx("foTn", s:snipe_op)+1 ? "\\(.\\|$\\)" : "")
-  let [w, l, c, off, vc] = getcurpos()
   let flags = "W"
         \.((stridx("SnFnTnSoToFo", s:snipe_op)>-1)-a:b ? 'b' : '')
         \.(stridx("foTn", s:snipe_op)>-1 ? "e" : "")
-  call searchpos(q, flags)
+  if (stridx(s:snipe_op, "v")>-1) | exec "normal! gv" | endif
+  call search(q, flags)
   if len(s:snipe_query) >= g:snipe_min_highlight_length
     if !exists('w:snipe_highlights')
       let w:snipe_highlights = []
@@ -50,6 +52,7 @@ function! SnipeNext(b)
     call add(w:snipe_highlights, matchadd("SnipeMatch", s:snipe_query))
   end
   let s:snipe_just_moved = 1
+  let &ignorecase = ignorecase_previous
 endfunction
 
 function! s:PromptInput(n)
@@ -64,12 +67,7 @@ function! s:PromptInput(n)
   return query
 endfunction
 
-function! Snipe(n, op)
-  echo "(snipe with) "
-        \."v:operator = ".v:operator
-        \.", s:count_pump = ".s:count_pump
-        \.", v:count = ".v:count
-        \.", v:count1 = ".v:count1
+function! Snipe(n, op) abort
   if !g:is_repeating && s:count_pump <= 0
     let query = s:PromptInput(a:n)
     if empty(query)
@@ -90,35 +88,12 @@ function! Snipe(n, op)
   end
 
   let s:snipe_op = a:op
-  call SnipeNext(0)
-  if !g:is_repeating
-    exec "normal! m`"
-  end
+  call SnipeNext(0, g:is_repeating?'':'s')
 endfunction
-
-" (number, backward, til, op)
-
-nnoremap <silent> s :call Snipe(2, "sn")<CR>
-nnoremap <silent> S :call Snipe(2, "Sn")<CR>
-nnoremap <silent> f :call Snipe(1, "fn")<CR>
-nnoremap <silent> F :call Snipe(1, "Fn")<CR>
-nnoremap <silent> t :call Snipe(1, "tn")<CR>
-nnoremap <silent> T :call Snipe(1, "Tn")<CR>
-
-onoremap <silent> s :call Snipe(2, "so")<CR>
-onoremap <silent> S :call Snipe(2, "So")<CR>
-onoremap <silent> f :call Snipe(1, "fo")<CR>
-onoremap <silent> F :call Snipe(1, "Fo")<CR>
-onoremap <silent> t :call Snipe(1, "to")<CR>
-onoremap <silent> T :call Snipe(1, "To")<CR>
-
-nnoremap <silent> ; :call SnipeNext(0)<CR>
-onoremap <silent> ; :call SnipeNext(0)<CR>
-nnoremap <silent> , :call SnipeNext(1)<CR>
-onoremap <silent> , :call SnipeNext(1)<CR>
 
 augroup snipe-unhighlight
   autocmd!
   autocmd CursorMoved * :call SnipeClearMatch()
+  autocmd CursorMovedI * :call SnipeClearMatch()
   autocmd WinLeave * :call SnipeClearMatch()
 augroup END

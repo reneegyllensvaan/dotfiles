@@ -14,11 +14,11 @@ function! LoadCoc()
   runtime plugin/coc.vim
   execute 'CocEnable'
   if !exists("g:coc_is_sourced")
-      let g:coc_is_sourced = 1
-      execute 'source' "~/.vim/rc/coc.vim"
-      if has('gui_running')
-        execute 'CocStart'
-      endif
+    let g:coc_is_sourced = 1
+    execute 'source' "~/.vim/rc/coc.vim"
+    if has('gui_running')
+      execute 'CocStart'
+    endif
   endif
 endfunction
 
@@ -49,4 +49,3 @@ function! ToggleCursorLine()
     setlocal nocursorline
   end
 endfunction
-

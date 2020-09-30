@@ -11,7 +11,7 @@
 # configured here named ".notmuch".
 #
 [database]
-path=/Users/renee/email/work
+path=/home/renee/email/home
 
 # User configuration
 #
@@ -30,7 +30,7 @@ path=/Users/renee/email/work
 #
 [user]
 name=Renee Gyllensvaan
-primary_email=rgyllensvaan@bison.co
+primary_email=renee.gyllensvaan@gmail.com
 
 # Configuration for "notmuch new"
 #

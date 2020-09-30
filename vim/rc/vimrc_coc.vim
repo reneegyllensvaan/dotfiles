@@ -94,24 +94,7 @@ endif
 " Plugin Config: {{{
 let g:skim_history_dir = '~/.local/share/skim-history'
 let g:floaterm_autoclose = 2
-nnoremap <silent> <C-@> :FloatermToggle<CR>
-tnoremap <silent> <C-@> <C-\><C-n>:FloatermToggle<CR>
-nnoremap <silent> <C-Space> :FloatermToggle<CR>
-tnoremap <silent> <C-Space> <C-\><C-n>:FloatermToggle<CR>
-tnoremap <silent> <C-S> <C-W>N
-tnoremap <silent> <C-b><C-n> <C-\><C-n>:FloatermNew<CR>
-
-tnoremap <silent> <C-q> <C-\><C-n>:FloatermNew<CR>
-tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
-nnoremap <silent> <Space>gl :FloatermNew git log<CR>
 " Plugin Config }}}
-
-" Unbind space from movement so we can use it as a second leader
-noremap <Space> <Nop>
-nnoremap <Space> <Nop>
-"let mapleader = "\<Space>"
-"let g:mapleader = "\<Space>"
-"let maplocalleader = ','
 
 " This is a special hack because some functions need to know if they're part
 " of a repeated command. An example is the `sneak` functions, which use it to
@@ -131,11 +114,6 @@ source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/surround.vim
 source ~/.vim/rc/snipe.vim
 source ~/.vim/rc/textobject.vim
-
-noremap ZZ <Nop>
-noremap ZQ <Nop>
-noremap q <Nop>
-noremap Q q
 
 if exists('$SPACELAB')
   source ~/.vim/rc/space.vim
