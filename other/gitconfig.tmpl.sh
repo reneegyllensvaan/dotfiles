@@ -8,6 +8,8 @@ cat << EOF
   `[ "$GIT_SIGNING_KEY" ] && echo "signingkey = $GIT_SIGNING_KEY"`
 [commit]
   `[ "$GIT_SIGNING_KEY" ] && echo "gpgsign = true"`
+[gpg]
+  program = gpg2
 [github]
   user = $GITHUB_USER
 [alias]

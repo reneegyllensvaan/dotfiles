@@ -1,3 +1,16 @@
+" General:
+nnoremap # *NN
+nnoremap <silent> c* *Ncgn
+nnoremap <silent> c# #Ncgn
+nnoremap <silent> cg* g*Ncgn
+nnoremap <silent> cg# g#Ncgn
+
+" Windows:
+nnoremap <C-w>/ <C-w>v
+nnoremap <C-w>_ <C-w>s
+nnoremap <C-w>m :tab split<CR>
+tnoremap <C-w>m <C-\><C-n>:tab split<CR>
+
 " Visual Mappings:
 nnoremap <Space>y "+y
 vnoremap <Space>y "+y
@@ -40,7 +53,13 @@ nnoremap <Space>;E :e ~/.vim/files/bookmarks.vim<CR>
 source ~/.vim/files/bookmarks.vim
 
 " File Actions:
-nnoremap <Space>fw :w<CR>
+nnoremap <silent> <Space>fw :w<CR>
+nnoremap <Space>fc :cd %:p:h<CR>
+nnoremap <silent> <Space>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<CR>
+nnoremap <silent> <Space>fr :call FzyScript("fr", ":e ")<CR>
+nnoremap <silent> <Space>fd :call FzyScript("fd", ":lcd ")<CR>
+nnoremap <silent> <Space>lcd :call FzyScript("lcd", ":lcd ~/")<CR>
+nnoremap <silent> <Space>fn :call FzyScript("fn", ":e ")<CR>
 
 nnoremap <Space>lj :tabnext<CR>
 nnoremap <Space>lk :tabprevious<CR>
@@ -49,16 +68,16 @@ nnoremap <Space>ln :tabnew<CR>
 nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 
 " WorkMode:
-nnoremap <Space>o :WorkMode<CR>
+nnoremap <Space>oE :e ~/workmode.vim<CR>
+if !exists('g:workmode_sourced')
+  nnoremap <Space>o :so ~/workmode.vim<CR>
+endif
 
-nnoremap <silent> <Space>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<CR>
-nnoremap <silent> <Space>fr :call FzyScript("fr", ":e ")<CR>
-nnoremap <silent> <Space>fd :call FzyScript("fd", ":lcd ")<CR>
-nnoremap <silent> <Space>lcd :call FzyScript("lcd", ":lcd ~/")<CR>
-nnoremap <silent> <Space>fn :call FzyScript("fn", ":e ")<CR>
 
 " Buffers:
 nnoremap <silent> <Space>bb :call FzyBuffers(":b ")<CR>
+nnoremap <silent> <Space>b/ :call FzyBuffers(":vert sb ")<CR>
+nnoremap <silent> <Space>b- :call FzyBuffers(":sb ")<CR>
 nnoremap <silent> <Space>bD :call FzyBuffers(":bd ")<CR>
 nnoremap <silent> <Space>fb :Buffers<CR>
 nnoremap <silent> <Space>bp :bprevious<CR>
@@ -78,3 +97,6 @@ nnoremap <silent> <Space>ghO :call FzyScript("ghO", ":!hub pr checkout ")<CR>
 nnoremap <silent> <Space>ghwo :call FzyScript("ghwo", ":!hub pr show ")<CR>
 nnoremap <silent> <Space>ghwO :call FzyScript("ghwO", ":!hub pr show ")<CR>
 
+" Quick Commands: (aliases)
+nmap qf <Space>ff
+nmap qc <Space>ff

@@ -103,7 +103,6 @@ tnoremap <silent> <C-b><C-n> <C-\><C-n>:FloatermNew<CR>
 
 tnoremap <silent> <C-q> <C-\><C-n>:FloatermNew<CR>
 tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
-nnoremap <silent> <Space>an :FloatermNew neomutt<CR>
 nnoremap <silent> <Space>gl :FloatermNew git log<CR>
 " Plugin Config }}}
 
@@ -137,12 +136,6 @@ noremap ZZ <Nop>
 noremap ZQ <Nop>
 noremap q <Nop>
 noremap Q q
-
-" Special Bindings:
-nnoremap # *NN
-nnoremap <C-w>/ <C-w>v
-nnoremap <C-w>_ <C-w>s
-nnoremap <C-w>m :tab split<CR>
 
 if exists('$SPACELAB')
   source ~/.vim/rc/space.vim

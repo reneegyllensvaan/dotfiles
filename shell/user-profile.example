@@ -1,3 +1,4 @@
+# vim: ft=bash
 # User/contact info
 export USER_NAME='Renee Gyllensvaan'
 # export USER_WORK_EMAIL='rgyllensvaan@cobaltgp.com'
@@ -5,8 +6,10 @@ export USER_NAME='Renee Gyllensvaan'
 export GITHUB_USER='reneegyllensvaan'
 
 export USER_PROFILE_ENV='home'  # home | work
-export OPERATING_SYSTEM='osx' # osx | linux
+export OPERATING_SYSTEM='linux' # osx | linux
 export USER_EMAIL=`[ "$USER_PROFILE_ENV" = "work" ] && echo "$USER_WORK_EMAIL" || echo "$USER_HOME_EMAIL"`
+# export GUI_GPG_PINENTRY='/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac'
+export GUI_GPG_PINENTRY=`which pinentry-curses`
 
 # GPG Settings
 export GPG_FINGERPRINT='FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4'
@@ -19,6 +22,3 @@ export GPG_SIGNING_KEYID='47EE898A014EEF1B'
 export GPG_AUTH_KEYID='C820BFAD1C9D1365'
 
 export GIT_SIGNING_KEY=$GPG_SIGNING_KEYID
-
-# TODO: make this work on linux
-export GUI_GPG_PINENTRY='/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac'
