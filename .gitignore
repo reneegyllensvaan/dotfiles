@@ -173,3 +173,13 @@ vim/blugin/floaterm
 vim/blugin/onedark
 vim/blugin/coc
 /home/renee/.skim
+shell/zmodules/zsh-syntax-highlighting
+vim/pack/plugins/start/gnupg
+vim/pack/plugins/start/commentary
+vim/pack/plugins/start/editorconfig
+vim/pack/plugins/start/skim
+vim/pack/plugins/start/polyglot
+vim/pack/plugins/start/floaterm
+vim/pack/plugins/start/onedark
+vim/pack/plugins/opt/coc
+vim/pack/plugins/start/skim_base

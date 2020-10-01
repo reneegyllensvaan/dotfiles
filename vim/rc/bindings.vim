@@ -90,6 +90,33 @@ nnoremap <Space>tw :set list!<CR>
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
 
+" Vim Actions:
+nnoremap <Space>vsf :so %<CR>
+nnoremap <Space>vsv :so ~/.vimrc<CR>
+nnoremap <Space>vev :e ~/.vimrc<CR>
+nnoremap <Space>vsb :so ~/.vim/rc/bindings.vim<CR>
+nnoremap <Space>vsc :so ~/.vim/rc/coc.vim<CR>
+nnoremap <Space>vsC :so ~/.vim/rc/commands.vim<CR>
+nnoremap <Space>vsF :so ~/.vim/rc/fzy.vim<CR>
+nnoremap <Space>vsG :so ~/.vim/rc/golden.vim<CR>
+nnoremap <Space>vsg :so ~/.vim/rc/gvimrc.vim<CR>
+nnoremap <Space>vsl :so ~/.vim/rc/look_and_feel.vim<CR>
+nnoremap <Space>vss :so ~/.vim/rc/snipe.vim<CR>
+nnoremap <Space>vs<Space> :so ~/.vim/rc/space.vim<CR>
+nnoremap <Space>vsS :so ~/.vim/rc/surround.vim<CR>
+nnoremap <Space>vsto :so ~/.vim/rc/textobject.vim<CR>
+nnoremap <Space>veb :e ~/.vim/rc/bindings.vim<CR>
+nnoremap <Space>vec :e ~/.vim/rc/coc.vim<CR>
+nnoremap <Space>veC :e ~/.vim/rc/commands.vim<CR>
+nnoremap <Space>veF :e ~/.vim/rc/fzy.vim<CR>
+nnoremap <Space>veG :e ~/.vim/rc/golden.vim<CR>
+nnoremap <Space>veg :e ~/.vim/rc/gvimrc.vim<CR>
+nnoremap <Space>vel :e ~/.vim/rc/look_and_feel.vim<CR>
+nnoremap <Space>ves :e ~/.vim/rc/snipe.vim<CR>
+nnoremap <Space>ve<Space> :e ~/.vim/rc/space.vim<CR>
+nnoremap <Space>veS :e ~/.vim/rc/surround.vim<CR>
+nnoremap <Space>veto :e ~/.vim/rc/textobject.vim<CR>
+
 " Bookmarks:
 nnoremap <Space>;E :e ~/.vim/files/bookmarks.vim<CR>
 source ~/.vim/files/bookmarks.vim
@@ -135,7 +162,10 @@ nnoremap <silent> <Space>gf :call FzyScript("gf", ":e ")<CR>
 nnoremap <silent> <Space>ghO :call FzyScript("ghO", ":!hub pr checkout ")<CR>
 nnoremap <silent> <Space>gho :call FzyScript("gho", ":!hub pr checkout ")<CR>
 nnoremap <silent> <Space>ghwO :call FzyScript("ghwO", ":!hub pr show ")<CR>
+nnoremap <silent> <Space>ghwi :!hub browse -- issues<CR>
 nnoremap <silent> <Space>ghwo :call FzyScript("ghwo", ":!hub pr show ")<CR>
+nnoremap <silent> <Space>ghwp :!hub browse -- pulls<CR>
+nnoremap <silent> <Space>ghwr :!hub browse<CR>
 nnoremap <silent> <Space>gl :FloatermNew git log<CR>
 nnoremap <silent> <Space>go :call FzyScript("go", ":!git checkout ")<CR>
 nnoremap <silent> <Space>gs :!git status<CR>
@@ -174,3 +204,4 @@ nnoremap qd :<C-u>CocList diagnostics
 nnoremap q5 :noh<CR>
 nnoremap q* :call feedkeys("\<Space>/ ".expand("<cword>"), 't')<CR>
 nnoremap q, A,<Down><Esc>
+nnoremap <silent> qd :CocList diagnostics<CR>

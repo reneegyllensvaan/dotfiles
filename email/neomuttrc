@@ -8,16 +8,17 @@ set mark_old='no'
 set editor = "vim"
 set crypt_use_gpgme = yes
 set pgp_sign_as = FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4
-set pgp_self_encrypt_as = FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4
-set pgp_self_encrypt = yes
+# set pgp_self_encrypt_as = FD52CF8CEAFF27FB03887BEAB4F76D0CFD1B30D4
+# set pgp_self_encrypt = yes
 set crypt_verify_sig = yes
 set crypt_autosign = yes
-set crypt_opportunistic_encrypt = yes
-message-hook '!~g !~G ~b "^-----BEGIN PGP (SIGNED )?MESSAGE"' 'exec check-traditional-pgp'
+# set crypt_opportunistic_encrypt = yes
+# message-hook '!~g !~G ~b "^-----BEGIN PGP (SIGNED )?MESSAGE"' 'exec check-traditional-pgp'
 
 tag-transforms \
     "TheNewPaper" "TNP"\
     "github" "GH"\
+    "notifications" "n"\
     "newsletters" "N"\
     "trello" "T"\
     "lists" "L"\
@@ -30,21 +31,20 @@ tag-transforms \
 
 # set date_format='%Y-%m-%d'
 # set index_format='%4C %Z %D %-20.20n [%e/%E] %s (%J)'
-
 # set index_format='%4C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-20.20n %-7.7J (%e/%E) %s'
 
 # With flags:
 # set index_format='%3C %Z %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-20.20n [%e/%E] %s (%J)'
-set index_format='%3C %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-14.14n [%e/%E] %s (%J)'
-
+# set index_format='%3C %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-14.14n [%e/%E] %s (%J)'
+set index_format='%3C %<[y?%<[m?%<[d?%[%H:%M ]&%[%d %a]>&%[%b %d]>&%[%m/%y ]> %-14.14n [%e/%E] %s (%g)'
 
 
 set sort_browser="reverse-date"
 set sort_aux="last-date-received"
-macro index T "<sort-reverse>t"
 set sort=reverse-threads
 #set sort=reverse-date-received
-macro index t "<sort-reverse>d"
+macro index oT "<sort-reverse>t"
+macro index ot "<sort-reverse>d"
 
 set pager_index_lines=10
 # set mbox_type = Maildir
@@ -55,7 +55,7 @@ set virtual_spoolfile = yes
 set hidden_tags=""
 set nm_exclude_tags = "spam,keep,deleted"
 set nm_open_timeout = 5
-set nm_query_type = 'messages'
+set nm_query_type = threads  # messages | threads
 set nm_unread_tag = "unread"
 
 set nm_db_limit = 0
@@ -92,13 +92,20 @@ set vfolder_format = "%6n(%6N) %f"
 # notmuch bindings
 source ~/.neomuttrc-mbox-primary
 
-macro index \\\\ "<vfolder-from-query>"
+# Message Actions:
+set wait_key = no  # Don't need to confirm pipe-message with enter if exit code is 0
 macro index,pager zx "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro index \\\\ "<vfolder-from-query>"
 
 macro index + "<modify-labels>+*\n<sync-mailbox>"
 macro index - "<modify-labels>-*\n<sync-mailbox>"
 bind index L modify-labels
 bind index Y edit-label
+bind index t tag-thread
+bind index T tag-entry
+bind index \CT tag-pattern
+bind index <Esc>t untag-pattern
+
 
 # threading keybindings
 bind index - collapse-thread
@@ -106,7 +113,6 @@ bind index _ collapse-all
 unset collapse_all
 
 # sidebar
-set sidebar_width   = 20
 set sidebar_visible = no
 color sidebar_new yellow default
 # set sidebar_format="%B%> (%Nn %Ff %S)"

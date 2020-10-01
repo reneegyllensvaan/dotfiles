@@ -1,6 +1,7 @@
 " vim: fdm=marker
 
 if has('gui_running')
+  packadd onedark
   colorscheme onedark
 end
 

@@ -18,15 +18,7 @@ fetch_email () {
   while true; do
     # Purge everything in trash from other tags
     notmuch new
-    notmuch tag --remove-all +trash tag:trash and tag:strict-delete
-    notmuch tag +trash -killed tag:killed
-
-    # Manually apply some tagging rules gmail doesn't
-    # (gmail doesn't seem to allow both moving to a label and to trash in inbox
-    # rules without clearing labels)
-    notmuch tag -important tag:github
-    notmuch tag +trash tag:github and not tag:unread and not tag:trash
-    notmuch tag +trash tag:asana and not tag:unread and not tag:trash
+    autotag
 
     # Do gmailieer sync (for notmuch/neomutt)
     [ "$USER_WORK_EMAIL" ] && (cd ~/email/work && gmi sync)

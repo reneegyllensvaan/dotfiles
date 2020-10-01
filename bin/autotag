@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Use the "deleted" tag to use trash that isn't auto-deleted, but maked safe to move to trash
+notmuch tag +deleted -trash tag:trash
+
+# Github
+notmuch tag +github from:github.com
+notmuch tag -important +notifications tag:github and 'from:notifications@github.com'
+notmuch tag -important tag:github
+
+# Asana
+notmuch tag -important +asana +notifications 'from:github.com'
+
+# Fortnox
+notmuch tag +notifications 'subject:Du har fått ett nytt lönebesked'
+
+# Cobalt notifs
+notmuch tag +notifications 'subject:Invitation to submit data to'
+
+# notmuch tag +deleted tag:github and not tag:unread and not tag:deleted
+# notmuch tag +deleted tag:asana and not tag:unread and not tag:deleted
+

@@ -1,4 +1,5 @@
 " vim:fdm=marker
+packloadall  " This has to go before filetype conf for vim-polyglot
 filetype plugin indent on         " Load plugins according to detected filetype.
 syntax on                         " Enable syntax highlighting.
 set nocompatible
@@ -67,29 +68,41 @@ set undofile
 set undodir     =$HOME/.vim/files/undo/
 set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 
-" ['gnupg','commentary','editorconfig','skim','polyglot','floaterm','onedark','coc']
-"   .map(v => `/Users/renee/.vim/blugin/${v}`).join(',')+'/Users/renee/.skim';
-function! EnsureLoaded(name, ...) abort
-  let plugin_path = expand('~/.vim/blugin/'.a:name)
-  if !(&rtp =~ plugin_path)
-    let &rtp.=','.plugin_path
-    " exec ''.a:name.'.vim'
-  endif
-  if !empty(a:000)
-    echo "refresh!"
-    exec "runtime plugin/".a:name.".vim"
-  endif
-endfunction
-let &rtp.=','.expand('~/.skim')
-call EnsureLoaded('gnupg')
-call EnsureLoaded('commentary')
-call EnsureLoaded('editorconfig')
-call EnsureLoaded('skim')
-call EnsureLoaded('polyglot')
-call EnsureLoaded('floaterm')
-if has('gui_running')
-  call EnsureLoaded('onedark')
-endif
+" function! EnsureLoaded(name, ...) abort
+"   let plugin_path = expand('~/.vim/blugin/'.a:name)
+"   if !(&rtp =~ plugin_path)
+"     let &rtp.=','.plugin_path
+"     " exec ''.a:name.'.vim'
+"   endif
+"   " if !empty(a:000)
+"   "   echo "refresh!"
+"   exec "runtime plugin/".a:name.".vim"
+"   " endif
+" endfunction
+" let &rtp.=','.expand('~/.skim')
+" call EnsureLoaded('gnupg')
+" call EnsureLoaded('commentary')
+" call EnsureLoaded('editorconfig')
+" call EnsureLoaded('skim')
+" call EnsureLoaded('polyglot')
+" call EnsureLoaded('floaterm')
+" if has('gui_running')
+"   call EnsureLoaded('onedark')
+" endif
+
+
+" call plug#begin('~/.vim/plugged')
+" Plug 'jamessan/vim-gnupg'
+" Plug 'tpope/vim-commentary'
+" Plug 'editorconfig/editorconfig-vim'
+" Plug 'lotabout/skim', {'dir': '~/.skim', 'do': './install' },
+" Plug 'lotabout/skim.vim'
+" Plug 'sheerun/vim-polyglot'
+" if has('gui_running')
+"   Plug 'joshdick/onedark.vim'
+" endif
+" Plug 'neoclide/coc.nvim', {'branch': 'release', 'on': 'CocEnable'}
+" call plug#end()
 
 " Plugin Config: {{{
 let g:skim_history_dir = '~/.local/share/skim-history'
@@ -114,6 +127,7 @@ source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/surround.vim
 source ~/.vim/rc/snipe.vim
 source ~/.vim/rc/textobject.vim
+source ~/.vim/rc/autocorrect.vim
 
 if exists('$SPACELAB')
   source ~/.vim/rc/space.vim

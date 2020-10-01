@@ -1,0 +1,3 @@
+#!/bin/sh
+cd ~/email/work
+exec gmi send $@

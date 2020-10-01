@@ -1,20 +1,41 @@
 # vim: ft=neomuttrc
-virtual-mailboxes \
-    "backlog" "notmuch://?query=not tag:trash and not tag:TheNewPaper and not tag:keep"\
-    "All mail"  "notmuch://?query=*"\
-    "Not trash" "notmuch://?query=NOT tag:trash"\
-    "inBox"     "notmuch://?query=tag:inbox and NOT tag:archive"\
-    "Unread"    "notmuch://?query=tag:unread"\
-    "Important" "notmuch://?query=tag:important"\
-    "Saved"     "notmuch://?query=tag:saved"\
-    "senT"      "notmuch://?query=tag:sent"\
-    "Github"    "notmuch://?query=tag:github"\
-    "asana"    "notmuch://?query=tag:asana"\
-    "orders"    "notmuch://?query=tag:orders"\
-    "Newsletters" "notmuch://?query=tag:newsletters"\
-    "lists"    "notmuch://?query=tag:lists"\
-    "attachment" "notmuch://?query=tag:attachment"\
-    "trash"    "notmuch://?query=tag:trash"
+
+unvirtual-mailboxes *
+source ~/.neomuttrc-env-work
+
+set sidebar_width = 24
+push "<change-vfolder>B: backlog<Enter>"
+
+virtual-mailboxes "B: backlog"     "notmuch://?query=not tag:trash and not tag:deleted and not tag:TheNewPaper and not tag:keep and not tag:orders and not tag:lists and not tag:github and not tag:arch-lists and not tag:asana and not tag:newsletters and not tag:notifications and not tag:sent and not tag:conversations"
+virtual-mailboxes "a: all_mail"    "notmuch://?query=*"
+virtual-mailboxes "b: inbox"       "notmuch://?query=tag:inbox and NOT tag:archive"
+virtual-mailboxes "c: conversations" "notmuch://?query=tag:conversations"
+virtual-mailboxes "n: notifications" "notmuch://?query=tag:notifications"
+virtual-mailboxes "u: unread"      "notmuch://?query=tag:unread"
+virtual-mailboxes "i: important"   "notmuch://?query=tag:important"
+# virtual-mailboxes "K: keep"        "notmuch://?query=tag:keep"
+virtual-mailboxes "E: sent"        "notmuch://?query=tag:sent"
+virtual-mailboxes "g: github"      "notmuch://?query=tag:github"
+virtual-mailboxes "A: asana"      "notmuch://?query=tag:asana"
+virtual-mailboxes "N: newsletters" "notmuch://?query=tag:newsletters"
+virtual-mailboxes "l: lists"       "notmuch://?query=tag:lists"\
+virtual-mailboxes "   attachment"  "notmuch://?query=tag:attachment"
+virtual-mailboxes "D: deleted"       "notmuch://?query=tag:deleted"
+
+macro index bB "<change-vfolder>B: backlog\n"
+macro index ba "<change-vfolder>a: all_mail\n"
+macro index bc "<change-vfolder>c: conversations\n"
+macro index bn "<change-vfolder>n: notifications\n"
+macro index bb "<change-vfolder>b: inbox\n"
+macro index bu "<change-vfolder>u: unread\n"
+macro index bi "<change-vfolder>i: important\n"
+# macro index bK "<change-vfolder>K: keep\n"
+macro index bE "<change-vfolder>E: sent\n"
+macro index bg "<change-vfolder>g: github\n"
+macro index bA "<change-vfolder>A: asana\n"
+macro index bN "<change-vfolder>N: newsletters\n"
+macro index bl "<change-vfolder>l: lists\n"
+macro index bD "<change-vfolder>D: deleted\n"
 
 # Tagging commands
 macro index R "<modify-labels>+unread +inbox\n"
@@ -22,21 +43,17 @@ macro index r "<modify-labels>-unread -inbox\n"
 macro index u "<modify-labels>-unread\n"
 macro index i "<modify-labels>+inbox\n"
 macro index I "<modify-labels>!important\n"
-macro index,pager K  "<modify-labels-then-hide>+keep\n"
-macro index,pager D  "<modify-labels-then-hide>-trash\n"
-macro index,pager d  "<modify-labels-then-hide>-inbox -unread +trash\n"
-macro index,pager mo "<modify-labels-then-hide>-inbox -unread !orders\n"
+# macro index,pager K  "<modify-labels>!keep\n"
+macro index,pager d  "<modify-labels>-inbox -unread +deleted\n"
+macro index,pager D  "<modify-labels>-deleted\n"
 
-# Vfolder keybindings
-macro index ba "<change-vfolder>All mail\n"
-macro index bb "<change-vfolder>inBox\n"
-macro index be "<change-vfolder>trEllo\n"
-macro index bo "<change-vfolder>Old\n"
-macro index bt "<change-vfolder>senT\n"
-macro index bu "<change-vfolder>Unread\n"
-macro index bg "<change-vfolder>Github\n"
-macro index bl "<change-vfolder>Lists\n"
-macro index bn "<change-vfolder>Newsletters\n"
-macro index bN "<change-vfolder>Not trash\n"
-macro index bi "<change-vfolder>Important\n"
+macro index,pager X "<modify-labels-then-hide>-inbox -unread -important +notifications\n"
+macro index,pager C "<modify-labels-then-hide>-inbox -unread -important +conversations\n"
 
+macro index,pager mo "<modify-labels-then-hide>-inbox -unread -important !orders\n"
+macro index,pager mb "<modify-labels-then-hide>-inbox -unread -important +inbox\n"
+macro index,pager md "<modify-labels-then-hide>-inbox -unread -important !deleted\n"
+macro index,pager mi "<modify-labels-then-hide>-inbox -unread !important\n"
+macro index,pager mn "<modify-labels-then-hide>-inbox -unread -important !notifications\n"
+macro index,pager mN "<modify-labels-then-hide>-inbox -unread -important !newsletters\n"
+macro index,pager mc "<modify-labels-then-hide>-inbox -unread -important !conversations\n"

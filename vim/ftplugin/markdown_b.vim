@@ -1,11 +1,17 @@
 function! s:ToggleChecked() abort
   let line = getline('.')
-  if line =~ '- [ ]'
-    call setline('.', substitute(line, '- \[ \]', 'aaaaa', ""))
+  if line =~ "- \\[ \\]"
+    call setline('.', substitute(line, '- \[ \]', '- [x]', ""))
   else
-    call setline('.', substitute(line, '- [x]', '- [ ]', ""))
+    call setline('.', substitute(line, '- \[x\]', '- [ ]', ""))
   endif
 
 endfunction
 
-nnoremap <buffer> <C-c><C-c> :call <SID>ToggleChecked()<CR>
+nnoremap <silent> <buffer> <C-c><C-c> :call <SID>ToggleChecked()<CR>
+iabbrev <buffer> -[] - [ ]
+iabbrev <buffer> -[ -\ [ ]
+iabbrev <buffer> [] []()<Left><Left><Left>
+
+" Language: (experimental)
+iabbrev <buffer> anoth another

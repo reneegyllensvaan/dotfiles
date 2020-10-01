@@ -6,12 +6,13 @@ command! RgSkim call fzf#vim#rg_interactive("", fzf#vim#with_preview('right:50%:
 " FIXME: be able to provide an argument
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
 
-command! -nargs=* FzyGrep call FzyCommandInBuffer("rg <args>", ':echo ', '')
-nnoremap <silent> <Space>? :FzyGrep
+command! -nargs=* FzyGrep call FzyCommandInBuffer("rg <args> \| cut -c -250", ':echo ', '')
+nnoremap <Space>? :FzyGrep
 
 function! LoadCoc()
-  call EnsureLoaded('coc')
-  runtime plugin/coc.vim
+  " call EnsureLoaded('coc')
+  " runtime plugin/coc.vim
+  packadd coc
   execute 'CocEnable'
   if !exists("g:coc_is_sourced")
     let g:coc_is_sourced = 1
