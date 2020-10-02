@@ -18,6 +18,7 @@ nnoremap \S :spellgood <C-r><C-w>
 nnoremap \sa yiw:e ~/.vim/rc/autocorrect.vim<CR>Goiab <C-r>0 <C-r>0
 nnoremap \< V`]<
 nnoremap \< V`]<
+nnoremap \F :Format<cr>
 nnoremap \T :silent s/\<\(\w\)\(\S*\)/\u\1\L\2/g<cr>:noh<cr>
 nnoremap \ff :set fdm=manual<cr>
 nnoremap \fi :set fdm=indent<cr>
@@ -55,10 +56,11 @@ vnoremap < <gv
 vnoremap > >gv
 
 " Window Mappings:
-nnoremap <Left> <C-w>h
-nnoremap <Down> <C-w>j
-nnoremap <Up> <C-w>k
-nnoremap <Right> <C-w>l
+" FIXME: find something nice to do with up/down arrows
+" nnoremap <Down> <C-w>j
+" nnoremap <Up> <C-w>k
+nnoremap <Right> :call DrillWindowOrTab(0)<CR>
+nnoremap <Left> :call DrillWindowOrTab(1)<CR>
 nnoremap <C-w>/ <C-w>v
 nnoremap <C-w>_ <C-w>s
 nnoremap <C-w>m :tab split<CR>
@@ -81,9 +83,12 @@ nnoremap <Space>wt- :term<CR>
 nnoremap <Space>/ :RgInteractive<CR>
 
 " Toggles: ( / To file )
-nnoremap <Space>tB :e ~/.vim/rc/bindings.vim<CR>
-nnoremap <Space>tV :e ~/.vim/rc/vimrc_coc.vim<CR>
-nnoremap <Space>tR :call FzyScript("tR", ":e ")<CR>
+nnoremap <Space>ttw0 :set textwidth=100<CR>
+nnoremap <Space>ttw9 :set textwidth=90<CR>
+nnoremap <Space>ttw8 :set textwidth=80<CR>
+nnoremap <Space>tRR :call FzyScript("tR", ":e ")<CR>
+nnoremap <Space>tR/ :call FzyScript("tR", ":vsp ")<CR>
+nnoremap <Space>tR_ :call FzyScript("tR", ":sp ")<CR>
 nnoremap <Space>tf :call ToggleVExplorer()<CR>
 nnoremap <Space>ta :call LoadCoc()<CR>
 nnoremap <Space>ts :call ToggleSyntax()<CR>
@@ -111,6 +116,7 @@ nnoremap <Space>vs<Space> :so ~/.vim/rc/space.vim<CR>
 nnoremap <Space>vsS :so ~/.vim/rc/surround.vim<CR>
 nnoremap <Space>vsto :so ~/.vim/rc/textobject.vim<CR>
 nnoremap <Space>veb :e ~/.vim/rc/bindings.vim<CR>
+nnoremap <Space>vea :e ~/.vim/rc/autocorrect.vim<CR>
 nnoremap <Space>vec :e ~/.vim/rc/coc.vim<CR>
 nnoremap <Space>veC :e ~/.vim/rc/commands.vim<CR>
 nnoremap <Space>veF :e ~/.vim/rc/fzy.vim<CR>
@@ -130,6 +136,8 @@ source ~/.vim/files/bookmarks.vim
 nnoremap <silent> <Space>fw :w<CR>
 nnoremap <Space>fc :cd %:p:h<CR>
 nnoremap <silent> <Space>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<CR>
+nnoremap <silent> <Space>f/ :call FzyCommandInBuffer("fd . --type f", ":vsp ", "")<CR>
+nnoremap <silent> <Space>f_ :call FzyCommandInBuffer("fd . --type f", ":vsp ", "")<CR>
 nnoremap <silent> <Space>fr :call FzyScript("fr", ":e ")<CR>
 nnoremap <silent> <Space>fd :call FzyScript("fd", ":lcd ")<CR>
 nnoremap <silent> <Space>lcd :call FzyScript("lcd", ":lcd ~/")<CR>

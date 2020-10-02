@@ -21,6 +21,7 @@ cat << EOF
   canoe = commit --amend --no-edit
   cp  = cherry-pick
   d   = diff
+  ds  = diff --staged
   l   = log
   ls-files-root = "! git ls-files"
   o   = checkout

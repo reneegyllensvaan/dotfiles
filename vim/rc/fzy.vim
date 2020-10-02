@@ -47,7 +47,7 @@ let g:fzy_actions = ['Files', 'Buffers']
 
 function! DumpBuffers()
   redir! > ~/.tmp/vim-buffers
-  :ls
+  silent ls
   redir END
 endfunction
 

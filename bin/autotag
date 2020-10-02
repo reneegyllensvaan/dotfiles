@@ -20,6 +20,9 @@ notmuch tag +notifications 'subject:Invitation to submit data to'
 # NPR Newsletters
 notmuch tag +NPR 'from:nl.npr.org'
 
+# Mail lists
+notmuch tag +lists +pypy-dev 'from:pypy-dev-request@python.org'
+
 # notmuch tag +deleted tag:github and not tag:unread and not tag:deleted
 # notmuch tag +deleted tag:asana and not tag:unread and not tag:deleted
 

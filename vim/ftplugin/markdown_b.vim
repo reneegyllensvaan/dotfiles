@@ -9,8 +9,7 @@ function! s:ToggleChecked() abort
 endfunction
 
 nnoremap <silent> <buffer> <C-c><C-c> :call <SID>ToggleChecked()<CR>
-iabbrev <buffer> -[] - [ ]
-iabbrev <buffer> -[ -\ [ ]
+iabbrev <buffer> -[] -<space>[<space>]
 iabbrev <buffer> [] []()<Left><Left><Left>
 
 " Language: (experimental)
