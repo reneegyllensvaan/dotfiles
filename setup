@@ -172,6 +172,8 @@ ensure_git_repo steno/steno-dictionaries https://github.com/didoesdigital/steno-
 
 ensure_directory vim/pack/plugins/start
 ensure_directory vim/pack/plugins/opt
+
+# Startup plugins
 ensure_git_repo vim/pack/plugins/start/gnupg https://github.com/jamessan/vim-gnupg
 ensure_git_repo vim/pack/plugins/start/commentary https://github.com/tpope/vim-commentary
 ensure_git_repo vim/pack/plugins/start/editorconfig https://github.com/editorconfig/editorconfig-vim
@@ -180,9 +182,11 @@ ensure_git_repo vim/pack/plugins/start/skim_base https://github.com/lotabout/ski
 ensure_git_repo vim/pack/plugins/start/skim https://github.com/lotabout/skim.vim
 ensure_git_repo vim/pack/plugins/start/polyglot https://github.com/sheerun/vim-polyglot
 ensure_git_repo vim/pack/plugins/start/floaterm https://github.com/voldikss/vim-floaterm
+
+# Dynamic plugins
+ensure_git_repo vim/pack/plugins/opt/gitgutter https://github.com/airblade/vim-gitgutter.git
 ensure_git_repo vim/pack/plugins/opt/onedark https://github.com/joshdick/onedark.vim
 ensure_git_repo vim/pack/plugins/opt/coc https://github.com/neoclide/coc.nvim '--branch release'
-# , {'branch': 'release', 'on': 'CocEnable'}
 
 log "Building shell template files"
 build_template gpg/gpg.conf

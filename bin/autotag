@@ -17,6 +17,9 @@ notmuch tag +notifications 'subject:Du har fått ett nytt lönebesked'
 # Cobalt notifs
 notmuch tag +notifications 'subject:Invitation to submit data to'
 
+# NPR Newsletters
+notmuch tag +NPR 'from:nl.npr.org'
+
 # notmuch tag +deleted tag:github and not tag:unread and not tag:deleted
 # notmuch tag +deleted tag:asana and not tag:unread and not tag:deleted
 

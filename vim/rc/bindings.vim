@@ -14,6 +14,8 @@ inoremap <C-s><C-w> <C-o>:w<CR>
 "  Editing Commands:
 nnoremap <bs> @Q
 nnoremap \= gg=G``
+nnoremap \S :spellgood <C-r><C-w>
+nnoremap \sa yiw:e ~/.vim/rc/autocorrect.vim<CR>Goiab <C-r>0 <C-r>0
 nnoremap \< V`]<
 nnoremap \< V`]<
 nnoremap \T :silent s/\<\(\w\)\(\S*\)/\u\1\L\2/g<cr>:noh<cr>
@@ -49,6 +51,8 @@ vnoremap zJ <Esc>`>jm>gv
 vnoremap zK <Esc>`>km>gv
 vnoremap zh <Esc>`>km>`<jm<gv
 vnoremap zl <Esc>`>jm>`<km<gv
+vnoremap < <gv
+vnoremap > >gv
 
 " Window Mappings:
 nnoremap <Left> <C-w>h
@@ -87,6 +91,7 @@ nnoremap <Space>tA :CocDisable<CR>
 nnoremap <Space>tn :set number!<CR>
 nnoremap <Space>tr :set relativenumber!<CR>
 nnoremap <Space>tw :set list!<CR>
+nnoremap <Space>tgg :call ToggleGitGutter()<CR>
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
 
@@ -169,6 +174,9 @@ nnoremap <silent> <Space>ghwr :!hub browse<CR>
 nnoremap <silent> <Space>gl :FloatermNew git log<CR>
 nnoremap <silent> <Space>go :call FzyScript("go", ":!git checkout ")<CR>
 nnoremap <silent> <Space>gs :!git status<CR>
+nnoremap <silent> <Space>gb :call GitBlameLine()<CR>
+" nnoremap <silent> <Space>gB :term tig blame %<CR>
+nnoremap <silent> <Space>gB :FloatermNew tig blame %<CR>
 
 " Snipe Mappings:
 nnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
@@ -200,6 +208,7 @@ onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
 nmap qf <Space>ff
 nmap qb <Space>bb
 nmap qc <Space>b/
+nmap qg <Space>gb
 nnoremap qd :<C-u>CocList diagnostics
 nnoremap q5 :noh<CR>
 nnoremap q* :call feedkeys("\<Space>/ ".expand("<cword>"), 't')<CR>

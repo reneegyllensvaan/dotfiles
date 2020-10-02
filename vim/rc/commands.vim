@@ -50,3 +50,13 @@ function! ToggleCursorLine()
     setlocal nocursorline
   end
 endfunction
+
+function! GitBlameLine()
+  echo system("git blame ".expand('%')." -L ".getpos('.')[1].",".getpos('.')[1])
+endfunction
+
+let g:loaded_gitgutter = 0
+function! ToggleGitGutter()
+  packadd gitgutter
+  exec "GitGutterToggle"
+endfunction
