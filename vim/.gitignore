@@ -8,3 +8,4 @@ files/recent-write.log
 files/bookmarks.vim
 pack/plugins/start/*
 pack/plugins/opt/*
+spell
