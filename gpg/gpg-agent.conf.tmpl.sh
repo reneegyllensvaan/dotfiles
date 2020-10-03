@@ -6,3 +6,4 @@ enable-ssh-support
 pinentry-program `[ "$OPERATING_SYSTEM" = 'linux' ] && which pinentry-curses 2>/dev/null || echo $GUI_GPG_PINENTRY`
 extra-socket "$HOME/.gnupg/S.gpg-agent.extra"
 EOF
+exit 0

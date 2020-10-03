@@ -28,3 +28,4 @@ $(binary_path racer_cmd racer)
 $rust_src_var
 set grepprg=$grepprg
 EOF
+exit 0

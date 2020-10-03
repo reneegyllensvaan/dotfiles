@@ -6,3 +6,4 @@ use-agent
 #no-tty
 default-key $GPG_FINGERPRINT
 EOF
+exit 0

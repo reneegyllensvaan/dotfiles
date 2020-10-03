@@ -10,3 +10,4 @@ right now i'm working on these dotfiles to get them where i want them, i have ki
 `cat system-packages/osx/recommended`
 
 EOF
+exit 0

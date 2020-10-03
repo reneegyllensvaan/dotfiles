@@ -74,8 +74,12 @@ push_cmd () {
 build_template () {
   if [ ! $nobuild_templates ]; then
     [ -f "$PWD/$1.tmpl.sh" ] || log "\nTemplate $1.tmpl.sh not found, skipping. Please fix this!"
-    sh "$PWD/$1.tmpl.sh" > "$PWD/$1"
-    log "  Built $1.tmpl.sh -> $1"
+    if sh "$PWD/$1.tmpl.sh" > "$PWD/$1"; then
+      log "  Built $1.tmpl.sh -> $1"
+    else
+      log "  Skipped template $1.tmpl.sh -> $1"
+      rm "$PWD/$1"
+    fi
   fi
 }
 
@@ -185,6 +189,7 @@ ensure_git_repo vim/pack/plugins/start/floaterm https://github.com/voldikss/vim-
 
 # Dynamic plugins
 ensure_git_repo vim/pack/plugins/opt/gitgutter https://github.com/airblade/vim-gitgutter.git
+ensure_git_repo vim/pack/plugins/opt/fugitive https://github.com/tpope/vim-fugitive.git
 ensure_git_repo vim/pack/plugins/opt/onedark https://github.com/joshdick/onedark.vim
 ensure_git_repo vim/pack/plugins/opt/coc https://github.com/neoclide/coc.nvim '--branch release'
 
@@ -195,7 +200,8 @@ build_template other/gitconfig
 build_template README.md
 build_template email/neomuttrc-env-home
 build_template email/neomuttrc-env-work
-build_template email/notmuch-config
+build_template email/notmuch-config-home
+build_template email/notmuch-config-work
 build_template nvim/pathspec.vim
 build_template shell/alias
 
@@ -210,8 +216,11 @@ else
   warn "Could not find 'yq' executable, not rebuilding textmate snippets"
 fi
 
-log "Making the config directory and linking/copying files"
+log "Making the config directories and linking/copying files"
 ensure_directory $HOME/.config/
+ensure_directory $HOME/.local/bin
+ensure_directory $HOME/.local/share
+ensure_directory $HOME/.tmp
 
 log "  Xorg applications"
 symlink file x11/xinitrc ~/.xinitrc
@@ -286,15 +295,24 @@ symlink file email/neomuttrc-env-home $HOME/.neomuttrc-env-home
 symlink file email/neomuttrc-env-work $HOME/.neomuttrc-env-work
 symlink file email/neomuttrc-unbind $HOME/.neomuttrc-unbind
 symlink file email/neomuttrc-colors $HOME/.neomuttrc-colors
-if [ "$USER_PROFILE_ENV" = "home" ]; then
+push_cmd "cat email/notmuch-config-home > $HOME/.notmuch-config-home"
+push_cmd "cat email/notmuch-config-work > $HOME/.notmuch-config-work"
+if [ "$USER_PROFILE_ENV" = "work" ]; then
+  symlink file email/neomuttrc-work $HOME/.neomuttrc-mbox-primary,
+  symlink file email/neomuttrc-home $HOME/.neomuttrc-mbox-secondary
+  symlink file bin/notmuch-work $HOME/.local/bin/notmuch-primary
+  symlink file bin/notmuch-home $HOME/.local/bin/notmuch-secondary
+  push_cmd "cat email/notmuch-config-work > $HOME/.notmuch-config-primary"
+  push_cmd "cat email/notmuch-config-home > $HOME/.notmuch-config-secondary"
+else
   symlink file email/neomuttrc-home $HOME/.neomuttrc-mbox-primary
   symlink file email/neomuttrc-work $HOME/.neomuttrc-mbox-secondary
-else
-  symlink file email/neomuttrc-work $HOME/.neomuttrc-mbox-primary
-  symlink file email/neomuttrc-home $HOME/.neomuttrc-mbox-secondary
+  symlink file bin/notmuch-home $HOME/.local/bin/notmuch-primary
+  symlink file bin/notmuch-work $HOME/.local/bin/notmuch-secondary
+  push_cmd "cat email/notmuch-config-work > $HOME/.notmuch-config-primary"
+  push_cmd "cat email/notmuch-config-home > $HOME/.notmuch-config-secondary"
 fi
 symlink file email/neomuttrc $HOME/.neomuttrc
-symlink file email/notmuch-config $HOME/.notmuch-config
 ensure_directory $HOME/.config/urlscan
 symlink file email/urlscan.json $HOME/.config/urlscan/config.json
 ensure_directory $HOME/email/work
@@ -316,11 +334,6 @@ symlink file other/editorconfig $HOME/.editorconfig
 symlink file other/gitconfig $HOME/.gitconfig
 symlink file other/tigrc $HOME/.tigrc
 symlink file other/ctags $HOME/.ctags
-
-log "  Making the $HOME/.local/bin directory"
-ensure_directory $HOME/.local/bin
-ensure_directory $HOME/.local/share
-ensure_directory $HOME/.tmp
 
 if [ '' != "$FATAL" ]; then
   fatal "There were errors during setup, please fix them and re-run"

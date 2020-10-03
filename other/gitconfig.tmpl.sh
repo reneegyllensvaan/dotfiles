@@ -35,3 +35,4 @@ cat << EOF
   s   = status
   z   = stash
 EOF
+exit 0

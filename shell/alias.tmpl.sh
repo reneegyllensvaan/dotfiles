@@ -40,6 +40,8 @@ alias rr='ranger'
 alias sx='startx;exit'
 alias up='cd ..'
 alias fab=comfortable-fab
+alias nm1=notmuch-primary
+alias nm2=notmuch-secondary
 
 # unglob some commands
 alias fd='noglob fd'
@@ -50,3 +52,4 @@ alias jq='noglob jq'
 alias yq='noglob yq'
 
 EOF
+exit 0
