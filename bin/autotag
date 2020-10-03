@@ -1,27 +1,39 @@
 #!/bin/sh
 
+home () {
+  notmuch-home $@
+}
+work () {
+  notmuch-home $@
+}
+both () {
+  notmuch-home $@
+  notmuch-work $@
+}
+
 # Use the "deleted" tag to use trash that isn't auto-deleted, but maked safe to move to trash
-notmuch tag +deleted -trash tag:trash
+both tag +deleted -trash tag:trash
 
 # Github
-notmuch tag +github from:github.com
-notmuch tag -important +notifications tag:github and 'from:notifications@github.com'
-notmuch tag -important tag:github
+both tag +github from:github.com
+both tag -important +notifications tag:github and 'from:notifications@github.com'
+both tag -important tag:github
 
 # Asana
-notmuch tag -important +asana +notifications 'from:github.com'
+both tag -important +asana +notifications 'from:asana.com'
 
 # Fortnox
-notmuch tag +notifications 'subject:Du har fått ett nytt lönebesked'
+work tag +notifications 'subject:Du har fått ett nytt lönebesked'
 
 # Cobalt notifs
-notmuch tag +notifications 'subject:Invitation to submit data to'
+work tag +notifications 'subject:Invitation to submit data to'
 
 # NPR Newsletters
-notmuch tag +NPR 'from:nl.npr.org'
+home tag +NPR 'from:nl.npr.org'
+home tag -deleted tag:NPR
 
 # Mail lists
-notmuch tag +lists +pypy-dev 'from:pypy-dev-request@python.org'
+work tag +lists +pypy-dev 'from:pypy-dev-request@python.org'
 
 # notmuch tag +deleted tag:github and not tag:unread and not tag:deleted
 # notmuch tag +deleted tag:asana and not tag:unread and not tag:deleted

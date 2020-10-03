@@ -4,8 +4,6 @@ unvirtual-mailboxes *
 source ~/.neomuttrc-env-home
 
 set sidebar_width   = 20
-push "<change-vfolder>B: backlog<Enter>"
-
 virtual-mailboxes "B: backlog"     "notmuch://?query=not tag:trash and not tag:deleted and not tag:TheNewPaper and not tag:keep and not tag:orders and not tag:lists and not tag:github and not tag:arch-lists and not tag:NPR"
 virtual-mailboxes "a: all_mail"    "notmuch://?query=*"
 virtual-mailboxes "N: not_deleted" "notmuch://?query=NOT tag:deleted"
@@ -22,6 +20,7 @@ virtual-mailboxes "A: attachment"  "notmuch://?query=tag:attachment"
 virtual-mailboxes "D: deleted"     "notmuch://?query=tag:deleted"
 virtual-mailboxes "   TheNewPaper" "notmuch://?query=tag:TheNewPaper"
 
+push "<change-vfolder>B: backlog<Enter>"
 
 macro index bB "<change-vfolder>B: backlog\n"
 macro index ba "<change-vfolder>a: all_mail\n"

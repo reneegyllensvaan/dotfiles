@@ -1,0 +1,4 @@
+#!/bin/sh
+rm ~/.notmuch-config
+ln -sf ~/.notmuch-config-home ~/.notmuch-config
+notmuch --config=$HOME/.notmuch-config-home $@

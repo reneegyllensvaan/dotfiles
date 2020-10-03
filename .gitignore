@@ -185,3 +185,6 @@ vim/pack/plugins/opt/coc
 vim/pack/plugins/start/skim_base
 vim/pack/plugins/opt/onedark
 vim/pack/plugins/opt/gitgutter
+email/notmuch-config-work
+email/notmuch-config-home
+vim/pack/plugins/opt/fugitive

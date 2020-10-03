@@ -3,6 +3,7 @@ source ~/.neomuttrc-unbind
 
 set keep_flagged='yes'
 set mark_old='no'
+auto_view text/html
 
 # GPG Config
 set editor = "vim"
@@ -91,6 +92,8 @@ set vfolder_format = "%6n(%6N) %f"
 # set the default vfolder
 # notmuch bindings
 source ~/.neomuttrc-mbox-primary
+macro index <F1> ":source ~/.neomuttrc-mbox-primary\n"
+macro index <F2> ":source ~/.neomuttrc-mbox-secondary\n"
 
 # Message Actions:
 set wait_key = no  # Don't need to confirm pipe-message with enter if exit code is 0

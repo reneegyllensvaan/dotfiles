@@ -17,12 +17,19 @@ stretch_notification () {
 fetch_email () {
   while true; do
     # Purge everything in trash from other tags
-    notmuch new
-    autotag
+    [ "$USER_HOME_EMAIL" ] && notmuch-home new
+    [ "$USER_WORK_EMAIL" ] && notmuch-work new
+
+    # Apply auto-tagging script
+    which autotag >/dev/null 2>&1 && autotag
 
     # Do gmailieer sync (for notmuch/neomutt)
-    [ "$USER_WORK_EMAIL" ] && (cd ~/email/work && gmi sync)
-    [ "$USER_HOME_EMAIL" ] && (cd ~/email/home && gmi sync)
+    [ "$USER_HOME_EMAIL" ] && (rm ~/.notmuch-config \
+                              ; ln -sf ~/.notmuch-config-home ~/.notmuch-config \
+                              ; cd ~/email/home && gmi sync)
+    [ "$USER_WORK_EMAIL" ] && (rm ~/.notmuch-config \
+                              ; ln -sf ~/.notmuch-config-work ~/.notmuch-config \
+                              ; cd ~/email/work && gmi sync)
     # Get amount of new email
     notmuch tag -unnotified tag:github or tag:trello
     new_mail=`notmuch search tag:unnotified | wc -l | awk '{print $1}'`

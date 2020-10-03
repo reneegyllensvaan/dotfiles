@@ -1,4 +1,5 @@
 #!/bin/sh
+[ "$USER_WORK_EMAIL" ] || exit 1
 cat << EOF
 # .notmuch-config - Configuration file for the notmuch mail system
 #
@@ -13,7 +14,7 @@ cat << EOF
 # configured here named ".notmuch".
 #
 [database]
-path=$HOME/email/$USER_PROFILE_ENV
+path=$HOME/email/work
 
 # User configuration
 #
@@ -32,7 +33,7 @@ path=$HOME/email/$USER_PROFILE_ENV
 #
 [user]
 name=$USER_NAME
-primary_email=$USER_EMAIL
+primary_email=$USER_WORK_EMAIL
 
 # Configuration for "notmuch new"
 #
@@ -88,3 +89,4 @@ exclude_tags=deleted;spam;
 [maildir]
 synchronize_flags=true
 EOF
+exit 0
