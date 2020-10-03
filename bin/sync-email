@@ -30,14 +30,7 @@ fetch_email () {
     [ "$USER_WORK_EMAIL" ] && (rm ~/.notmuch-config \
                               ; ln -sf ~/.notmuch-config-work ~/.notmuch-config \
                               ; cd ~/email/work && gmi sync)
-    # Get amount of new email
-    notmuch tag -unnotified tag:github or tag:trello
-    new_mail=`notmuch search tag:unnotified | wc -l | awk '{print $1}'`
-    # if [ $new_mail != '0' ]; then
-    #   [ $OPERATING_SYSTEM = 'osx' ] && \
-    #     osascript -e 'display notification "'"$new_messages"'new messages" with title "notmuch"'
-    # fi
-    notmuch tag -unnotified tag:unnotified
+
     sleep $EMAIL_SYNC_INTERVAL;
   done
 }

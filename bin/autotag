@@ -11,6 +11,15 @@ both () {
   notmuch-work $@
 }
 
+# First, do some basic post-proccesing
+both tag -unnotified tag:github or tag:trello
+# new_mail=`both search tag:unnotified | wc -l | awk '{print $1}'`
+# if [ $new_mail != '0' ]; then
+#   [ $OPERATING_SYSTEM = 'osx' ] && \
+#     osascript -e 'display notification "'"$new_messages"'new messages" with title "notmuch"'
+# fi
+both tag -unnotified tag:unnotified
+
 # Use the "deleted" tag to use trash that isn't auto-deleted, but maked safe to move to trash
 both tag +deleted -trash tag:trash
 
@@ -35,6 +44,6 @@ home tag -deleted tag:NPR
 # Mail lists
 work tag +lists +pypy-dev 'from:pypy-dev-request@python.org'
 
-# notmuch tag +deleted tag:github and not tag:unread and not tag:deleted
-# notmuch tag +deleted tag:asana and not tag:unread and not tag:deleted
+# both tag +deleted tag:github and not tag:unread and not tag:deleted
+# both tag +deleted tag:asana and not tag:unread and not tag:deleted
 

@@ -1,3 +1,4 @@
+" vim: ft=sourceonsave.vim
 " Unmaps:
 nnoremap <C-c> <Nop>
 nnoremap <C-c><C-c> <Nop>
@@ -6,6 +7,10 @@ noremap ZZ <Nop>
 noremap ZQ <Nop>
 noremap Y <Nop>
 noremap q <Nop>
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 noremap Q q
 
 " Insert Mode:
@@ -81,6 +86,7 @@ nnoremap <Space>wt- :term<CR>
 
 " Searching:
 nnoremap <Space>/ :RgInteractive<CR>
+nnoremap <Space>? :FzyGrep<Space>:
 
 " Toggles: ( / To file )
 nnoremap <Space>ttw0 :set textwidth=100<CR>
@@ -101,9 +107,11 @@ nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
 
 " Vim Actions:
+nnoremap <silent> <Space>vpa :call feedkeys(":packadd \<Tab>", 'tn')<CR>
 nnoremap <Space>vsf :so %<CR>
 nnoremap <Space>vsv :so ~/.vimrc<CR>
 nnoremap <Space>vev :e ~/.vimrc<CR>
+nnoremap <silent> <Space>vee :call feedkeys(":e ~/.vim/\<Tab>", 'tn')<CR>
 nnoremap <Space>vsb :so ~/.vim/rc/bindings.vim<CR>
 nnoremap <Space>vsc :so ~/.vim/rc/coc.vim<CR>
 nnoremap <Space>vsC :so ~/.vim/rc/commands.vim<CR>
@@ -219,6 +227,6 @@ nmap qc <Space>b/
 nmap qg <Space>gb
 nnoremap qd :<C-u>CocList diagnostics
 nnoremap q5 :noh<CR>
-nnoremap q* :call feedkeys("\<Space>/ ".expand("<cword>"), 't')<CR>
+nnoremap q* :exec "FzyGrep ".expand("<cword>")<CR>
 nnoremap q, A,<Down><Esc>
 nnoremap <silent> qd :CocList diagnostics<CR>

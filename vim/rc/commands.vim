@@ -2,12 +2,12 @@ let g:rg_opts = '--smart-case'
 command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': 'e', 'down': '30%'})
 command! -bang -nargs=* RgInteractive call fzf#vim#rg_interactive(<q-args>)
 " call fzf#vim#grep_interactive("sh -c \'rg --column --line-number --color=always \"{}\" . \| head -n 10'", 1)
-command! RgSkim call fzf#vim#rg_interactive("", fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
 " FIXME: be able to provide an argument
+command! RgSkim call fzf#vim#rg_interactive("", fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
+" command! -nargs=* Rg call skim#run({'source': "rg <args>", 'sink': 'e', 'down': '30%'})
 
-command! -nargs=* FzyGrep call FzyCommandInBuffer("rg <args> \| cut -c -250", ':echo ', '')
-nnoremap <Space>? :FzyGrep
+command! -nargs=* FzyGrep call FzyCommandInBuffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
 
 function! LoadCoc()
   " call EnsureLoaded('coc')
@@ -31,6 +31,17 @@ function! ToggleSyntax()
   endif
 endfunction
 
+augroup myhooks
+  autocmd!
+  " This isn't really used for anything in my vim config currently, I'm just
+  " logging all files so i can experiment with a 'recent files' type of scoring
+  " for fuzzy matchers.
+  autocmd BufReadPost * :call writefile([localtime().";".getcwd().";".expand("%:p")],
+        \glob("~/.vim/files/recent.log"), "a")
+  autocmd BufWritePost * :call writefile([localtime().";".getcwd().";".expand("%:p")],
+        \glob("~/.vim/files/recent-write.log"), "a")
+augroup END
+
 let g:center_cursor_disabled_scrolloff = 4
 function! ToggleCenterCursor()
   if &so == 999
@@ -38,17 +49,6 @@ function! ToggleCenterCursor()
     let g:center_cursor_disabled_scrolloff = &so
   else
     set so=999
-  end
-endfunction
-
-" TODO: Set up non-terrible-looking cursorline on console
-let g:cursorline_enabled = has('gui_running')
-function! ToggleCursorLine()
-  let g:cursorline_enabled = !g:cursorline_enabled
-  if g:cursorline_enabled
-    setlocal cursorline
-  else
-    setlocal nocursorline
   end
 endfunction
 

@@ -192,6 +192,8 @@ ensure_git_repo vim/pack/plugins/opt/gitgutter https://github.com/airblade/vim-g
 ensure_git_repo vim/pack/plugins/opt/fugitive https://github.com/tpope/vim-fugitive.git
 ensure_git_repo vim/pack/plugins/opt/onedark https://github.com/joshdick/onedark.vim
 ensure_git_repo vim/pack/plugins/opt/coc https://github.com/neoclide/coc.nvim '--branch release'
+ensure_git_repo vim/pack/plugins/opt/colors-atlas https://github.com/huyvohcmc/atlas.vim
+
 
 log "Building shell template files"
 build_template gpg/gpg.conf

@@ -10,9 +10,6 @@ hide_edge_borders smart
 #floating window settings
 floating_modifier $mod
 bindsym $mod+Shift+space floating toggle
-for_window [class="guake" instance="dropdown"] floating enable
-for_window [instance="Gnome-pie"] floating enable
-#for_window [title="pye-launcher-window"] floating enable
 
 # launching programs
 bindsym $mod+Return exec --no-startup-id "urxvtc -e 'urxvtmux'"
@@ -21,7 +18,6 @@ bindsym $mod+z exec --no-startup-id "rofi -modi run,drun,ssh,window -show drun"
 bindsym $mod+Shift+z exec --no-startup-id "rofi -modi run,drun,ssh,window -show run"
 bindsym $mod+Shift+w exec --no-startup-id "rofi -modi window -show window"
 bindsym $mod+Shift+e exec --no-startup-id "rofi -modi emoji -show emoji"
-bindsym $mod+x exec --no-startup-id "albert toggle"
 bindsym $mod+space focus mode_toggle
 bindsym $mod+c exec --no-startup-id "clipmenu && xsel -o"
 #bindsym $mod+F1 exec --no-startup-id "guake -t" //commented because terminal trigger has bad dbus lag
@@ -31,6 +27,8 @@ bindsym $mod+F10 bar mode toggle
 bindsym $mod+Mod1+w exec --no-startup-id "GTK_THEME=Adwaita:light chromium"
 #bindsym $mod+Mod1+e exec --no-startup-id "emacsclient -c -a ''"
 bindsym $mod+Mod1+e exec --no-startup-id "emacs"
+bindsym $mod+Mod1+g exec --no-startup-id "gvim"
+
 
 # core controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
@@ -129,7 +127,7 @@ bar {
   status_command i3status
   mode dock
   colors {
-    background #1d262a
+    background #282C34
     statusline #e7ebed
     separator #e7ebed
     focused_workspace  #adf7be #adf7be #1d262a

@@ -54,7 +54,7 @@ set pager_index_lines=10
 # set virtual_spoolfile='yes'
 set virtual_spoolfile = yes
 set hidden_tags=""
-set nm_exclude_tags = "spam,keep,deleted"
+set nm_exclude_tags = "spam,deleted"
 set nm_open_timeout = 5
 set nm_query_type = threads  # messages | threads
 set nm_unread_tag = "unread"
@@ -100,14 +100,14 @@ set wait_key = no  # Don't need to confirm pipe-message with enter if exit code 
 macro index,pager zx "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro index \\\\ "<vfolder-from-query>"
 
-macro index + "<modify-labels>+*\n<sync-mailbox>"
-macro index - "<modify-labels>-*\n<sync-mailbox>"
 bind index L modify-labels
 bind index Y edit-label
 bind index t tag-thread
 bind index T tag-entry
 bind index \CT tag-pattern
 bind index <Esc>t untag-pattern
+macro index + "<modify-labels>+*\n<sync-mailbox>"
+macro index = "<modify-labels>-*\n<sync-mailbox>"
 
 
 # threading keybindings

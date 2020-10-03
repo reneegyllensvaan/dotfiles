@@ -1,0 +1,25 @@
+! special
+*.foreground:   #abb2bf
+*.background:   #282c34
+*.cursorColor:  #abb2bf
+
+! black
+*.color0:       #282a2e
+*.color8:       #4b5263
+
+*.color1:       #abb2bf
+*.color9:       #abb2bf
+*.color2:       #abb2bf
+*.color10:      #abb2bf
+*.color3:       #abb2bf
+*.color11:      #abb2bf
+*.color4:       #abb2bf
+*.color12:      #abb2bf
+*.color5:       #abb2bf
+*.color13:      #abb2bf
+*.color6:       #abb2bf
+*.color14:      #abb2bf
+
+! white
+*.color7:       #5c6370
+*.color15:      #abb2bf

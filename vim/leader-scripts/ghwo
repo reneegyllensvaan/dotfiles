@@ -1,6 +1,6 @@
 #!/bin/sh
 if [ "$1" = "pre" ]; then
-  hub pr list --color -f '%pC%>(8)%i%Creset %t% l %Cblue (%H)%Creset%n'
+  hub pr list -L 100 --color -f '%pC%>(8)%i%Creset %t% l %Cblue (%H)%Creset%n'
 elif [ "$1" = "post" ]; then
   if which gsed >/dev/null 2>&1; then
     sed=gsed

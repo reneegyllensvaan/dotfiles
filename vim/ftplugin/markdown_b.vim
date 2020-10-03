@@ -5,7 +5,6 @@ function! s:ToggleChecked() abort
   else
     call setline('.', substitute(line, '- \[x\]', '- [ ]', ""))
   endif
-
 endfunction
 
 nnoremap <silent> <buffer> <C-c><C-c> :call <SID>ToggleChecked()<CR>
@@ -14,3 +13,4 @@ iabbrev <buffer> [] []()<Left><Left><Left>
 
 " Language: (experimental)
 iabbrev <buffer> anoth another
+iabbrev <buffer> dacol Data Collection

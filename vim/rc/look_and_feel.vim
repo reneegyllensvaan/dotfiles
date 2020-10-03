@@ -5,23 +5,18 @@ if has('gui_running')
   colorscheme onedark
 end
 
-hi Pmenu ctermbg=16
-hi Search ctermbg=11 ctermfg=black
-hi Visual ctermbg=238 ctermfg=NONE
-hi CocHighlightText ctermbg=0
-hi SnipeMatch ctermbg=cyan ctermfg=black guibg=#365A6F
-
-" Emit cursor shape control chars
-let &t_SI = "\<Esc>[6 q"
-let &t_SR = "\<Esc>[4 q"
-let &t_EI = "\<Esc>[2 q"
+if 0
+  " Emit cursor shape control chars
+  let &t_SI = "\<Esc>[6 q"
+  let &t_SR = "\<Esc>[4 q"
+  let &t_EI = "\<Esc>[2 q"
+endif
 
 "" statusline {{{
-hi User1 ctermbg=darkgray ctermfg=white guibg=#22252b
-hi User2 ctermbg=green ctermfg=black guibg=#98C379 guifg=black
-hi User3 ctermbg=darkgray ctermfg=lightgreen guibg=#22252b
-  " guibg=#ffffff guifg=lightgreen
-hi User5 ctermbg=3 ctermfg=black guibg=#ADC39D guifg=black
+hi User1 guibg=#22252b
+hi User2 guibg=#98C379 guifg=black
+hi User3 guibg=#22252b
+hi User5 guibg=#ADC39D guifg=black
 
 set statusline=%5*\ \ \ \ \ \ \ \ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
 function! ActiveStatusLine()
@@ -36,29 +31,54 @@ function! InactiveStatusLine()
 endfunction
 
 augroup statusline-toggler
-    autocmd!
-    autocmd WinEnter * :call ActiveStatusLine()
-    autocmd WinLeave * :call InactiveStatusLine()
+  autocmd!
+  autocmd WinEnter * :call ActiveStatusLine()
+  autocmd WinLeave * :call InactiveStatusLine()
 augroup END
 
-"" statusline
 function! StatuslineMode()
-    let l:mode=mode()
-    if l:mode==#"n"
-        hi User2 ctermbg=green ctermfg=black guibg=#98C379 guifg=black
-        return "NORMAL"
-    elseif l:mode==?"v"
-        hi User2 ctermbg=magenta ctermfg=black guibg=#C678DD guifg=black
-        return "VISUAL"
-    elseif l:mode==#"i"
-        hi User2 ctermbg=cyan ctermfg=black guibg=#56B6C2 guifg=black
-        return "INSERT"
-    elseif l:mode==#"R"
-        hi User2 ctermbg=red ctermfg=black guibg=#E06C75 guifg=black
-        return "REPLACE"
+  let l:mode=mode()
+  if !exists('w:last_mode')
+    let w:last_mode = ''
+  endif
+  let l:ret = ''
+  if l:mode==#"n"
+    if w:last_mode != l:mode
+      hi User2 ctermbg=green ctermfg=black guibg=#98C379 guifg=black
     endif
+    let l:ret = "NORMAL"
+  elseif l:mode==?"v"
+    if w:last_mode != l:mode
+      hi User2 ctermbg=magenta ctermfg=black guibg=#C678DD guifg=black
+    endif
+    let l:ret = "VISUAL"
+  elseif l:mode==#"i"
+    if w:last_mode != l:mode
+      hi User2 ctermbg=cyan ctermfg=black guibg=#56B6C2 guifg=black
+    endif
+    let l:ret = "INSERT"
+  elseif l:mode==#"R"
+    if w:last_mode != l:mode
+      hi User2 ctermbg=red ctermfg=black guibg=#E06C75 guifg=black
+    endif
+    let l:ret = "REPLACE"
+  endif
+  let w:last_mode = l:mode
+  return l:ret
 endfunction
 "" statusline }}}
+
+" cursorline {{{
+" TODO: Set up non-terrible-looking cursorline on console
+let g:cursorline_enabled = has('gui_running')
+function! ToggleCursorLine()
+  let g:cursorline_enabled = !g:cursorline_enabled
+  if g:cursorline_enabled
+    setlocal cursorline
+  else
+    setlocal nocursorline
+  end
+endfunction
 
 function! MaybeEnableCursorline()
   if g:cursorline_enabled
@@ -67,11 +87,13 @@ function! MaybeEnableCursorline()
 endfunction
 
 augroup cursorline-toggler
-    autocmd!
-    autocmd WinEnter * :call MaybeEnableCursorline()
-    autocmd WinLeave * :setlocal nocursorline
+  autocmd!
+  autocmd WinEnter * :call MaybeEnableCursorline()
+  autocmd WinLeave * :setlocal nocursorline
 augroup END
+" cursorline }}}
 
+" netrw {{{
 let g:netrw_banner=0
 let g:netrw_browse_split=4
 let g:netrw_altv=1
@@ -82,23 +104,24 @@ let g:netrw_list_hide.=',\.(pyc)$'
 
 function! ToggleVExplorer()
   if exists("t:expl_buf_num")
-      let expl_win_num = bufwinnr(t:expl_buf_num)
-      if expl_win_num != -1
-          let cur_win_nr = winnr()
-          exec expl_win_num . 'wincmd w'
-          close
-          exec cur_win_nr . 'wincmd w'
-          unlet t:expl_buf_num
-      else
-          unlet t:expl_buf_num
-      endif
+    let expl_win_num = bufwinnr(t:expl_buf_num)
+    if expl_win_num != -1
+      let cur_win_nr = winnr()
+      exec expl_win_num . 'wincmd w'
+      close
+      exec cur_win_nr . 'wincmd w'
+      unlet t:expl_buf_num
+    else
+      unlet t:expl_buf_num
+    endif
   else
-      exec '1wincmd w'
-      Vexplore
-      let t:expl_buf_num = bufnr("%")
+    exec '1wincmd w'
+    Vexplore
+    let t:expl_buf_num = bufnr("%")
   endif
 endfunction
 
 let g:netrw_winsize = -28
 let g:netrw_fastbrowse = 0
 autocmd FileType netrw setl bufhidden=wipe
+" netrw }}}
