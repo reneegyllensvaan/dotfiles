@@ -25,8 +25,6 @@ bindsym $mod+F10 bar mode toggle
 
 # launcher hotkeys
 bindsym $mod+Mod1+w exec --no-startup-id "GTK_THEME=Adwaita:light chromium"
-#bindsym $mod+Mod1+e exec --no-startup-id "emacsclient -c -a ''"
-bindsym $mod+Mod1+e exec --no-startup-id "emacs"
 bindsym $mod+Mod1+g exec --no-startup-id "gvim"
 
 
@@ -150,7 +148,6 @@ mode "launcher" {
   # Bind this as a leader for launching applications
   bindsym q           exec --no-startup-id qutebrowser    ; mode "default"
   bindsym w           exec --no-startup-id chromium       ; mode "default"
-  bindsym w           exec --no-startup-id emacs          ; mode "default"
 
   # back to normal: Enter or Escape or Mod1+r
   bindsym Return mode "default"

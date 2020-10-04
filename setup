@@ -322,12 +322,10 @@ ensure_directory $HOME/email/work
 
 log "  Symlinked directories"
 symlink dir bin $HOME/.bin
-symlink dir emacs.d $HOME/.emacs.d
 symlink dir ranger $HOME/.config/ranger
 symlink dir shell/fish $HOME/.config/fish
 
 log "  Other configs"
-symlink file other/spacemacs $HOME/.spacemacs
 symlink file other/batrc $HOME/.batrc
 symlink file shell/alias $HOME/.alias
 symlink file shell/profile $HOME/.profile

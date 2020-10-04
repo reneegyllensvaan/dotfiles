@@ -1,5 +1,0 @@
-# -*- mode: snippet -*-
-# name: session query
-# key: SQ
-# --
-session.query($1).$2

@@ -1,7 +1,6 @@
 ``` bash
 brew install          \
   bash                \
-  emacs-plus          \
   fzf                 \
   gawk                \
   git                 \
@@ -11,7 +10,6 @@ brew install          \
   macvim              \
   monkeysphere        \
   moreutils           \
-  mu --with-emacs     \
   mutt                \
   ncdu                \
   node                \
@@ -23,7 +21,6 @@ brew install          \
   ranger              \
   ruby                \
   sqlite              \
-  the_silver_searcher \
   tmux                \
   tree
 brew cask install      \
