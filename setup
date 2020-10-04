@@ -205,7 +205,6 @@ build_template email/neomuttrc-env-home
 build_template email/neomuttrc-env-work
 build_template email/notmuch-config-home
 build_template email/notmuch-config-work
-build_template nvim/pathspec.vim
 build_template shell/alias
 
 if which yq >/dev/null 2>&1; then
@@ -257,20 +256,6 @@ ensure_directory vim/files/info
 ensure_file vim/files/recent.log
 ensure_file vim/files/recent-write.log
 ensure_file vim/files/bookmarks.vim
-
-log "  Neovim conf"
-ensure_directory $HOME/.config
-ensure_directory $HOME/.local/share/nvim/site/autoload
-ensure_directory $HOME/.local/share/nvim
-ensure_directory $HOME/.local/share/nvim/blugin
-ensure_directory $HOME/.local/share/nvim/autoload
-ensure_directory $HOME/.local/share/nvim/files
-ensure_directory $HOME/.local/share/nvim/files/swap
-ensure_directory $HOME/.local/share/nvim/files/backup
-ensure_directory $HOME/.local/share/nvim/files/info
-ensure_directory $HOME/.local/share/nvim/files/undo
-symlink dir nvim $HOME/.config/nvim
-symlink file other/plug.vim $HOME/.local/share/nvim/site/autoload/plug.vim
 
 log "  GPG config"
 ensure_directory $HOME/.gnupg
