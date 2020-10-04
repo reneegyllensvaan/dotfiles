@@ -56,8 +56,8 @@ hi VertSplit  cterm=none ctermbg=none ctermfg=darkgray
 hi Visual     ctermbg=59 ctermfg=NONE
 hi VisualNOS  cterm=underline,bold
 hi WarningMsg ctermfg=DarkRed
-hi WildMenu   cterm=NONE ctermfg=black ctermbg=blue
-hi StatusLine cterm=NONE ctermfg=white ctermbg=NONE
+hi WildMenu   cterm=none ctermfg=black ctermbg=blue
+hi StatusLine cterm=none ctermfg=white ctermbg=NONE
 
 " Syntax Highlighting
 hi Comment    cterm=none ctermbg=none ctermfg=gray
@@ -100,8 +100,8 @@ hi link Conditional Repeat
 " Links }}}
 
 " Special Cases
-hi mkdLink ctermfg=white ctermbg=none
-hi mkdDelimiter ctermfg=magenta ctermbg=none
+hi mkdLink      cterm=none ctermfg=none ctermbg=white
+hi mkdDelimiter cterm=none ctermbg=none ctermfg=magenta
 hi LineNr       cterm=none ctermbg=none ctermfg=gray
 hi CursorLineNr cterm=none ctermbg=none ctermfg=white
 
