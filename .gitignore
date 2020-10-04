@@ -189,3 +189,4 @@ email/notmuch-config-work
 email/notmuch-config-home
 vim/pack/plugins/opt/fugitive
 vim/pack/plugins/opt/colors-atlas
+vim/pack/plugins/opt/vinegar

@@ -188,6 +188,7 @@ ensure_git_repo vim/pack/plugins/start/polyglot https://github.com/sheerun/vim-p
 ensure_git_repo vim/pack/plugins/start/floaterm https://github.com/voldikss/vim-floaterm
 
 # Dynamic plugins
+ensure_git_repo vim/pack/plugins/opt/vinegar https://github.com/tpope/vim-vinegar
 ensure_git_repo vim/pack/plugins/opt/gitgutter https://github.com/airblade/vim-gitgutter.git
 ensure_git_repo vim/pack/plugins/opt/fugitive https://github.com/tpope/vim-fugitive.git
 ensure_git_repo vim/pack/plugins/opt/onedark https://github.com/joshdick/onedark.vim
