@@ -1,4 +1,4 @@
-augroup SourceOnSave
+augroup source-on-save
   autocmd!
-  autocmd <buffer> BufWritePost * source %
+  autocmd BufWritePost <buffer> source %
 augroup END

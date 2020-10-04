@@ -1,0 +1,14 @@
+#!/bin/sh
+[ "$1" ] || exit
+file="$1"
+if [ "$OPERATING_SYSTEM" = "osx" ]; then
+  case "${1##*.}" in
+    pdf) exec open $@ ;;
+    *) exec vim $@ ;;
+  esac
+else
+  case "${1##*.}" in
+    pdf) exec zathura $@ ;;
+    *) exec vim $@ ;;
+  esac
+fi

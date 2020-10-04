@@ -60,5 +60,4 @@ nnoremap <silent> <C-_> :set ignorecase!<CR>
 
 
 " Vimwiki:
-let g:vimwiki_list = [{'path': '~/org/vimwiki',
-                      \ 'syntax': 'markdown', 'ext': '.md'}]
+let g:vimwiki_list = [{'path': '~/org/vimwiki', 'syntax': 'markdown', 'ext': '.md'}]

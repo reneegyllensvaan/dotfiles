@@ -3,6 +3,22 @@
 if has('gui_running')
   packadd onedark
   colorscheme onedark
+  hi User1 guibg=#22252b
+  hi User2 guibg=#98C379 guifg=black
+  hi User3 guibg=#22252b
+  hi User5 guibg=#ADC39D guifg=black
+  function! StatuslineColor(mode)
+    if a:mode[0] == 'N'
+      hi User2 guibg=#E06C75 guifg=black
+    elseif a:mode[0] == 'I'
+      hi User2 guibg=#C678DD guifg=black
+    elseif a:mode[0] == 'V'
+      hi User2 guibg=#56B6C2 guifg=black
+    elseif a:mode[0] == 'R'
+      hi User2 guibg=#98C379 guifg=black
+    end
+    return a:mode
+  endfunction
 end
 
 if 0
@@ -13,20 +29,18 @@ if 0
 endif
 
 "" statusline {{{
-hi User1 guibg=#22252b
-hi User2 guibg=#98C379 guifg=black
-hi User3 guibg=#22252b
-hi User5 guibg=#ADC39D guifg=black
-
+let g:mode_map = {'n': 'NORMAL', 'i': 'INSERT', 'v': 'VISUAL', 'r': 'REPLACE'}
 set statusline=%5*\ \ \ \ \ \ \ \ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
 function! ActiveStatusLine()
+  setlocal laststatus=1
   if has('g:coc_enabled')
-    setlocal statusline=%2*\ %{StatuslineMode()}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y\%{coc#status()}%{get(b:,'coc_current_function','')}
+    setlocal statusline=%2*\ %{StatuslineColor(get(g:mode_map,tolower(mode()),'n'))}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y\%{coc#status()}%{get(b:,'coc_current_function','')}
   else
-    setlocal statusline=%2*\ %{StatuslineMode()}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
+    setlocal statusline=%2*\ %{StatuslineColor(get(g:mode_map,tolower(mode()),'n'))}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
   end
 endfunction
 function! InactiveStatusLine()
+  setlocal laststatus=1
   setlocal statusline=%5*\ \ \ \ \ \ \ \ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
 endfunction
 
@@ -36,36 +50,6 @@ augroup statusline-toggler
   autocmd WinLeave * :call InactiveStatusLine()
 augroup END
 
-function! StatuslineMode()
-  let l:mode=mode()
-  if !exists('w:last_mode')
-    let w:last_mode = ''
-  endif
-  let l:ret = ''
-  if l:mode==#"n"
-    if w:last_mode != l:mode
-      hi User2 ctermbg=green ctermfg=black guibg=#98C379 guifg=black
-    endif
-    let l:ret = "NORMAL"
-  elseif l:mode==?"v"
-    if w:last_mode != l:mode
-      hi User2 ctermbg=magenta ctermfg=black guibg=#C678DD guifg=black
-    endif
-    let l:ret = "VISUAL"
-  elseif l:mode==#"i"
-    if w:last_mode != l:mode
-      hi User2 ctermbg=cyan ctermfg=black guibg=#56B6C2 guifg=black
-    endif
-    let l:ret = "INSERT"
-  elseif l:mode==#"R"
-    if w:last_mode != l:mode
-      hi User2 ctermbg=red ctermfg=black guibg=#E06C75 guifg=black
-    endif
-    let l:ret = "REPLACE"
-  endif
-  let w:last_mode = l:mode
-  return l:ret
-endfunction
 "" statusline }}}
 
 " cursorline {{{

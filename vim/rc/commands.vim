@@ -9,6 +9,9 @@ command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': 
 
 command! -nargs=* FzyGrep call FzyCommandInBuffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
 
+
+command! -nargs=* Chmod call myfns#chmod(expand('%'), <q-args>)
+
 function! LoadCoc()
   " call EnsureLoaded('coc')
   " runtime plugin/coc.vim

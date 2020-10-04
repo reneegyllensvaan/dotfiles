@@ -24,6 +24,7 @@ export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"
 export GOPATH=$HOME/code/go
 export RANGER_LOAD_DEFAULT_RC=FALSE
 export NNN_USE_EDITOR=1
+export NNN_OPENER="$HOME/.bin/topen"
 export ASDF_DIR=/usr/local/opt/asdf
 
 # Less flags:

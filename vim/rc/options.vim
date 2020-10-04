@@ -1,28 +1,32 @@
 set nocompatible
 set encoding=utf-8
 
-set autoindent                    " Indent according to previous line.
-set expandtab                     " Use spaces instead of tabs.
-set softtabstop =2                " Tab key indents by 2 spaces.
-set shiftwidth  =2                " >> indents by 2 spaces.
-set shiftround                    " >> indents to next multiple of 'shiftwidth'.
+set autoindent     " Indent according to previous line.
+set expandtab      " Use spaces instead of tabs.
+set softtabstop=2  " Tab key indents by 2 spaces.
+set shiftwidth=2   " >> indents by 2 spaces.
+set shiftround     " >> indents to next multiple of 'shiftwidth'.
 
-set backspace   =indent,eol,start " Make backspace work as you would expect.
-set hidden                        " Switch between buffers without having to save first.
-"set laststatus  =2               " Always show statusline.
+set backspace=indent,eol,start " Allow full editing with backspace
+set hidden  " Switch between buffers without having to save first.
+set laststatus=1  " Show statusline if more than 2 windows
 "set display     =lastline         " Show as much as possible of the last line.
 
 set foldmethod=syntax  " Collapsing with `za` should be based on syntax
 set foldlevel=99       " But unfold all text by default
 
-set wildmenu
+set wildmenu  " Use fancy tab completion menu
+" And configure wildmenu to:
+"   - longest: complete to longest shared prefix
+"   - :full: and use wildmenu
+"   - ,full: fall back to cycling thru matches
 set wildmode=longest:full,full
 
-set showmode                      " Show current mode in command-line.
-set showcmd                       " Show already typed keys when more are expected.
+set noshowmode " Show current mode in command-line.
+set showcmd  " Show already typed keys when more are expected.
 
-set incsearch                     " Highlight while searching with / or ?.
-set hlsearch                      " Keep matches highlighted.
+set incsearch  " Highlight while searching with / or ?.
+set hlsearch   " Keep matches highlighted.
 
 set ttyfast                       " Faster redrawing.
 set lazyredraw                    " Only redraw when necessary.
