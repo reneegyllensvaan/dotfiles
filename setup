@@ -1,10 +1,13 @@
 #!/bin/zsh
 log () {
-  if echo "$@" | grep "hasn't changed" >/dev/null 2>&1; then
-    printf '\033[1;30m'"$@"'\033[0m'" \n"
-  elif echo "$@" | grep '\(overwrite\)' >/dev/null 2>&1; then
-    printf '\033[1;30m'"$@"'\033[0m'" \n"
-  else
+  # if echo "$@" | grep "hasn't changed" >/dev/null 2>&1; then
+  #   printf '\033[1;30m'"$@"'\033[0m'" \n"
+  # else
+    echo $@
+  # fi
+}
+debug () {
+  if [ "$DEBUG" = "1" ]; then
     echo $@
   fi
 }
@@ -65,6 +68,7 @@ done
 log "Sourcing profile and user-profile to make sure we have the latest env..."
 source $PWD/shell/profile
 source $PWD/shell/user-profile
+source $PWD/colors/$COLORSCHEME
 
 CMDS=()
 push_cmd () {
@@ -95,6 +99,12 @@ symlink () {
       if [ ! -d "$2" ]; then
         fatal "  Error: Couldn't find file $2, check setup script."
       elif [ -L "$3" ]; then
+        debug "Compare: <`readlink $3`>"
+        debug "         <$PWD/$2>"
+        if [ "`readlink $3`" = "$PWD/$2" ]; then
+          debug "Identical symlink exists, skipping."
+          return 0
+        fi
         overwrite=' (overwrite)'
         push_cmd "rm '$3'"
       elif [ -d "$3" ] && [ '' = `ls $3` ]; then
@@ -111,6 +121,10 @@ symlink () {
         log "    Found existing file or directory '$3', backing it up as '$3.bak'"
         push_cmd "mv '$PWD/$3' '$PWD/$3.bak'"
       elif [ -L "$3" ]; then
+        if [ "`readlink $3`" = "$PWD/$2" ]; then
+          debug "Identical symlink exists, skipping."
+          return 0
+        fi
         overwrite=' (overwrite)'
         push_cmd "rm '$3'"
       fi
@@ -128,10 +142,10 @@ safe_copy () {
   hash_new=`$hash_command $1 | head -c 40`
   hash_old=`$hash_command $2 | head -c 40`
   if [[ $hash_new = $hash_old ]]; then
-    log "    $2 hasn't changed, skipping..."
+    debug "    $2 hasn't changed, skipping..."
   else
     [ -f "$2.bak" ] && \
-      "$2.bak would be overwritten, please move or delete that file to prevent data loss" && return 1
+      log "$2.bak would be overwritten, please move or delete that file to prevent data loss" && return 1
     [ ! $remove_backups ] && \
       [ -f $2 ] && \
       push_cmd "mv $2 '$2.bak'"
@@ -142,7 +156,7 @@ safe_copy () {
 }
 
 ensure_git_repo () {
-  grep "$1" .gitignore || log "$1" >> .gitignore
+  grep "$1" .gitignore >/dev/null || log "$1" >> .gitignore
   if [ ! -d "$1" ]; then
     log "  Couldn't find a folder at $1, will clone $2 there"
     push_cmd "git clone --single-branch $3 '$2' '$1'"
@@ -171,13 +185,13 @@ ensure_file () {
 
 # load git submodules
 ensure_git_repo shell/zmodules/zsh-syntax-highlighting https://github.com/zsh-users/zsh-syntax-highlighting
-ensure_git_repo steno/steno-dictionaries https://github.com/didoesdigital/steno-dictionaries
-#ensure_git_repo system-packages/from-source/fxz https://github.com/conor42/fxz
+# ensure_git_repo steno/steno-dictionaries https://github.com/didoesdigital/steno-dictionaries
+# ensure_git_repo system-packages/from-source/fxz https://github.com/conor42/fxz
 
 ensure_directory vim/pack/plugins/start
 ensure_directory vim/pack/plugins/opt
 
-# Startup plugins
+# Vim startup plugins
 ensure_git_repo vim/pack/plugins/start/gnupg https://github.com/jamessan/vim-gnupg
 ensure_git_repo vim/pack/plugins/start/commentary https://github.com/tpope/vim-commentary
 ensure_git_repo vim/pack/plugins/start/editorconfig https://github.com/editorconfig/editorconfig-vim
@@ -186,7 +200,6 @@ ensure_git_repo vim/pack/plugins/start/skim_base https://github.com/lotabout/ski
 ensure_git_repo vim/pack/plugins/start/skim https://github.com/lotabout/skim.vim
 ensure_git_repo vim/pack/plugins/start/polyglot https://github.com/sheerun/vim-polyglot
 ensure_git_repo vim/pack/plugins/start/floaterm https://github.com/voldikss/vim-floaterm
-
 # Dynamic plugins
 ensure_git_repo vim/pack/plugins/opt/vinegar https://github.com/tpope/vim-vinegar
 ensure_git_repo vim/pack/plugins/opt/gitgutter https://github.com/airblade/vim-gitgutter.git
@@ -206,6 +219,8 @@ build_template email/neomuttrc-env-work
 build_template email/notmuch-config-home
 build_template email/notmuch-config-work
 build_template shell/alias
+build_template x11/zathurarc
+build_template x11/xres/colors
 
 if which yq >/dev/null 2>&1; then
   if [ -e ~/.config/textmateSnippets ]; then
@@ -229,7 +244,7 @@ symlink file x11/xinitrc ~/.xinitrc
 symlink file x11/xsession ~/.xsession
 symlink dir x11/xres ~/.xres
 ensure_directory ~/.config/dunst
-symlink file x11/dunstrx ~/.dunst/dunstrc
+symlink file x11/dunstrc ~/.config/dunst/dunstrc
 ensure_directory $HOME/.config/i3
 symlink file x11/i3_config $HOME/.config/i3/config
 ensure_directory $HOME/.config/zathura

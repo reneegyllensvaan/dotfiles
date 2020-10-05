@@ -1,15 +1,5 @@
 #!/bin/sh
 
-# Uncomment the terminal color scheme you want to use
-# xrdb colors-material
-# xrdb colors-onedark
-# xrdb colors-faded
-# xrdb colors-zenburn
-# xrdb colors-dracula
-
-# xrdb colors-onemono
-xrdb colors-onedark-vibrant
-# xrdb colors-grayscale
-
+xrdb colors
 xrdb -merge xresources-rofi
 xrdb -merge xresources-urxvt

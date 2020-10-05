@@ -232,7 +232,6 @@ nmap qf <Space>ff
 nmap qb <Space>bb
 nmap qb/ <Space>b/
 nmap qb- <Space>b_
-nmap qg <Space>gb
 nnoremap <S-Esc> :noh<CR>
 nnoremap qd :<C-u>CocList diagnostics
 nnoremap q5 :noh<CR>

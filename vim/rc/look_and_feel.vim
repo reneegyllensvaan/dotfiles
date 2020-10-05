@@ -1,7 +1,16 @@
 " vim: fdm=marker ft=sourceonsave.vim
+
+
 if has('gui_running')
   packadd onedark
   colorscheme onedark
+
+  hi Pmenu ctermbg=16
+  hi Search ctermbg=11 ctermfg=black
+  hi Visual ctermbg=238 ctermfg=NONE
+  hi CocHighlightText ctermbg=0
+  hi SnipeMatch guibg=#365A6F guifg=NONE
+
   hi User1 guibg=#22252b
   hi User2 guibg=#98C379 guifg=black
   hi User3 guibg=#22252b
@@ -52,8 +61,7 @@ augroup END
 "" statusline }}}
 
 " cursorline {{{
-" TODO: Set up non-terrible-looking cursorline on console
-let g:cursorline_enabled = has('gui_running')
+let g:cursorline_enabled = &cursorline
 function! ToggleCursorLine()
   let g:cursorline_enabled = !g:cursorline_enabled
   if g:cursorline_enabled

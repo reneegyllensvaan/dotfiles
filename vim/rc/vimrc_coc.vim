@@ -5,7 +5,6 @@ packadd vinegar
 filetype plugin indent on         " Load plugins according to detected filetype.
 
 " Plugin Config: {{{
-let g:loaded_netrw = 1
 let g:skim_history_dir = '~/.local/share/skim-history'
 let g:floaterm_autoclose = 2
 " Plugin Config }}}

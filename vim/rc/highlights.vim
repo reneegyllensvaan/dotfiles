@@ -46,7 +46,7 @@ hi NonText      ctermfg=Blue
 hi Pmenu        ctermbg=black ctermfg=white
 hi PmenuSel     ctermfg=black ctermbg=blue
 hi Question     ctermfg=DarkGreen ctermbg=black
-hi Todo   cterm=bold,underline ctermfg=magenta ctermbg=black
+hi Todo   cterm=bold,underline ctermbg=black ctermfg=magenta
 hi MatchParen cterm=bold,underline ctermfg=blue ctermbg=black
 hi Search     ctermfg=Black ctermbg=Yellow
 
