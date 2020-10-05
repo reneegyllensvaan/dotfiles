@@ -98,6 +98,7 @@ macro index <F2> ":source ~/.neomuttrc-mbox-secondary\n"
 # Message Actions:
 set wait_key = no  # Don't need to confirm pipe-message with enter if exit code is 0
 macro index,pager zx "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+macro index,pager \Cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
 macro index \\\\ "<vfolder-from-query>"
 
 bind index L modify-labels

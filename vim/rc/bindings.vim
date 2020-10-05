@@ -225,6 +225,7 @@ nmap qf <Space>ff
 nmap qb <Space>bb
 nmap qc <Space>b/
 nmap qg <Space>gb
+nnoremap <S-Esc> :noh<CR>
 nnoremap qd :<C-u>CocList diagnostics
 nnoremap q5 :noh<CR>
 nnoremap q* :exec "FzyGrep ".expand("<cword>")<CR>
