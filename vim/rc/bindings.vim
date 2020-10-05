@@ -45,6 +45,10 @@ tnoremap <silent> <C-S> <C-W>N
 tnoremap <silent> <C-b><C-n> <C-\><C-n>:FloatermNew<CR>
 tnoremap <silent> <C-q> <C-\><C-n>:FloatermNew<CR>
 tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
+" Terminal Applications:
+nnoremap <silent> <Space>as :FloatermNew! cd %:p:h<CR>
+nnoremap <silent> <Space>ar :FloatermNew! cd && cd - && ranger && exit<CR>
+nnoremap <silent> <Space>ag :FloatermNew! tig && exit<CR>
 
 " Visual Mappings:
 nnoremap <Space>y "+y
@@ -74,7 +78,6 @@ nnoremap <Space>wl <C-w>l
 nnoremap <Space>wh <C-w>h
 nnoremap <Space>wj <C-w>j
 nnoremap <Space>wk <C-w>k
-nnoremap <Space>w- <C-w>s
 nnoremap <Space>w_ <C-w>s
 nnoremap <Space>w/ <C-w>v
 nnoremap <Space>wd <C-w>c
@@ -85,7 +88,7 @@ nnoremap <Space>wt/ :vert term<CR>
 nnoremap <Space>wt- :term<CR>
 
 " Searching:
-nnoremap <Space>/ :RgInteractive<CR>
+nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :FzyGrep<Space>:
 
 " Toggles: ( / To file )
@@ -102,6 +105,8 @@ nnoremap <Space>tA :CocDisable<CR>
 nnoremap <Space>tn :set number!<CR>
 nnoremap <Space>tr :set relativenumber!<CR>
 nnoremap <Space>tw :set list!<CR>
+nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
+nnoremap <Space>tsL :set laststatus=0<CR>
 nnoremap <Space>tgg :call ToggleGitGutter()<CR>
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
@@ -142,6 +147,7 @@ source ~/.vim/files/bookmarks.vim
 
 " File Actions:
 nnoremap <silent> <Space>fw :w<CR>
+nnoremap <silent> <C-c><C-s> :w<CR>
 nnoremap <Space>fc :cd %:p:h<CR>
 nnoremap <silent> <Space>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<CR>
 nnoremap <silent> <Space>f/ :call FzyCommandInBuffer("fd . --type f", ":vsp ", "")<CR>
@@ -167,9 +173,10 @@ endif
 " Buffers:
 nnoremap <silent> <Space>bb :call FzyBuffers(":b ")<CR>
 nnoremap <silent> <Space>b/ :call FzyBuffers(":vert sb ")<CR>
-nnoremap <silent> <Space>b- :call FzyBuffers(":sb ")<CR>
+nnoremap <silent> <Space>b_ :call FzyBuffers(":sb ")<CR>
 nnoremap <silent> <Space>bD :call FzyBuffers(":bd ")<CR>
 nnoremap <silent> <Space>fb :Buffers<CR>
+nnoremap <silent> <Space>bN :bp<CR>
 nnoremap <silent> <Space>bp :bp<CR>
 nnoremap <silent> <Space>bn :bn<CR>
 nnoremap <silent> <Space>bd :bp\|bd #<CR>
@@ -191,8 +198,8 @@ nnoremap <silent> <Space>gl :FloatermNew git log<CR>
 nnoremap <silent> <Space>go :call FzyScript("go", ":!git checkout ")<CR>
 nnoremap <silent> <Space>gs :!git status<CR>
 nnoremap <silent> <Space>gb :call GitBlameLine()<CR>
-" nnoremap <silent> <Space>gB :term tig blame %<CR>
-nnoremap <silent> <Space>gB :FloatermNew tig blame %<CR>
+nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
+nnoremap <silent> <Space>gB :FloatermNew! cd %:p:h && tig blame %:t && exit<CR>
 
 " Snipe Mappings:
 nnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
@@ -223,7 +230,8 @@ onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
 " Quick Commands: (aliases)
 nmap qf <Space>ff
 nmap qb <Space>bb
-nmap qc <Space>b/
+nmap qb/ <Space>b/
+nmap qb- <Space>b_
 nmap qg <Space>gb
 nnoremap <S-Esc> :noh<CR>
 nnoremap qd :<C-u>CocList diagnostics

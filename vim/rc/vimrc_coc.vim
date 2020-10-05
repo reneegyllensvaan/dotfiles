@@ -1,5 +1,6 @@
 " vim:fdm=marker
 packloadall  " This has to go before filetype conf for vim-polyglot
+packadd vinegar
 
 filetype plugin indent on         " Load plugins according to detected filetype.
 
@@ -22,7 +23,9 @@ endfunction
 nnoremap <silent> . :call DoRepeat()<CR>
 
 source ~/.vim/rc/options.vim
-source ~/.vim/rc/highlights.vim
+if !has('gui_running')
+  source ~/.vim/rc/highlights.vim
+endif
 source ~/.vim/rc/commands.vim
 source ~/.vim/rc/fzy.vim
 source ~/.vim/rc/look_and_feel.vim

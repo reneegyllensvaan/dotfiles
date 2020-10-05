@@ -1,21 +1,20 @@
-" vim: fdm=marker
-
+" vim: fdm=marker ft=sourceonsave.vim
 if has('gui_running')
   packadd onedark
   colorscheme onedark
   hi User1 guibg=#22252b
   hi User2 guibg=#98C379 guifg=black
   hi User3 guibg=#22252b
-  hi User5 guibg=#ADC39D guifg=black
+  hi User5 guibg=#6F6F6F guifg=black
   function! StatuslineColor(mode)
     if a:mode[0] == 'N'
-      hi User2 guibg=#E06C75 guifg=black
-    elseif a:mode[0] == 'I'
-      hi User2 guibg=#C678DD guifg=black
-    elseif a:mode[0] == 'V'
-      hi User2 guibg=#56B6C2 guifg=black
-    elseif a:mode[0] == 'R'
       hi User2 guibg=#98C379 guifg=black
+    elseif a:mode[0] == 'I'
+      hi User2 guibg=#56B6C2 guifg=black
+    elseif a:mode[0] == 'V'
+      hi User2 guibg=#C678DD guifg=black
+    elseif a:mode[0] == 'R'
+      hi User2 guibg=#E06C75 guifg=black
     end
     return a:mode
   endfunction
@@ -109,3 +108,5 @@ let g:netrw_winsize = -28
 let g:netrw_fastbrowse = 0
 autocmd FileType netrw setl bufhidden=wipe
 " netrw }}}
+
+call ActiveStatusLine()

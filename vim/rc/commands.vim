@@ -1,9 +1,7 @@
 let g:rg_opts = '--smart-case'
 command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': 'e', 'down': '30%'})
-command! -bang -nargs=* RgInteractive call fzf#vim#rg_interactive(<q-args>)
-" call fzf#vim#grep_interactive("sh -c \'rg --column --line-number --color=always \"{}\" . \| head -n 10'", 1)
 " FIXME: be able to provide an argument
-command! RgSkim call fzf#vim#rg_interactive("", fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
 " command! -nargs=* Rg call skim#run({'source': "rg <args>", 'sink': 'e', 'down': '30%'})
 
@@ -99,3 +97,4 @@ function! NextWindowOrTab(b)
     endif
   end
 endfunction
+

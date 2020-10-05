@@ -32,7 +32,7 @@ unsetopt SHARE_HISTORY
 setopt INC_APPEND_HISTORY
 # }}}
 
-# prompt {{{
+# Prompt {{{
 setopt PROMPT_SUBST
 
 source "$HOME/.profile"
@@ -93,8 +93,10 @@ fi
 [ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
 
 # Set up the prompt template
-PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%} \$(git_prompt_info)"
-[ $SSH_CLIENT ] && PROMPT="$PROMPT [%n@%m]" # only append prompt with host over ssh
+PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%}"
+[ $SSH_CLIENT ] \
+  && PROMPT="$PROMPT [%n@%m]" \
+  || PROMPT="$PROMPT \$(git_prompt_info)"
 PROMPT="$PROMPT"$'\n$nesting_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
 
 # prompt }}}
