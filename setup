@@ -275,9 +275,6 @@ symlink file shell/zshrc $HOME/.zshrc
 symlink dir shell/zfunctions $HOME/.zfunctions
 symlink dir shell/zmodules $HOME/.zmodules
 
-log "  Qutebrowser config"
-symlink dir qutebrowser $HOME/.config/qutebrowser
-
 log "  Email config"
 symlink file email/neomuttrc-env-home $HOME/.neomuttrc-env-home
 symlink file email/neomuttrc-env-work $HOME/.neomuttrc-env-work
