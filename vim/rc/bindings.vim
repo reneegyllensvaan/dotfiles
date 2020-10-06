@@ -23,7 +23,7 @@ nnoremap \= gg=G``
 nnoremap \S :spellgood <C-r><C-w>
 nnoremap \sa yiw:e ~/.vim/rc/autocorrect.vim<CR>Goiab <C-r>0 <C-r>0
 nnoremap \< V`]<
-nnoremap \< V`]<
+nnoremap \> V`]>
 nnoremap \F :Format<cr>
 nnoremap \T :silent s/\<\(\w\)\(\S*\)/\u\1\L\2/g<cr>:noh<cr>
 nnoremap \ff :set fdm=manual<cr>
@@ -38,6 +38,11 @@ nnoremap <silent> cg* g*Ncgn
 nnoremap <silent> cg# g#Ncgn
 onoremap <silent> i_ :<C-u>call InsideSnake()<CR>
 onoremap <silent> iA :<C-u>call InsideCapital()<CR>
+
+nnoremap <expr> crc "ciw".myfns#to_camel(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crp "ciw".myfns#to_pascal(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crs "ciw".myfns#to_snake(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crus "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
 
 " Terminal Mappings:
 nnoremap <silent> <C-@> :FloatermToggle<CR>
@@ -147,10 +152,7 @@ nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 
 " WorkMode:
 nnoremap <Space>oE :e ~/workmode.vim<CR>
-if !exists('g:workmode_sourced')
-  nnoremap <Space>o :so ~/workmode.vim<CR>
-endif
-
+nnoremap <Space>oo :so ~/workmode.vim<CR>
 
 " Buffers:
 nnoremap <silent> <Space>bb :call FzyBuffers(":b ")<CR>
