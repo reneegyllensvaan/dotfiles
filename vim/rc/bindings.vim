@@ -14,7 +14,8 @@ noremap <Right> <Nop>
 noremap Q q
 
 " Insert Mode:
-inoremap <C-s><C-w> <C-o>:w<CR>
+inoremap <C-c> <Nop>
+inoremap <C-c><C-s> <C-o>:w<CR>
 
 "  Editing Commands:
 nnoremap <bs> @Q
@@ -148,7 +149,10 @@ source ~/.vim/files/bookmarks.vim
 " File Actions:
 nnoremap <silent> <Space>fw :w<CR>
 nnoremap <silent> <C-c><C-s> :w<CR>
-nnoremap <Space>fc :cd %:p:h<CR>
+nnoremap <expr>   <Space>fc ":lcd ".expand("%:p:h")."\<CR>"
+nnoremap <expr>   <Space>fC ":cd ".expand("%:p:h")."\<CR>"
+nnoremap <silent> <Space>fy :YankFileName<CR>
+nnoremap <silent> <Space>fY :YankFileName!<CR>
 nnoremap <silent> <Space>ff :call FzyCommandInBuffer("fd . --type f", ":e ", "")<CR>
 nnoremap <silent> <Space>f/ :call FzyCommandInBuffer("fd . --type f", ":vsp ", "")<CR>
 nnoremap <silent> <Space>f_ :call FzyCommandInBuffer("fd . --type f", ":vsp ", "")<CR>

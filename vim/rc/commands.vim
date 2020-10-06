@@ -3,12 +3,14 @@ command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': '
 " FIXME: be able to provide an argument
 command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
-" command! -nargs=* Rg call skim#run({'source': "rg <args>", 'sink': 'e', 'down': '30%'})
 
 command! -nargs=* FzyGrep call FzyCommandInBuffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
 
-
 command! -nargs=* Chmod call myfns#chmod(expand('%'), <q-args>)
+command! -bang YankFileNameAbsolute call setreg("+", expand('%:p').((expand("<bang>") != "!") ? (":".line('.')) : ""))
+command! -bang YankFileNameHomedir call setreg("+", expand('%:p:~').((expand("<bang>") != "!") ? (":".line('.')) : ""))
+command! -bang YankFileNameRelative call setreg("+", expand('%').((expand("<bang>") != "!") ? (":".line('.')) : ""))
+command! -bang YankFileName exec (["","YankFileNameAbsolute","YankFileNameHomedir","YankFileNameRelative"][confirm('YankFileName', "&Absolute\n&Homedir\n&Relative")].expand("<bang>"))
 
 function! LoadCoc()
   " call EnsureLoaded('coc')
