@@ -26,7 +26,6 @@ if !has('gui_running')
   source ~/.vim/rc/highlights.vim
 endif
 source ~/.vim/rc/commands.vim
-source ~/.vim/rc/fzy.vim
 source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/surround.vim
 source ~/.vim/rc/snipe.vim

@@ -4,13 +4,26 @@ command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': '
 command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
 
-command! -nargs=* FzyGrep call FzyCommandInBuffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
+command! -nargs=* FzyGrep call fzy#in_buffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
 
-command! -nargs=* Chmod call myfns#chmod(expand('%'), <q-args>)
-command! -bang YankFileNameAbsolute call setreg("+", expand('%:p').((expand("<bang>") != "!") ? (":".line('.')) : ""))
-command! -bang YankFileNameHomedir call setreg("+", expand('%:p:~').((expand("<bang>") != "!") ? (":".line('.')) : ""))
-command! -bang YankFileNameRelative call setreg("+", expand('%').((expand("<bang>") != "!") ? (":".line('.')) : ""))
-command! -bang YankFileName exec (["","YankFileNameAbsolute","YankFileNameHomedir","YankFileNameRelative"][confirm('YankFileName', "&Absolute\n&Homedir\n&Relative")].expand("<bang>"))
+command! -nargs=1 Chmod call fileutils#chmod(expand('%'), <q-args>)
+
+command! -bang YankFileNameAbsolute call fileutils#yank_path("+",'%:p', "<bang>")
+command! -bang YankFileNameHomedir call fileutils#yank_path("+",'%:p:~', "<bang>")
+command! -bang YankFileNameRelative call fileutils#yank_path("+",'%', "<bang>")
+command! -bang YankFileName execute "silent ".["","YankFileNameAbsolute","YankFileNameHomedir","YankFileNameRelative"]
+      \[confirm('YankFileName', "&Absolute\n&Homedir\n&Relative")]."<bang>"
+
+function! InsideSnake()
+  call search('\(_\|\<\).', 'bce')
+  normal! v
+  call search('.\(_\|\>\)', 'c')
+endfunction
+function! InsideCapital()
+  call search('\([A-Z]\|\<\)', 'bc')
+  normal! v
+  call search('.\([A-Z]\|\>\)', 'c')
+endfunction
 
 function! LoadCoc()
   " call EnsureLoaded('coc')
@@ -80,23 +93,6 @@ function! DrillWindowOrTab(b)
     else
       exec (winnr()+1)."wincmd w"
     end
-  end
-endfunction
-
-function! NextWindowOrTab(b)
-  let prev_number = winnr()
-  if a:b
-    exec "normal! \<C-w>h"
-    if winnr() == prev_number
-      " normal! gT
-      exec "normal! gT\<C-w>l\<C-w>l\<C-w>l"
-    endif
-  else
-    exec "normal! \<C-w>l"
-    if winnr() == prev_number
-      " normal! gt
-      exec "normal! gt\<C-w>h\<C-w>h\<C-w>h"
-    endif
   end
 endfunction
 

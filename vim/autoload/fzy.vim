@@ -1,4 +1,5 @@
-function! FzyCommand(choice_command, vim_command)
+
+function! fzy#command(choice_command, vim_command)
   try
     let output = system(a:choice_command . " | fzy ")
   catch /Vim:Interrupt/
@@ -10,7 +11,7 @@ function! FzyCommand(choice_command, vim_command)
   endif
 endfunction
 
-function! FzyCommandInBuffer(choice_command, vim_command, post_command) abort
+function! fzy#in_buffer(choice_command, vim_command, post_command) abort
   let s:choice_command = a:choice_command
   let s:vim_command = a:vim_command
   let s:post_command = a:post_command
@@ -38,21 +39,25 @@ function! FzyCommandInBuffer(choice_command, vim_command, post_command) abort
   startinsert
 endfunction
 
-function! FzyScript(key_sequence, run) abort
-  call FzyCommandInBuffer(glob("~/.vim/leader-scripts/".a:key_sequence)." pre", a:run, "\| ".glob("~/.vim/leader-scripts/".a:key_sequence)." post")
+function! fzy#leader_script(key_sequence, run) abort
+  call fzy#in_buffer(glob("~/.vim/leader-scripts/".a:key_sequence)." pre", a:run, "\| ".glob("~/.vim/leader-scripts/".a:key_sequence)." post")
+endfunction
+
+function! fzy#file_with_base(base_dir)
+  call fzy#in_buffer("fd . --type f --base-directory ~/".a:base_dir."", ":e ~/".a:base_dir, "")
 endfunction
 
 let g:fzy_actions = ['Files', 'Buffers']
 
-function! DumpBuffers()
+function! s:DumpBuffers()
   redir! > ~/.tmp/vim-buffers
   silent ls
   redir END
 endfunction
 
 function! FzyBuffers(cmd)
-  call DumpBuffers()
-  call FzyCommandInBuffer("cat ~/.tmp/vim-buffers", a:cmd, "\| awk '{print $1}'")
+  call s:DumpBuffers()
+  call fzy#in_buffer("cat ~/.tmp/vim-buffers", a:cmd, "\| awk '{print $1}'")
 endfunction
 
 function! GitCommand()

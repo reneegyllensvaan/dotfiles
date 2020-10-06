@@ -1,12 +1,15 @@
 set nocompatible
 set encoding=utf-8
 
+set foldopen-=block     " Braces should not open folds
+
 set autoindent     " Indent according to previous line.
 set expandtab      " Use spaces instead of tabs.
 set softtabstop=2  " Tab key indents by 2 spaces.
 set shiftwidth=2   " >> indents by 2 spaces.
 set shiftround     " >> indents to next multiple of 'shiftwidth'.
 
+set cursorline  " Highlight current cursor line
 set backspace=indent,eol,start " Allow full editing with backspace
 set hidden  " Switch between buffers without having to save first.
 set laststatus=1  " Show statusline if more than 2 windows
