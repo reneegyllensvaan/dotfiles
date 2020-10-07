@@ -1,6 +1,6 @@
+" vim: fdm=marker ft=sourceonsave.vim
 let g:rg_opts = '--smart-case'
 command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': 'e', 'down': '30%'})
-" FIXME: be able to provide an argument
 command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
 
@@ -25,28 +25,6 @@ function! InsideCapital()
   call search('.\([A-Z]\|\>\)', 'c')
 endfunction
 
-function! LoadCoc()
-  " call EnsureLoaded('coc')
-  " runtime plugin/coc.vim
-  packadd coc
-  execute 'CocEnable'
-  if !exists("g:coc_is_sourced")
-    let g:coc_is_sourced = 1
-    execute 'source' "~/.vim/rc/coc.vim"
-    if has('gui_running')
-      execute 'CocStart'
-    endif
-  endif
-endfunction
-
-function! ToggleSyntax()
-  if !exists("g:syntax_on") || !g:syntax_on
-    syntax on
-  else
-    syntax off
-  endif
-endfunction
-
 augroup myhooks
   autocmd!
   " This isn't really used for anything in my vim config currently, I'm just
@@ -57,6 +35,18 @@ augroup myhooks
   autocmd BufWritePost * :call writefile([localtime().";".getcwd().";".expand("%:p")],
         \glob("~/.vim/files/recent-write.log"), "a")
 augroup END
+
+" TODO: these two don't work as visual motions
+function! InsideSnake()
+  call search('\(_\|\<\).', 'bce')
+  normal! v
+  call search('.\(_\|\>\)', 'c')
+endfunction
+function! InsideCapital()
+  call search('\([A-Z]\|\<\)', 'bc')
+  normal! v
+  call search('.\([A-Z]\|\>\)', 'c')
+endfunction
 
 let g:center_cursor_disabled_scrolloff = 4
 function! ToggleCenterCursor()

@@ -30,5 +30,5 @@ zle -N __fzy-git-files
 
 # Bind widgets to keys
 bindkey '^T' __fzy-expand-file
-bindkey '^R' __fzy-command-history
+# bindkey '^R' __fzy-command-history
 bindkey '^G' __fzy-git-files

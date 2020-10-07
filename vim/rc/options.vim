@@ -1,9 +1,15 @@
 set nocompatible
 set encoding=utf-8
 
-set foldopen-=block     " Braces should not open folds
+" Braces should not open folds
+set foldopen-=block
 
-set autoindent     " Indent according to previous line.
+" Automatically refresh files changed on disk if no unsaved changes
+set autoread
+
+" Indent according to previous line.
+set autoindent
+
 set expandtab      " Use spaces instead of tabs.
 set softtabstop=2  " Tab key indents by 2 spaces.
 set shiftwidth=2   " >> indents by 2 spaces.

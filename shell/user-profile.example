@@ -5,6 +5,7 @@ export USER_NAME='Renee Gyllensvaan'
 # export USER_HOME_EMAIL='renee.gyllensvaan@gmail.com'
 export GITHUB_USER='reneegyllensvaan'
 
+export COLORSCHEME='onedark-vibrant'  # home | work
 export USER_PROFILE_ENV='home'  # home | work
 export OPERATING_SYSTEM='linux' # osx | linux
 export USER_EMAIL=`[ "$USER_PROFILE_ENV" = "work" ] && echo "$USER_WORK_EMAIL" || echo "$USER_HOME_EMAIL"`

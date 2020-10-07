@@ -100,7 +100,7 @@ hi link Conditional Repeat
 " Links }}}
 
 " Special Cases
-hi mkdLink      cterm=none ctermfg=none ctermbg=white
+hi mkdLink      cterm=none ctermbg=none ctermfg=none
 hi mkdDelimiter cterm=none ctermbg=none ctermfg=magenta
 hi LineNr       cterm=none ctermbg=none ctermfg=gray
 hi CursorLineNr cterm=none ctermbg=none ctermfg=white

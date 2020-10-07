@@ -93,16 +93,19 @@ font:
     # family: Inconsolata
     # size: 11.0
 
-  normal:
-    family: "Menlo"
-    size: 11.0
+  # normal:
+  #   family: "Menlo"
+  #   size: 11.0
 
-  # bold:
-  #   family: "Iosevka-Fixed"
-  #   size: 11.0
-  # italic:
-  #   family: "Iosevka-Fixed"
-  #   size: 11.0
+  normal:
+    family: "Iosevka Fixed"
+    size: 11.0
+  bold:
+    family: "Iosevka Fixed"
+    size: 11.0
+  italic:
+    family: "Iosevka Fixed"
+    size: 11.0
 
     # The `style` can be specified to pick a specific face.
     #style: Regular

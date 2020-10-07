@@ -38,3 +38,26 @@ function! myfns#split_case(word)
   let &ignorecase = l:ignorecase
   return l:words
 endfunction
+
+function! myfns#start_coc()
+  " call EnsureLoaded('coc')
+  " runtime plugin/coc.vim
+  packadd coc
+  execute 'CocEnable'
+  if !exists("g:coc_is_sourced")
+    let g:coc_is_sourced = 1
+    execute 'source' "~/.vim/rc/coc.vim"
+    if has('gui_running')
+      execute 'CocStart'
+    endif
+  endif
+endfunction
+
+function! myfns#toggle_syntax()
+  if !exists("g:syntax_on") || !g:syntax_on
+    syntax on
+  else
+    syntax off
+  endif
+endfunction
+

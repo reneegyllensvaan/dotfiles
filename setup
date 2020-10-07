@@ -295,22 +295,22 @@ symlink file email/neomuttrc-env-home $HOME/.neomuttrc-env-home
 symlink file email/neomuttrc-env-work $HOME/.neomuttrc-env-work
 symlink file email/neomuttrc-unbind $HOME/.neomuttrc-unbind
 symlink file email/neomuttrc-colors $HOME/.neomuttrc-colors
-push_cmd "cat email/notmuch-config-home > $HOME/.notmuch-config-home"
-push_cmd "cat email/notmuch-config-work > $HOME/.notmuch-config-work"
+push_cmd "[ -f \"email/notmuch-config-home\" ] && cat email/notmuch-config-home > $HOME/.notmuch-config-home"
+push_cmd "[ -f \"email/notmuch-config-work\" ] && cat email/notmuch-config-work > $HOME/.notmuch-config-work"
 if [ "$USER_PROFILE_ENV" = "work" ]; then
   symlink file email/neomuttrc-work $HOME/.neomuttrc-mbox-primary,
   symlink file email/neomuttrc-home $HOME/.neomuttrc-mbox-secondary
   symlink file bin/notmuch-work $HOME/.local/bin/notmuch-primary
   symlink file bin/notmuch-home $HOME/.local/bin/notmuch-secondary
-  push_cmd "cat email/notmuch-config-work > $HOME/.notmuch-config-primary"
-  push_cmd "cat email/notmuch-config-home > $HOME/.notmuch-config-secondary"
+  push_cmd "[ -f \"email/notmuch-config-work\" ] && cat email/notmuch-config-work > $HOME/.notmuch-config-primary"
+  push_cmd "[ -f \"email/notmuch-config-home\" ] && cat email/notmuch-config-home > $HOME/.notmuch-config-secondary"
 else
   symlink file email/neomuttrc-home $HOME/.neomuttrc-mbox-primary
   symlink file email/neomuttrc-work $HOME/.neomuttrc-mbox-secondary
   symlink file bin/notmuch-home $HOME/.local/bin/notmuch-primary
   symlink file bin/notmuch-work $HOME/.local/bin/notmuch-secondary
-  push_cmd "cat email/notmuch-config-work > $HOME/.notmuch-config-primary"
-  push_cmd "cat email/notmuch-config-home > $HOME/.notmuch-config-secondary"
+  push_cmd "[ -f \"email/notmuch-config-work\" ] && cat email/notmuch-config-work > $HOME/.notmuch-config-primary"
+  push_cmd "[ -f \"email/notmuch-config-home\" ] && cat email/notmuch-config-home > $HOME/.notmuch-config-secondary"
 fi
 symlink file email/neomuttrc $HOME/.neomuttrc
 ensure_directory $HOME/.config/urlscan
@@ -351,7 +351,7 @@ for cmd in $CMDS; do
   printf "\r\033[2K"
 done
 echo "Log written to ./last_install.log"
-[ `cat last_install_errors.log` ] \
+[ "`cat last_install_errors.log`" ] \
   && fatal "./last_install_errors.log was not empty, please check it for errors" \
   || rm last_install_errors.log
 

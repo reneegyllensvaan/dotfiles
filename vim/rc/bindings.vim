@@ -7,8 +7,8 @@ noremap ZZ <Nop>
 noremap ZQ <Nop>
 noremap Y <Nop>
 noremap q <Nop>
-noremap <Up> <Nop>
-noremap <Down> <Nop>
+" noremap <Up> <Nop>
+" noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <expr> Q (empty(reg_recording()) ? "q".tolower(nr2char(getchar())) : "q")
@@ -36,13 +36,14 @@ nnoremap <silent> c* *Ncgn
 nnoremap <silent> c# #Ncgn
 nnoremap <silent> cg* g*Ncgn
 nnoremap <silent> cg# g#Ncgn
-onoremap <silent> i_ :<C-u>call InsideSnake()<CR>
-onoremap <silent> iA :<C-u>call InsideCapital()<CR>
-
 nnoremap <expr> crc "ciw".myfns#to_camel(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crp "ciw".myfns#to_pascal(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crs "ciw".myfns#to_snake(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crus "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
+onoremap <silent> i_ :<C-u>call InsideSnake()<CR>
+onoremap <silent> iA :<C-u>call InsideCapital()<CR>
+" visual
+vnoremap \sl :sort<CR>
 
 " Terminal Mappings:
 nnoremap <silent> <C-@> :FloatermToggle<CR>
@@ -100,21 +101,21 @@ nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :FzyGrep<Space>:
 
 " Toggles: ( / To file )
-nnoremap <Space>ttw0 :set textwidth=100<CR>
-nnoremap <Space>ttw9 :set textwidth=90<CR>
-nnoremap <Space>ttw8 :set textwidth=80<CR>
-nnoremap <Space>tf :call ToggleVExplorer()<CR>
-nnoremap <Space>ta :call LoadCoc()<CR>
-nnoremap <Space>ts :call ToggleSyntax()<CR>
 nnoremap <Space>tA :CocDisable<CR>
-nnoremap <Space>tn :set number!<CR>
-nnoremap <Space>tr :set relativenumber!<CR>
-nnoremap <Space>tw :set list!<CR>
-nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
-nnoremap <Space>tsL :set laststatus=0<CR>
-nnoremap <Space>tgg :call ToggleGitGutter()<CR>
+nnoremap <Space>ta :call myfns#start_coc()<CR>
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
+nnoremap <Space>tf :call ToggleVExplorer()<CR>
+nnoremap <Space>tgg :call ToggleGitGutter()<CR>
+nnoremap <Space>tn :set number!<CR>
+nnoremap <Space>tr :set relativenumber!<CR>
+nnoremap <Space>tsL :set laststatus=0<CR>
+nnoremap <Space>tss :call myfns#toggle_syntax()<CR>
+nnoremap <Space>ttw0 :set textwidth=100<CR>
+nnoremap <Space>ttw8 :set textwidth=80<CR>
+nnoremap <Space>ttw9 :set textwidth=90<CR>
+nnoremap <Space>tw :set list!<CR>
+nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
 
 " Vim Actions:
 nnoremap <silent> <Space>vpa :call feedkeys(":packadd \<Tab>", 'tn')<CR>
