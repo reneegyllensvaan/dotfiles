@@ -1,0 +1,7 @@
+#!/bin/sh
+[ -f '/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac' ] \
+  && exec '/usr/local/MacGPG2/libexec/pinentry-mac.app/Contents/MacOS/pinentry-mac'
+
+which pinentry-qt >/dev/null 2>&1 && exec pinentry-qt
+which pinentry-gtk >/dev/null 2>&1 && exec pinentry-gtk
+which pinentry-curses >/dev/null 2>&1 && exec pinentry-curses

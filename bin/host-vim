@@ -1,0 +1,3 @@
+#!/bin/sh
+while [ "$1" = "--" ]; do shift ; done
+vim --servername $VIM_SERVERNAME --remote-send "<C-w>:e $1<CR>"

@@ -11,6 +11,7 @@ hi SnipeMatch ctermbg=242 ctermfg=NONE
 hi CursorLine cterm=none ctermbg=0
 
 hi StatusLineNC cterm=none ctermbg=black ctermfg=none
+hi StatusLineTerm cterm=none ctermbg=black ctermfg=none
 hi User1 ctermbg=0 ctermfg=white
 hi User2 ctermbg=green ctermfg=black
 hi User3 ctermbg=black ctermfg=white

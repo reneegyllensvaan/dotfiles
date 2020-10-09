@@ -64,8 +64,20 @@ tnoremap <silent> <C-q> <C-\><C-n>:FloatermNew<CR>
 tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
 " Terminal Applications:
 nnoremap <silent> <Space>as :FloatermNew! cd %:p:h<CR>
-nnoremap <silent> <Space>ar :FloatermNew! cd && cd - && ranger && exit<CR>
+nnoremap <silent> <Space>am :tab term ++close neomutt<CR>
 nnoremap <silent> <Space>ag :FloatermNew! tig && exit<CR>
+
+function! TermCommand(prefix, cmd, dir)
+  let l:term_name = '!!'.a:cmd
+  if bufexists(l:term_name)
+    exec "bd! ".bufnr(l:term_name)
+  endif
+  call term_start(a:cmd, {'term_name': l:term_name, 'cwd': a:dir, 'term_finish': 'close', 'vertical': 1})
+endfunction
+nnoremap <Space>ar :call TermCommand('vert ', 'ranger', getcwd())<CR>
+
+" nnoremap <silent> <Space>aR :vert term ++close ranger ".getcwd()."\<CR>"
+" nnoremap <silent> <Space>ar :vert term ++close ranger %:p:h<CR>
 
 " Visual Mappings:
 nnoremap <Space>y "+y
@@ -101,8 +113,8 @@ nnoremap <Space>wd <C-w>c
 nnoremap <Space>w= <C-w>=
 nnoremap <Space>wr <C-w>r
 nnoremap <Space>wm :tab split<CR>
-nnoremap <Space>wt/ :vert term<CR>
-nnoremap <Space>wt_ :term<CR>
+nnoremap <Space>wt/ :vert term ++close<CR>
+nnoremap <Space>wt_ :term ++close<CR>
 
 " Searching:
 nnoremap <Space>/ :Rg<CR>
@@ -180,7 +192,7 @@ nnoremap <silent> <Space>b? :w !diff % -<CR>
 " Git:
 nnoremap <silent> <Space>gO :call fzy#leader_script("gO", ":!git checkout-remote-branch origin ")<CR>
 nnoremap <silent> <Space>ga :call fzy#leader_script("ga", ":!git add ")<CR>
-nnoremap <silent> <Space>gc :term git commit<CR>
+nnoremap <silent> <Space>gc :term ++close git commit<CR>
 nnoremap <silent> <Space>gf :call fzy#leader_script("gf", ":e ")<CR>
 nnoremap <silent> <Space>ghO :call fzy#leader_script("ghO", ":!hub pr checkout ")<CR>
 nnoremap <silent> <Space>gho :call fzy#leader_script("gho", ":!hub pr checkout ")<CR>
