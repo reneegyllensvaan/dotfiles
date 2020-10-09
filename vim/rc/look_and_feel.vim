@@ -115,7 +115,6 @@ endfunction
 
 let g:netrw_winsize = -28
 let g:netrw_fastbrowse = 0
-autocmd FileType netrw setl bufhidden=wipe
 " netrw }}}
 
 call ActiveStatusLine()

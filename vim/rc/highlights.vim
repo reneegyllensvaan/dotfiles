@@ -53,7 +53,7 @@ hi Search     ctermfg=Black ctermbg=Yellow
 hi SpecialKey ctermfg=DarkBlue
 hi Title      ctermfg=blue
 hi VertSplit  cterm=none ctermbg=none ctermfg=darkgray
-hi Visual     ctermbg=59 ctermfg=NONE
+hi Visual     cterm=reverse ctermbg=none ctermfg=none
 hi VisualNOS  cterm=underline,bold
 hi WarningMsg ctermfg=DarkRed
 hi WildMenu   cterm=none ctermfg=black ctermbg=blue

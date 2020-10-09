@@ -1,19 +1,3 @@
-#  Usage:
-#
-#    mark-dir x  -  mark current directory as x
-#
-#    pop-mark x  -  cd to directory marked as x
-#
-#  Configuration:
-#
-#    DIR_MARK_PATH  -  Export this variable as the path
-#                      to the file in which directory
-#                      marks should be stored. The file
-#                      does not need to exist but the
-#                      directory does.
-#                      ( default: /tmp/dir-marks )
-
-
 pop-mark () {
   # if mark file isn't set, use /tmp
   if [ -z "$DIR_MARK_PATH" ]; then
@@ -28,6 +12,20 @@ pop-mark () {
   # if no arg, do nothing
   if [ -z $1 ]
   then
+    echo '#  Usage:'
+    echo '#'
+    echo '#    mark-dir x  -  mark current directory as x'
+    echo '#'
+    echo '#    pop-mark x  -  cd to directory marked as x'
+    echo '#'
+    echo '#  Configuration:'
+    echo '#'
+    echo '#    DIR_MARK_PATH  -  Export this variable as the path'
+    echo '#                      to the file in which directory'
+    echo '#                      marks should be stored. The file'
+    echo '#                      does not need to exist but the'
+    echo '#                      directory does.'
+    echo '#                      ( default: /tmp/dir-marks )'
     return
   fi
 

@@ -36,10 +36,18 @@ nnoremap <silent> c* *Ncgn
 nnoremap <silent> c# #Ncgn
 nnoremap <silent> cg* g*Ncgn
 nnoremap <silent> cg# g#Ncgn
+
 nnoremap <expr> crc "ciw".myfns#to_camel(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crp "ciw".myfns#to_pascal(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crs "ciw".myfns#to_snake(expand("<cword>"))."\<Esc>"
-nnoremap <expr> crus "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crS "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
+
+" TODO: Try out these approaches to make case conversion repeatable
+" onoremap rc
+" onoremap rp
+" onoremap rs
+" onoremap rS
+
 onoremap <silent> i_ :<C-u>call InsideSnake()<CR>
 onoremap <silent> iA :<C-u>call InsideCapital()<CR>
 " visual
@@ -99,6 +107,8 @@ nnoremap <Space>wt_ :term<CR>
 " Searching:
 nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :FzyGrep<Space>:
+nnoremap <Leader>/ :call myfns#toggle_case_sensitive()<CR>
+nnoremap <Leader>? :call myfns#toggle_search_direction()<CR>
 
 " Toggles: ( / To file )
 nnoremap <Space>tA :CocDisable<CR>
@@ -156,10 +166,10 @@ nnoremap <Space>oE :e ~/workmode.vim<CR>
 nnoremap <Space>oo :so ~/workmode.vim<CR>
 
 " Buffers:
-nnoremap <silent> <Space>bb :call FzyBuffers(":b ")<CR>
-nnoremap <silent> <Space>b/ :call FzyBuffers(":vert sb ")<CR>
-nnoremap <silent> <Space>b_ :call FzyBuffers(":sb ")<CR>
-nnoremap <silent> <Space>bD :call FzyBuffers(":bd ")<CR>
+nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ")<CR>
+nnoremap <silent> <Space>b/ :call fzy#buffer_cmd(":vert sb ")<CR>
+nnoremap <silent> <Space>b_ :call fzy#buffer_cmd(":sb ")<CR>
+nnoremap <silent> <Space>bD :call fzy#buffer_cmd(":bd ")<CR>
 nnoremap <silent> <Space>fb :Buffers<CR>
 nnoremap <silent> <Space>bN :bp<CR>
 nnoremap <silent> <Space>bp :bp<CR>
@@ -215,8 +225,10 @@ onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
 " Quick Commands: (aliases)
 nmap qf <Space>ff
 nmap qb <Space>bb
-nmap qb/ <Space>b/
-nmap qb- <Space>b_
+nnoremap <silent> qw :call searchpos('\<', '')<CR>
+nnoremap <silent> qW :call searchpos('\<', 'b')<CR>
+nnoremap qn :bn<CR>
+nnoremap qN :bp<CR>
 nnoremap <S-Esc> :noh<CR>
 nnoremap qd :<C-u>CocList diagnostics
 nnoremap q5 :noh<CR>

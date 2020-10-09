@@ -55,7 +55,7 @@ function! s:DumpBuffers()
   redir END
 endfunction
 
-function! FzyBuffers(cmd)
+function! fzy#buffer_cmd(cmd)
   call s:DumpBuffers()
   call fzy#in_buffer("cat ~/.tmp/vim-buffers", a:cmd, "\| awk '{print $1}'")
 endfunction

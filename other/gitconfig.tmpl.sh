@@ -2,6 +2,8 @@
 cat << EOF
 [core]
   excludesfile = $HOME/.gitignore_global
+[status]
+	relativePaths = true
 [user]
   name = $USER_NAME
   email = $USER_EMAIL

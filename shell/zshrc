@@ -43,7 +43,7 @@ source "$HOME/.zfunctions/miscellaneous.zsh"
 source "$HOME/.zfunctions/colors.zsh"
 source "$HOME/.zfunctions/git-prompt.zsh"
 source "$HOME/.zfunctions/fzy.zsh"
-# source "$HOME/.zfunctions/fzf.zsh"
+source "$HOME/.zfunctions/fzf.zsh"
 [ -f "$HOME/.zfunctions/zsh-syntax-highlighting.zsh" ] \
   && source "$HOME/.zfunctions/zsh-syntax-highlighting.zsh"
 

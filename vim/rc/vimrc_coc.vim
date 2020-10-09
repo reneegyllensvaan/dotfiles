@@ -1,8 +1,13 @@
 " vim:fdm=marker
 packloadall  " This has to go before filetype conf for vim-polyglot
 packadd vinegar
+nunmap -
 
 filetype plugin indent on         " Load plugins according to detected filetype.
+
+" Project Ideas: {{{
+"   - <Leader>/ to toggle case-sensitivity for search (setreg, '/C|/c')
+" Project Ideas }}}
 
 " Plugin Config: {{{
 let g:skim_history_dir = '~/.local/share/skim-history'
