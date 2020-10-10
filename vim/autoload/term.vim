@@ -1,10 +1,15 @@
-function! term#singleton_run(mods, cmd, dir)
+function! term#singleton_run(mods, cmd, dir, bang)
   let l:term_name = '!!'.a:cmd
+  let l:cmd = a:cmd
   if bufexists(l:term_name)
     exec "bd! ".bufnr(l:term_name)
   endif
-  exec a:mods." call term_start(a:cmd, {'term_name': '".
+  if a:bang == '!'
+    let l:cmd = "zsh -c '".l:cmd."'"
+  endif
+  exec a:mods." call term_start(\"".l:cmd."\", {'term_name': '".
         \l:term_name."', 'cwd': '".a:dir."', 'term_finish': 'close'})"
+  setlocal bufhidden=wipe nobuflisted
 endfunction
 
 function! term#singleton_shell(mods, cmd, dir)

@@ -90,10 +90,10 @@ inoremap <silent><expr> <c-@> coc#refresh()
 inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 
 " Actions:
-" xmap <Space>a  <Plug>(coc-codeaction-selected)
-" nmap <Space>a  <Plug>(coc-codeaction-selected)
-" nmap <Space>ac  <Plug>(coc-codeaction)
-nmap <Space>rn <Plug>(coc-rename)
+xmap <Leader>a  <Plug>(coc-codeaction-selected)
+nmap <Leader>a  <Plug>(coc-codeaction-selected)
+nmap <Leader>ac  <Plug>(coc-codeaction)
+nmap <Leader>rn <Plug>(coc-rename)
 
 " QuickFix:
 nmap <Space>qf  <Plug>(coc-fix-current)

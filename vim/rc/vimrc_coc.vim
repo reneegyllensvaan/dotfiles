@@ -1,7 +1,10 @@
 " vim:fdm=marker
 packloadall  " This has to go before filetype conf for vim-polyglot
-packadd vinegar
-noremap - <Nop>
+packadd polyglot-small
+" packadd polyglot-large
+
+" packadd vinegar
+" noremap - <Nop>
 
 filetype plugin indent on         " Load plugins according to detected filetype.
 

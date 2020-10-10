@@ -54,19 +54,19 @@ onoremap <silent> iA :<C-u>call InsideCapital()<CR>
 vnoremap \sl :sort<CR>
 
 " Terminal Mappings:
-nnoremap <silent> <C-@> :FloatermToggle<CR>
-tnoremap <silent> <C-@> <C-\><C-n>:FloatermToggle<CR>
-nnoremap <silent> <C-Space> :FloatermToggle<CR>
-tnoremap <silent> <C-Space> <C-\><C-n>:FloatermToggle<CR>
-tnoremap <silent> <C-S> <C-W>N
-tnoremap <silent> <C-b><C-n> <C-\><C-n>:FloatermNew<CR>
-tnoremap <silent> <C-q> <C-\><C-n>:FloatermNew<CR>
-tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
+" nnoremap <silent> <C-@> :FloatermToggle<CR>
+" tnoremap <silent> <C-@> <C-\><C-n>:FloatermToggle<CR>
+" nnoremap <silent> <C-Space> :FloatermToggle<CR>
+" tnoremap <silent> <C-Space> <C-\><C-n>:FloatermToggle<CR>
+" tnoremap <silent> <C-b><C-n> <C-\><C-n>:FloatermNew<CR>
+" tnoremap <silent> <C-q> <C-\><C-n>:FloatermNew<CR>
+" tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
+" nnoremap <silent> <Space>as :FloatermNew! cd %:p:h<CR>
 
 " Terminal Applications:
-nnoremap <silent> <Space>as :FloatermNew! cd %:p:h<CR>
 nnoremap <silent> <Space>am :tab term ++close neomutt<CR>
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
+tnoremap <silent> <C-S> <C-W>N
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
 nnoremap <Space>ar :vert SingletonTerm ranger<CR>
 nnoremap <Space>at :SingletonShell<CR>
@@ -202,7 +202,9 @@ nnoremap <silent> <Space>gb :call GitBlameLine()<CR>
 nnoremap <Space>gL :vert SingletonTerm git log<CR>
 nnoremap <Space>gl :SingletonTerm git log<CR>
 nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
-nnoremap <silent> <Space>gB :FloatermNew! cd %:p:h && tig blame %:t && exit<CR>
+
+nnoremap <silent> <Space>gB :call term#singleton_run('tab', 'tig blame '.expand('%:t'), expand('%:p:h'), '')<CR>
+" nnoremap <silent> <Space>gB :SingletonTerm %:p:h && tig blame %:t && exit <CR>
 
 " Snipe Mappings:
 nnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>

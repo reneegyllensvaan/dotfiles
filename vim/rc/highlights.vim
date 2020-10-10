@@ -45,9 +45,9 @@ hi DiffChange   ctermbg=LightMagenta
 hi DiffDelete   ctermfg=Blue ctermbg=LightCyan
 hi DiffText     ctermbg=Red cterm=bold
 hi Directory    ctermfg=DarkBlue
-hi ErrorMsg     ctermfg=White ctermbg=DarkRed
-hi FoldColumn   ctermfg=DarkBlue ctermbg=Grey
-hi Folded       ctermbg=Grey ctermfg=DarkBlue
+hi ErrorMsg     ctermbg=DarkRed ctermfg=White
+hi FoldColumn   ctermbg=Grey ctermfg=DarkBlue
+hi Folded       ctermbg=8 ctermfg=blue
 hi IncSearch    cterm=reverse
 hi ModeMsg      cterm=bold
 hi MoreMsg      ctermfg=DarkGreen
@@ -69,7 +69,7 @@ hi WildMenu   cterm=none ctermfg=black ctermbg=blue
 hi StatusLine cterm=none ctermfg=white ctermbg=NONE
 
 " Syntax Highlighting
-hi Comment    cterm=none ctermbg=none ctermfg=gray
+hi Comment    cterm=none ctermbg=none ctermfg=8
 hi Constant   cterm=none ctermbg=none ctermfg=cyan
 hi Identifier cterm=none ctermbg=none ctermfg=red
 hi Function   cterm=none ctermbg=none ctermfg=blue

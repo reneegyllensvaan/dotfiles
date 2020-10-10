@@ -14,8 +14,8 @@ command! -bang YankFileNameRelative call fileutils#yank_path("+",'%', "<bang>")
 command! -bang YankFileName execute "silent ".["","YankFileNameAbsolute","YankFileNameHomedir","YankFileNameRelative"]
       \[confirm('YankFileName', "&Absolute\n&Homedir\n&Relative")]."<bang>"
 
-command! -nargs=* SingletonTerm call term#singleton_run(<q-mods>, <q-args>, getcwd())
-command! -nargs=* SingletonShell call term#singleton_shell(<q-mods>, <q-args>, getcwd())
+command! -bang -nargs=* SingletonTerm call term#singleton_run(<q-mods>, <q-args>, getcwd(), <q-bang>)
+command! -bang -nargs=* SingletonShell call term#singleton_shell(<q-mods>, <q-args>, getcwd())
 
 augroup myhooks
   autocmd!

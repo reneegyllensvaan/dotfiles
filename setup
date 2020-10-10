@@ -198,8 +198,6 @@ ensure_git_repo vim/pack/plugins/start/editorconfig https://github.com/editorcon
 ensure_git_repo vim/pack/plugins/start/skim_base https://github.com/lotabout/skim \
   || ( symlink dir ~/.skim vim/pack/plugins/start/skim_base ; push_cmd 'cd ~/.skim && ./install')
 ensure_git_repo vim/pack/plugins/start/skim https://github.com/lotabout/skim.vim
-ensure_git_repo vim/pack/plugins/start/polyglot https://github.com/sheerun/vim-polyglot
-ensure_git_repo vim/pack/plugins/start/floaterm https://github.com/voldikss/vim-floaterm
 # Dynamic plugins
 ensure_git_repo vim/pack/plugins/opt/vinegar https://github.com/tpope/vim-vinegar
 ensure_git_repo vim/pack/plugins/opt/gitgutter https://github.com/airblade/vim-gitgutter.git
@@ -207,6 +205,10 @@ ensure_git_repo vim/pack/plugins/opt/fugitive https://github.com/tpope/vim-fugit
 ensure_git_repo vim/pack/plugins/opt/onedark https://github.com/joshdick/onedark.vim
 ensure_git_repo vim/pack/plugins/opt/coc https://github.com/neoclide/coc.nvim '--branch release'
 ensure_git_repo vim/pack/plugins/opt/colors-atlas https://github.com/huyvohcmc/atlas.vim
+ensure_git_repo vim/pack/plugins/opt/floaterm https://github.com/voldikss/vim-floaterm
+
+ensure_git_repo vim/pack/plugins/opt/polyglot-small https://github.com/reneegyllensvaan/vim-polyglot.git
+ensure_git_repo vim/pack/plugins/opt/polyglot-large https://github.com/sheerun/vim-polyglot.git
 
 
 log "Building shell template files"

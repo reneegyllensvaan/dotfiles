@@ -36,5 +36,12 @@ cat << EOF
   root = "! git rev-parse --show-toplevel"
   s   = status
   z   = stash
+
+[tig "color"]
+	cursor		= default	0 underline
+	title-blur	= white	blue
+	title-focus	= white	blue	bold
+[tig "color.tree"]
+	date		= cyan	default	bold
 EOF
 exit 0
