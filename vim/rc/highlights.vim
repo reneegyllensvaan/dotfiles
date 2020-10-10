@@ -102,6 +102,7 @@ hi link SpecialChar Special
 hi Delimiter cterm=none ctermbg=none ctermfg=white
 hi link SpecialComment Special
 hi link Debug Special
+" hi link vimIsCommand Statement
 
 hi link Float Number
 

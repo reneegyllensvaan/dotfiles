@@ -1,3 +1,11 @@
+if empty(v:servername)
+  call remote_startserver('vim-'.rand())
+endif
+let $PYTHONUNBUFFERED = 1
+let $EDITOR = "host-vim"
+let $VISUAL = $EDITOR
+let $GIT_EDITOR = "host-vim-wait"
+
 function! term#singleton_run(mods, cmd, dir, bang)
   let l:term_name = '!!'.a:cmd
   let l:cmd = a:cmd
@@ -9,7 +17,7 @@ function! term#singleton_run(mods, cmd, dir, bang)
   endif
   exec a:mods." call term_start(\"".l:cmd."\", {'term_name': '".
         \l:term_name."', 'cwd': '".a:dir."', 'term_finish': 'close'})"
-  setlocal bufhidden=wipe nobuflisted
+  setlocal bufhidden=hide nobuflisted
 endfunction
 
 function! term#singleton_shell(mods, cmd, dir)
@@ -23,4 +31,16 @@ function! term#singleton_shell(mods, cmd, dir)
   tnoremap <buffer> <C-s> <C-w>c
   autocmd BufEnter <buffer> startinsert
   startinsert
+endfunction
+
+function! term#run(mods, cmd, dir, bang)
+  " if bufexists('scratchterm')
+  "   exec a:mods." sb ".bufnr('scratchterm')
+  "   return
+  " endif
+  exec a:mods." call term_start('".(empty(a:cmd) ? 'zsh' : a:cmd)
+        \."', {'term_name': '".(empty(a:cmd) ? '!zsh'.rand() : a:cmd)
+        \."', 'cwd': '".a:dir."'".
+        \.(a:bang == '!' ? '' : ", 'term_finish': 'close'")."})"
+  setlocal bufhidden=hide nobuflisted
 endfunction

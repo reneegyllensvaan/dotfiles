@@ -1,5 +1,6 @@
 " vim:fdm=marker
-packloadall  " This has to go before filetype conf for vim-polyglot
+packloadall
+" This has to go before filetype conf for vim-polyglot
 packadd polyglot-small
 " packadd polyglot-large
 
@@ -16,15 +17,6 @@ filetype plugin indent on         " Load plugins according to detected filetype.
 let g:skim_history_dir = '~/.local/share/skim-history'
 let g:floaterm_autoclose = 2
 " Plugin Config }}}
-let $PYTHONUNBUFFERED = 1
-
-if empty(v:servername)
-  call remote_startserver('vim-'.rand())
-endif
-
-let $EDITOR = "host-vim"
-let $VISUAL = $EDITOR
-let $GIT_EDITOR = "host-vim-wait"
 
 " This is a special hack because some functions need to know if they're part
 " of a repeated command. An example is the `snipe` functions, which use it to

@@ -49,15 +49,15 @@ endfunction
 
 let g:fzy_actions = ['Files', 'Buffers']
 
-function! s:DumpBuffers()
+function! s:DumpBuffers(has_bang)
   redir! > ~/.tmp/vim-buffers
-  silent ls
+  exec "silent ls".(a:has_bang ? '!' : '')
   redir END
 endfunction
 
-function! fzy#buffer_cmd(cmd)
-  call s:DumpBuffers()
-  call fzy#in_buffer("cat ~/.tmp/vim-buffers", a:cmd, "\| awk '{print $1}'")
+function! fzy#buffer_cmd(cmd, has_bang)
+  call s:DumpBuffers(a:has_bang)
+  call fzy#in_buffer("cat ~/.tmp/vim-buffers", a:cmd, "\| awk '{gsub(\"u\", \"\", $1);print $1}'")
 endfunction
 
 function! GitCommand()

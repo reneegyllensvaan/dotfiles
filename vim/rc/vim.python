@@ -1,8 +1,0 @@
-# vim: ft=python
-
-# from vim import *
-import time
-
-for x in range(10):
-    print('{"arst": '+str(x)+'}')
-    time.sleep(0.5)

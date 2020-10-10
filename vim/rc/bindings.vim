@@ -64,7 +64,7 @@ vnoremap \sl :sort<CR>
 " nnoremap <silent> <Space>as :FloatermNew! cd %:p:h<CR>
 
 " Terminal Applications:
-nnoremap <silent> <Space>am :tab term ++close neomutt<CR>
+nnoremap <silent> <Space>am :tab SingletonTerm neomutt<CR>
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
 tnoremap <silent> <C-S> <C-W>N
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
@@ -108,8 +108,8 @@ nnoremap <Space>wd <C-w>c
 nnoremap <Space>w= <C-w>=
 nnoremap <Space>wr <C-w>r
 nnoremap <Space>wm :tab split<CR>
-nnoremap <Space>wt/ :vert term ++close<CR>
-nnoremap <Space>wt_ :term ++close<CR>
+nnoremap <Space>wt/ :vert Term<CR>
+nnoremap <Space>wt_ :Term<CR>
 
 " Searching:
 nnoremap <Space>/ :Rg<CR>
@@ -173,10 +173,12 @@ nnoremap <Space>oE :e ~/workmode.vim<CR>
 nnoremap <Space>oo :so ~/workmode.vim<CR>
 
 " Buffers:
-nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ")<CR>
-nnoremap <silent> <Space>b/ :call fzy#buffer_cmd(":vert sb ")<CR>
-nnoremap <silent> <Space>b_ :call fzy#buffer_cmd(":sb ")<CR>
-nnoremap <silent> <Space>bD :call fzy#buffer_cmd(":bd ")<CR>
+nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ", 0)<CR>
+nnoremap <silent> <Space>bB :call fzy#buffer_cmd(":b ", 1)<CR>
+nnoremap <silent> <Space>b/ :call fzy#buffer_cmd(":vert sb ",0)<CR>
+nnoremap <silent> <Space>b_ :call fzy#buffer_cmd(":sb ",0)<CR>
+nnoremap <silent> <Space>bD :call fzy#buffer_cmd(":bd ",0)<CR>
+nnoremap <silent> <Space>bW :call fzy#buffer_cmd(":bwipe ",1)<CR>
 nnoremap <silent> <Space>fb :Buffers<CR>
 nnoremap <silent> <Space>bN :bp<CR>
 nnoremap <silent> <Space>bp :bp<CR>
@@ -187,7 +189,6 @@ nnoremap <silent> <Space>b? :w !diff % -<CR>
 " Git:
 nnoremap <silent> <Space>gO :call fzy#leader_script("gO", ":!git checkout-remote-branch origin ")<CR>
 nnoremap <silent> <Space>ga :call fzy#leader_script("ga", ":!git add ")<CR>
-nnoremap <silent> <Space>gc :term ++close git commit<CR>
 nnoremap <silent> <Space>gf :call fzy#leader_script("gf", ":e ")<CR>
 nnoremap <silent> <Space>ghO :call fzy#leader_script("ghO", ":!hub pr checkout ")<CR>
 nnoremap <silent> <Space>gho :call fzy#leader_script("gho", ":!hub pr checkout ")<CR>
@@ -199,12 +200,12 @@ nnoremap <silent> <Space>ghwr :!hub browse<CR>
 nnoremap <silent> <Space>go :call fzy#leader_script("go", ":!git checkout ")<CR>
 nnoremap <silent> <Space>gs :!git status<CR>
 nnoremap <silent> <Space>gb :call GitBlameLine()<CR>
+nnoremap <silent> <Space>gc :Term! git commit<CR>
 nnoremap <Space>gL :vert SingletonTerm git log<CR>
 nnoremap <Space>gl :SingletonTerm git log<CR>
 nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
 
 nnoremap <silent> <Space>gB :call term#singleton_run('tab', 'tig blame '.expand('%:t'), expand('%:p:h'), '')<CR>
-" nnoremap <silent> <Space>gB :SingletonTerm %:p:h && tig blame %:t && exit <CR>
 
 " Snipe Mappings:
 nnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
