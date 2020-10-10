@@ -13,7 +13,7 @@ filetype plugin indent on         " Load plugins according to detected filetype.
 let g:skim_history_dir = '~/.local/share/skim-history'
 let g:floaterm_autoclose = 2
 " Plugin Config }}}
-
+let $PYTHONUNBUFFERED = 1
 " This is a special hack because some functions need to know if they're part
 " of a repeated command. An example is the `snipe` functions, which use it to
 " determine whether they should prompt for new text, or re-use the same input
