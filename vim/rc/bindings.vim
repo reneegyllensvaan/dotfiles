@@ -62,22 +62,17 @@ tnoremap <silent> <C-S> <C-W>N
 tnoremap <silent> <C-b><C-n> <C-\><C-n>:FloatermNew<CR>
 tnoremap <silent> <C-q> <C-\><C-n>:FloatermNew<CR>
 tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
+
 " Terminal Applications:
 nnoremap <silent> <Space>as :FloatermNew! cd %:p:h<CR>
 nnoremap <silent> <Space>am :tab term ++close neomutt<CR>
-nnoremap <silent> <Space>ag :FloatermNew! tig && exit<CR>
+tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
+nnoremap <Space>ag :tab SingletonTerm tig<CR>
+nnoremap <Space>ar :vert SingletonTerm ranger<CR>
+nnoremap <Space>at :SingletonShell<CR>
+nnoremap <Space>aT :vert SingletonShell<CR>
+nnoremap <Space>a<C-t> :tab SingletonShell<CR>
 
-function! TermCommand(prefix, cmd, dir)
-  let l:term_name = '!!'.a:cmd
-  if bufexists(l:term_name)
-    exec "bd! ".bufnr(l:term_name)
-  endif
-  call term_start(a:cmd, {'term_name': l:term_name, 'cwd': a:dir, 'term_finish': 'close', 'vertical': 1})
-endfunction
-nnoremap <Space>ar :call TermCommand('vert ', 'ranger', getcwd())<CR>
-
-" nnoremap <silent> <Space>aR :vert term ++close ranger ".getcwd()."\<CR>"
-" nnoremap <silent> <Space>ar :vert term ++close ranger %:p:h<CR>
 
 " Visual Mappings:
 nnoremap <Space>y "+y
@@ -201,10 +196,11 @@ nnoremap <silent> <Space>ghwi :!hub browse -- issues<CR>
 nnoremap <silent> <Space>ghwo :call fzy#leader_script("ghwo", ":!hub pr show ")<CR>
 nnoremap <silent> <Space>ghwp :!hub browse -- pulls<CR>
 nnoremap <silent> <Space>ghwr :!hub browse<CR>
-nnoremap <silent> <Space>gl :FloatermNew git log<CR>
 nnoremap <silent> <Space>go :call fzy#leader_script("go", ":!git checkout ")<CR>
 nnoremap <silent> <Space>gs :!git status<CR>
 nnoremap <silent> <Space>gb :call GitBlameLine()<CR>
+nnoremap <Space>gL :vert SingletonTerm git log<CR>
+nnoremap <Space>gl :SingletonTerm git log<CR>
 nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
 nnoremap <silent> <Space>gB :FloatermNew! cd %:p:h && tig blame %:t && exit<CR>
 

@@ -14,16 +14,8 @@ command! -bang YankFileNameRelative call fileutils#yank_path("+",'%', "<bang>")
 command! -bang YankFileName execute "silent ".["","YankFileNameAbsolute","YankFileNameHomedir","YankFileNameRelative"]
       \[confirm('YankFileName', "&Absolute\n&Homedir\n&Relative")]."<bang>"
 
-function! InsideSnake()
-  call search('\(_\|\<\).', 'bce')
-  normal! v
-  call search('.\(_\|\>\)', 'c')
-endfunction
-function! InsideCapital()
-  call search('\([A-Z]\|\<\)', 'bc')
-  normal! v
-  call search('.\([A-Z]\|\>\)', 'c')
-endfunction
+command! -nargs=* SingletonTerm call term#singleton_run(<q-mods>, <q-args>, getcwd())
+command! -nargs=* SingletonShell call term#singleton_shell(<q-mods>, <q-args>, getcwd())
 
 augroup myhooks
   autocmd!
@@ -35,18 +27,6 @@ augroup myhooks
   autocmd BufWritePost * :call writefile([localtime().";".getcwd().";".expand("%:p")],
         \glob("~/.vim/files/recent-write.log"), "a")
 augroup END
-
-" TODO: these two don't work as visual motions
-function! InsideSnake()
-  call search('\(_\|\<\).', 'bce')
-  normal! v
-  call search('.\(_\|\>\)', 'c')
-endfunction
-function! InsideCapital()
-  call search('\([A-Z]\|\<\)', 'bc')
-  normal! v
-  call search('.\([A-Z]\|\>\)', 'c')
-endfunction
 
 let g:center_cursor_disabled_scrolloff = 4
 function! ToggleCenterCursor()
@@ -62,7 +42,6 @@ function! GitBlameLine()
   echo system("git blame ".expand('%')." -L ".getpos('.')[1].",".getpos('.')[1])
 endfunction
 
-let g:loaded_gitgutter = 0
 function! ToggleGitGutter()
   packadd gitgutter
   exec "GitGutterToggle"

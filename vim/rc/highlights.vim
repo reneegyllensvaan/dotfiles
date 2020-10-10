@@ -5,10 +5,18 @@ nnoremap <Space>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") .
 syntax on
 set t_Co=16
 
-hi CocHighlightText ctermbg=0
-hi SnipeMatch ctermbg=242 ctermfg=NONE
+
 " hi CursorLine cterm=none ctermbg=236
 hi CursorLine cterm=none ctermbg=0
+
+hi SnipeMatch ctermbg=242 ctermfg=NONE
+hi CocHighlightText ctermbg=0
+hi SignColumn ctermbg=none ctermfg=blue
+hi GitGutterAdd ctermbg=none ctermfg=green
+hi GitGutterRemove ctermbg=none ctermfg=red
+hi GitGutterDelete ctermbg=none ctermfg=red
+hi GitGutterChange ctermbg=none ctermfg=darkyellow
+
 
 hi StatusLineNC cterm=none ctermbg=black ctermfg=none
 hi StatusLineTerm cterm=none ctermbg=black ctermfg=none
