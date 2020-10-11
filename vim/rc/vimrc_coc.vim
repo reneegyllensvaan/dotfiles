@@ -38,7 +38,6 @@ if !has('gui_running')
 endif
 source ~/.vim/rc/commands.vim
 source ~/.vim/rc/look_and_feel.vim
-source ~/.vim/rc/surround.vim
 source ~/.vim/rc/snipe.vim
 source ~/.vim/rc/textobject.vim
 source ~/.vim/rc/autocorrect.vim
