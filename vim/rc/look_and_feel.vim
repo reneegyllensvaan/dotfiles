@@ -4,6 +4,7 @@
 if has('gui_running')
   packadd onedark
   colorscheme onedark
+  syntax on
 
   hi Pmenu ctermbg=16
   hi Search ctermbg=11 ctermfg=black
@@ -27,7 +28,7 @@ if has('gui_running')
     end
     return a:mode
   endfunction
-end
+endif
 
 if 0
   " Emit cursor shape control chars

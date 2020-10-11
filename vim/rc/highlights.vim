@@ -120,3 +120,4 @@ hi cIncluded cterm=none ctermbg=none ctermfg=green
 
 " Vimscript
 hi vimNotation cterm=none ctermbg=none ctermfg=blue
+hi link vimUserFunc Function

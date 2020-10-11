@@ -48,25 +48,24 @@ nnoremap <expr> crS "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
 " onoremap rs
 " onoremap rS
 
-onoremap <silent> i_ :<C-u>call InsideSnake()<CR>
-onoremap <silent> iA :<C-u>call InsideCapital()<CR>
+onoremap <silent> i_ :<C-u>call myfns#inside_snake()<CR>
+onoremap <silent> iA :<C-u>call myfns#inside_capital()<CR>
 " visual
 vnoremap \sl :sort<CR>
 
 " Terminal Mappings:
+tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
+tnoremap <silent> <C-S> <C-W>N
 " nnoremap <silent> <C-@> :FloatermToggle<CR>
 " tnoremap <silent> <C-@> <C-\><C-n>:FloatermToggle<CR>
 " nnoremap <silent> <C-Space> :FloatermToggle<CR>
 " tnoremap <silent> <C-Space> <C-\><C-n>:FloatermToggle<CR>
 " tnoremap <silent> <C-b><C-n> <C-\><C-n>:FloatermNew<CR>
-" tnoremap <silent> <C-q> <C-\><C-n>:FloatermNew<CR>
 " tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
 " nnoremap <silent> <Space>as :FloatermNew! cd %:p:h<CR>
 
 " Terminal Applications:
 nnoremap <silent> <Space>am :tab SingletonTerm neomutt<CR>
-tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
-tnoremap <silent> <C-S> <C-W>N
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
 nnoremap <Space>ar :vert SingletonTerm ranger<CR>
 nnoremap <Space>at :SingletonShell<CR>
@@ -233,6 +232,25 @@ onoremap <silent> f :<C-u>call Snipe(1, "fo")<CR>
 onoremap <silent> s :<C-u>call Snipe(2, "so")<CR>
 onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
 
+" Surround Mappings:
+vnoremap s( :<C-u>call surround#selection('()', 0)<CR>
+vnoremap S( :<C-u>call surround#selection('()', 1)<CR>
+vnoremap s[ :<C-u>call surround#selection('[]', 0)<CR>
+vnoremap S[ :<C-u>call surround#selection('[]', 1)<CR>
+vnoremap s{ :<C-u>call surround#selection('{}', 0)<CR>
+vnoremap S{ :<C-u>call surround#selection('{}', 1)<CR>
+vnoremap s' :<C-u>call surround#selection("''", 0)<CR>
+vnoremap S' :<C-u>call surround#selection("''", 1)<CR>
+vnoremap s" :<C-u>call surround#selection('""', 0)<CR>
+vnoremap S" :<C-u>call surround#selection('""', 1)<CR>
+vnoremap s` :<C-u>call surround#selection('``', 0)<CR>
+vnoremap S` :<C-u>call surround#selection('``', 1)<CR>
+vnoremap s_ :<C-u>call surround#selection('__', 0)<CR>
+vnoremap S_ :<C-u>call surround#selection('__', 1)<CR>
+vnoremap s* :<C-u>call surround#selection('**', 0)<CR>
+vnoremap S* :<C-u>call surround#selection('**', 1)<CR>
+vnoremap sf :<C-u>call surround#selection('()', 0)<CR><Esc>`<hi
+
 " Quick Commands: (aliases)
 nmap qf <Space>ff
 nmap qb <Space>bb
@@ -241,6 +259,7 @@ nnoremap <silent> qW :call searchpos('\<', 'b')<CR>
 nnoremap qn :bn<CR>
 nnoremap qN :bp<CR>
 nnoremap <S-Esc> :noh<CR>
+nnoremap q<Tab> :noh<CR>
 nnoremap qd :<C-u>CocList diagnostics
 nnoremap q5 :noh<CR>
 nnoremap q* :exec "FzyGrep ".expand("<cword>")<CR>

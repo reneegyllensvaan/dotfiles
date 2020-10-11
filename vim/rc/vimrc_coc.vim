@@ -1,13 +1,15 @@
 " vim:fdm=marker
+filetype off
 packloadall
 " This has to go before filetype conf for vim-polyglot
-packadd polyglot-small
-" packadd polyglot-large
+packadd polyglotsmall
+" packadd polyglotlarge
 
 " packadd vinegar
 " noremap - <Nop>
 
 filetype plugin indent on         " Load plugins according to detected filetype.
+syntax on
 
 " Project Ideas: {{{
 "   - <Leader>/ to toggle case-sensitivity for search (setreg, '/C|/c')

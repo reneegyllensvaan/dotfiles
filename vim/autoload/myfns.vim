@@ -1,7 +1,6 @@
 " vim: fdm=marker ft=sourceonsave.vim
 
 function! myfns#to_pascal(word)
-  echo "TO PASCAL".a:word
   let l:s = ''
   for word in myfns#split_case(a:word)
     if !len(word)
@@ -32,6 +31,18 @@ function! myfns#to_upper_snake(word)
   return toupper(join(myfns#split_case(a:word), '_'))
 endfunction
 
+function! myfns#inside_snake()
+  call search('\(\<\|_\).', 'Wbce')
+  normal! v
+  call search('.\(\>\|_\)', 'Wc')
+endfunction
+
+function! myfns#inside_capital()
+  call search('\(\<\|[A-Z]\)', 'Wbce')
+  normal! v
+  call search('.\(\>\|[A-Z]\)', 'Wc')
+endfunction
+
 function! myfns#split_case(word)
   let l:ignorecase = &ignorecase
   set noignorecase
@@ -41,7 +52,7 @@ function! myfns#split_case(word)
 endfunction
 
 function! myfns#start_coc()
-  " call EnsureLoaded('coc')
+  " call EnsurePluginLoaded('coc')
   " runtime plugin/coc.vim
   packadd coc
   execute 'CocEnable'
