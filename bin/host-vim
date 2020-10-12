@@ -1,3 +1,8 @@
 #!/bin/sh
 while [ "$1" = "--" ]; do shift ; done
-vim --servername $VIM_SERVERNAME --remote-send "<C-w>:e $1<CR>"
+
+vimprog=vim
+if [ "$MACVIM_RUNNING" = "yes" ]; then
+  vimprog=mvim
+fi
+$vimprog --servername $VIM_SERVERNAME --remote-send "<C-w>:e $1<CR>"

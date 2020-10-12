@@ -1,2 +1,8 @@
 #!/bin/sh
-vim --servername $VIM_SERVERNAME --remote-wait $@
+while [ "$1" = "--" ]; do shift ; done
+
+vimprog=vim
+if [ "$MACVIM_RUNNING" = "yes" ]; then
+  vimprog=mvim
+fi
+$vimprog --servername $VIM_SERVERNAME --remote-tab-wait $@

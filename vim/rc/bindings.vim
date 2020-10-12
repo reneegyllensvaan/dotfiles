@@ -13,6 +13,12 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <expr> Q (empty(reg_recording()) ? "q".tolower(nr2char(getchar())) : "q")
 
+" Alt Mappings:
+noremap <A-Up> <C-w>+
+noremap <A-Down> <C-w>-
+noremap <A-Left> <C-w><<C-w><
+noremap <A-Right> <C-w>><C-w>>
+
 " Insert Mode:
 inoremap <C-c> <Nop>
 inoremap <C-c><C-s> <C-o>:w<CR>
@@ -56,18 +62,12 @@ vnoremap \sl :sort<CR>
 " Terminal Mappings:
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
 tnoremap <silent> <C-S> <C-W>N
-" nnoremap <silent> <C-@> :FloatermToggle<CR>
-" tnoremap <silent> <C-@> <C-\><C-n>:FloatermToggle<CR>
-" nnoremap <silent> <C-Space> :FloatermToggle<CR>
-" tnoremap <silent> <C-Space> <C-\><C-n>:FloatermToggle<CR>
-" tnoremap <silent> <C-b><C-n> <C-\><C-n>:FloatermNew<CR>
-" tnoremap <silent> <C-o> <C-\><C-n>:FloatermNext<CR>
-" nnoremap <silent> <Space>as :FloatermNew! cd %:p:h<CR>
 
 " Terminal Applications:
 nnoremap <silent> <Space>am :tab SingletonTerm neomutt<CR>
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
-nnoremap <Space>ar :vert SingletonTerm ranger<CR>
+nnoremap <Space>ar :SingletonTerm ranger<CR>
+nnoremap <Space>aR :vert SingletonTerm ranger<CR>
 nnoremap <Space>at :SingletonShell<CR>
 nnoremap <Space>aT :vert SingletonShell<CR>
 nnoremap <Space>a<C-t> :tab SingletonShell<CR>
@@ -86,6 +86,7 @@ vnoremap zh <Esc>`>km>`<jm<gv
 vnoremap zl <Esc>`>jm>`<km<gv
 vnoremap < <gv
 vnoremap > >gv
+vnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
 
 " Window Mappings:
 " FIXME: find something nice to do with up/down arrows
@@ -203,7 +204,6 @@ nnoremap <silent> <Space>gc :Term! git commit<CR>
 nnoremap <Space>gL :vert SingletonTerm git log<CR>
 nnoremap <Space>gl :SingletonTerm git log<CR>
 nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
-
 nnoremap <silent> <Space>gB :call term#singleton_run('tab', 'tig blame '.expand('%:t'), expand('%:p:h'), '')<CR>
 
 " Snipe Mappings:
@@ -232,24 +232,26 @@ onoremap <silent> f :<C-u>call Snipe(1, "fo")<CR>
 onoremap <silent> s :<C-u>call Snipe(2, "so")<CR>
 onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
 
+
 " Surround Mappings:
-vnoremap s( :<C-u>call surround#selection('()', 0)<CR>
-vnoremap S( :<C-u>call surround#selection('()', 1)<CR>
-vnoremap s[ :<C-u>call surround#selection('[]', 0)<CR>
-vnoremap S[ :<C-u>call surround#selection('[]', 1)<CR>
-vnoremap s{ :<C-u>call surround#selection('{}', 0)<CR>
-vnoremap S{ :<C-u>call surround#selection('{}', 1)<CR>
-vnoremap s' :<C-u>call surround#selection("''", 0)<CR>
-vnoremap S' :<C-u>call surround#selection("''", 1)<CR>
-vnoremap s" :<C-u>call surround#selection('""', 0)<CR>
-vnoremap S" :<C-u>call surround#selection('""', 1)<CR>
-vnoremap s` :<C-u>call surround#selection('``', 0)<CR>
-vnoremap S` :<C-u>call surround#selection('``', 1)<CR>
-vnoremap s_ :<C-u>call surround#selection('__', 0)<CR>
-vnoremap S_ :<C-u>call surround#selection('__', 1)<CR>
-vnoremap s* :<C-u>call surround#selection('**', 0)<CR>
-vnoremap S* :<C-u>call surround#selection('**', 1)<CR>
-vnoremap sf :<C-u>call surround#selection('()', 0)<CR><Esc>`<hi
+vnoremap s( :<C-u>call visualops#surround_selection('()', 0)<CR>
+vnoremap S( :<C-u>call visualops#surround_selection('()', 1)<CR>
+vnoremap s[ :<C-u>call visualops#surround_selection('[]', 0)<CR>
+vnoremap S[ :<C-u>call visualops#surround_selection('[]', 1)<CR>
+vnoremap s{ :<C-u>call visualops#surround_selection('{}', 0)<CR>
+vnoremap S{ :<C-u>call visualops#surround_selection('{}', 1)<CR>
+vnoremap s' :<C-u>call visualops#surround_selection("''", 0)<CR>
+vnoremap S' :<C-u>call visualops#surround_selection("''", 1)<CR>
+vnoremap s" :<C-u>call visualops#surround_selection('""', 0)<CR>
+vnoremap S" :<C-u>call visualops#surround_selection('""', 1)<CR>
+vnoremap s` :<C-u>call visualops#surround_selection('``', 0)<CR>
+vnoremap S` :<C-u>call visualops#surround_selection('``', 1)<CR>
+vnoremap s_ :<C-u>call visualops#surround_selection('__', 0)<CR>
+vnoremap S_ :<C-u>call visualops#surround_selection('__', 1)<CR>
+vnoremap s* :<C-u>call visualops#surround_selection('**', 0)<CR>
+vnoremap S* :<C-u>call visualops#surround_selection('**', 1)<CR>
+vnoremap sf :<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
+
 
 " Quick Commands: (aliases)
 nmap qf <Space>ff

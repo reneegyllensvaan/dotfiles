@@ -1,6 +1,9 @@
 if empty(v:servername)
   call remote_startserver('vim-'.rand())
 endif
+if has('gui_macvim') && has('gui_running')
+  let $MACVIM_RUNNING = "yes"
+end
 let $PYTHONUNBUFFERED = 1
 let $EDITOR = "host-vim"
 let $VISUAL = $EDITOR
