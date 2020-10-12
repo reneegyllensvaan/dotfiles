@@ -23,16 +23,23 @@ function! term#singleton_run(mods, cmd, dir, bang)
   setlocal bufhidden=hide nobuflisted
 endfunction
 
-function! term#singleton_shell(mods, cmd, dir)
+function! term#singleton_shell(mods, cmd, dir) abort
   if bufexists('scratchterm')
     exec a:mods." sb ".bufnr('scratchterm')
     return
   endif
-  exec a:mods." call term_start('zsh', {'term_name': 'scratchterm', 'cwd': '".a:dir."', 'term_finish': 'close'})"
+  if has('nvim')
+    exec a:mods." new"
+    call termopen('zsh', {})
+    file scratchterm
+  else
+    exec a:mods." call term_start('zsh', {'term_name': 'scratchterm', 'cwd': '".a:dir."', 'term_finish': 'close'})"
+  endif
   setlocal bufhidden=hide nobuflisted
   nnoremap <buffer> <C-s> <C-w>c
   tnoremap <buffer> <C-s> <C-w>c
   autocmd BufEnter <buffer> startinsert
+  autocmd TermClose <buffer> bd!
   startinsert
 endfunction
 

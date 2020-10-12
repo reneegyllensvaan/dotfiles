@@ -62,12 +62,25 @@ vnoremap \sl :sort<CR>
 " Terminal Mappings:
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
 tnoremap <silent> <C-S> <C-W>N
+if has('nvim')
+  tnoremap <silent> <C-w>h <C-\><C-n><C-w>h
+  tnoremap <silent> <C-w>j <C-\><C-n><C-w>j
+  tnoremap <silent> <C-w>k <C-\><C-n><C-w>k
+  tnoremap <silent> <C-w>l <C-\><C-n><C-w>l
+  tnoremap <silent> <C-w>H <C-\><C-n><C-w>H
+  tnoremap <silent> <C-w>J <C-\><C-n><C-w>J
+  tnoremap <silent> <C-w>K <C-\><C-n><C-w>K
+  tnoremap <silent> <C-w>L <C-\><C-n><C-w>L
+  tnoremap <silent> <C-w>: <C-\><C-n><C-w>:
+endif
 
 " Terminal Applications:
 nnoremap <silent> <Space>am :tab SingletonTerm neomutt<CR>
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
-nnoremap <Space>ar :SingletonTerm ranger<CR>
-nnoremap <Space>aR :vert SingletonTerm ranger<CR>
+nnoremap <Space>af :SingletonTerm fish<CR>
+nnoremap <Space>aF :vert SingletonTerm! fish<CR>
+nnoremap <Space>ar :SingletonTerm! ranger<CR>
+nnoremap <Space>aR :vert SingletonTerm! ranger<CR>
 nnoremap <Space>at :SingletonShell<CR>
 nnoremap <Space>aT :vert SingletonShell<CR>
 nnoremap <Space>a<C-t> :tab SingletonShell<CR>
@@ -154,7 +167,7 @@ nnoremap <expr>   <Space>fc ":lcd ".expand("%:p:h")."\<CR>"
 nnoremap <expr>   <Space>fC ":cd ".expand("%:p:h")."\<CR>"
 nnoremap <silent> <Space>fy :YankFileName<CR>
 nnoremap <silent> <Space>fY :YankFileName!<CR>
-nnoremap <silent> <Space>ff :call fzy#in_buffer("fd . --type f", ":e ", "")<CR>
+nnoremap <Space>ff :call fzy#in_buffer("fd . --type f", ":e ", "")<CR>
 nnoremap <silent> <Space>f/ :call fzy#in_buffer("fd . --type f", ":vsp ", "")<CR>
 nnoremap <silent> <Space>f_ :call fzy#in_buffer("fd . --type f", ":vsp ", "")<CR>
 nnoremap <silent> <Space>fr :call fzy#leader_script("fr", ":e ")<CR>
