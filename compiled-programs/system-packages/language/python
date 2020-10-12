@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if which pip3 >/dev/null 2>&1; then
+  pip3 install \
+    wheel \
+    neovim-remote \
+    neovim
+fi
+
+if which pip2 >/dev/null 2>&1; then
+  pip2 install \
+    wheel \
+    neovim
+fi

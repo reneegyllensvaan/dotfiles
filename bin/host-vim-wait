@@ -1,6 +1,10 @@
 #!/bin/sh
 while [ "$1" = "--" ]; do shift ; done
 
+if [ "$NVIM_LISTEN_ADDRESS" ]; then
+  exec nvr --servername $NVIM_LISTEN_ADDRESS --remote-send $1
+fi
+
 vimprog=vim
 if [ "$MACVIM_RUNNING" = "yes" ]; then
   vimprog=mvim
