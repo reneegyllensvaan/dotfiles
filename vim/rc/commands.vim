@@ -14,6 +14,19 @@ command! -bang YankFileNameRelative call fileutils#yank_path("+",'%', "<bang>")
 command! -bang YankFileName execute "silent ".["","YankFileNameAbsolute","YankFileNameHomedir","YankFileNameRelative"]
       \[confirm('YankFileName', "&Absolute\n&Homedir\n&Relative")]."<bang>"
 
+let g:term_should_startinsert = 0
+command! -bang -nargs=* PushTermStartInsert let g:term_should_startinsert = 1
+function! PopTermStartInsert()
+  if g:term_should_startinsert
+    startinsert
+  end
+  let g:term_should_startinsert = 0
+endfunction
+augroup term-pop-startinsert
+  autocmd!
+  autocmd BufEnter * if &buftype=="terminal" | call PopTermStartInsert() | endif
+augroup END
+
 command! -bang -nargs=* Term call term#run(<q-mods>, <q-args>, getcwd(), <q-bang>)
 command! -bang -nargs=* SingletonTerm call term#singleton_run(<q-mods>, <q-args>, getcwd(), <q-bang>)
 command! -bang -nargs=* SingletonShell call term#singleton_shell(<q-mods>, <q-args>, getcwd())

@@ -2,8 +2,8 @@
 filetype off
 packloadall
 " This has to go before filetype conf for vim-polyglot
-packadd polyglotsmall
-" packadd polyglotlarge
+packadd polyglot-small
+" packadd polyglot-large
 
 " packadd vinegar
 " noremap - <Nop>
