@@ -24,18 +24,24 @@ hi User1 ctermbg=0 ctermfg=white
 hi User2 ctermbg=green ctermfg=black
 hi User3 ctermbg=black ctermfg=white
 hi User5 ctermbg=gray ctermfg=black
-function! StatuslineColor(mode)
-  if a:mode[0] == 'N'
-    hi User2 ctermbg=green
-  elseif a:mode[0] == 'I'
-    hi User2 ctermbg=blue
-  elseif a:mode[0] == 'V'
-    hi User2 ctermbg=magenta
-  elseif a:mode[0] == 'R'
-    hi User2 ctermbg=red
-  end
-  return a:mode
-endfunction
+
+hi StatusLineNormal   ctermbg=green      ctermfg=black
+hi StatusLineInsert   ctermbg=blue       ctermfg=black
+hi StatusLineVisual   ctermbg=magenta    ctermfg=black
+hi StatusLineReplace  ctermbg=red        ctermfg=black
+hi StatusLineDisabled ctermbg=white      ctermfg=black
+" function! StatuslineColor(mode)
+"   if a:mode[0] == '\%6N'
+"     hi User2 ctermbg=green
+"   elseif a:mode[0] == 'I'
+"     hi User2 ctermbg=blue
+"   elseif a:mode[0] == 'V'
+"     hi User2 ctermbg=magenta
+"   elseif a:mode[0] == 'R'
+"     hi User2 ctermbg=red
+"   end
+"   return a:mode
+" endfunction
 hi TabLineFill cterm=none ctermbg=black ctermfg=white
 hi TabLineSel cterm=bold ctermbg=black ctermfg=white
 hi TabLine cterm=none ctermbg=black ctermfg=gray

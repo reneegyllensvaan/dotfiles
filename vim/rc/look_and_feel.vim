@@ -15,19 +15,11 @@ if has('gui_running')
   hi User1 guibg=#22252b
   hi User2 guibg=#98C379 guifg=black
   hi User3 guibg=#22252b
-  hi User5 guibg=#6F6F6F guifg=black
-  function! StatuslineColor(mode)
-    if a:mode[0] == 'N'
-      hi User2 guibg=#98C379 guifg=black
-    elseif a:mode[0] == 'I'
-      hi User2 guibg=#56B6C2 guifg=black
-    elseif a:mode[0] == 'V'
-      hi User2 guibg=#C678DD guifg=black
-    elseif a:mode[0] == 'R'
-      hi User2 guibg=#E06C75 guifg=black
-    end
-    return a:mode
-  endfunction
+  hi StatusLineNormal    guibg=#98C379 guifg=black
+  hi StatusLineInsert    guibg=#56B6C2 guifg=black
+  hi StatusLineVisual    guibg=#C678DD guifg=black
+  hi StatusLineReplace   guibg=#E06C75 guifg=black
+  hi StatusLineDisabled  guibg=#6F6F6F guifg=black
 endif
 
 if 0
@@ -38,25 +30,34 @@ if 0
 endif
 
 "" statusline {{{
-let g:mode_map = {'n': 'NORMAL', 'i': 'INSERT', 'v': 'VISUAL', 'r': 'REPLACE'}
-set statusline=%5*\ \ \ \ \ \ \ \ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
+let g:mode_map = {'n': "NORMAL", 'i': 'INSERT', 'v': 'VISUAL', 'r': 'REPLACE'}
+let g:statusline_active = join([
+      \"%#StatusLineNormal#%{(mode()=='n') ? '  NORMAL ' : ''}",
+      \"%#StatusLineInsert#%{(mode()=='i') ? '  INSERT ' : ''}",
+      \"%#StatusLineVisual#%{(mode()=='v'||mode()=='\<C-v>') ? '  VISUAL ' : ''}",
+      \"%#StatusLineReplace#%{(mode()=='r') ? '  REPLACE ' : ''}",
+      \'%1* %t%=%*%3*%h%m%r%3*%3*%c:%3*%l/%L\|%3*%y'], '')
+let g:statusline_disabled = join([
+      \"%#StatusLineDisabled#%{'         '}",
+      \'%1* %t%=%*%3*%h%m%r%3*%3*%c:%3*%l/%L\|%3*%y'], '')
+let &statusline = g:statusline_disabled
+" set statusline='\ %{StatuslineColor(get(g:mode_map,tolower(mode()),'n'))}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y'
+" set statusline=%2*\ %{StatuslineColor(get(g:mode_map,tolower(mode()),'n'))}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
+
 function! ActiveStatusLine()
-  setlocal laststatus=1
   if has('g:coc_enabled')
-    setlocal statusline=%2*\ %{StatuslineColor(get(g:mode_map,tolower(mode()),'n'))}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y\%{coc#status()}%{get(b:,'coc_current_function','')}
+    let &l:statusline=g:statusline_active
   else
-    setlocal statusline=%2*\ %{StatuslineColor(get(g:mode_map,tolower(mode()),'n'))}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
+    let &l:statusline=g:statusline_active
   end
 endfunction
 function! InactiveStatusLine()
-  setlocal laststatus=1
-  setlocal statusline=%5*\ \ \ \ \ \ \ \ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
+    let &statusline=g:statusline_disabled
 endfunction
-
 augroup statusline-toggler
   autocmd!
-  autocmd WinEnter * :call ActiveStatusLine()
-  autocmd WinLeave * :call InactiveStatusLine()
+  autocmd WinEnter * call ActiveStatusLine()
+  autocmd WinLeave * call InactiveStatusLine()
 augroup END
 
 "" statusline }}}
@@ -118,4 +119,3 @@ let g:netrw_winsize = -28
 let g:netrw_fastbrowse = 0
 " netrw }}}
 
-call ActiveStatusLine()

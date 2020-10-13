@@ -30,7 +30,7 @@ set wildmenu  " Use fancy tab completion menu
 "   - ,full: fall back to cycling thru matches
 set wildmode=longest:full,full
 
-set noshowmode " Show current mode in command-line.
+set showmode " Show current mode in command-line.
 set showcmd  " Show already typed keys when more are expected.
 
 set incsearch  " Highlight while searching with / or ?.

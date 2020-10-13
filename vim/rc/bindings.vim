@@ -100,6 +100,7 @@ vnoremap zl <Esc>`>jm>`<km<gv
 vnoremap < <gv
 vnoremap > >gv
 vnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
+vnoremap \C :!column -t<cr>
 
 " Window Mappings:
 " FIXME: find something nice to do with up/down arrows
