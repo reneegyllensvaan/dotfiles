@@ -61,8 +61,10 @@ vnoremap \sl :sort<CR>
 
 " Terminal Mappings:
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
-tnoremap <silent> <C-S> <C-W>N
+tnoremap <silent> <C-s> <C-W>N
 if has('nvim')
+  tnoremap <silent> <C-w>N <C-\><C-n>
+  tnoremap <silent> <C-s> <C-\><C-n>
   tnoremap <silent> <C-w>h <C-\><C-n><C-w>h
   tnoremap <silent> <C-w>j <C-\><C-n><C-w>j
   tnoremap <silent> <C-w>k <C-\><C-n><C-w>k
@@ -215,6 +217,7 @@ nnoremap <silent> <Space>go :call fzy#leader_script("go", ":!git checkout ")<CR>
 nnoremap <silent> <Space>gs :!git status<CR>
 nnoremap <silent> <Space>gb :call GitBlameLine()<CR>
 nnoremap <silent> <Space>gc :Term! git commit<CR>
+nnoremap <Space>g<C-l> :tab SingletonTerm git log<CR>
 nnoremap <Space>gL :vert SingletonTerm git log<CR>
 nnoremap <Space>gl :SingletonTerm git log<CR>
 nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
@@ -265,6 +268,15 @@ vnoremap S_ :<C-u>call visualops#surround_selection('__', 1)<CR>
 vnoremap s* :<C-u>call visualops#surround_selection('**', 0)<CR>
 vnoremap S* :<C-u>call visualops#surround_selection('**', 1)<CR>
 vnoremap sf :<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
+vnoremap sr( <Esc>`<r(`>r)gv
+vnoremap sr[ <Esc>`<r[`>r]gv
+vnoremap sr{ <Esc>`<r{`>r}gv
+vnoremap sr' <Esc>`<r'`>r'gv
+vnoremap sr" <Esc>`<r"`>r"gv
+vnoremap sr` <Esc>`<r``>r`gv
+vnoremap sr_ <Esc>`<r_`>r_gv
+vnoremap sr* <Esc>`<r*`>r*gv
+vnoremap srf <Esc>`>r)`<r(i
 
 
 " Quick Commands: (aliases)

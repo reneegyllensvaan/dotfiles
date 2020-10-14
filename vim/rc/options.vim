@@ -35,6 +35,9 @@ set showcmd  " Show already typed keys when more are expected.
 
 set incsearch  " Highlight while searching with / or ?.
 set hlsearch   " Keep matches highlighted.
+if has('nvim')
+  set inccommand=nosplit
+end
 
 set ttyfast                       " Faster redrawing.
 set lazyredraw                    " Only redraw when necessary.
@@ -74,4 +77,7 @@ set directory   =$HOME/.vim/files/swap//
 set updatecount =100
 set undofile
 set undodir     =$HOME/.vim/files/undo/
-set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+
+if !has('nvim')
+  set viminfo     ='100,n$HOME/.vim/files/info/viminfo
+end

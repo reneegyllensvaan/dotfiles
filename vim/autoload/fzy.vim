@@ -11,62 +11,39 @@ function! fzy#command(choice_command, vim_command)
   endif
 endfunction
 
-if has('nvim')
-  function! fzy#in_buffer(choice_command, vim_command, post_command) abort
-    let s:choice_command = a:choice_command
-    let s:vim_command = a:vim_command
-    let s:post_command = a:post_command
-    let s:returnwindow = winnr()
-    function! s:CleanBuffer(foo, status, baz)
-      exec 'bd! '.s:fzybuffer
-      if exists('s:returnwindow')
-        " Switch back to the window we started from so we change the right one
-        exec s:returnwindow . 'wincmd w'
-      end
-      let s:fzy_out = readfile(glob("~/.tmp/fzy-out"))
-      if !(a:status)
-        for line in s:fzy_out
-          exec s:vim_command . line
-        endfor
-      end
-    endfunction
-    exec 'botright 20new'
+
+function! fzy#in_buffer(choice_command, vim_command, post_command) abort
+  let s:choice_command = a:choice_command
+  let s:vim_command = a:vim_command
+  let s:post_command = a:post_command
+  let s:returnwindow = winnr()
+  function! s:CleanBuffer(pid, code, ...)
+    if exists('s:fzybuffer')
+      " When command finishes, don't keep the terminal around
+      silent exec 'bd! ' s:fzybuffer
+    end
+    if exists('s:returnwindow')
+      " Switch back to the window we started from so we change the right one
+      exec s:returnwindow . 'wincmd w'
+    end
+    let s:fzy_out = readfile(glob("~/.tmp/fzy-out"))
+    if !(a:code)
+      for line in s:fzy_out
+        exec s:vim_command . line
+      endfor
+    end
+  endfunction
+  exec 'botright 20new'
+  if has('nvim')
     call termopen(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'], {'on_exit': function('s:CleanBuffer')})
     let s:fzybuffer = bufnr()
-    setlocal nospell bufhidden=wipe nobuflisted nonumber laststatus=0
-    setf fzy
-    startinsert
-  endfunction
-
-else
-  function! fzy#in_buffer(choice_command, vim_command, post_command) abort
-    let s:choice_command = a:choice_command
-    let s:vim_command = a:vim_command
-    let s:post_command = a:post_command
-    let s:returnwindow = winnr()
-    function! s:CleanBuffer(pid, code)
-      if exists('s:fzybuffer')
-        " When command finishes, don't keep the terminal around
-        silent exec 'bd! ' s:fzybuffer
-      end
-      if exists('s:returnwindow')
-        " Switch back to the window we started from so we change the right one
-        exec s:returnwindow . 'wincmd w'
-      end
-      let s:fzy_out = readfile(glob("~/.tmp/fzy-out"))
-      if !(a:code)
-        for line in s:fzy_out
-          exec s:vim_command . line
-        endfor
-      end
-    endfunction
-    exec 'botright 20new'
+  else
     let s:fzybuffer = term_start(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'], {'curwin': 1, 'exit_cb': function('s:CleanBuffer')})
-    setlocal nospell bufhidden=wipe nobuflisted nonumber laststatus=0
-    setf fzy
-    startinsert
-  endfunction
-endif
+  endif
+  setlocal nospell bufhidden=wipe nobuflisted nonumber laststatus=0
+  setf fzy
+  startinsert
+endfunction
 
 function! fzy#leader_script(key_sequence, run) abort
   call fzy#in_buffer(glob("~/.vim/leader-scripts/".a:key_sequence)." pre", a:run, "\| ".glob("~/.vim/leader-scripts/".a:key_sequence)." post")

@@ -88,6 +88,7 @@ function! Snipe(n, op) abort
   end
 
   let s:snipe_op = a:op
+  normal! m'
   call SnipeNext(0, g:is_repeating?'':'s')
 endfunction
 

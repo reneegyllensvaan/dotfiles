@@ -2,7 +2,7 @@
 while [ "$1" = "--" ]; do shift ; done
 
 if [ "$NVIM_LISTEN_ADDRESS" ]; then
-  exec nvr --servername $NVIM_LISTEN_ADDRESS --remote-send $1
+  exec nvr --servername $NVIM_LISTEN_ADDRESS --remote-tab-wait $1
 fi
 
 vimprog=vim

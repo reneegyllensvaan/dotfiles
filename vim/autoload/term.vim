@@ -18,9 +18,19 @@ function! term#singleton_run(mods, cmd, dir, bang)
   if a:bang == '!'
     let l:cmd = "zsh -c '".l:cmd."'"
   endif
-  exec a:mods." call term_start(\"".l:cmd."\", {'term_name': '".
-        \l:term_name."', 'cwd': '".a:dir."', 'term_finish': 'close'})"
-  setlocal bufhidden=hide nobuflisted
+  if has('nvim')
+    exec a:mods." new"
+    call termopen(l:cmd, {})
+    exec "file ".l:term_name
+  else
+    exec a:mods." call term_start(\"".l:cmd."\", {'term_name': '".
+          \l:term_name."', 'cwd': '".a:dir."', 'term_finish': 'close'})"
+  endif
+  setlocal bufhidden=hide nobuflisted nonumber
+  if has('nvim')
+    autocmd TermClose <buffer> bd!
+  end
+  startinsert
 endfunction
 
 function! term#singleton_shell(mods, cmd, dir) abort
@@ -35,11 +45,13 @@ function! term#singleton_shell(mods, cmd, dir) abort
   else
     exec a:mods." call term_start('zsh', {'term_name': 'scratchterm', 'cwd': '".a:dir."', 'term_finish': 'close'})"
   endif
-  setlocal bufhidden=hide nobuflisted
+  setlocal bufhidden=hide nobuflisted nonumber
   nnoremap <buffer> <C-s> <C-w>c
   tnoremap <buffer> <C-s> <C-w>c
   autocmd BufEnter <buffer> startinsert
-  autocmd TermClose <buffer> bd!
+  if has('nvim')
+    autocmd TermClose <buffer> bd!
+  end
   startinsert
 endfunction
 
@@ -52,5 +64,5 @@ function! term#run(mods, cmd, dir, bang)
         \."', {'term_name': '".(empty(a:cmd) ? '!zsh'.rand() : a:cmd)
         \."', 'cwd': '".a:dir."'".
         \.(a:bang == '!' ? '' : ", 'term_finish': 'close'")."})"
-  setlocal bufhidden=hide nobuflisted
+  setlocal bufhidden=hide nobuflisted nonumber
 endfunction

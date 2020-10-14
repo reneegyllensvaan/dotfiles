@@ -1,5 +1,11 @@
 " vim:fdm=marker
 filetype off
+
+if has('nvim')
+  set packpath^=~/.vim
+  set rtp^=~/.vim
+end
+
 packloadall
 " This has to go before filetype conf for vim-polyglot
 packadd polyglot-small

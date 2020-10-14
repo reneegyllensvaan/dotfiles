@@ -63,8 +63,7 @@ augroup END
 "" statusline }}}
 
 " cursorline {{{
-" TODO: Set up non-terrible-looking cursorline on console
-let g:cursorline_enabled = has('gui_running')
+let g:cursorline_enabled = &cursorline
 function! ToggleCursorLine()
   let g:cursorline_enabled = !g:cursorline_enabled
   if g:cursorline_enabled

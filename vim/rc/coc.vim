@@ -16,7 +16,11 @@ set updatetime=150
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
 
-set signcolumn=number
+if has('nvim')
+  set signcolumn=yes
+else
+  set signcolumn=number
+end
 set number
 
 function! s:check_back_space() abort

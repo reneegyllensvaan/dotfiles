@@ -43,6 +43,7 @@ augroup myhooks
 augroup END
 
 let g:center_cursor_disabled_scrolloff = 4
+let g:cached_scrolloff = &so
 function! ToggleCenterCursor()
   if &so == 999
     exec 'set so=' . g:center_cursor_disabled_scrolloff
@@ -50,7 +51,15 @@ function! ToggleCenterCursor()
   else
     set so=999
   end
+  let g:cached_scrolloff = &so
 endfunction
+if has('nvim')
+  augroup center-cursor-settings
+    autocmd!
+    au TermEnter * set so=0
+    au TermLeave * exec "set so=".g:cached_scrolloff
+  augroup END
+endif
 
 function! GitBlameLine()
   echo system("git blame ".expand('%')." -L ".getpos('.')[1].",".getpos('.')[1])
