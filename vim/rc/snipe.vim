@@ -37,7 +37,7 @@ endfunction
 function! SnipeNext(b,flags)
   let ignorecase_previous = &ignorecase
   set noignorecase
-  let q = (stridx("tn", s:snipe_op)+1 ? "." : "")
+  let q = (stridx("tntv", s:snipe_op)+1 ? "." : "")
         \.s:snipe_query
         \.(stridx("foTn", s:snipe_op)+1 ? "\\(.\\|$\\)" : "")
   let flags = "W"
