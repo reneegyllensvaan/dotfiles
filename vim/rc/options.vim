@@ -17,7 +17,7 @@ set shiftround     " >> indents to next multiple of 'shiftwidth'.
 set cursorline  " Highlight current cursor line
 set backspace=indent,eol,start " Allow full editing with backspace
 set hidden  " Switch between buffers without having to save first.
-set laststatus=1  " Show statusline if more than 2 windows
+set laststatus=1  " Show statusline if multiple windows
 "set display     =lastline         " Show as much as possible of the last line.
 
 set foldmethod=syntax  " Collapsing with `za` should be based on syntax

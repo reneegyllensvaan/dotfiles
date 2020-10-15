@@ -41,7 +41,7 @@ function! SnipeNext(b,flags)
         \.s:snipe_query
         \.(stridx("foTn", s:snipe_op)+1 ? "\\(.\\|$\\)" : "")
   let flags = "W"
-        \.((stridx("SnFnTnSoToFo", s:snipe_op)>-1)-a:b ? 'b' : '')
+        \.((stridx("SnFnTnSoToFoSvFvTv", s:snipe_op)>-1)-a:b ? 'b' : '')
         \.(stridx("foTn", s:snipe_op)>-1 ? "e" : "")
   if (stridx(s:snipe_op, "v")>-1) | exec "normal! gv" | endif
   call search(q, flags)

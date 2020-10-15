@@ -5,6 +5,11 @@ if [ "$MACVIM_RUNNING" = "yes" ]; then
   vimprog=mvim
 fi
 
+# if [ "$NVIM_LISTEN_ADDRESS" ]; then
+#   vimprog="nvr -c 'echo \"foo\"'"
+#   VIM_SERVERNAME="$NVIM_LISTEN_ADDRESS"
+# fi
+
 :e () {
   [ "$1" ] || return
   $vimprog --servername $VIM_SERVERNAME --remote-send "<C-w>:e! $PWD/$1<CR>"

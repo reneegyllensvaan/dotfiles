@@ -35,12 +35,14 @@ function! fzy#in_buffer(choice_command, vim_command, post_command) abort
   endfunction
   exec 'botright 20new'
   if has('nvim')
-    call termopen(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'], {'on_exit': function('s:CleanBuffer')})
+    call termopen(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'],
+          \{'on_exit': function('s:CleanBuffer')})
     let s:fzybuffer = bufnr()
   else
-    let s:fzybuffer = term_start(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'], {'curwin': 1, 'exit_cb': function('s:CleanBuffer')})
+    let s:fzybuffer = term_start(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'],
+          \{'curwin': 1, 'exit_cb': function('s:CleanBuffer')})
   endif
-  setlocal nospell bufhidden=wipe nobuflisted nonumber laststatus=0
+  setlocal nospell bufhidden=wipe nobuflisted nonumber
   setf fzy
   startinsert
 endfunction

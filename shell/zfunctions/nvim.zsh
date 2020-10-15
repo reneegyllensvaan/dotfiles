@@ -2,12 +2,12 @@
 
 :e () {
   [ "$1" ] || return
-  nvr --servername $NVIM_LISTEN_ADDRESS --remote-send "<C-w>:e! $PWD/$1<CR>"
+  nvr --servername $NVIM_LISTEN_ADDRESS --remote-send "<C-w>:e! `realpath $1`<CR>"
 }
 
 # Post-cd hook in zsh, makes the containing vim terminal window cd when we cd in zsh
 chpwd() {
-  nvr --servername $NVIM_LISTEN_ADDRESS --remote-send "<C-\\><C-n>:lcd $PWD<cr>"
+  nvr -c 'startinsert' --servername $NVIM_LISTEN_ADDRESS --remote-send "<C-\\><C-n>:lcd $PWD<cr>"
 }
 
 # Open files in the host vim session

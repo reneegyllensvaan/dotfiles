@@ -103,6 +103,8 @@ vnoremap < <gv
 vnoremap > >gv
 vnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
 vnoremap \C :!column -t<cr>
+vnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Tab><Esc>A
+
 
 " Window Mappings:
 " FIXME: find something nice to do with up/down arrows
@@ -234,12 +236,12 @@ nnoremap <silent> s :<C-u>call Snipe(2, "sn")<CR>
 nnoremap <silent> t :<C-u>call Snipe(1, "tn")<CR>
 vnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
 vnoremap <silent> ; :<C-u>call SnipeNext(0,"")<CR>
-vnoremap <silent> F :<C-u>call Snipe(1, "Fnv")<CR>
-vnoremap <silent> S :<C-u>call Snipe(2, "Snv")<CR>
-vnoremap <silent> T :<C-u>call Snipe(1, "Tnv")<CR>
-vnoremap <silent> f :<C-u>call Snipe(1, "fnv")<CR>
-vnoremap <silent> s :<C-u>call Snipe(2, "snv")<CR>
-vnoremap <silent> t :<C-u>call Snipe(1, "tnv")<CR>
+vnoremap <silent> F :<C-u>call Snipe(1, "Fv")<CR>
+vnoremap <silent> S :<C-u>call Snipe(2, "Sv")<CR>
+vnoremap <silent> T :<C-u>call Snipe(1, "Tv")<CR>
+vnoremap <silent> f :<C-u>call Snipe(1, "fv")<CR>
+vnoremap <silent> s :<C-u>call Snipe(2, "sv")<CR>
+vnoremap <silent> t :<C-u>call Snipe(1, "tv")<CR>
 onoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
 onoremap <silent> ; :<C-u>call SnipeNext(0,"")<CR>
 onoremap <silent> F :<C-u>call Snipe(1, "Fo")<CR>
@@ -248,7 +250,6 @@ onoremap <silent> T :<C-u>call Snipe(1, "To")<CR>
 onoremap <silent> f :<C-u>call Snipe(1, "fo")<CR>
 onoremap <silent> s :<C-u>call Snipe(2, "so")<CR>
 onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
-
 
 " Surround Mappings:
 vnoremap s( :<C-u>call visualops#surround_selection('()', 0)<CR>
