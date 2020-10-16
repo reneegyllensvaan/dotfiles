@@ -1,3 +1,4 @@
+" vim: ft=vim fdm=marker
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -68,6 +69,10 @@ let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 nmap <silent> K :call <SID>show_documentation()<CR>
 
+
+nnoremap <silent><nowait> <Space>sR  :CocRestart<cr>
+
+" CocList: {{{
 nnoremap <silent><nowait> <Space>ss  :<C-u>CocList<cr>
 nnoremap <silent><nowait> <Space>sa  :<C-u>CocList actions<cr>
 nnoremap <silent><nowait> <Space>sd  :<C-u>CocList diagnostics<cr>
@@ -87,6 +92,7 @@ vnoremap <silent><nowait> <Space>so  :<C-u>CocList outline<cr>
 vnoremap <silent><nowait> <Space>sy  :<C-u>CocList -I symbols<cr>
 vnoremap <silent><nowait> <Space>sj  :<C-u>CocNext<CR>
 vnoremap <silent><nowait> <Space>sk  :<C-u>CocPrev<CR>
+" CocList: }}}
 
 inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"

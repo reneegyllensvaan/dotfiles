@@ -1,7 +1,10 @@
+" vim: fdm=marker ft=sourceonsave.vim
 set encoding=utf-8
 
 " Braces should not open folds
 set foldopen-=block
+" h/l should not open folds
+set foldopen-=hor
 
 " Automatically refresh files changed on disk if no unsaved changes
 set autoread

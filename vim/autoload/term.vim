@@ -20,7 +20,7 @@ function! term#singleton_run(mods, cmd, dir, bang)
   endif
   if has('nvim')
     exec a:mods." new"
-    call termopen(l:cmd, {})
+    call termopen(l:cmd, {'cwd': a:dir})
     exec "file ".l:term_name
   else
     exec a:mods." call term_start(\"".l:cmd."\", {'term_name': '".
@@ -28,7 +28,7 @@ function! term#singleton_run(mods, cmd, dir, bang)
   endif
   setlocal bufhidden=hide nobuflisted nonumber
   if has('nvim')
-    autocmd TermClose <buffer> bd!
+    exec "autocmd TermClose <buffer> bd! ".bufnr()
   end
   startinsert
 endfunction
@@ -51,6 +51,7 @@ function! term#singleton_shell(mods, cmd, dir) abort
   autocmd BufEnter <buffer> startinsert
   if has('nvim')
     autocmd TermClose <buffer> bd!
+    tnoremap <buffer> <C-s> <C-\><C-n><C-w>c
   end
   startinsert
 endfunction

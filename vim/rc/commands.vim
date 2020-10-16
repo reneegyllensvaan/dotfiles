@@ -61,6 +61,16 @@ if has('nvim')
   augroup END
 endif
 
+augroup tabclose-left
+  autocmd!
+  autocmd TabClosed * if expand('<afile>') == tabpagenr() | tabprevious | end
+augroup END
+
+augroup clean-noname-buffers
+  autocmd!
+  " autocmd BufHidden * if (empty(bufname(str2nr(expand('<abuf>'))))) | exec "bd! ".expand("<abuf>") | end
+augroup END
+
 function! GitBlameLine()
   echo system("git blame ".expand('%')." -L ".getpos('.')[1].",".getpos('.')[1])
 endfunction

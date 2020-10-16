@@ -74,6 +74,7 @@ if has('nvim')
   tnoremap <silent> <C-w>K <C-\><C-n><C-w>K
   tnoremap <silent> <C-w>L <C-\><C-n><C-w>L
   tnoremap <silent> <C-w>: <C-\><C-n><C-w>:
+  tnoremap <silent> <C-w>c <C-\><C-n><C-w>c
 endif
 
 " Terminal Applications:
@@ -155,6 +156,8 @@ nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
 " Vim Actions:
 nnoremap <silent> <Space>vpa :call feedkeys(":packadd \<Tab>", 'tn')<CR>
 " nnoremap <silent> <Space>vee :call feedkeys(":e ~/.vim/\<Tab>", 'tn')<CR>
+nnoremap <Space>v<C-e> :call vimrctools#pick_runtime_file('Edit runtime file (vert split):', ':tabe ')<CR>
+nnoremap <Space>vE :call vimrctools#pick_runtime_file('Edit runtime file (vert split):', ':vsp ')<CR>
 nnoremap <Space>ve :call vimrctools#pick_runtime_file('Edit runtime file:', ':edit ')<CR>
 nnoremap <Space>vs :call vimrctools#pick_runtime_file('Source runtime file:', ':source ')<CR>
 nnoremap <Space>vRR :call fzy#leader_script("vR", ":e ")<CR>
@@ -278,6 +281,7 @@ vnoremap sr` <Esc>`<r``>r`gv
 vnoremap sr_ <Esc>`<r_`>r_gv
 vnoremap sr* <Esc>`<r*`>r*gv
 vnoremap srf <Esc>`>r)`<r(i
+vnoremap sr<BS> <Esc>`>x`<x<Esc>`>hhm>gv
 
 
 " Quick Commands: (aliases)

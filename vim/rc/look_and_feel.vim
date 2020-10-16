@@ -36,10 +36,10 @@ let g:statusline_active = join([
       \"%#StatusLineInsert#%{(mode()=='i') ? '  INSERT ' : ''}",
       \"%#StatusLineVisual#%{(mode()=='v'||mode()=='\<C-v>') ? '  VISUAL ' : ''}",
       \"%#StatusLineReplace#%{(mode()=='r') ? '  REPLACE ' : ''}",
-      \'%1* %t%=%*%3*%h%m%r%3*%3*%c:%3*%l/%L\|%3*%y'], '')
+      \'%1* %t%=%*%3*%h%m%r%3*%3*%c:%3*%l/%L|%3*%y'], '')
 let g:statusline_disabled = join([
       \"%#StatusLineDisabled#%{'         '}",
-      \'%1* %t%=%*%3*%h%m%r%3*%3*%c:%3*%l/%L\|%3*%y'], '')
+      \'%1* %t%=%*%3*%h%m%r%3*%3*%c:%3*%l/%L %3*%y'], '')
 let &statusline = g:statusline_disabled
 " set statusline='\ %{StatuslineColor(get(g:mode_map,tolower(mode()),'n'))}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y'
 " set statusline=%2*\ %{StatuslineColor(get(g:mode_map,tolower(mode()),'n'))}\ %1*\ %t%=%*%3*\%h%m%r%3*%3*\%c:%3*\%l/%L\\|%3*\%y
