@@ -2,7 +2,7 @@ files/undo/*
 plugged/*
 files/backup/*
 files/swap/*
-files/info/viminfo
+files/info/*
 files/recent.log
 files/recent-write.log
 files/bookmarks.vim
