@@ -1,12 +1,10 @@
 #!/bin/sh
-echo "disp-$RANDOM"
 # if [ "$1" ]; then
-  session_name=`tmux ls | grep -E '^disp-' | grep -v ' (attached)' | head -n 1 | grep -Eo '^[^:]*'`
-  echo session name "$session_name"
+  session_name="`tmux ls 2>/dev/null | grep -E '^disp-' | grep -v ' (attached)' | head -n 1 | grep -Eo '^[^:]*'`"
   if [ "$session_name" != "" ]; then
-    tmux attach-session -t "$session_name"
+    exec tmux attach-session -t "$session_name"
   else
-    tmux new-session -s "disp-$RANDOM"
+    exec tmux new-session -s "disp-$RANDOM"
   fi
 # else
 #   tmux $@

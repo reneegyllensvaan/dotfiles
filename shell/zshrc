@@ -113,3 +113,4 @@ if [ $GPG_FINGERPRINT ]; then
 fi
 
 [ -f "$HOME/workmode.zsh" ] && source "$HOME/workmode.zsh"
+true

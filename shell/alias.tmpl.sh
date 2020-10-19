@@ -14,10 +14,11 @@ try_override () {
   fi
 }
 
-try_override sed gsed
-try_override grep ggrep
-try_override cat bat
-try_override ls exa
+try_override  sed   gsed
+try_override  grep  ggrep
+try_override  cat   bat
+try_override  ls    exa
+try_override  vim   nvim
 
 cat << EOF
 
@@ -27,8 +28,9 @@ alias m='mark-dir'
 alias lass='$ls -lahg --color=always | less -R'
 alias arst='asdf'
 alias ncdu="ncdu --color dark -rr -x"
-#alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
+# alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 alias nim="nim --outdir:$HOME/.nimble/_out"
+alias kak="kak -c default"
 
 alias fim='f=\`fd . -t f | fzy\` && vim \$f' # use fzf to select a file but only open on return 1
 

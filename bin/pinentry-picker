@@ -5,3 +5,4 @@
 which pinentry-qt >/dev/null 2>&1 && exec pinentry-qt
 which pinentry-gtk >/dev/null 2>&1 && exec pinentry-gtk
 which pinentry-curses >/dev/null 2>&1 && exec pinentry-curses
+echo 'found no pinentry'

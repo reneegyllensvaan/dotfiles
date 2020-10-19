@@ -15,6 +15,14 @@ function! visualops#surround_selection(seps, around)
   end
 endfunction
 
+function! visualops#surround(seps)
+  let s:seps = a:seps
+  function! OpFunc(foo)
+    normal! `[v`]
+    call visualops#surround_selection(s:seps, 0)
+  endfunction
+  set opfunc=OpFunc
+endfunction
 
 function! visualops#break_lines()
   let l:col = col('.')

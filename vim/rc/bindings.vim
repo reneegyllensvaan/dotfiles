@@ -255,6 +255,8 @@ onoremap <silent> s :<C-u>call Snipe(2, "so")<CR>
 onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
 
 " Surround Mappings:
+nnoremap zs( :call visualops#surround('()')<CR>g@
+
 vnoremap s( :<C-u>call visualops#surround_selection('()', 0)<CR>
 vnoremap S( :<C-u>call visualops#surround_selection('()', 1)<CR>
 vnoremap s[ :<C-u>call visualops#surround_selection('[]', 0)<CR>
