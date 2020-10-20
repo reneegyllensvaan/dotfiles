@@ -1,21 +1,22 @@
 let s:options = {
-      \'f': '%',
-      \'v': '~/.vimrc',
-      \'b': '~/.vim/rc/bindings.vim',
-      \'E': '~/.vim/autoload/vimrctools.vim',
-      \'h': '~/.vim/rc/highlights.vim',
-      \'o': '~/.vim/rc/options.vim',
-      \'c': '~/.vim/rc/coc.vim',
+      \' ': '~/.vim/rc/space.vim',
       \'C': '~/.vim/rc/commands.vim',
+      \'E': '~/.vim/autoload/vimrctools.vim',
       \'F': '~/.vim/autoload/fzy.vim',
-      \'g': '~/.vim/rc/gvimrc.vim',
       \'G': '~/.vim/rc/golden.vim',
-      \'a': '~/.vim/rc/autocorrect.vim',
-      \'l': '~/.vim/rc/look_and_feel.vim',
-      \'s': '~/.vim/rc/snipe.vim',
       \'S': '~/.vim/rc/surround.vim',
-      \'t': '~/.vim/rc/textobject.vim',
-      \' ': '~/.vim/rc/space.vim'}
+      \'T': '~/.vim/rc/textobject.vim',
+      \'a': '~/.vim/rc/autocorrect.vim',
+      \'b': '~/.vim/rc/bindings.vim',
+      \'c': '~/.vim/rc/coc.vim',
+      \'f': '%',
+      \'g': '~/.vim/rc/gvimrc.vim',
+      \'h': '~/.vim/rc/highlights.vim',
+      \'l': '~/.vim/rc/look_and_feel.vim',
+      \'o': '~/.vim/rc/options.vim',
+      \'s': '~/.vim/rc/snipe.vim',
+      \'t': '~/.vim/autoload/term.vim',
+      \'v': '~/.vimrc'}
 
 function! vimrctools#pick_runtime_file(prompt, cmd)
   let l:cmdheight = &cmdheight

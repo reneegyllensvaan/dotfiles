@@ -84,22 +84,16 @@ hi  SpecialChar     cterm=none       ctermbg=none  ctermfg=white
 hi  Tag             cterm=none       ctermbg=none  ctermfg=white
 hi  Debug           cterm=none       ctermbg=none  ctermfg=white
 hi  SpecialComment  cterm=none       ctermbg=none  ctermfg=8
-
-" Links {{{
-hi link Label Statement
-hi link Exception Statement
-hi link PreCondit PreProc
-hi link StorageClass Type
-hi link Structure Type
-hi link Typedef Type
-hi link Tag Special
-hi link SpecialChar Special
-hi link Debug Special
-" hi link vimIsCommand Statement
-
-hi link Float Number
-
-" Links }}}
+hi  Label           cterm=none       ctermbg=none  ctermfg=magenta
+hi  Exception       cterm=none       ctermbg=none  ctermfg=magenta
+hi  PreCondit       cterm=none       ctermbg=none  ctermfg=yellow
+hi  StorageClass    cterm=none       ctermbg=none  ctermfg=yellow
+hi  Structure       cterm=none       ctermbg=none  ctermfg=yellow
+hi  Typedef         cterm=none       ctermbg=none  ctermfg=yellow
+hi  Tag             cterm=none       ctermbg=none  ctermfg=blue
+hi  SpecialChar     cterm=none       ctermbg=none  ctermfg=blue
+hi  Debug           cterm=none       ctermbg=none  ctermfg=blue
+hi  Float           cterm=none       ctermbg=none  ctermfg=3
 
 " Special Cases
 hi mkdLink      cterm=none ctermbg=none ctermfg=none
@@ -115,4 +109,4 @@ hi vimNotation cterm=none ctermbg=none ctermfg=blue
 hi link vimUserFunc Function
 
 " Typescript
-" hi link typescriptDOMFormProp Keyword
+hi link typescriptBraces Delimiter

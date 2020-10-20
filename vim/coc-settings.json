@@ -1,4 +1,3 @@
-
 {
   "coc.preferences.formatOnSaveFiletypes": [],
   "python.formatting.blackPath": "/usr/local/bin/black",
@@ -6,6 +5,7 @@
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
   "tsserver.enableJavascript": true,
   "tsserver.log": "normal",
+  // "tsserver.trace.server": "verbose",
   "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"],
   "languageserver": {
     "nim": {

@@ -275,6 +275,7 @@ ensure_file vim/files/recent-write.log
 ensure_file vim/files/bookmarks.vim
 ensure_directory $HOME/.config/nvim/
 symlink file vim/rc/vimrc_coc.vim $HOME/.config/nvim/init.vim
+symlink file vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
 
 log "  GPG config"
 ensure_directory $HOME/.gnupg

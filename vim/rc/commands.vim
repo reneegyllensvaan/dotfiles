@@ -98,3 +98,10 @@ function! DrillWindowOrTab(b)
   end
 endfunction
 
+
+" augroup file-types
+"   autocmd!
+"   autocmd FileType typescriptreact setlocal makeprg=npm\ run\ eslint
+"   autocmd FileType typescript      setlocal makeprg=npm\ run\ eslint
+"   autocmd FileType typescript      setlocal errorformat=\<text\>:\ line\ %l\\,\ col\ %c\\,\ %m
+" augroup END

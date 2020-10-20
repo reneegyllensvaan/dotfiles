@@ -22,6 +22,9 @@ noremap <A-Right> <C-w>><C-w>>
 " Insert Mode:
 inoremap <C-c> <Nop>
 inoremap <C-c><C-s> <C-o>:w<CR>
+inoremap <expr> <C-c><C-i><C-u> system('uuid')[:-2]
+inoremap <expr> <C-c><C-i><C-n> system('faker name')[:-3]
+inoremap <expr> <C-c><C-i><C-g> system('faker country')[:-3]
 
 "  Editing Commands:
 nnoremap <bs> @q
@@ -84,9 +87,12 @@ nnoremap <Space>af :SingletonTerm fish<CR>
 nnoremap <Space>aF :vert SingletonTerm! fish<CR>
 nnoremap <Space>ar :SingletonTerm! ranger<CR>
 nnoremap <Space>aR :vert SingletonTerm! ranger<CR>
-nnoremap <Space>at :SingletonShell<CR>
-nnoremap <Space>aT :vert SingletonShell<CR>
-nnoremap <Space>a<C-t> :tab SingletonShell<CR>
+
+nnoremap <C-Space> :tab SingletonShell<CR>
+nnoremap <C-@> :tab SingletonShell<CR>
+nnoremap <Space>at :Term $SHELL<CR>
+nnoremap <Space>aT :vert Term $SHELL<CR>
+nnoremap <Space>a<C-t> :tab $SHELL<CR>
 
 
 " Visual Mappings:
@@ -300,3 +306,6 @@ nnoremap q5 :noh<CR>
 nnoremap q* :exec "FzyGrep ".expand("<cword>")<CR>
 nnoremap q, A,<Esc>j
 nnoremap <silent> qd :CocList diagnostics<CR>
+
+nnoremap qj :cnext<CR>
+nnoremap qk :cprevious<CR>
