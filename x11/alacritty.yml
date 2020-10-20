@@ -90,8 +90,9 @@ font:
     #   - (Linux) monospace
     #   - (Windows) Consolas
 
-    # family: Inconsolata
-    # size: 11.0
+  # normal:
+  #   family: Inconsolata
+  #   size: 11.0
 
   # normal:
   #   family: "Menlo"
@@ -136,7 +137,7 @@ font:
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
-    x: -2
+    x: 0
     y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
@@ -160,7 +161,7 @@ font:
   #
   # This is a global setting and will require a log out or restart to take
   # effect.
-  use_thin_strokes: true
+  use_thin_strokes: false
 
 # If `true`, bold text is drawn using the bright color variants.
 draw_bold_text_with_bright_colors: true

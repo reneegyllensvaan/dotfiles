@@ -12,12 +12,12 @@ export PATH="/home/renee/.gem/ruby/2.7.0/bin:$PATH"
 which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
 which python2 >/dev/null 2>&1 && PATH="$PATH:`python2 -m site --user-base`/bin"
 
-export VISUAL="vim"
+export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export XDG_CONFIG_HOME="$HOME/.config"
 #export PAGER=`which bat >/dev/null && echo bat || echo less`
 export PAGER=less
-export GIT_EDITOR=vim
+export GIT_EDITOR=nvim
 export GIT_PAGER=less
 
 export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"

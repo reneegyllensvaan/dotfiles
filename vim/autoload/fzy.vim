@@ -42,7 +42,7 @@ function! fzy#in_buffer(choice_command, vim_command, post_command) abort
     let s:fzybuffer = term_start(['sh', '-c', s:choice_command.' | fzy -l 20 '.s:post_command.' > ~/.tmp/fzy-out'],
           \{'curwin': 1, 'exit_cb': function('s:CleanBuffer')})
   endif
-  setlocal nospell bufhidden=wipe nobuflisted nonumber
+  setlocal nospell bufhidden=wipe nobuflisted nonumber norelativenumber
   setf fzy
   startinsert
 endfunction
