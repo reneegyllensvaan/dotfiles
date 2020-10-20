@@ -223,6 +223,7 @@ build_template email/notmuch-config-work
 build_template shell/alias
 build_template x11/zathurarc
 build_template x11/xres/colors
+build_template x11/dunstrc
 
 if which yq >/dev/null 2>&1; then
   if [ -e ~/.config/textmateSnippets ]; then

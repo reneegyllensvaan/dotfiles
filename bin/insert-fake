@@ -1,0 +1,21 @@
+#!/bin/sh
+
+hasprog () {
+  which $1 >/dev/null 2>&1
+}
+
+target="$1"
+shift
+
+if [ "$target" = 'uuid' ]; then
+  hasprog  uuid     &&  exec  uuid     $@
+  hasprog  uuidgen  &&  exec  uuidgen  $@
+fi
+
+if [ "$target" = 'name' ]; then
+  hasprog faker && exec faker name $@
+fi
+
+if [ "$target" = 'country' ]; then
+  hasprog faker && exec faker country $@
+fi

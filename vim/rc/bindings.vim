@@ -22,9 +22,9 @@ noremap <A-Right> <C-w>><C-w>>
 " Insert Mode:
 inoremap <C-c> <Nop>
 inoremap <C-c><C-s> <C-o>:w<CR>
-inoremap <expr> <C-c><C-i><C-u> system('uuid')[:-2]
-inoremap <expr> <C-c><C-i><C-n> system('faker name')[:-3]
-inoremap <expr> <C-c><C-i><C-g> system('faker country')[:-3]
+inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
+inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
+inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
 
 "  Editing Commands:
 nnoremap <bs> @q

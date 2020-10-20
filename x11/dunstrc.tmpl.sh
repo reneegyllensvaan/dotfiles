@@ -1,3 +1,5 @@
+#!/bin/sh
+cat << EOF
 [global]
     ### Display ###
 
@@ -64,7 +66,7 @@
     frame_width = 3
 
     # Defines color of the frame around the notification window.
-    frame_color = "#4b5263"
+    frame_color = "$COLOR08"
 
     # Define a color for the separator.
     # possible values are:
@@ -126,7 +128,7 @@
     #   %n  progress value if set without any extra characters
     #   %%  Literal %
     # Markup is allowed
-    format = "<b>%s</b>\n%b"
+    format = "<b>%s</b>\\n%b"
 
     # Alignment of message text.
     # Possible values are "left", "center" and "right".
@@ -149,7 +151,7 @@
     # Possible values are "start", "middle" and "end".
     ellipsize = middle
 
-    # Ignore newlines '\n' in notifications.
+    # Ignore newlines '\\n' in notifications.
     ignore_newline = no
 
     # Stack together notifications with the same content
@@ -292,25 +294,25 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#2c303a"
-    foreground = "#abb2bf"
-    frame_color = "#4b5263"
+    background = "$COLOR00"
+    foreground = "$FOREGROUND"
+    frame_color = "$COLOR08"
     timeout = 10
     # Icon for notifications with low urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_normal]
-    background = "#2c303a"
-    foreground = "#abb2bf"
-    frame_color = "#4b5263"
+    background = "$COLOR00"
+    foreground = "$FOREGROUND"
+    frame_color = "$COLOR08"
     timeout = 10
     # Icon for notifications with normal urgency, uncomment to enable
     #icon = /path/to/icon
 
 [urgency_critical]
-    background = "#2c303a"
-    foreground = "#abb2bf"
-    frame_color = "#e06c75"
+    background = "$COLOR00"
+    foreground = "$FOREGROUND"
+    frame_color = "$COLOR09"
     timeout = 0
     # Icon for notifications with critical urgency, uncomment to enable
     #icon = /path/to/icon
@@ -431,3 +433,6 @@
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
+EOF
+
+true

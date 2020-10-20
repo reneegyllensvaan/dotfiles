@@ -31,6 +31,8 @@ command! -bang -nargs=* Term call term#run(<q-mods>, <q-args>, getcwd(), <q-bang
 command! -bang -nargs=* SingletonTerm call term#singleton_run(<q-mods>, <q-args>, getcwd(), <q-bang>)
 command! -bang -nargs=* SingletonShell call term#singleton_shell(<q-mods>, <q-args>, getcwd())
 
+command! -bang -nargs=* Make call make#infer(<q-args>, <q-bang>)
+
 augroup myhooks
   autocmd!
   " This isn't really used for anything in my vim config currently, I'm just
@@ -97,7 +99,6 @@ function! DrillWindowOrTab(b)
     end
   end
 endfunction
-
 
 " augroup file-types
 "   autocmd!
