@@ -71,7 +71,8 @@ hi  Type            cterm=none       ctermbg=none  ctermfg=yellow
 hi  Number          cterm=none       ctermbg=none  ctermfg=3
 hi  String          cterm=none       ctermbg=none  ctermfg=green
 hi  Character       cterm=none       ctermbg=none  ctermfg=green
-hi  Keyword         cterm=none       ctermbg=none  ctermfg=red
+" hi  Keyword         cterm=none       ctermbg=none  ctermfg=red
+hi  Keyword         cterm=none       ctermbg=none  ctermfg=magenta
 hi  Boolean         cterm=none       ctermbg=none  ctermfg=3
 hi  Conditional     cterm=none       ctermbg=none  ctermfg=magenta
 hi  Include         cterm=none       ctermbg=none  ctermfg=blue

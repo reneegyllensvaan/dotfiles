@@ -206,7 +206,7 @@ ensure_git_repo vim/pack/plugins/opt/onedark https://github.com/joshdick/onedark
 ensure_git_repo vim/pack/plugins/opt/coc https://github.com/neoclide/coc.nvim '--branch release'
 ensure_git_repo vim/pack/plugins/opt/colors-atlas https://github.com/huyvohcmc/atlas.vim
 ensure_git_repo vim/pack/plugins/opt/floaterm https://github.com/voldikss/vim-floaterm
-
+ensure_git_repo vim/pack/plugins/opt/firenvim https://github.com/glacambre/firenvim
 ensure_git_repo vim/pack/plugins/opt/polyglot-small https://github.com/reneegyllensvaan/vim-polyglot.git
 ensure_git_repo vim/pack/plugins/opt/polyglot-large https://github.com/sheerun/vim-polyglot.git
 

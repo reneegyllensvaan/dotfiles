@@ -1,5 +1,8 @@
 " vim:fdm=marker
-filetype off
+if exists('g:started_by_firenvim')
+  source ~/.vim/rc/firenvim.vim
+  finish
+endif
 
 if has('nvim')
   set packpath^=~/.vim
