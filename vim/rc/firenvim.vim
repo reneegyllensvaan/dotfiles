@@ -1,0 +1,2 @@
+packadd firenvim
+set background=
