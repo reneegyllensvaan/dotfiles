@@ -110,7 +110,7 @@ vnoremap < <gv
 vnoremap > >gv
 vnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
 vnoremap \C :!column -t<cr>
-vnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Tab><Esc>A
+vnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Esc>==
 
 
 " Window Mappings:
@@ -262,6 +262,14 @@ onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
 
 " Surround Mappings:
 nnoremap zs( :call visualops#surround('()')<CR>g@
+nnoremap zs( :call visualops#surround('()')<CR>g@
+nnoremap zs[ :call visualops#surround('[]')<CR>g@
+nnoremap zs{ :call visualops#surround('{}')<CR>g@
+nnoremap zs' :call visualops#surround("''")<CR>g@
+nnoremap zs" :call visualops#surround('""')<CR>g@
+nnoremap zs` :call visualops#surround('``')<CR>g@
+nnoremap zs_ :call visualops#surround('__')<CR>g@
+nnoremap zs* :call visualops#surround('**')<CR>g@
 
 vnoremap s( :<C-u>call visualops#surround_selection('()', 0)<CR>
 vnoremap S( :<C-u>call visualops#surround_selection('()', 1)<CR>
@@ -289,7 +297,8 @@ vnoremap sr` <Esc>`<r``>r`gv
 vnoremap sr_ <Esc>`<r_`>r_gv
 vnoremap sr* <Esc>`<r*`>r*gv
 vnoremap srf <Esc>`>r)`<r(i
-vnoremap sr<BS> <Esc>`>x`<x<Esc>`>hhm>gv
+vnoremap sr<BS> <Esc>`>x`<x<Esc>`>hm>gv
+vmap srx sr<BS>
 
 
 " Quick Commands: (aliases)

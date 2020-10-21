@@ -4,7 +4,7 @@ let s:options = {
       \'E': '~/.vim/autoload/vimrctools.vim',
       \'F': '~/.vim/autoload/fzy.vim',
       \'G': '~/.vim/rc/golden.vim',
-      \'S': '~/.vim/rc/surround.vim',
+      \'S': '~/.vim/autoload/visualops.vim',
       \'T': '~/.vim/rc/textobject.vim',
       \'a': '~/.vim/rc/autocorrect.vim',
       \'b': '~/.vim/rc/bindings.vim',

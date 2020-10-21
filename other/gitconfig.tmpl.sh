@@ -27,9 +27,10 @@ cat << EOF
   l   = log
   ls-files-root = "! git ls-files"
   o   = checkout
-  p   = pull
   pop = stash pop
+  pm  = pull --rebase=false
   pr  = pull --rebase
+  pf  = pull --ff
   r   = rebase
   rc  = rebase --continue
   ri  = rebase -i

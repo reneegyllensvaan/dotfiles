@@ -145,7 +145,7 @@ safe_copy () {
     debug "    $2 hasn't changed, skipping..."
   else
     [ -f "$2.bak" ] && \
-      log "$2.bak would be overwritten, please move or delete that file to prevent data loss" && return 1
+      fatal "$2.bak would be overwritten, please move or delete that file to prevent data loss" && return 1
     [ ! $remove_backups ] && \
       [ -f $2 ] && \
       push_cmd "mv $2 '$2.bak'"

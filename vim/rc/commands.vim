@@ -100,6 +100,13 @@ function! DrillWindowOrTab(b)
   end
 endfunction
 
+function! s:checktime(timer_id)
+  checktime
+endfunction
+if exists('g:autoread_timer_id')
+  let g:autoread_timer_id = timer_start(1000, function('s:checktime'), {'repeat': -1})
+endif
+
 " augroup file-types
 "   autocmd!
 "   autocmd FileType typescriptreact setlocal makeprg=npm\ run\ eslint

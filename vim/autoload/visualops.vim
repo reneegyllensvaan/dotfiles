@@ -15,11 +15,28 @@ function! visualops#surround_selection(seps, around)
   end
 endfunction
 
+" function! visualops#surround(seps)
+"   let s:seps = a:seps
+"   function! OpFunc(foo)
+"     normal! `[v`]
+"     let [startbufnum, startlnum, startcol, startoff] = getpos("'[")
+"     let [endbufnum, endlnum, endcol, endoff] = getpos("']")
+"     exec "normal! \<Esc>`[i".(s:seps[0])
+"     normal! m[
+"     exec "normal! \<Esc>`]".(startlnum == endlnum ? 'l' : '')."a".(s:seps[1])
+"     normal! m]
+"   endfunction
+"   set opfunc=OpFunc
+" endfunction
+
 function! visualops#surround(seps)
   let s:seps = a:seps
   function! OpFunc(foo)
-    normal! `[v`]
-    call visualops#surround_selection(s:seps, 0)
+    call setpos('.', getpos("'["))
+    normal! mz
+    call setpos('.', getpos("']"))
+    normal! mx
+    exec "normal! `xa)\<Esc>`zi(\<Esc>"
   endfunction
   set opfunc=OpFunc
 endfunction
@@ -37,3 +54,14 @@ function! visualops#break_lines()
 endfunction
 
 
+"  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur eu elit eu nisi
+"  rutrum tincidua et ac tortor. Quisque laoreet feugiat arcu, tincidunt porttitor risus
+"  efficitur ut. Phasellus ac justo gravida, posuere metus nec, luctus mi. Aenean
+"  sollicitudin, ante nec volutpat elementum, justo nisl laoreet nunc, id vestibulum
+"  tortor neque et augue. Donec posuere, sapien sed varius lacinia, erat ligula cursus
+"  sem, eu finibus justo nunc consequat magna. Ut vulputate urna a leo sodales tristique.
+"  Cras consequat ipsum pulvinar risus lacinia, et venenatis massa pretium. Suspendisse
+"  commodo augue justo. Nulla ipsum ligula, posuere sit amet semper sit amet, venenatis
+"  quis dui. Etiam risus odio, aliquet quis leo ut, rutrum mollis elit. Mauris nec dapibus
+"  sapien, sed efficitur ligula. Aenean dolor justo, eleifend vel erat fermentum, porta
+"  vehicula mauris.
