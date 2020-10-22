@@ -7,6 +7,7 @@
   "tsserver.log": "normal",
   // "tsserver.trace.server": "verbose",
   "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"],
+  "eslint.enable": false,
   "languageserver": {
     "nim": {
       "command": "nimlsp",

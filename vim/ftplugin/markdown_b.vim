@@ -16,3 +16,5 @@ iabbrev <buffer> [] []()<Left><Left><Left>
 " Language: (experimental)
 iabbrev <buffer> anoth another
 iabbrev <buffer> dacol Data Collection
+
+setlocal expandtab
