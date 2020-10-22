@@ -31,6 +31,7 @@ alias ncdu="ncdu --color dark -rr -x"
 # alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 alias nim="nim --outdir:$HOME/.nimble/_out"
 alias kak="kak -c default"
+alias openv="eval \\\$(opam env)"
 
 alias fim='f=\`fd . -t f | fzy\` && vim \$f' # use fzf to select a file but only open on return 1
 

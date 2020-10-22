@@ -47,6 +47,7 @@ set sort=reverse-threads
 macro index oT "<sort-reverse>t"
 macro index ot "<sort-reverse>d"
 
+set beep = no
 set pager_index_lines=10
 # set mbox_type = Maildir
 
