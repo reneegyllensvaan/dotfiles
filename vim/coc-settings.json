@@ -8,6 +8,7 @@
   // "tsserver.trace.server": "verbose",
   "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"],
   "eslint.enable": false,
+  "coc.preferences.enableFloatHighlight": false,
   "languageserver": {
     "nim": {
       "command": "nimlsp",

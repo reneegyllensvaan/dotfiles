@@ -6,9 +6,13 @@ set foldopen-=block
 " h/l should not open folds
 set foldopen-=hor
 
+" Remove comment operators when joining commented lines
+set formatoptions+=j
+
 " Automatically refresh files changed on disk if no unsaved changes
 set autoread
 
+" Indent according to previous line.
 " Indent according to previous line.
 set autoindent
 

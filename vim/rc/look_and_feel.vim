@@ -67,8 +67,10 @@ let g:cursorline_enabled = &cursorline
 function! ToggleCursorLine()
   let g:cursorline_enabled = !g:cursorline_enabled
   if g:cursorline_enabled
+    set cursorline
     setlocal cursorline
   else
+    set nocursorline
     setlocal nocursorline
   end
 endfunction

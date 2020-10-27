@@ -15,8 +15,8 @@ setopt autocd
 # misc }}}
 
 # history {{{
-export HISTSIZE=1000000
-export SAVEHIST=1000000
+export HISTSIZE=10000000
+export SAVEHIST=10000000
 export HISTFILE="$HOME/.zhistory"
 
 setopt EXTENDED_HISTORY
@@ -69,9 +69,9 @@ if [ "$USE_EMOJI" = 'random' ]; then
     echo -n "$EMOJI[$RANDOM%$#EMOJI+1]";
   };
 
-  function precmd () {
-    prepend_prompt;
-  };
+function precmd () {
+  prepend_prompt;
+};
 
 elif [ "$USE_EMOJI" = 'success' ]; then
   function prepend_prompt () {
@@ -82,10 +82,10 @@ elif [ "$USE_EMOJI" = 'success' ]; then
     fi
   };
 
-  function precmd () {
-    cmd_status="$?"
-    prepend_prompt;
-  };
+function precmd () {
+  cmd_status="$?"
+  prepend_prompt;
+};
 
 else
   function prepend_prompt () { };
@@ -99,7 +99,7 @@ PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%}"
 [ $SSH_CLIENT ] \
   && PROMPT="$PROMPT [%n@%m]" \
   || PROMPT="$PROMPT \$(git_prompt_info)"
-PROMPT="$PROMPT"$'\n$nesting_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
+  PROMPT="$PROMPT"$'\n$nesting_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
 
 # prompt }}}
 
@@ -128,5 +128,11 @@ fi
 # fi
 # unset __conda_setup
 # # <<< conda initialize <<<
+
+if [[ -r "/usr/local/opt/mcfly/mcfly.zsh" ]]; then
+  export MCFLY_HISTORY=~/.mcflyhist
+  source "/usr/local/opt/mcfly/mcfly.zsh"
+  # export MCFLY_KEY_SCHEME=vim
+fi
 
 true

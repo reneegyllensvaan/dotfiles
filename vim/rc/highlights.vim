@@ -111,3 +111,7 @@ hi link vimUserFunc Function
 
 " Typescript
 hi link typescriptBraces Delimiter
+hi link jsStorageClass Keyword
+hi link jsFunction Keyword
+
+hi  Delimiter       cterm=none       ctermbg=none  ctermfg=black

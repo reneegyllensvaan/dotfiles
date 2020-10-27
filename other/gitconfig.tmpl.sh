@@ -30,13 +30,16 @@ cat << EOF
   pop = stash pop
   pm  = pull --rebase=false
   pr  = pull --rebase
-  pf  = pull --ff
+  pf  = pull --ff-only
   r   = rebase
   rc  = rebase --continue
   ri  = rebase -i
   root = "! git rev-parse --show-toplevel"
   s   = status
   z   = stash
+  za  = stash apply
+  zl  = stash list
+  zs  = stash show
 
 [tig "color"]
 	cursor		= default	0 underline
