@@ -30,25 +30,25 @@ hi  TabLineFill         cterm=none  ctermbg=black    ctermfg=white
 hi  TabLineSel          cterm=bold  ctermbg=black    ctermfg=white
 hi  TabLine             cterm=none  ctermbg=black    ctermfg=gray
 
-hi DiffAdd      ctermbg=LightBlue
-hi DiffChange   ctermbg=LightMagenta
-hi DiffDelete   ctermfg=Blue ctermbg=LightCyan
-hi DiffText     ctermbg=Red cterm=bold
-hi Directory    ctermfg=DarkBlue
-hi ErrorMsg     cterm=none ctermbg=none ctermfg=red
-hi FoldColumn   ctermbg=Grey ctermfg=DarkBlue
-hi Folded       ctermbg=8 ctermfg=blue
-hi ColorColumn  ctermbg=0 ctermfg=none
-hi IncSearch    cterm=reverse
-hi ModeMsg      cterm=bold
-hi MoreMsg      ctermfg=DarkGreen
-hi NonText      ctermbg=none   ctermfg=Blue
-hi Pmenu        ctermbg=black  ctermfg=white
-hi PmenuSel     ctermbg=blue   ctermfg=black
-hi Question     ctermbg=black  ctermfg=DarkGreen
-hi Todo        cterm=none ctermbg=black  ctermfg=magenta
-hi MatchParen   ctermbg=black  ctermfg=blue      cterm=bold,underline
-hi Search       ctermbg=Yellow ctermfg=Black
+hi  DiffAdd      cterm=none      ctermbg=LightBlue
+hi  DiffChange   cterm=none      ctermbg=LightMagenta
+hi  DiffDelete   cterm=none      ctermfg=Blue          ctermbg=LightCyan
+hi  DiffText     cterm=none      ctermbg=Red           cterm=bold
+hi  Directory    cterm=none      ctermfg=DarkBlue
+hi  ErrorMsg     cterm=none      ctermbg=none          ctermfg=red
+hi  FoldColumn   cterm=none      ctermbg=Grey          ctermfg=DarkBlue
+hi  Folded       cterm=none      ctermbg=8             ctermfg=blue
+hi  ColorColumn  cterm=none      ctermbg=0             ctermfg=none
+hi  IncSearch    cterm=none      cterm=reverse
+hi  ModeMsg      cterm=none      cterm=bold
+hi  MoreMsg      cterm=none      ctermfg=DarkGreen
+hi  NonText      cterm=none      ctermbg=none          ctermfg=Blue
+hi  Pmenu        cterm=none      ctermbg=black         ctermfg=white
+hi  PmenuSel     cterm=none      ctermbg=blue          ctermfg=black
+hi  Question     cterm=none      ctermbg=black         ctermfg=DarkGreen
+hi  Todo         cterm=none      ctermbg=black         ctermfg=magenta
+hi  MatchParen   ctermbg=black   ctermfg=blue          cterm=bold,underline
+hi  Search       ctermbg=Yellow  ctermfg=Black
 
 hi  SpecialKey  ctermfg=DarkBlue
 hi  Title       ctermfg=blue
@@ -114,4 +114,4 @@ hi link typescriptBraces Delimiter
 hi link jsStorageClass Keyword
 hi link jsFunction Keyword
 
-hi  Delimiter       cterm=none       ctermbg=none  ctermfg=black
+" hi  Delimiter       cterm=none       ctermbg=none  ctermfg=black
