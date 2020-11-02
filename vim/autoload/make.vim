@@ -3,7 +3,8 @@ augroup quickfixOnMakeFinish
   autocmd QuickFixCmdPost [^l]* cwindow
 augroup END
 
-function! make#infer(foo, bar)
-  echo 'foo: '.a:foo
-  echo 'bar: '.a:bar
+function! make#infer(args, bang)
+  if contexts#infer()
+    exec b:makecmd
+  end
 endfunction

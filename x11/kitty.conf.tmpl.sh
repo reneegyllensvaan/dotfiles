@@ -1,3 +1,5 @@
+#!/bin/sh
+cat << EOF
 # vim:fileencoding=utf-8:ft=conf:foldmethod=marker
 
 #: Fonts {{{
@@ -493,7 +495,7 @@ scrollback_lines 0
 #: use::
 
 #:     env MYVAR1=a
-#:     env MYVAR2=${MYVAR1}/${HOME}/b
+#:     env MYVAR2=\${MYVAR1}/\${HOME}/b
 
 #: The value of MYVAR2 will be a/<path to home directory>/b.
 
@@ -606,7 +608,7 @@ macos_option_as_alt yes
 #: Finally, you can use raw system key codes to map keys. To see the
 #: system key code for a key, start kitty with the kitty --debug-
 #: keyboard option. Then kitty will output some debug text for every
-#: key event. In that text look for native_code the value of that
+#: key event. In that text look for ``native_code`` the value of that
 #: becomes the key name in the shortcut. For example:
 
 #: .. code-block:: none
@@ -689,7 +691,7 @@ macos_option_as_alt yes
 # map kitty_mod+h         show_scrollback
 
 #: You can pipe the contents of the current screen + history buffer as
-#: STDIN to an arbitrary program using the pipe function. For
+#: STDIN to an arbitrary program using the ``pipe`` function. For
 #: example, the following opens the scrollback buffer in less in an
 #: overlay window::
 
@@ -728,7 +730,7 @@ macos_option_as_alt yes
 # map kitty_mod+[ previous_window
 # map kitty_mod+f move_window_forward
 # map kitty_mod+b move_window_backward
-# map kitty_mod+` move_window_to_top
+# map kitty_mod+\` move_window_to_top
 # map kitty_mod+r start_resizing_window
 # map kitty_mod+1 first_window
 # map kitty_mod+2 second_window
@@ -870,7 +872,7 @@ macos_option_as_alt yes
 #:     map kitty_mod+f12 clear_terminal scroll active
 
 #: If you want to operate on all windows instead of just the current
-#: one, use all instead of :italic.
+#: one, use all instead of :italic`active`.
 
 #: It is also possible to remap Ctrl+L to both scroll the current
 #: screen contents into the scrollback buffer and clear the screen,
@@ -886,7 +888,7 @@ macos_option_as_alt yes
 
 #: This will send "Special text" when you press the ctrl+alt+a key
 #: combination.  The text to be sent is a python string literal so you
-#: can use escapes like \x1b to send control codes or \u21fb to send
+#: can use escapes like \\x1b to send control codes or \\u21fb to send
 #: unicode characters (or you can just input the unicode characters
 #: directly as UTF-8 text). The first argument to send_text is the
 #: keyboard modes in which to activate the shortcut. The possible
@@ -899,31 +901,33 @@ macos_option_as_alt yes
 #: Another example, that outputs a word and then moves the cursor to
 #: the start of the line (same as pressing the Home key)::
 
-#:     map ctrl+alt+a send_text normal Word\x1b[H
-#:     map ctrl+alt+a send_text application Word\x1bOH
+#:     map ctrl+alt+a send_text normal Word\\x1b[H
+#:     map ctrl+alt+a send_text application Word\\x1bOH
 
 #: }}}
 
 # }}}
 
 # Generated colors
-foreground   #abb2bf
-background   #282c34
-cursorColor  #abb2bf
-color0       #2c303a
-color1       #e06c75
-color2       #98c379
-color3       #d19a66
-color4       #61afef
-color5       #c678dd
-color6       #56b6c2
-color7       #5c6370
-color8       #4b5263
-color9       #e06c75
-color10      #98c379
-color11      #e5c07b
-color12      #61afef
-color13      #c678dd
-color14      #56b6c2
-color15      #abb2bf
+foreground   $FOREGROUND
+background   $BACKGROUND
+cursorColor  $CURSOR_COLOR
+color0       $COLOR00
+color1       $COLOR01
+color2       $COLOR02
+color3       $COLOR03
+color4       $COLOR04
+color5       $COLOR05
+color6       $COLOR06
+color7       $COLOR07
+color8       $COLOR08
+color9       $COLOR09
+color10      $COLOR10
+color11      $COLOR11
+color12      $COLOR12
+color13      $COLOR13
+color14      $COLOR14
+color15      $COLOR15
 
+EOF
+exit 0

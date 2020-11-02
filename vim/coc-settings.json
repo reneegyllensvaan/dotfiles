@@ -3,6 +3,7 @@
   "python.formatting.blackPath": "/usr/local/bin/black",
   "clangd.semanticHighlighting": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
+  "coc.source.buffer.ignoreGitignore": true,
   "tsserver.enableJavascript": true,
   "tsserver.log": "normal",
   // "tsserver.trace.server": "verbose",

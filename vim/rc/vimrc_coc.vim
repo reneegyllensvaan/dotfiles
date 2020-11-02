@@ -9,16 +9,18 @@ if exists('g:started_by_firenvim')
   finish
 endif
 
+" Disable Netrw
+let g:loaded_netrw = 1
 packloadall
-" This has to go before filetype conf for vim-polyglot
-packadd polyglot-small
+
+if !exists('$NVIM_USE_TREESITTER') || ($NVIM_USE_TREESITTER != '1')
+  packadd polyglot-small
+  filetype plugin indent on
+  syntax on
+endif
+
+" To use full vim-polyglot distribution:
 " packadd polyglot-large
-
-" packadd vinegar
-" noremap - <Nop>
-
-filetype plugin indent on         " Load plugins according to detected filetype.
-syntax on
 
 " Project Ideas: {{{
 "   - <Leader>/ to toggle case-sensitivity for search (setreg, '/C|/c')
@@ -41,6 +43,8 @@ function! DoRepeat()
 endfunction
 nnoremap <silent> . :call DoRepeat()<CR>
 
+source ~/.local.vim
+
 source ~/.vim/rc/options.vim
 if !has('gui_running')
   source ~/.vim/rc/highlights.vim
@@ -50,6 +54,27 @@ source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/snipe.vim
 source ~/.vim/rc/textobject.vim
 source ~/.vim/rc/autocorrect.vim
+
+function! UseTreesitter()
+  " source ~/.vim/rc/lsp.vim
+  syntax off
+  packadd nvim-treesitter
+  command! TSHighlightCapturesUnderCursor :lua require'treesitter-get-highlight'.show_hl_captures()<CR>
+  nnoremap <Space>vh :TSHighlightCapturesUnderCursor<CR>
+  luafile ~/.vim/rc/treesitter.lua
+endfunction
+
+function! UsePolyglot()
+  filetype off
+  syntax off
+  packadd polyglot-small
+  filetype plugin indent on
+  syntax on
+endfunction
+
+if exists('$NVIM_USE_TREESITTER') && $NVIM_USE_TREESITTER == '1'
+  call UseTreesitter()
+endif
 
 if exists('$SPACELAB')
   source ~/.vim/rc/space.vim

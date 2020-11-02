@@ -209,6 +209,11 @@ ensure_git_repo vim/pack/plugins/opt/floaterm https://github.com/voldikss/vim-fl
 ensure_git_repo vim/pack/plugins/opt/firenvim https://github.com/glacambre/firenvim
 ensure_git_repo vim/pack/plugins/opt/polyglot-small https://github.com/reneegyllensvaan/vim-polyglot.git
 ensure_git_repo vim/pack/plugins/opt/polyglot-large https://github.com/sheerun/vim-polyglot.git
+ensure_git_repo vim/pack/plugins/opt/nvim-lspconfig https://github.com/neovim/nvim-lspconfig
+ensure_git_repo vim/pack/plugins/opt/completion-nvim https://github.com/nvim-lua/completion-nvim
+ensure_git_repo vim/pack/plugins/opt/completion-buffers https://github.com/steelsojka/completion-buffers
+ensure_git_repo vim/pack/plugins/opt/nvim-treesitter https://github.com/nvim-treesitter/nvim-treesitter
+ensure_git_repo vim/pack/plugins/opt/completion-treesitter https://github.com/nvim-treesitter/completion-treesitter
 
 
 log "Building shell template files"
@@ -224,6 +229,7 @@ build_template shell/alias
 build_template x11/zathurarc
 build_template x11/xres/colors
 build_template x11/dunstrc
+build_template x11/kitty.conf
 
 if which yq >/dev/null 2>&1; then
   if [ -e ~/.config/textmateSnippets ]; then

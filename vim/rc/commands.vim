@@ -107,6 +107,12 @@ if exists('g:autoread_timer_id')
   let g:autoread_timer_id = timer_start(1000, function('s:checktime'), {'repeat': -1})
 endif
 
+
+" augroup infer-context
+"   autocmd!
+"   autocmd FileType * call contexts#infer()
+" augroup END
+
 " augroup file-types
 "   autocmd!
 "   autocmd FileType typescriptreact setlocal makeprg=npm\ run\ eslint

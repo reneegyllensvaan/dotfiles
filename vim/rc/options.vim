@@ -9,6 +9,9 @@ set foldopen-=hor
 " Remove comment operators when joining commented lines
 set formatoptions+=j
 
+" Always choose "edit anyway" if a swap file is found
+set shortmess=A
+
 " Automatically refresh files changed on disk if no unsaved changes
 set autoread
 

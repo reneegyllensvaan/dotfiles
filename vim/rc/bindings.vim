@@ -14,10 +14,13 @@ noremap <Right> <Nop>
 noremap <expr> Q (empty(reg_recording()) ? "q".tolower(nr2char(getchar())) : "q")
 
 " Alt Mappings:
-noremap <A-Up> <C-w>+
-noremap <A-Down> <C-w>-
-noremap <A-Left> <C-w><<C-w><
-noremap <A-Right> <C-w>><C-w>>
+nnoremap <A-Up> <C-w>+
+nnoremap <A-Down> <C-w>-
+nnoremap <A-Left> <C-w><<C-w><
+nnoremap <A-Right> <C-w>><C-w>>
+
+vnoremap <A-Down> :move +1<CR>gv
+vnoremap <A-Up> :move -2<CR>gv
 
 " Insert Mode:
 inoremap <C-c> <Nop>
@@ -25,6 +28,14 @@ inoremap <C-c><C-s> <C-o>:w<CR>
 inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
+
+"  G Command Overrides:
+" Note: many of these are useful for moving the window's view of the buffer. I
+" always keep my cursor centered using a high scrolloff, so I'm overriding
+" many of these because I don't use the default mapping anyway
+nnoremap gj ddp
+nnoremap gk ddkP
+
 
 "  Editing Commands:
 nnoremap <bs> @q
@@ -100,12 +111,12 @@ nnoremap <Space>y "+y
 vnoremap <Space>y "+y
 nnoremap <Space>p "+p
 vnoremap <Space>p "+p
-vnoremap zj <Esc>`<jm<gv
-vnoremap zk <Esc>`<km<gv
-vnoremap zJ <Esc>`>jm>gv
-vnoremap zK <Esc>`>km>gv
-vnoremap zh <Esc>`>km>`<jm<gv
-vnoremap zl <Esc>`>jm>`<km<gv
+vnoremap zj <Esc>`<mz`>mx`zjm<`xm>gv
+vnoremap zk <Esc>`<mz`>mx`zkm<`xm>gv
+vnoremap zJ <Esc>`<mz`>mx`xjm>`zm<gv
+vnoremap zK <Esc>`<mz`>mx`xkm>`zm<gv
+vnoremap zh <Esc>`<mz`>mx`zkm<`xjm>gv
+vnoremap zl <Esc>`<mz`>mx`zjm<`xkm>gv
 vnoremap < <gv
 vnoremap > >gv
 vnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
@@ -136,11 +147,19 @@ nnoremap <Space>wm :tab split<CR>
 nnoremap <Space>wt/ :vert Term<CR>
 nnoremap <Space>wt_ :Term<CR>
 
-" Searching:
+" Searching And Navigation:
 nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :FzyGrep<Space>:
 nnoremap <Leader>/ :call myfns#toggle_case_sensitive()<CR>
 nnoremap <Leader>? :call myfns#toggle_search_direction()<CR>
+
+let g:ctrl_d_jump = 10
+nnoremap <expr> <silent> <C-d> g:ctrl_d_jump."j"
+nnoremap <expr> <silent> <C-u> g:ctrl_d_jump."k"
+nnoremap <C-c><C-d><C-a> :let ctrl_d_jump = 40<CR>
+nnoremap <C-c><C-d><C-r> :let ctrl_d_jump = 20<CR>
+nnoremap <C-c><C-d><C-s> :let ctrl_d_jump = 10<CR>
+nnoremap <C-c><C-d><C-t> :let ctrl_d_jump = 5<CR>
 
 " Toggles: ( / To file )
 nnoremap <Space>tA :CocDisable<CR>
@@ -304,8 +323,6 @@ vmap srx sr<BS>
 " Quick Commands: (aliases)
 nmap qf <Space>ff
 nmap qb <Space>bb
-nnoremap <silent> qw :call searchpos('\<', '')<CR>
-nnoremap <silent> qW :call searchpos('\<', 'b')<CR>
 nnoremap qn :bn<CR>
 nnoremap qN :bp<CR>
 nnoremap <S-Esc> :noh<CR>
@@ -316,5 +333,7 @@ nnoremap q* :exec "FzyGrep ".expand("<cword>")<CR>
 nnoremap q, A,<Esc>j
 nnoremap <silent> qd :CocList diagnostics<CR>
 
-nnoremap qj :cnext<CR>
-nnoremap qk :cprevious<CR>
+" QuickFix:
+nnoremap qj :botright cnext<CR>
+nnoremap qk :botright cprevious<CR>
+nnoremap q+ :botright cwindow<CR>

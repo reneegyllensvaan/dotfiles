@@ -1,7 +1,6 @@
 " vim: fdm=marker ft=sourceonsave.vim
 " nnoremap <Space>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
-nnoremap <silent> <Space>vh :exec "hi ".synIDattr(synID(line("."),col("."),1),"name")<CR>
-syntax on
+" nnoremap <silent> <Space>vh :exec "hi ".synIDattr(synID(line("."),col("."),1),"name")<CR>
 set t_Co=16
 
 " hi CursorLine cterm=none ctermbg=236
@@ -114,4 +113,17 @@ hi link typescriptBraces Delimiter
 hi link jsStorageClass Keyword
 hi link jsFunction Keyword
 
+" Weird stuff that's up while i'm away:
 " hi  Delimiter       cterm=none       ctermbg=none  ctermfg=black
+
+hi  TSTag           cterm=none  ctermbg=none  ctermfg=blue
+hi  TSTagName       cterm=none  ctermbg=none  ctermfg=blue
+hi  TSConstructor   cterm=none  ctermbg=none  ctermfg=red
+hi  TSType          cterm=none  ctermbg=none  ctermfg=red
+hi  TSKeyword       cterm=none  ctermbg=none  ctermfg=magenta
+hi  TSProperty      cterm=none  ctermbg=none  ctermfg=blue
+hi  TSField         cterm=none  ctermbg=none  ctermfg=blue
+hi  TSArgument      cterm=none  ctermbg=none  ctermfg=yellow
+hi  TSVariable      cterm=none  ctermbg=none  ctermfg=white
+hi  TSConstBuiltin  cterm=none  ctermbg=none  ctermfg=darkyellow
+hi  TSTypeBuiltin   cterm=none  ctermbg=none  ctermfg=yellow

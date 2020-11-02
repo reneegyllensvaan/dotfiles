@@ -194,3 +194,8 @@ vim/pack/plugins/opt/floaterm
 vim/pack/plugins/opt/polyglot-small
 vim/pack/plugins/opt/polyglot-large
 vim/pack/plugins/opt/firenvim
+vim/pack/plugins/opt/nvim-lspconfig
+vim/pack/plugins/opt/completion-nvim
+vim/pack/plugins/opt/completion-buffers
+vim/pack/plugins/opt/completion-treesitter
+vim/pack/plugins/opt/nvim-treesitter

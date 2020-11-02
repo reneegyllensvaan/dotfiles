@@ -140,6 +140,8 @@ bind generic,index <Down> next-entry
 bind generic,index <Up> previous-entry
 bind generic,index j next-entry
 bind generic,index k previous-entry
+bind generic,index J next-thread
+bind generic,index K previous-thread
 bind index \Cu previous-page
 bind index \Cd next-page
 
