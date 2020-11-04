@@ -7,12 +7,19 @@ set t_Co=16
 hi CursorLine cterm=none ctermbg=0
 
 hi SnipeMatch ctermbg=242 ctermfg=NONE
-hi CocHighlightText ctermbg=0
 hi SignColumn ctermbg=none ctermfg=blue
 hi GitGutterAdd ctermbg=none ctermfg=green
 hi GitGutterRemove ctermbg=none ctermfg=red
 hi GitGutterDelete ctermbg=none ctermfg=red
 hi GitGutterChange ctermbg=none ctermfg=darkyellow
+
+hi  CocHighlightText         ctermbg=0
+hi  CocGitAddedSign          cterm=none  ctermbg=green   ctermfg=black
+hi  CocGitChangeAddedSign    cterm=none  ctermbg=yellow  ctermfg=green
+hi  CocGitChangeRemovedSign  cterm=none  ctermbg=yellow  ctermfg=red
+hi  CocGitChangedSign        cterm=none  ctermbg=yellow  ctermfg=black
+hi  CocGitRemovedSign        cterm=none  ctermbg=red     ctermfg=black
+hi  CocGitTopRemovedSign     cterm=none  ctermbg=none    ctermfg=red
 
 hi  User1               cterm=none  ctermbg=0        ctermfg=white
 hi  User2               cterm=none  ctermbg=green    ctermfg=black

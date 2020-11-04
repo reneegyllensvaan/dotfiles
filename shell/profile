@@ -44,7 +44,7 @@ export CLICOLOR=1
 export CLICOLOR_FORCE=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export KEYTIMEOUT=1
-export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
+#export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
 
 # configs for dotfile scripts
 export EMAIL_SYNC_INTERVAL=120 # seconds

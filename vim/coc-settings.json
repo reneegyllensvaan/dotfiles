@@ -6,10 +6,10 @@
   "coc.source.buffer.ignoreGitignore": true,
   "tsserver.enableJavascript": true,
   "tsserver.log": "normal",
-  // "tsserver.trace.server": "verbose",
   "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"],
   "eslint.enable": false,
   "coc.preferences.enableFloatHighlight": false,
+  "python.formatting.provider": "black",
   "languageserver": {
     "nim": {
       "command": "nimlsp",

@@ -55,7 +55,8 @@ command! -nargs=0 Format :call CocAction('format')
 command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 CocSortImports call CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR CocSortImports
 
 " " Add (Neo)Vim's native statusline support.
 " " NOTE: Please see `:h coc-status` for integrations with external plugins that
@@ -71,8 +72,10 @@ nmap <silent> K :call <SID>show_documentation()<CR>
 
 
 nnoremap <silent><nowait> <Space>sR  :CocRestart<cr>
+nnoremap <Space>si  :CocSortImports<cr>
 
 " CocList: {{{
+
 nnoremap <silent><nowait> <Space>ss  :<C-u>CocList<cr>
 nnoremap <silent><nowait> <Space>sa  :<C-u>CocList actions<cr>
 nnoremap <silent><nowait> <Space>sd  :<C-u>CocList diagnostics<cr>

@@ -19,8 +19,10 @@ nnoremap <A-Down> <C-w>-
 nnoremap <A-Left> <C-w><<C-w><
 nnoremap <A-Right> <C-w>><C-w>>
 
-vnoremap <A-Down> :move +1<CR>gv
-vnoremap <A-Up> :move -2<CR>gv
+vnoremap <A-Up> :move '<-2<CR>gv
+vnoremap <A-Down> :move '>+1<CR>gv
+inoremap <A-Up> <C-o>:<C-u>move -2<CR>
+inoremap <A-Down> <C-o>:<C-u>move +1<CR>
 
 " Insert Mode:
 inoremap <C-c> <Nop>

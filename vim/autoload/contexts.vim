@@ -16,11 +16,12 @@ function! Ctx_work_cobalt2()
   return 1
 endfunction
 
+"  ./layers/use_cases/reporting/tests/test_create_or_update_client_email_template.py:13:1: F401 'layers.use_cases.reporting.types.ClientEmailTemplateParamSerializer' imported but unused
+"  ./layers/use_cases/reporting/tests/test_create_or_update_client_email_template.py:78:1: F811 redefinition of unused 'test_create_client_email_template' from line 33
 function! Ctx_work_backend()
-  let &l:makeprg = 'make'
-  let &l:errorformat = "%f: line %l\\, col %c\\, %m"
+  let &l:makeprg = 'fab flake8'
+  let &l:errorformat = "%f:%l%c: %m"
   let b:makecmd = 'silent make!'
-  echo "NYI context 'work_backend'"
   return 0
 endfunction
 
