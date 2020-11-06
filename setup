@@ -280,6 +280,7 @@ ensure_directory vim/files/info
 ensure_file vim/files/recent.log
 ensure_file vim/files/recent-write.log
 ensure_file vim/files/bookmarks.vim
+ensure_file $HOME/.local.vim
 ensure_directory $HOME/.config/nvim/
 symlink file vim/rc/vimrc_coc.vim $HOME/.config/nvim/init.vim
 symlink file vim/coc-settings.json $HOME/.config/nvim/coc-settings.json
