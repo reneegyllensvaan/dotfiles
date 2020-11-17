@@ -16,7 +16,7 @@ function! term#singleton_run(mods, cmd, dir, bang)
     exec "bd! ".bufnr(l:term_name)
   endif
   if a:bang == '!'
-    let l:cmd = $SHELL" -c '".l:cmd."'"
+    let l:cmd = $SHELL." -c '".l:cmd."'"
   endif
   if has('nvim')
     exec a:mods." new"

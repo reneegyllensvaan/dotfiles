@@ -1,6 +1,5 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [],
-  "python.formatting.blackPath": "/usr/local/bin/black",
   "clangd.semanticHighlighting": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
   "coc.source.buffer.ignoreGitignore": true,
@@ -9,7 +8,14 @@
   "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"],
   "eslint.enable": false,
   "coc.preferences.enableFloatHighlight": false,
+
+  "python.formatting.blackPath": "/usr/local/bin/black",
   "python.formatting.provider": "black",
+  "python.linting.pylintArgs": [
+    "--rcfile",
+    "/Users/renee/Projects/backend/pylintrc"
+  ],
+
   "languageserver": {
     "nim": {
       "command": "nimlsp",

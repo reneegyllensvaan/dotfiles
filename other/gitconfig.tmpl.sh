@@ -47,5 +47,20 @@ cat << EOF
 	title-focus	= white	blue	bold
 [tig "color.tree"]
 	date		= cyan	default	bold
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    features = side-by-side line-numbers decorations
+    whitespace-error-style = 22 reverse
+
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
 EOF
 exit 0

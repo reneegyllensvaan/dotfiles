@@ -8,4 +8,5 @@ cargo install fd-find \
               ripgrep \
               handlr \
               sd \
+              git-delta \
               bat

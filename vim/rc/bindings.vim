@@ -19,10 +19,10 @@ nnoremap <A-Down> <C-w>-
 nnoremap <A-Left> <C-w><<C-w><
 nnoremap <A-Right> <C-w>><C-w>>
 
-vnoremap <A-Up> :move '<-2<CR>gv
-vnoremap <A-Down> :move '>+1<CR>gv
-inoremap <A-Up> <C-o>:<C-u>move -2<CR>
-inoremap <A-Down> <C-o>:<C-u>move +1<CR>
+vnoremap <silent> <A-Up> :move '<-2<CR>gv
+vnoremap <silent> <A-Down> :move '>+1<CR>gv
+inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
+inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
 
 " Insert Mode:
 inoremap <C-c> <Nop>
@@ -181,6 +181,8 @@ nnoremap <Space>tw :set list!<CR>
 nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
 
 " Vim Actions:
+nnoremap <silent> <Space>vh :exec "hi ".synIDattr(synID(line("."),col("."),1),"name")<CR>
+nnoremap <Space>vH :TSHighlightCapturesUnderCursor<CR>
 nnoremap <silent> <Space>vpa :call feedkeys(":packadd \<Tab>", 'tn')<CR>
 " nnoremap <silent> <Space>vee :call feedkeys(":e ~/.vim/\<Tab>", 'tn')<CR>
 nnoremap <Space>v<C-e> :call vimrctools#pick_runtime_file('Edit runtime file (vert split):', ':tabe ')<CR>
@@ -238,6 +240,8 @@ nnoremap <silent> <Space>b? :w !diff % -<CR>
 nnoremap <silent> <Space>gO :call fzy#leader_script("gO", ":!git checkout-remote-branch origin ")<CR>
 nnoremap <silent> <Space>ga :call fzy#leader_script("ga", ":!git add ")<CR>
 nnoremap <silent> <Space>gf :call fzy#leader_script("gf", ":e ")<CR>
+nnoremap <silent> <Space>gDD :call fzy#leader_script("gf", ":!git checkout -- ")<CR>
+nnoremap <silent> <Space>gz :call fzy#leader_script("gf", ":!git checkout -- ")<CR>
 nnoremap <silent> <Space>ghO :call fzy#leader_script("ghO", ":!hub pr checkout ")<CR>
 nnoremap <silent> <Space>gho :call fzy#leader_script("gho", ":!hub pr checkout ")<CR>
 nnoremap <silent> <Space>ghwO :call fzy#leader_script("ghwO", ":!hub pr show ")<CR>

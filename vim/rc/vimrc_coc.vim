@@ -60,7 +60,6 @@ function! UseTreesitter()
   syntax off
   packadd nvim-treesitter
   command! TSHighlightCapturesUnderCursor :lua require'treesitter-get-highlight'.show_hl_captures()<CR>
-  nnoremap <Space>vh :TSHighlightCapturesUnderCursor<CR>
   luafile ~/.vim/rc/treesitter.lua
 endfunction
 
