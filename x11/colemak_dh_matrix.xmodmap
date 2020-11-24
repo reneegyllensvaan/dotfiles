@@ -2,7 +2,7 @@
 !
 ! NOTE: This layout file is NOT recommended on standard, staggered keyboards at it will not correctly apply the Angle Mod.
 ! It is recommended to use the approprite ANSI or ISO layout file instead.
-! 
+!
 ! http://colemakmods.github.io/mod-dh/.
 ! Public domain.
 
@@ -63,7 +63,7 @@ keycode  65  =  space         space        space                 nobreakspace
 keycode 108 =  Mode_switch Mode_switch
 
 ! Remove these 2 lines if you want caps lock unmodified
-keycode 66 =  BackSpace BackSpace BackSpace BackSpace
+keycode 66 =  Escape Escape Escape Escape
 clear Lock
 
 !clear Shift
@@ -79,7 +79,7 @@ clear Lock
 !add    Mod1    = Alt_L Alt_R
 !add    Mod2    = Num_Lock
 !add    Mod4    = Meta_L Meta_R
-!add    Mod5    = Scroll_Lock 
+!add    Mod5    = Scroll_Lock
 
 !keycode   9 = Escape
 !keycode  22 = BackSpace Terminate_Server
