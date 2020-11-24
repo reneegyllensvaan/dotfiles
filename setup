@@ -263,6 +263,7 @@ symlink file x11/kitty.conf $HOME/.config/kitty/kitty.conf
 symlink file x11/picom.conf $HOME/.config/picom.conf
 ensure_directory $HOME/.config/alacritty
 symlink file x11/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+symlink file x11/colemak_dh_matrix.xmodmap $HOME/.config/colemak_dh_matrix.xmodmap
 
 
 log "  Urxvt conf"
