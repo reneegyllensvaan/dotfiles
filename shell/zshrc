@@ -121,3 +121,5 @@ if [[ -r "/usr/local/opt/mcfly/mcfly.zsh" ]]; then
 fi
 
 true
+
+[ "$ASDF_ZSHRC_PATH" ] && source "$ASDF_ZSHRC_PATH"

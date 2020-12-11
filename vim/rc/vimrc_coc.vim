@@ -43,8 +43,6 @@ function! DoRepeat()
 endfunction
 nnoremap <silent> . :call DoRepeat()<CR>
 
-source ~/.local.vim
-
 source ~/.vim/rc/options.vim
 if !has('gui_running')
   source ~/.vim/rc/highlights.vim
@@ -81,3 +79,4 @@ else
   source ~/.vim/rc/bindings.vim
 end
 
+source ~/.local.vim

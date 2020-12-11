@@ -25,6 +25,7 @@ cat << EOF
   d   = diff
   ds  = diff --staged
   l   = log
+  lo  = log --pretty=oneline
   ls-files-root = "! git ls-files"
   o   = checkout
   pop = stash pop

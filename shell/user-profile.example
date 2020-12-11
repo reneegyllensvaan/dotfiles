@@ -5,6 +5,10 @@ export USER_NAME='Renee Gyllensvaan'
 # export USER_HOME_EMAIL='renee.gyllensvaan@gmail.com'
 export GITHUB_USER='reneegyllensvaan'
 
+# Configure with:
+#   Macos: 'echo -e "$(brew --prefix asdf)/asdf.sh" | pbcopy'
+export ASDF_ZSHRC_PATH=''
+
 export COLORSCHEME='onedark-vibrant'  # home | work
 export USER_PROFILE_ENV='home'  # home | work
 export OPERATING_SYSTEM='linux' # osx | linux

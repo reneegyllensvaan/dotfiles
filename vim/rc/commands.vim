@@ -2,6 +2,7 @@
 let g:rg_opts = '--smart-case'
 command! FzfProjectFiles call skim#run({'source': 'git ls-files-root', 'sink': 'e', 'down': '30%'})
 command! -bang -nargs=* Rg call fzf#vim#rg_interactive(<q-args>, fzf#vim#with_preview('right:50%:hidden', 'alt-h'))
+command! -bang -nargs=* RgFromCurrentFile Rg exec "Rg ".expand('%:h')
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
 
 command! -nargs=* FzyGrep call fzy#in_buffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
@@ -33,6 +34,14 @@ command! -bang -nargs=* SingletonShell call term#singleton_shell(<q-mods>, <q-ar
 
 command! -bang -nargs=* Make call make#infer(<q-args>, <q-bang>)
 
+function! ResetLayerFlags()
+  let g:myhooks_ctrl_a_layer = 0
+endfunction
+
+function! ProcessInsertLeaveEvents()
+  call ResetLayerFlags()
+endfunction
+
 augroup myhooks
   autocmd!
   " This isn't really used for anything in my vim config currently, I'm just
@@ -42,6 +51,8 @@ augroup myhooks
         \glob("~/.vim/files/recent.log"), "a")
   autocmd BufWritePost * :call writefile([localtime().";".getcwd().";".expand("%:p")],
         \glob("~/.vim/files/recent-write.log"), "a")
+
+  autocmd InsertLeave * call ProcessInsertLeaveEvents()
 augroup END
 
 let g:center_cursor_disabled_scrolloff = 4

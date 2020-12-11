@@ -40,7 +40,7 @@ function! visualops#surround(seps)
     normal! mz
     call setpos('.', getpos("']"))
     normal! mx
-    exec "normal! `xa)\<Esc>`zi(\<Esc>"
+    exec "normal! `xa".s:seps[1]."\<Esc>`zi".s:seps[0]."\<Esc>"
   endfunction
   set opfunc=OpFunc
 endfunction

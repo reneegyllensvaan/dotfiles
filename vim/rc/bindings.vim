@@ -1,17 +1,18 @@
 " vim: ft=sourceonsave.vim
 " Unmaps:
 nnoremap <C-c> <Nop>
+nnoremap <C-u> <Nop>
 nnoremap <C-c><C-c> <Nop>
+nnoremap <C-a> <Nop>
 noremap <Space> <Nop>
 noremap ZZ <Nop>
 noremap ZQ <Nop>
 noremap Y <Nop>
 noremap q <Nop>
-" noremap <Up> <Nop>
-" noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <expr> Q (empty(reg_recording()) ? "q".tolower(nr2char(getchar())) : "q")
+nnoremap <C-a><C-a> <C-a>
 
 " Alt Mappings:
 nnoremap <A-Up> <C-w>+
@@ -26,6 +27,8 @@ inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
 
 " Insert Mode:
 inoremap <C-c> <Nop>
+inoremap <C-n> <Nop>
+inoremap <C-p> <Nop>
 inoremap <C-c><C-s> <C-o>:w<CR>
 inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
@@ -40,6 +43,7 @@ nnoremap gk ddkP
 
 
 "  Editing Commands:
+nnoremap <C-j> <CR>
 nnoremap <bs> @q
 nnoremap \= gg=G``
 nnoremap \S :spellgood <C-r><C-w>
@@ -58,6 +62,7 @@ nnoremap <silent> c* *Ncgn
 nnoremap <silent> c# #Ncgn
 nnoremap <silent> cg* g*Ncgn
 nnoremap <silent> cg# g#Ncgn
+nnoremap <silent> crg viwA<><C-o>h
 
 nnoremap <expr> crc "ciw".myfns#to_camel(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crp "ciw".myfns#to_pascal(expand("<cword>"))."\<Esc>"
@@ -91,6 +96,7 @@ if has('nvim')
   tnoremap <silent> <C-w>L <C-\><C-n><C-w>L
   tnoremap <silent> <C-w>: <C-\><C-n><C-w>:
   tnoremap <silent> <C-w>c <C-\><C-n><C-w>c
+  tnoremap <silent> <C-w><C-w> <C-\><C-n><C-w><C-w>
 endif
 
 " Terminal Applications:
@@ -127,9 +133,6 @@ vnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Esc>==
 
 
 " Window Mappings:
-" FIXME: find something nice to do with up/down arrows
-" nnoremap <Down> <C-w>j
-" nnoremap <Up> <C-w>k
 nnoremap <Right> :call DrillWindowOrTab(0)<CR>
 nnoremap <Left> :call DrillWindowOrTab(1)<CR>
 nnoremap <C-w>/ <C-w>v
@@ -151,21 +154,23 @@ nnoremap <Space>wt_ :Term<CR>
 
 " Searching And Navigation:
 nnoremap <Space>/ :Rg<CR>
-nnoremap <Space>? :FzyGrep<Space>:
+nnoremap <Space>? :RgFromCurrentFile<CR>
 nnoremap <Leader>/ :call myfns#toggle_case_sensitive()<CR>
 nnoremap <Leader>? :call myfns#toggle_search_direction()<CR>
 
 let g:ctrl_d_jump = 10
 nnoremap <expr> <silent> <C-d> g:ctrl_d_jump."j"
-nnoremap <expr> <silent> <C-u> g:ctrl_d_jump."k"
+nnoremap <expr> <silent> <C-p> g:ctrl_d_jump."k"
 nnoremap <C-c><C-d><C-a> :let ctrl_d_jump = 40<CR>
 nnoremap <C-c><C-d><C-r> :let ctrl_d_jump = 20<CR>
 nnoremap <C-c><C-d><C-s> :let ctrl_d_jump = 10<CR>
 nnoremap <C-c><C-d><C-t> :let ctrl_d_jump = 5<CR>
 
+" Coc:
+nnoremap <Space>s- :CocDisable<CR>
+nnoremap <Space>s+ :call myfns#start_coc()<CR>
+
 " Toggles: ( / To file )
-nnoremap <Space>tA :CocDisable<CR>
-nnoremap <Space>ta :call myfns#start_coc()<CR>
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
 nnoremap <Space>tf :call ToggleVExplorer()<CR>
@@ -217,10 +222,12 @@ nnoremap <Space>lk :tabprevious<CR>
 nnoremap <Space>ln :tabnew<CR>
 
 nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
+nnoremap <silent> <Space>E :call feedkeys(":e %:h\<Tab>", 'tn')<CR>
 
 " WorkMode:
 nnoremap <Space>oE :e ~/workmode.vim<CR>
 nnoremap <Space>oo :so ~/workmode.vim<CR>
+nnoremap <Space>o  :so ~/workmode.vim<CR>
 
 " Buffers:
 nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ", 0)<CR>
@@ -286,10 +293,21 @@ onoremap <silent> s :<C-u>call Snipe(2, "so")<CR>
 onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
 
 " Surround Mappings:
-nnoremap zs( :call visualops#surround('()')<CR>g@
+nnoremap cr( :call visualops#surround('()')<CR>g@iw
+nnoremap cr[ :call visualops#surround('[]')<CR>g@iw
+nnoremap cr{ :call visualops#surround('{}')<CR>g@iw
+nnoremap cr< :call visualops#surround('<>')<CR>g@iw
+nnoremap cr' :call visualops#surround("''")<CR>g@iw
+nnoremap cr" :call visualops#surround('""')<CR>g@iw
+nnoremap cr` :call visualops#surround('``')<CR>g@iw
+nnoremap cr_ :call visualops#surround('__')<CR>g@iw
+nnoremap cr* :call visualops#surround('**')<CR>g@iw
+nnoremap crf viw:<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
+
 nnoremap zs( :call visualops#surround('()')<CR>g@
 nnoremap zs[ :call visualops#surround('[]')<CR>g@
 nnoremap zs{ :call visualops#surround('{}')<CR>g@
+nnoremap zs< :call visualops#surround('<>')<CR>g@
 nnoremap zs' :call visualops#surround("''")<CR>g@
 nnoremap zs" :call visualops#surround('""')<CR>g@
 nnoremap zs` :call visualops#surround('``')<CR>g@
@@ -302,6 +320,8 @@ vnoremap s[ :<C-u>call visualops#surround_selection('[]', 0)<CR>
 vnoremap S[ :<C-u>call visualops#surround_selection('[]', 1)<CR>
 vnoremap s{ :<C-u>call visualops#surround_selection('{}', 0)<CR>
 vnoremap S{ :<C-u>call visualops#surround_selection('{}', 1)<CR>
+vnoremap s< :<C-u>call visualops#surround_selection('<>', 0)<CR>
+vnoremap S< :<C-u>call visualops#surround_selection('<>', 1)<CR>
 vnoremap s' :<C-u>call visualops#surround_selection("''", 0)<CR>
 vnoremap S' :<C-u>call visualops#surround_selection("''", 1)<CR>
 vnoremap s" :<C-u>call visualops#surround_selection('""', 0)<CR>
@@ -343,3 +363,8 @@ nnoremap <silent> qd :CocList diagnostics<CR>
 nnoremap qj :botright cnext<CR>
 nnoremap qk :botright cprevious<CR>
 nnoremap q+ :botright cwindow<CR>
+
+" Arborist:
+nnoremap <C-s> <Nop>
+nnoremap <C-t> <Nop>
+nnoremap <C-s><C-t> :w<CR>
