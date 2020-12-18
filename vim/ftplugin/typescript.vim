@@ -8,6 +8,8 @@ inoremap <buffer> <Plug>(object-string-entry) <C-o>A:<Space>'',<Left><Left>
 
 nmap <buffer> <C-t><C-f><C-s> <Plug>(object-string-entry)
 imap <buffer> <C-t><C-f><C-s> <Plug>(object-string-entry)
+
+inoremap <buffer> <C-t><C-f><C-f> ()<Space>=><Space>
 " }}}
 
 " TT: Tap-Type  {{{

@@ -104,8 +104,8 @@ nnoremap <silent> <Space>am :tab SingletonTerm neomutt<CR>
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
 nnoremap <Space>af :SingletonTerm fish<CR>
 nnoremap <Space>aF :vert SingletonTerm! fish<CR>
-nnoremap <Space>ar :SingletonTerm! ranger<CR>
-nnoremap <Space>aR :vert SingletonTerm! ranger<CR>
+nnoremap <Space>ar :exec "SingletonTerm! ranger ".expand('%:h')<CR>
+nnoremap <Space>aR :exec "vert SingletonTerm! ranger ".expand('%:h')<CR>
 
 nnoremap <C-Space> :tab SingletonShell<CR>
 nnoremap <C-@> :tab SingletonShell<CR>
@@ -184,6 +184,7 @@ nnoremap <Space>ttw8 :set textwidth=80<CR>
 nnoremap <Space>ttw9 :set textwidth=90<CR>
 nnoremap <Space>tw :set list!<CR>
 nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
+nnoremap <expr> <Space>td ":setlocal ".(&l:diff ? "no" : "")."diff\<CR>"
 
 " Vim Actions:
 nnoremap <silent> <Space>vh :exec "hi ".synIDattr(synID(line("."),col("."),1),"name")<CR>
@@ -236,6 +237,8 @@ nnoremap <silent> <Space>b/ :call fzy#buffer_cmd(":vert sb ",0)<CR>
 nnoremap <silent> <Space>b_ :call fzy#buffer_cmd(":sb ",0)<CR>
 nnoremap <silent> <Space>bD :call fzy#buffer_cmd(":bd ",0)<CR>
 nnoremap <silent> <Space>bW :call fzy#buffer_cmd(":bwipe ",1)<CR>
+nnoremap <silent> <Space>br :e<CR>
+nnoremap <silent> <Space>bR :e!<CR>
 nnoremap <silent> <Space>fb :Buffers<CR>
 nnoremap <silent> <Space>bN :bp<CR>
 nnoremap <silent> <Space>bp :bp<CR>

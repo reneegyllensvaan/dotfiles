@@ -35,9 +35,9 @@ hi  TabLineFill         cterm=none  ctermbg=black    ctermfg=white
 hi  TabLineSel          cterm=bold  ctermbg=black    ctermfg=white
 hi  TabLine             cterm=none  ctermbg=black    ctermfg=gray
 
-hi  DiffAdd      cterm=none      ctermbg=LightBlue
-hi  DiffChange   cterm=none      ctermbg=LightMagenta
-hi  DiffDelete   cterm=none      ctermfg=Blue          ctermbg=LightCyan
+hi  DiffAdd      cterm=none      ctermbg=darkgreen    ctermfg=black
+hi  DiffChange   cterm=none      ctermbg=darkyellow   ctermfg=black
+hi  DiffDelete   cterm=none      ctermfg=red          ctermbg=black
 hi  DiffText     cterm=none      ctermbg=Red           cterm=bold
 hi  Directory    cterm=none      ctermfg=DarkBlue
 hi  ErrorMsg     cterm=none      ctermbg=none          ctermfg=red

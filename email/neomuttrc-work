@@ -3,7 +3,7 @@
 unvirtual-mailboxes *
 source ~/.neomuttrc-env-work
 
-set sidebar_width = 24
+set sidebar_width = 30
 push "<change-vfolder>B: backlog<Enter>"
 
 virtual-mailboxes "B: backlog"     "notmuch://?query=not tag:trash and not tag:deleted and not tag:TheNewPaper and not tag:keep and not tag:orders and not tag:lists and not tag:github and not tag:arch-lists and not tag:asana and not tag:newsletters and not tag:notifications and not tag:sent and not tag:conversations"
@@ -15,8 +15,14 @@ virtual-mailboxes "u: unread"      "notmuch://?query=tag:unread"
 virtual-mailboxes "i: important"   "notmuch://?query=tag:important"
 # virtual-mailboxes "K: keep"        "notmuch://?query=tag:keep"
 virtual-mailboxes "E: sent"        "notmuch://?query=tag:sent"
-virtual-mailboxes "g: github"      "notmuch://?query=tag:github"
-virtual-mailboxes "A: asana"      "notmuch://?query=tag:asana"
+
+virtual-mailboxes "G: github"      "notmuch://?query=tag:github"
+virtual-mailboxes "g: github (u)"  "notmuch://?query=tag:github and tag:unread"
+virtual-mailboxes "   gh_subscribed"  "notmuch://?query=tag:gh_subscribed"
+virtual-mailboxes "   gh_author"  "notmuch://?query=tag:gh_author"
+virtual-mailboxes "   gh_reviewing"  "notmuch://?query=tag:gh_reviewing"
+
+virtual-mailboxes "A: asana"       "notmuch://?query=tag:asana"
 virtual-mailboxes "N: newsletters" "notmuch://?query=tag:newsletters"
 virtual-mailboxes "l: lists"       "notmuch://?query=tag:lists"\
 virtual-mailboxes "   attachment"  "notmuch://?query=tag:attachment"
@@ -31,7 +37,8 @@ macro index bu "<change-vfolder>u: unread\n"
 macro index bi "<change-vfolder>i: important\n"
 # macro index bK "<change-vfolder>K: keep\n"
 macro index bE "<change-vfolder>E: sent\n"
-macro index bg "<change-vfolder>g: github\n"
+macro index bG "<change-vfolder>G: github\n"
+macro index bg "<change-vfolder>g: github (u)\n"
 macro index bA "<change-vfolder>A: asana\n"
 macro index bN "<change-vfolder>N: newsletters\n"
 macro index bl "<change-vfolder>l: lists\n"
