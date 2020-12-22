@@ -14,6 +14,8 @@ cat << EOF
   program = gpg2
 [github]
   user = $GITHUB_USER
+[init]
+  defaultBranch = main
 [alias]
   a   = add
   aa  = add --all
