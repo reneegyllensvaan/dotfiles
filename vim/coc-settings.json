@@ -1,5 +1,5 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": [],
+  "coc.preferences.formatOnSaveFiletypes": ["rust"],
   "clangd.semanticHighlighting": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
   "coc.source.buffer.ignoreGitignore": true,

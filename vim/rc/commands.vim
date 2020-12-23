@@ -118,6 +118,11 @@ if exists('g:autoread_timer_id')
   let g:autoread_timer_id = timer_start(1000, function('s:checktime'), {'repeat': -1})
 endif
 
+augroup quickfixOnMakeFinish
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* cwindow
+augroup END
+
 
 " augroup infer-context
 "   autocmd!

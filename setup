@@ -214,6 +214,7 @@ ensure_git_repo vim/pack/plugins/opt/completion-nvim https://github.com/nvim-lua
 ensure_git_repo vim/pack/plugins/opt/completion-buffers https://github.com/steelsojka/completion-buffers
 ensure_git_repo vim/pack/plugins/opt/nvim-treesitter https://github.com/nvim-treesitter/nvim-treesitter
 ensure_git_repo vim/pack/plugins/opt/completion-treesitter https://github.com/nvim-treesitter/completion-treesitter
+ensure_git_repo vim/pack/plugins/opt/parinfer https://github.com/eraserhd/parinfer-rust
 
 
 log "Building shell template files"

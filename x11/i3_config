@@ -7,9 +7,10 @@ new_window pixel 3
 hide_edge_borders smart
 #new_window normal
 
-#floating window settings
+# Floating window settings
 floating_modifier $mod
 bindsym $mod+Shift+space floating toggle
+for_window [title="feh"] floating enable
 
 # launching programs
 bindsym $mod+Return exec --no-startup-id "urxvtc -e 'urxvtmux'"

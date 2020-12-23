@@ -1,5 +1,5 @@
-" vim: ft=sourceonsave.vim
-" Unmaps:
+" vim: ft=sourceonsave.vim fdm=marker foldlevel=0
+" Unmaps: {{{
 nnoremap <C-c> <Nop>
 nnoremap <C-u> <Nop>
 nnoremap <C-c><C-c> <Nop>
@@ -13,8 +13,9 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <expr> Q (empty(reg_recording()) ? "q".tolower(nr2char(getchar())) : "q")
 nnoremap <C-a><C-a> <C-a>
+" Unmaps }}}
 
-" Alt Mappings:
+" Alt Mappings: {{{
 nnoremap <A-Up> <C-w>+
 nnoremap <A-Down> <C-w>-
 nnoremap <A-Left> <C-w><<C-w><
@@ -24,46 +25,80 @@ vnoremap <silent> <A-Up> :move '<-2<CR>gv
 vnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
+" Alt Mappings }}}
 
-" Insert Mode:
-inoremap <C-c> <Nop>
-inoremap <C-n> <Nop>
+" Insert Mode: {{{
 inoremap <C-p> <Nop>
+
+inoremap <C-c> <Nop>
 inoremap <C-c><C-s> <C-o>:w<CR>
 inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
+" Insert Mode }}}
+
+" Microsnippets: {{{
+inoremap <C-n> <Nop>
+inoremap <C-n><C-u> {<Cr>}<C-o>O
+inoremap <C-n><C-e> [<Cr>]<C-o>O
+inoremap <C-n><C-y> (<Cr>)<C-o>O
+
+"
+imap <buffer> <C-t><C-a> <Space>=><Space>
+imap <buffer> <C-t><C-m> ()<Space>=><Space>
+" Microsnippets }}}
+
 
 "  G Command Overrides:
 " Note: many of these are useful for moving the window's view of the buffer. I
 " always keep my cursor centered using a high scrolloff, so I'm overriding
 " many of these because I don't use the default mapping anyway
-nnoremap gj ddp
-nnoremap gk ddkP
 
 
-"  Editing Commands:
+"  Editing Commands: {{{
+" Line break
 nnoremap <C-j> <CR>
+
+" Quick-fire macro
 nnoremap <bs> @q
+
+" Indentfunc whole buffer
 nnoremap \= gg=G``
+
+" Spellcheck
 nnoremap \S :spellgood <C-r><C-w>
 nnoremap \sa yiw:e ~/.vim/rc/autocorrect.vim<CR>Goiab <C-r>0 <C-r>0
+nnoremap <expr> <Space>ta ":setlocal ".(&l:spell ? "no" : "")."spell\<CR>"
+
+" Keep visual selection on indent
 nnoremap \< V`]<
 nnoremap \> V`]>
+
+" Format buffer (usually shells out to CoC)
 nnoremap \F :Format<cr>
 nnoremap \T :silent s/\<\(\w\)\(\S*\)/\u\1\L\2/g<cr>:noh<cr>
+
+" Foldmethod
 nnoremap \ff :set fdm=manual<cr>
 nnoremap \fi :set fdm=indent<cr>
 nnoremap \fm :set fdm=marker<cr>
 nnoremap \fs :set fdm=syntax<cr>
 nnoremap \fd :set fdm=diff<cr>
+
+" Make `n` after `#` always search downward
 nnoremap # *NN
+
+" Replace word and put into search register
 nnoremap <silent> c* *Ncgn
 nnoremap <silent> c# #Ncgn
 nnoremap <silent> cg* g*Ncgn
 nnoremap <silent> cg# g#Ncgn
-nnoremap <silent> crg viwA<><C-o>h
 
+" Move lines. Overrides some defaults that don't matter because scrolloff=999
+nnoremap gj ddp
+nnoremap gk ddkP
+
+" Toggle identifier case
 nnoremap <expr> crc "ciw".myfns#to_camel(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crp "ciw".myfns#to_pascal(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crs "ciw".myfns#to_snake(expand("<cword>"))."\<Esc>"
@@ -75,12 +110,12 @@ nnoremap <expr> crS "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
 " onoremap rs
 " onoremap rS
 
+" Extra textobjects for sub-words
 onoremap <silent> i_ :<C-u>call myfns#inside_snake()<CR>
 onoremap <silent> iA :<C-u>call myfns#inside_capital()<CR>
-" visual
-vnoremap \sl :sort<CR>
+" Editing Commands }}}
 
-" Terminal Mappings:
+" Terminal Mode Mappings: {{{
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
 tnoremap <silent> <C-s> <C-W>N
 if has('nvim')
@@ -98,8 +133,9 @@ if has('nvim')
   tnoremap <silent> <C-w>c <C-\><C-n><C-w>c
   tnoremap <silent> <C-w><C-w> <C-\><C-n><C-w><C-w>
 endif
+" Terminal Mode Mappings }}}
 
-" Terminal Applications:
+" Terminal Applications: {{{
 nnoremap <silent> <Space>am :tab SingletonTerm neomutt<CR>
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
 nnoremap <Space>af :SingletonTerm fish<CR>
@@ -112,9 +148,9 @@ nnoremap <C-@> :tab SingletonShell<CR>
 nnoremap <Space>at :Term $SHELL<CR>
 nnoremap <Space>aT :vert Term $SHELL<CR>
 nnoremap <Space>a<C-t> :tab $SHELL<CR>
+" Terminal Applications }}}
 
-
-" Visual Mappings:
+" Visual Mappings: {{{
 nnoremap <Space>y "+y
 vnoremap <Space>y "+y
 nnoremap <Space>p "+p
@@ -130,9 +166,10 @@ vnoremap > >gv
 vnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
 vnoremap \C :!column -t<cr>
 vnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Esc>==
+vnoremap \sl :sort<CR>
+" Visual Mappings }}}
 
-
-" Window Mappings:
+" Window Mappings: {{{
 nnoremap <Right> :call DrillWindowOrTab(0)<CR>
 nnoremap <Left> :call DrillWindowOrTab(1)<CR>
 nnoremap <C-w>/ <C-w>v
@@ -151,8 +188,9 @@ nnoremap <Space>wr <C-w>r
 nnoremap <Space>wm :tab split<CR>
 nnoremap <Space>wt/ :vert Term<CR>
 nnoremap <Space>wt_ :Term<CR>
+" Window Mappings }}}
 
-" Searching And Navigation:
+" Searching And Navigation: {{{
 nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :RgFromCurrentFile<CR>
 nnoremap <Leader>/ :call myfns#toggle_case_sensitive()<CR>
@@ -165,12 +203,9 @@ nnoremap <C-c><C-d><C-a> :let ctrl_d_jump = 40<CR>
 nnoremap <C-c><C-d><C-r> :let ctrl_d_jump = 20<CR>
 nnoremap <C-c><C-d><C-s> :let ctrl_d_jump = 10<CR>
 nnoremap <C-c><C-d><C-t> :let ctrl_d_jump = 5<CR>
+" Searching And Navigation }}}
 
-" Coc:
-nnoremap <Space>s- :CocDisable<CR>
-nnoremap <Space>s+ :call myfns#start_coc()<CR>
-
-" Toggles: ( / To file )
+" Toggles: ( / To file ) {{{
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
 nnoremap <Space>tf :call ToggleVExplorer()<CR>
@@ -185,8 +220,9 @@ nnoremap <Space>ttw9 :set textwidth=90<CR>
 nnoremap <Space>tw :set list!<CR>
 nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
 nnoremap <expr> <Space>td ":setlocal ".(&l:diff ? "no" : "")."diff\<CR>"
+" Toggles }}}
 
-" Vim Actions:
+" Vim Actions: {{{
 nnoremap <silent> <Space>vh :exec "hi ".synIDattr(synID(line("."),col("."),1),"name")<CR>
 nnoremap <Space>vH :TSHighlightCapturesUnderCursor<CR>
 nnoremap <silent> <Space>vpa :call feedkeys(":packadd \<Tab>", 'tn')<CR>
@@ -198,12 +234,9 @@ nnoremap <Space>vs :call vimrctools#pick_runtime_file('Source runtime file:', ':
 nnoremap <Space>vRR :call fzy#leader_script("vR", ":e ")<CR>
 nnoremap <Space>vR/ :call fzy#leader_script("vR", ":vsp ")<CR>
 nnoremap <Space>vR_ :call fzy#leader_script("vR", ":sp ")<CR>
+" Vim Actions }}}
 
-" Bookmarks:
-nnoremap <Space>;E :e ~/.vim/files/bookmarks.vim<CR>
-source ~/.vim/files/bookmarks.vim
-
-" File Actions:
+" File Actions: {{{
 nnoremap <silent> <Space>fw :w<CR>
 nnoremap <silent> <C-c><C-s> :w<CR>
 nnoremap <expr>   <Space>fc ":lcd ".expand("%:p:h")."\<CR>"
@@ -218,17 +251,24 @@ nnoremap <silent> <Space>fd :call fzy#leader_script("fd", ":lcd ")<CR>
 nnoremap <silent> <Space>lcd :call fzy#leader_script("lcd", ":lcd ~/")<CR>
 nnoremap <silent> <Space>fn :call fzy#leader_script("fn", ":e ")<CR>
 
-nnoremap <Space>lj :tabnext<CR>
-nnoremap <Space>lk :tabprevious<CR>
-nnoremap <Space>ln :tabnew<CR>
-
 nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 nnoremap <silent> <Space>E :call feedkeys(":e %:h\<Tab>", 'tn')<CR>
+" File Actions }}}
 
-" WorkMode:
+" Hooks For External Files: {{{
+" WorkMode
 nnoremap <Space>oE :e ~/workmode.vim<CR>
 nnoremap <Space>oo :so ~/workmode.vim<CR>
 nnoremap <Space>o  :so ~/workmode.vim<CR>
+
+" Coc
+nnoremap <Space>s- :CocDisable<CR>
+nnoremap <Space>s+ :call myfns#start_coc()<CR>
+
+" Bookmarks
+nnoremap <Space>;E :e ~/.vim/files/bookmarks.vim<CR>
+source ~/.vim/files/bookmarks.vim
+" Hooks For External Files }}}
 
 " Buffers:
 nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ", 0)<CR>
@@ -244,6 +284,7 @@ nnoremap <silent> <Space>bN :bp<CR>
 nnoremap <silent> <Space>bp :bp<CR>
 nnoremap <silent> <Space>bn :bn<CR>
 nnoremap <silent> <Space>bd :bp\|bd #<CR>
+nnoremap <silent> <Space>bx :bp\|bw #<CR>
 nnoremap <silent> <Space>b? :w !diff % -<CR>
 
 " Git:
@@ -306,6 +347,7 @@ nnoremap cr` :call visualops#surround('``')<CR>g@iw
 nnoremap cr_ :call visualops#surround('__')<CR>g@iw
 nnoremap cr* :call visualops#surround('**')<CR>g@iw
 nnoremap crf viw:<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
+nnoremap <silent> crg viwA<><C-o>h
 
 nnoremap zs( :call visualops#surround('()')<CR>g@
 nnoremap zs[ :call visualops#surround('[]')<CR>g@
@@ -360,6 +402,7 @@ nnoremap qd :<C-u>CocList diagnostics
 nnoremap q5 :noh<CR>
 nnoremap q* :exec "FzyGrep ".expand("<cword>")<CR>
 nnoremap q, A,<Esc>j
+nnoremap q; A;<Esc>j
 nnoremap <silent> qd :CocList diagnostics<CR>
 
 " QuickFix:
@@ -367,7 +410,8 @@ nnoremap qj :botright cnext<CR>
 nnoremap qk :botright cprevious<CR>
 nnoremap q+ :botright cwindow<CR>
 
-" Arborist:
+" Arborist Mappings:
 nnoremap <C-s> <Nop>
 nnoremap <C-t> <Nop>
 nnoremap <C-s><C-t> :w<CR>
+
