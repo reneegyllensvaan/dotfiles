@@ -199,6 +199,8 @@ nnoremap <Leader>? :call myfns#toggle_search_direction()<CR>
 let g:ctrl_d_jump = 10
 nnoremap <expr> <silent> <C-d> g:ctrl_d_jump."j"
 nnoremap <expr> <silent> <C-p> g:ctrl_d_jump."k"
+vnoremap <expr> <silent> <C-d> g:ctrl_d_jump."j"
+vnoremap <expr> <silent> <C-p> g:ctrl_d_jump."k"
 nnoremap <C-c><C-d><C-a> :let ctrl_d_jump = 40<CR>
 nnoremap <C-c><C-d><C-r> :let ctrl_d_jump = 20<CR>
 nnoremap <C-c><C-d><C-s> :let ctrl_d_jump = 10<CR>
