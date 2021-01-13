@@ -198,6 +198,7 @@ ensure_git_repo vim/pack/plugins/start/editorconfig https://github.com/editorcon
 ensure_git_repo vim/pack/plugins/start/skim_base https://github.com/lotabout/skim \
   || ( symlink dir ~/.skim vim/pack/plugins/start/skim_base ; push_cmd 'cd ~/.skim && ./install')
 ensure_git_repo vim/pack/plugins/start/skim https://github.com/lotabout/skim.vim
+ensure_git_repo vim/pack/plugins/start/eunuch https://github.com/tpope/vim-eunuch
 # Dynamic plugins
 ensure_git_repo vim/pack/plugins/opt/vinegar https://github.com/tpope/vim-vinegar
 ensure_git_repo vim/pack/plugins/opt/gitgutter https://github.com/airblade/vim-gitgutter.git
@@ -215,6 +216,7 @@ ensure_git_repo vim/pack/plugins/opt/completion-buffers https://github.com/steel
 ensure_git_repo vim/pack/plugins/opt/nvim-treesitter https://github.com/nvim-treesitter/nvim-treesitter
 ensure_git_repo vim/pack/plugins/opt/completion-treesitter https://github.com/nvim-treesitter/completion-treesitter
 ensure_git_repo vim/pack/plugins/opt/parinfer https://github.com/eraserhd/parinfer-rust
+ensure_git_repo vim/pack/plugins/opt/vimacs https://github.com/andrep/vimacs
 
 
 log "Building shell template files"
@@ -363,7 +365,7 @@ for cmd in $CMDS; do
   printf "$cmd"
   echo "$cmd" >> last_install.log
   sh -c "$cmd" 2>last_install_errors.log
-  printf "\r\033[2K"
+  # printf "\r\033[2K"
 done
 echo "Log written to ./last_install.log"
 [ "`cat last_install_errors.log`" ] \

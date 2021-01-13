@@ -1,5 +1,7 @@
 " vim: ft=sourceonsave.vim fdm=marker foldlevel=0
 " Unmaps: {{{
+nnoremap <C-s> <Nop>
+nnoremap <C-t> <Nop>
 nnoremap <C-c> <Nop>
 nnoremap <C-u> <Nop>
 nnoremap <C-c><C-c> <Nop>
@@ -14,7 +16,6 @@ noremap <Right> <Nop>
 noremap <expr> Q (empty(reg_recording()) ? "q".tolower(nr2char(getchar())) : "q")
 nnoremap <C-a><C-a> <C-a>
 " Unmaps }}}
-
 " Alt Mappings: {{{
 nnoremap <A-Up> <C-w>+
 nnoremap <A-Down> <C-w>-
@@ -26,7 +27,6 @@ vnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
 " Alt Mappings }}}
-
 " Insert Mode: {{{
 inoremap <C-p> <Nop>
 
@@ -36,7 +36,6 @@ inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
 " Insert Mode }}}
-
 " Microsnippets: {{{
 inoremap <C-n> <Nop>
 inoremap <C-n><C-u> {<Cr>}<C-o>O
@@ -47,14 +46,6 @@ inoremap <C-n><C-y> (<Cr>)<C-o>O
 imap <buffer> <C-t><C-a> <Space>=><Space>
 imap <buffer> <C-t><C-m> ()<Space>=><Space>
 " Microsnippets }}}
-
-
-"  G Command Overrides:
-" Note: many of these are useful for moving the window's view of the buffer. I
-" always keep my cursor centered using a high scrolloff, so I'm overriding
-" many of these because I don't use the default mapping anyway
-
-
 "  Editing Commands: {{{
 " Line break
 nnoremap <C-j> <CR>
@@ -114,7 +105,6 @@ nnoremap <expr> crS "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
 onoremap <silent> i_ :<C-u>call myfns#inside_snake()<CR>
 onoremap <silent> iA :<C-u>call myfns#inside_capital()<CR>
 " Editing Commands }}}
-
 " Terminal Mode Mappings: {{{
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
 tnoremap <silent> <C-s> <C-W>N
@@ -134,7 +124,6 @@ if has('nvim')
   tnoremap <silent> <C-w><C-w> <C-\><C-n><C-w><C-w>
 endif
 " Terminal Mode Mappings }}}
-
 " Terminal Applications: {{{
 nnoremap <silent> <Space>am :tab SingletonTerm neomutt<CR>
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
@@ -149,7 +138,6 @@ nnoremap <Space>at :Term $SHELL<CR>
 nnoremap <Space>aT :vert Term $SHELL<CR>
 nnoremap <Space>a<C-t> :tab $SHELL<CR>
 " Terminal Applications }}}
-
 " Visual Mappings: {{{
 nnoremap <Space>y "+y
 vnoremap <Space>y "+y
@@ -168,7 +156,6 @@ vnoremap \C :!column -t<cr>
 vnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Esc>==
 vnoremap \sl :sort<CR>
 " Visual Mappings }}}
-
 " Window Mappings: {{{
 nnoremap <Right> :call DrillWindowOrTab(0)<CR>
 nnoremap <Left> :call DrillWindowOrTab(1)<CR>
@@ -189,7 +176,6 @@ nnoremap <Space>wm :tab split<CR>
 nnoremap <Space>wt/ :vert Term<CR>
 nnoremap <Space>wt_ :Term<CR>
 " Window Mappings }}}
-
 " Searching And Navigation: {{{
 nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :RgFromCurrentFile<CR>
@@ -206,8 +192,7 @@ nnoremap <C-c><C-d><C-r> :let ctrl_d_jump = 20<CR>
 nnoremap <C-c><C-d><C-s> :let ctrl_d_jump = 10<CR>
 nnoremap <C-c><C-d><C-t> :let ctrl_d_jump = 5<CR>
 " Searching And Navigation }}}
-
-" Toggles: ( / To file ) {{{
+" Toggles: {{{
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
 nnoremap <Space>tf :call ToggleVExplorer()<CR>
@@ -223,7 +208,6 @@ nnoremap <Space>tw :set list!<CR>
 nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
 nnoremap <expr> <Space>td ":setlocal ".(&l:diff ? "no" : "")."diff\<CR>"
 " Toggles }}}
-
 " Vim Actions: {{{
 nnoremap <silent> <Space>vh :exec "hi ".synIDattr(synID(line("."),col("."),1),"name")<CR>
 nnoremap <Space>vH :TSHighlightCapturesUnderCursor<CR>
@@ -237,10 +221,8 @@ nnoremap <Space>vRR :call fzy#leader_script("vR", ":e ")<CR>
 nnoremap <Space>vR/ :call fzy#leader_script("vR", ":vsp ")<CR>
 nnoremap <Space>vR_ :call fzy#leader_script("vR", ":sp ")<CR>
 " Vim Actions }}}
-
 " File Actions: {{{
 nnoremap <silent> <Space>fw :w<CR>
-nnoremap <silent> <C-c><C-s> :w<CR>
 nnoremap <expr>   <Space>fc ":lcd ".expand("%:p:h")."\<CR>"
 nnoremap <expr>   <Space>fC ":cd ".expand("%:p:h")."\<CR>"
 nnoremap <silent> <Space>fy :YankFileName<CR>
@@ -256,7 +238,6 @@ nnoremap <silent> <Space>fn :call fzy#leader_script("fn", ":e ")<CR>
 nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 nnoremap <silent> <Space>E :call feedkeys(":e %:h\<Tab>", 'tn')<CR>
 " File Actions }}}
-
 " Hooks For External Files: {{{
 " WorkMode
 nnoremap <Space>oE :e ~/workmode.vim<CR>
@@ -271,8 +252,7 @@ nnoremap <Space>s+ :call myfns#start_coc()<CR>
 nnoremap <Space>;E :e ~/.vim/files/bookmarks.vim<CR>
 source ~/.vim/files/bookmarks.vim
 " Hooks For External Files }}}
-
-" Buffers:
+" Buffers: {{{
 nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ", 0)<CR>
 nnoremap <silent> <Space>bB :call fzy#buffer_cmd(":b ", 1)<CR>
 nnoremap <silent> <Space>b/ :call fzy#buffer_cmd(":vert sb ",0)<CR>
@@ -288,8 +268,8 @@ nnoremap <silent> <Space>bn :bn<CR>
 nnoremap <silent> <Space>bd :bp\|bd #<CR>
 nnoremap <silent> <Space>bx :bp\|bw #<CR>
 nnoremap <silent> <Space>b? :w !diff % -<CR>
-
-" Git:
+" Buffers }}}
+" Git: {{{
 nnoremap <silent> <Space>gO :call fzy#leader_script("gO", ":!git checkout-remote-branch origin ")<CR>
 nnoremap <silent> <Space>ga :call fzy#leader_script("ga", ":!git add ")<CR>
 nnoremap <silent> <Space>gf :call fzy#leader_script("gf", ":e ")<CR>
@@ -309,10 +289,9 @@ nnoremap <silent> <Space>gc :Term! git commit<CR>
 nnoremap <Space>g<C-l> :tab SingletonTerm git log<CR>
 nnoremap <Space>gL :vert SingletonTerm git log<CR>
 nnoremap <Space>gl :SingletonTerm git log<CR>
-nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
 nnoremap <silent> <Space>gB :call term#singleton_run('tab', 'tig blame '.expand('%:t'), expand('%:p:h'), '')<CR>
-
-" Snipe Mappings:
+" Git }}}
+" Snipe Mappings: {{{
 nnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
 nnoremap <silent> ; :<C-u>call SnipeNext(0,"")<CR>
 nnoremap <silent> F :<C-u>call Snipe(1, "Fn")<CR>
@@ -337,8 +316,8 @@ onoremap <silent> T :<C-u>call Snipe(1, "To")<CR>
 onoremap <silent> f :<C-u>call Snipe(1, "fo")<CR>
 onoremap <silent> s :<C-u>call Snipe(2, "so")<CR>
 onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
-
-" Surround Mappings:
+" Snipe Mappings }}}
+" Surround Mappings: {{{
 nnoremap cr( :call visualops#surround('()')<CR>g@iw
 nnoremap cr[ :call visualops#surround('[]')<CR>g@iw
 nnoremap cr{ :call visualops#surround('{}')<CR>g@iw
@@ -391,9 +370,8 @@ vnoremap sr* <Esc>`<r*`>r*gv
 vnoremap srf <Esc>`>r)`<r(i
 vnoremap sr<BS> <Esc>`>x`<x<Esc>`>hm>gv
 vmap srx sr<BS>
-
-
-" Quick Commands: (aliases)
+" Surround Mappings }}}
+" Quick Commands: (aliases) {{{
 nmap qf <Space>ff
 nmap qb <Space>bb
 nnoremap qn :bn<CR>
@@ -406,14 +384,28 @@ nnoremap q* :exec "FzyGrep ".expand("<cword>")<CR>
 nnoremap q, A,<Esc>j
 nnoremap q; A;<Esc>j
 nnoremap <silent> qd :CocList diagnostics<CR>
-
-" QuickFix:
+" Quick Commands }}}
+" QuickFix: {{{
 nnoremap qj :botright cnext<CR>
 nnoremap qk :botright cprevious<CR>
 nnoremap q+ :botright cwindow<CR>
+" QuickFix }}}
 
 " Arborist Mappings:
-nnoremap <C-s> <Nop>
-nnoremap <C-t> <Nop>
-nnoremap <C-s><C-t> :w<CR>
+nnoremap <C-a> <Nop>
+" idk, maybe structural editing commands? splitting/joining on expressions etc
 
+" Ftplugin trunk:
+nnoremap <C-t> <Nop>
+
+" Calling out to external tools
+nnoremap <C-c> <Nop>
+nnoremap <silent> <C-c><C-c> :w<CR>:Make<CR>
+nnoremap <C-c><C-r> :Rename<Space>
+
+":cd ".expand("%:p:h")."\<CR>"
+nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
+
+" Actions
+nnoremap <C-s> <Nop>
+nnoremap <silent> <C-s><C-t> :w<CR>
