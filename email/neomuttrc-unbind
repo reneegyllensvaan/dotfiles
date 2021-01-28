@@ -129,7 +129,7 @@ bind generic,pager,editor,index <Return>   noop
 ##bind generic,pager,editor,index \CR noop
 ##bind generic,pager,editor,index \CS noop
 ##bind generic,pager,editor,index \CT noop
-##bind generic,pager,editor,index \CU noop
+bind generic,pager,editor,index \CU noop
 ##bind generic,pager,editor,index \CV noop
 ##bind generic,pager,editor,index \CW noop
 ##bind generic,pager,editor,index \CX noop

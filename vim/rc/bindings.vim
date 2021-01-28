@@ -22,8 +22,8 @@ nnoremap <A-Down> <C-w>-
 nnoremap <A-Left> <C-w><<C-w><
 nnoremap <A-Right> <C-w>><C-w>>
 
-vnoremap <silent> <A-Up> :move '<-2<CR>gv
-vnoremap <silent> <A-Down> :move '>+1<CR>gv
+xnoremap <silent> <A-Up> :move '<-2<CR>gv
+xnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
 " Alt Mappings }}}
@@ -32,6 +32,8 @@ inoremap <C-p> <Nop>
 
 inoremap <C-c> <Nop>
 inoremap <C-c><C-s> <C-o>:w<CR>
+inoremap <C-r><C-r> <C-r>"
+
 inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
@@ -42,13 +44,12 @@ inoremap <C-n><C-u> {<Cr>}<C-o>O
 inoremap <C-n><C-e> [<Cr>]<C-o>O
 inoremap <C-n><C-y> (<Cr>)<C-o>O
 
-"
-imap <buffer> <C-t><C-a> <Space>=><Space>
-imap <buffer> <C-t><C-m> ()<Space>=><Space>
 " Microsnippets }}}
 "  Editing Commands: {{{
 " Line break
-nnoremap <C-j> <CR>
+nnoremap <C-j> <Esc>o
+" nnoremap <C-r> "
+" xnoremap <C-r> "
 
 " Quick-fire macro
 nnoremap <bs> @q
@@ -88,6 +89,8 @@ nnoremap <silent> cg# g#Ncgn
 " Move lines. Overrides some defaults that don't matter because scrolloff=999
 nnoremap gj ddp
 nnoremap gk ddkP
+xnoremap <silent> gj :move '>+1<CR>gv
+xnoremap <silent> gk :move '<-2<CR>gv
 
 " Toggle identifier case
 nnoremap <expr> crc "ciw".myfns#to_camel(expand("<cword>"))."\<Esc>"
@@ -140,21 +143,35 @@ nnoremap <Space>a<C-t> :tab $SHELL<CR>
 " Terminal Applications }}}
 " Visual Mappings: {{{
 nnoremap <Space>y "+y
-vnoremap <Space>y "+y
+xnoremap <Space>y "+y
 nnoremap <Space>p "+p
-vnoremap <Space>p "+p
-vnoremap zj <Esc>`<mz`>mx`zjm<`xm>gv
-vnoremap zk <Esc>`<mz`>mx`zkm<`xm>gv
-vnoremap zJ <Esc>`<mz`>mx`xjm>`zm<gv
-vnoremap zK <Esc>`<mz`>mx`xkm>`zm<gv
-vnoremap zh <Esc>`<mz`>mx`zkm<`xjm>gv
-vnoremap zl <Esc>`<mz`>mx`zjm<`xkm>gv
-vnoremap < <gv
-vnoremap > >gv
-vnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
-vnoremap \C :!column -t<cr>
-vnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Esc>==
-vnoremap \sl :sort<CR>
+xnoremap <Space>p "+p
+xnoremap zj <Esc>`<mz`>mx`zjm<`xm>gv
+xnoremap zk <Esc>`<mz`>mx`zkm<`xm>gv
+xnoremap zJ <Esc>`<mz`>mx`xjm>`zm<gv
+xnoremap zK <Esc>`<mz`>mx`xkm>`zm<gv
+xnoremap zh <Esc>`<mz`>mx`zkm<`xjm>gv
+xnoremap zl <Esc>`<mz`>mx`zjm<`xkm>gv
+xnoremap < <gv
+xnoremap > >gv
+xnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
+xnoremap \C :!column -t<cr>
+xnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Esc>==
+xnoremap \sl :sort<CR>
+
+" Don't include trailing line ending on $ in visual mode
+xnoremap $ $h
+
+nnoremap v V
+nnoremap V v
+xnoremap v v
+" " v key cycles V -> ^V -> v -> ...
+" vnoremap <expr> mode() == 'V' ? "\<C-v>" : (mode() == "\<C-v>" ? 'v' : 'V')
+" " Rotate the default mappings a bit based on most common cases
+" " This is a work in progress, it messes with `viw` motions and similar
+" nnoremap v V
+" nnoremap V v
+" nnoremap <C-v> <C-v>
 " Visual Mappings }}}
 " Window Mappings: {{{
 nnoremap <Right> :call DrillWindowOrTab(0)<CR>
@@ -185,8 +202,8 @@ nnoremap <Leader>? :call myfns#toggle_search_direction()<CR>
 let g:ctrl_d_jump = 10
 nnoremap <expr> <silent> <C-d> g:ctrl_d_jump."j"
 nnoremap <expr> <silent> <C-p> g:ctrl_d_jump."k"
-vnoremap <expr> <silent> <C-d> g:ctrl_d_jump."j"
-vnoremap <expr> <silent> <C-p> g:ctrl_d_jump."k"
+xnoremap <expr> <silent> <C-d> g:ctrl_d_jump."j"
+xnoremap <expr> <silent> <C-p> g:ctrl_d_jump."k"
 nnoremap <C-c><C-d><C-a> :let ctrl_d_jump = 40<CR>
 nnoremap <C-c><C-d><C-r> :let ctrl_d_jump = 20<CR>
 nnoremap <C-c><C-d><C-s> :let ctrl_d_jump = 10<CR>
@@ -249,7 +266,7 @@ nnoremap <Space>s- :CocDisable<CR>
 nnoremap <Space>s+ :call myfns#start_coc()<CR>
 
 " Bookmarks
-nnoremap <Space>;E :e ~/.vim/files/bookmarks.vim<CR>
+nnoremap <Space>'E :e ~/.vim/files/bookmarks.vim<CR>
 source ~/.vim/files/bookmarks.vim
 " Hooks For External Files }}}
 " Buffers: {{{
@@ -300,14 +317,14 @@ nnoremap <silent> T :<C-u>call Snipe(1, "Tn")<CR>
 nnoremap <silent> f :<C-u>call Snipe(1, "fn")<CR>
 nnoremap <silent> s :<C-u>call Snipe(2, "sn")<CR>
 nnoremap <silent> t :<C-u>call Snipe(1, "tn")<CR>
-vnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
-vnoremap <silent> ; :<C-u>call SnipeNext(0,"")<CR>
-vnoremap <silent> F :<C-u>call Snipe(1, "Fv")<CR>
-vnoremap <silent> S :<C-u>call Snipe(2, "Sv")<CR>
-vnoremap <silent> T :<C-u>call Snipe(1, "Tv")<CR>
-vnoremap <silent> f :<C-u>call Snipe(1, "fv")<CR>
-vnoremap <silent> s :<C-u>call Snipe(2, "sv")<CR>
-vnoremap <silent> t :<C-u>call Snipe(1, "tv")<CR>
+xnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
+xnoremap <silent> ; :<C-u>call SnipeNext(0,"")<CR>
+xnoremap <silent> F :<C-u>call Snipe(1, "Fv")<CR>
+xnoremap <silent> S :<C-u>call Snipe(2, "Sv")<CR>
+xnoremap <silent> T :<C-u>call Snipe(1, "Tv")<CR>
+xnoremap <silent> f :<C-u>call Snipe(1, "fv")<CR>
+xnoremap <silent> s :<C-u>call Snipe(2, "sv")<CR>
+xnoremap <silent> t :<C-u>call Snipe(1, "tv")<CR>
 onoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
 onoremap <silent> ; :<C-u>call SnipeNext(0,"")<CR>
 onoremap <silent> F :<C-u>call Snipe(1, "Fo")<CR>
@@ -340,35 +357,35 @@ nnoremap zs` :call visualops#surround('``')<CR>g@
 nnoremap zs_ :call visualops#surround('__')<CR>g@
 nnoremap zs* :call visualops#surround('**')<CR>g@
 
-vnoremap s( :<C-u>call visualops#surround_selection('()', 0)<CR>
-vnoremap S( :<C-u>call visualops#surround_selection('()', 1)<CR>
-vnoremap s[ :<C-u>call visualops#surround_selection('[]', 0)<CR>
-vnoremap S[ :<C-u>call visualops#surround_selection('[]', 1)<CR>
-vnoremap s{ :<C-u>call visualops#surround_selection('{}', 0)<CR>
-vnoremap S{ :<C-u>call visualops#surround_selection('{}', 1)<CR>
-vnoremap s< :<C-u>call visualops#surround_selection('<>', 0)<CR>
-vnoremap S< :<C-u>call visualops#surround_selection('<>', 1)<CR>
-vnoremap s' :<C-u>call visualops#surround_selection("''", 0)<CR>
-vnoremap S' :<C-u>call visualops#surround_selection("''", 1)<CR>
-vnoremap s" :<C-u>call visualops#surround_selection('""', 0)<CR>
-vnoremap S" :<C-u>call visualops#surround_selection('""', 1)<CR>
-vnoremap s` :<C-u>call visualops#surround_selection('``', 0)<CR>
-vnoremap S` :<C-u>call visualops#surround_selection('``', 1)<CR>
-vnoremap s_ :<C-u>call visualops#surround_selection('__', 0)<CR>
-vnoremap S_ :<C-u>call visualops#surround_selection('__', 1)<CR>
-vnoremap s* :<C-u>call visualops#surround_selection('**', 0)<CR>
-vnoremap S* :<C-u>call visualops#surround_selection('**', 1)<CR>
-vnoremap sf :<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
-vnoremap sr( <Esc>`<r(`>r)gv
-vnoremap sr[ <Esc>`<r[`>r]gv
-vnoremap sr{ <Esc>`<r{`>r}gv
-vnoremap sr' <Esc>`<r'`>r'gv
-vnoremap sr" <Esc>`<r"`>r"gv
-vnoremap sr` <Esc>`<r``>r`gv
-vnoremap sr_ <Esc>`<r_`>r_gv
-vnoremap sr* <Esc>`<r*`>r*gv
-vnoremap srf <Esc>`>r)`<r(i
-vnoremap sr<BS> <Esc>`>x`<x<Esc>`>hm>gv
+xnoremap s( :<C-u>call visualops#surround_selection('()', 0)<CR>
+xnoremap S( :<C-u>call visualops#surround_selection('()', 1)<CR>
+xnoremap s[ :<C-u>call visualops#surround_selection('[]', 0)<CR>
+xnoremap S[ :<C-u>call visualops#surround_selection('[]', 1)<CR>
+xnoremap s{ :<C-u>call visualops#surround_selection('{}', 0)<CR>
+xnoremap S{ :<C-u>call visualops#surround_selection('{}', 1)<CR>
+xnoremap s< :<C-u>call visualops#surround_selection('<>', 0)<CR>
+xnoremap S< :<C-u>call visualops#surround_selection('<>', 1)<CR>
+xnoremap s' :<C-u>call visualops#surround_selection("''", 0)<CR>
+xnoremap S' :<C-u>call visualops#surround_selection("''", 1)<CR>
+xnoremap s" :<C-u>call visualops#surround_selection('""', 0)<CR>
+xnoremap S" :<C-u>call visualops#surround_selection('""', 1)<CR>
+xnoremap s` :<C-u>call visualops#surround_selection('``', 0)<CR>
+xnoremap S` :<C-u>call visualops#surround_selection('``', 1)<CR>
+xnoremap s_ :<C-u>call visualops#surround_selection('__', 0)<CR>
+xnoremap S_ :<C-u>call visualops#surround_selection('__', 1)<CR>
+xnoremap s* :<C-u>call visualops#surround_selection('**', 0)<CR>
+xnoremap S* :<C-u>call visualops#surround_selection('**', 1)<CR>
+xnoremap sf :<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
+xnoremap sr( <Esc>`<r(`>r)gv
+xnoremap sr[ <Esc>`<r[`>r]gv
+xnoremap sr{ <Esc>`<r{`>r}gv
+xnoremap sr' <Esc>`<r'`>r'gv
+xnoremap sr" <Esc>`<r"`>r"gv
+xnoremap sr` <Esc>`<r``>r`gv
+xnoremap sr_ <Esc>`<r_`>r_gv
+xnoremap sr* <Esc>`<r*`>r*gv
+xnoremap srf <Esc>`>r)`<r(i
+xnoremap sr<BS> <Esc>`>x`<x<Esc>`>hm>gv
 vmap srx sr<BS>
 " Surround Mappings }}}
 " Quick Commands: (aliases) {{{
@@ -383,6 +400,7 @@ nnoremap q5 :noh<CR>
 nnoremap q* :exec "FzyGrep ".expand("<cword>")<CR>
 nnoremap q, A,<Esc>j
 nnoremap q; A;<Esc>j
+nnoremap q<CR> o<Esc>k
 nnoremap <silent> qd :CocList diagnostics<CR>
 " Quick Commands }}}
 " QuickFix: {{{
@@ -397,14 +415,14 @@ nnoremap <C-a> <Nop>
 
 " Ftplugin trunk:
 nnoremap <C-t> <Nop>
+imap <buffer> <C-t><C-u> UUID
 
 " Calling out to external tools
 nnoremap <C-c> <Nop>
 nnoremap <silent> <C-c><C-c> :w<CR>:Make<CR>
-nnoremap <C-c><C-r> :Rename<Space>
-
-":cd ".expand("%:p:h")."\<CR>"
+nnoremap <expr> <C-c><C-r> ":Rename ".expand("%:t")
 nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
+nnoremap <expr> <C-c><C-w> ":set bufhidden=".(&bufhidden == 'wipe' ? '' : 'wipe')."\<CR>"
 
 " Actions
 nnoremap <C-s> <Nop>

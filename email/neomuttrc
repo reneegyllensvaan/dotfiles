@@ -108,6 +108,7 @@ bind index t tag-thread
 bind index T tag-entry
 bind index \CT tag-pattern
 bind index <Esc>t untag-pattern
+macro index \CU\CT "<untag-pattern>~A\n<sync-mailbox>"
 macro index + "<modify-labels>+*\n<sync-mailbox>"
 macro index = "<modify-labels>-*\n<sync-mailbox>"
 

@@ -2,6 +2,7 @@ let s:options = {
       \' ': '~/.vim/rc/space.vim',
       \'C': '~/.vim/rc/commands.vim',
       \'E': '~/.vim/autoload/vimrctools.vim',
+      \'p': '{ftplugin}',
       \'F': '~/.vim/autoload/fzy.vim',
       \'G': '~/.vim/rc/golden.vim',
       \'S': '~/.vim/autoload/visualops.vim',
@@ -30,7 +31,11 @@ function! vimrctools#pick_runtime_file(prompt, cmd)
   let l:target = get(s:options, nr2char(getchar()), '')
   let &cmdheight = l:cmdheight
   if !empty(l:target)
-    exec a:cmd.expand(l:target)
+    if l:target == '{ftplugin}'
+      exec a:cmd.expand("~/.vim/ftplugin/".(&filetype).".vim")
+    else
+      exec a:cmd.expand(l:target)
+    endif
   endif
 endfunction
 

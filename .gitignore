@@ -200,3 +200,5 @@ vim/pack/plugins/opt/completion-buffers
 vim/pack/plugins/opt/completion-treesitter
 vim/pack/plugins/opt/nvim-treesitter
 vim/pack/plugins/opt/parinfer
+vim/pack/plugins/start/eunuch
+vim/pack/plugins/opt/vimacs

@@ -88,8 +88,8 @@ function precmd () {
 };
 
 else
-  function prepend_prompt () { };
 fi
+  function prepend_prompt () { };
 
 [ $RANGER_LEVEL ] && nesting_prompt="(rr $RANGER_LEVEL) " #
 [ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
