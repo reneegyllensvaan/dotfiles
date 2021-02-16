@@ -60,9 +60,12 @@ keycode  61  =  slash         question     questiondown          asciitilde
 
 keycode  65  =  space         space        space                 nobreakspace
 
-keycode 108 =  Mode_switch Mode_switch
+! Keep altgr unmodified
+!keycode 108 =  Mode_switch Mode_switch
 
-! Remove these 2 lines if you want caps lock unmodified
+! AltGr => Ctrl
+keycode 108 =  Control_R Control_R
+
 keycode 66 =  Escape Escape Escape Escape
 clear Lock
 

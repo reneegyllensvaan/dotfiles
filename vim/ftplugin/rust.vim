@@ -3,8 +3,6 @@ inoremap <buffer> <C-t> <Nop>
 nmap <buffer> crt cr<
 
 " Arrow
-imap <buffer> <C-t><C-a> <Space>=><Space>
-imap <buffer> <C-t><C-m> ()<Space>=><Space>
 
 " TF: Tap-Fhrase  {{{
 " }}}

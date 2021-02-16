@@ -19,6 +19,9 @@ hi  CocGitChangeRemovedSign  cterm=none  ctermbg=yellow  ctermfg=red
 hi  CocGitChangedSign        cterm=none  ctermbg=yellow  ctermfg=black
 hi  CocGitRemovedSign        cterm=none  ctermbg=red     ctermfg=black
 hi  CocGitTopRemovedSign     cterm=none  ctermbg=none    ctermfg=red
+hi  CocRustTypeHint          cterm=none  ctermbg=none    ctermfg=yellow
+hi  CocRustChainingHint      cterm=none  ctermbg=none    ctermfg=blue
+
 
 hi  User1               cterm=none  ctermbg=0        ctermfg=white
 hi  User2               cterm=none  ctermbg=green    ctermfg=black
