@@ -120,18 +120,20 @@ endif
 
 augroup quickfixOnMakeFinish
   autocmd!
-  autocmd QuickFixCmdPost [^l]* cwindow
+  autocmd QuickFixCmdPost [^l]* botright cwindow
 augroup END
 
 
-" augroup infer-context
-"   autocmd!
-"   autocmd FileType * call contexts#infer()
-" augroup END
+function! s:WipeUnattachedBuffers()
+  let l:limit = bufnr("$")
+  for l:i in range(1, l:limit)
+    if bufnr(l:i) > 0
+      if win_findbuf(l:i) == []
+        exec (l:i)."bw"
+      endif
+    endif
+  endfor
+endfunction
 
-" augroup file-types
-"   autocmd!
-"   autocmd FileType typescriptreact setlocal makeprg=npm\ run\ eslint
-"   autocmd FileType typescript      setlocal makeprg=npm\ run\ eslint
-"   autocmd FileType typescript      setlocal errorformat=\<text\>:\ line\ %l\\,\ col\ %c\\,\ %m
-" augroup END
+command! WipeUnattachedBuffers call <SID>WipeUnattachedBuffers()
+command! BWU WipeUnattachedBuffers

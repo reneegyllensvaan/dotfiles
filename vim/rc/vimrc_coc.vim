@@ -14,7 +14,7 @@ let g:loaded_netrw = 1
 packloadall
 
 if !exists('$NVIM_USE_TREESITTER') || ($NVIM_USE_TREESITTER != '1')
-  packadd polyglot-small
+  packadd polyglot-large
   filetype plugin indent on
   syntax on
 endif

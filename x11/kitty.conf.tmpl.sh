@@ -644,7 +644,7 @@ macos_option_as_alt yes
 
 #:     map ctrl+f>2 set_font_size 20
 
-# kitty_mod ctrl+shift
+kitty_mod super+alt+shift
 
 #: The value of kitty_mod is used as the modifier for all default
 #: shortcuts, you can change it in your kitty.conf to change the

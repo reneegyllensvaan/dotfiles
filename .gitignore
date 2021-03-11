@@ -202,3 +202,6 @@ vim/pack/plugins/opt/nvim-treesitter
 vim/pack/plugins/opt/parinfer
 vim/pack/plugins/start/eunuch
 vim/pack/plugins/opt/vimacs
+vim/pack/plugins/opt/neomake
+vim/pack/plugins/opt/clap
+vim/pack/plugins/opt/octo

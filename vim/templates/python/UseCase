@@ -1,0 +1,51 @@
+from __future__ import absolute_import, division, print_function, unicode_literals
+
+from builtins import str, int, float, dict, list
+from uuid import UUID
+from typing import List, Dict
+
+import attr
+from marshmallow import Schema, fields
+
+from bisonlib.constants import EntityType
+import layers.exceptions as exc
+from layers.objects.entity import AccessLevel, AccessTable
+from layers.use_cases.mixins import CheckAccessMixin
+from layers.utils import Optional, UseCase, UseCaseParams, UseCaseResult, defaultattrs
+
+
+@with_derived_serializer()
+@defaultattrs()
+class Params(UseCaseParams):
+    user_uid = attr.ib(type=UUID)
+
+    class Serializer(Schema):
+        user_uid = fields.UUID()
+
+
+@with_derived_serializer()
+@defaultattrs()
+class Result(UseCaseResult):
+    uid = attr.ib(type=UUID)
+
+
+class FIXMEUseCaseName(UseCase, CheckAccessMixin):
+    """
+    """
+
+    Params = Params
+    Result = Result
+
+    def evaluate(self, params):
+        user = self.gateway.user.get_user(params.user_uid)
+
+        # if not self.check_access(
+        #     params.user_fund_uid,
+        #     EntityType.UserFund,
+        #     params.user_uid,
+        #     AccessLevel.Read
+        # ):
+        #     raise NoReadAccessError(params.user_fund_uid, user)
+
+        return Result(
+        )

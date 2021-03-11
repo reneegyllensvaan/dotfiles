@@ -11,7 +11,7 @@ cat << EOF
 [commit]
   `[ "$GIT_SIGNING_KEY" ] && echo "gpgsign = true"`
 [gpg]
-  program = gpg2
+  program = gpg
 [github]
   user = $GITHUB_USER
 [init]
@@ -23,6 +23,7 @@ cat << EOF
   c   = commit
   ca  = commit --amend
   canoe = commit --amend --no-edit
+  canoera = commit --amend --no-edit --reset-author
   cp  = cherry-pick
   d   = diff
   ds  = diff --staged

@@ -38,6 +38,7 @@ function! term#singleton_shell(mods, cmd, dir) abort
     exec a:mods." sb ".bufnr('scratchterm')
     return
   endif
+
   if has('nvim')
     exec a:mods." new"
     call termopen($SHELL, {})
@@ -52,12 +53,15 @@ function! term#singleton_shell(mods, cmd, dir) abort
   tnoremap <buffer> <C-Space> <C-w>c
   nnoremap <buffer> <C-@> <C-w>c
   tnoremap <buffer> <C-@> <C-w>c
-  autocmd BufEnter <buffer> startinsert
+  " autocmd BufEnter <buffer> startinsert
   if has('nvim')
     autocmd TermClose <buffer> bw!
+    " autocmd BufLeave <buffer> let b:prev_mode = mode() | echo mode()
+    let b:prev_mode = 't'
+    autocmd BufEnter <buffer> if (b:prev_mode != 'n') | startinsert | endif
     tnoremap <buffer> <C-s> <C-\><C-n><C-w>c
-    nnoremap <buffer> <C-Space> <C-\><C-n><C-w>c
-    tnoremap <buffer> <C-Space> <C-\><C-n><C-w>c
+    nnoremap <buffer> <C-Space> <C-\><C-n>:let b:prev_mode = 'n'<CR><C-w>c
+    tnoremap <buffer> <C-Space> <C-\><C-n>:let b:prev_mode = 't'<CR><C-w>c
     nnoremap <buffer> <C-@> <C-\><C-n><C-w>c
     tnoremap <buffer> <C-@> <C-\><C-n><C-w>c
   end

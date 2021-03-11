@@ -89,10 +89,10 @@ function precmd () {
 
 else
 fi
-  function prepend_prompt () { };
+function prepend_prompt () { };
 
-[ $RANGER_LEVEL ] && nesting_prompt="(rr $RANGER_LEVEL) " #
-[ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
+  [ $RANGER_LEVEL ] && nesting_prompt="(rr $RANGER_LEVEL) " #
+  [ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
 
 # Set up the prompt template
 PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%}"
@@ -114,12 +114,13 @@ fi
 
 [ -f "$HOME/workmode.zsh" ] && source "$HOME/workmode.zsh"
 
-if [[ -r "/usr/local/opt/mcfly/mcfly.zsh" ]]; then
-  export MCFLY_HISTORY=~/.mcflyhist
-  source "/usr/local/opt/mcfly/mcfly.zsh"
-  # export MCFLY_KEY_SCHEME=vim
-fi
-
-true
+# if [[ -r "/usr/local/opt/mcfly/mcfly.zsh" ]]; then
+#   export MCFLY_HISTORY=~/.mcflyhist
+#   source "/usr/local/opt/mcfly/mcfly.zsh"
+#   # export MCFLY_KEY_SCHEME=vim
+# fi
 
 [ "$ASDF_ZSHRC_PATH" ] && source "$ASDF_ZSHRC_PATH"
+# if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+true

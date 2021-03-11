@@ -1,14 +1,20 @@
 function fish_mode_prompt
   switch $fish_bind_mode
     case default
-      echo "N"
+      set_color --bold red
+      echo 'N'
     case insert
-      echo "I"
-    case normal
-      echo "N"
-    case visual
-      echo "V"
+      set_color --bold green
+      echo 'I'
     case replace_one
-      echo "R"
+      set_color --bold green
+      echo 'R'
+    case visual
+      set_color --bold brmagenta
+      echo 'V'
+    case '*'
+      set_color --bold red
+      echo '?'
   end
+  set_color normal
 end

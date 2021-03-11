@@ -43,6 +43,8 @@ inoremap <C-n> <Nop>
 inoremap <C-n><C-u> {<Cr>}<C-o>O
 inoremap <C-n><C-e> [<Cr>]<C-o>O
 inoremap <C-n><C-y> (<Cr>)<C-o>O
+inoremap <C-n><C-j> UUID
+inoremap <C-n><C-n> <C-o>:Macrosnippet<CR>
 
 " Microsnippets }}}
 "  Editing Commands: {{{
@@ -211,6 +213,7 @@ nnoremap <C-c><C-d><C-t> :let ctrl_d_jump = 5<CR>
 " Searching And Navigation }}}
 " Toggles: {{{
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
+nnoremap <expr> <Space>tch ":set cmdheight=".(&cmdheight == 1 ? '2' : '1')."\<CR>"
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
 nnoremap <Space>tf :call ToggleVExplorer()<CR>
 nnoremap <Space>tgg :call ToggleGitGutter()<CR>
@@ -347,6 +350,18 @@ nnoremap cr* :call visualops#surround('**')<CR>g@iw
 nnoremap crf viw:<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
 nnoremap <silent> crg viwA<><C-o>h
 
+nnoremap cR( :call visualops#surround('()')<CR>g@iW
+nnoremap cR[ :call visualops#surround('[]')<CR>g@iW
+nnoremap cR{ :call visualops#surround('{}')<CR>g@iW
+nnoremap cR< :call visualops#surround('<>')<CR>g@iW
+nnoremap cR' :call visualops#surround("''")<CR>g@iW
+nnoremap cR" :call visualops#surround('""')<CR>g@iW
+nnoremap cR` :call visualops#surround('``')<CR>g@iW
+nnoremap cR_ :call visualops#surround('__')<CR>g@iW
+nnoremap cR* :call visualops#surround('**')<CR>g@iW
+nnoremap cRf viW:<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
+nnoremap <silent> cRg viWA<><C-o>h
+
 nnoremap zs( :call visualops#surround('()')<CR>g@
 nnoremap zs[ :call visualops#surround('[]')<CR>g@
 nnoremap zs{ :call visualops#surround('{}')<CR>g@
@@ -409,13 +424,13 @@ nnoremap qk :botright cprevious<CR>
 nnoremap q+ :botright cwindow<CR>
 " QuickFix }}}
 
+
 " Arborist Mappings:
 nnoremap <C-a> <Nop>
 " idk, maybe structural editing commands? splitting/joining on expressions etc
 
 " Ftplugin trunk:
 nnoremap <C-t> <Nop>
-imap <buffer> <C-t><C-u> UUID
 
 " Calling out to external tools
 nnoremap <C-c> <Nop>
@@ -427,3 +442,4 @@ nnoremap <expr> <C-c><C-w> ":set bufhidden=".(&bufhidden == 'wipe' ? '' : 'wipe'
 " Actions
 nnoremap <C-s> <Nop>
 nnoremap <silent> <C-s><C-t> :w<CR>
+nnoremap <silent> <C-s><C-f> :Format<CR>
