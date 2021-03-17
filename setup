@@ -309,6 +309,7 @@ ensure_git_repo other/tmux-extrakto https://github.com/laktak/extrakto
 log "  Zsh configs"
 symlink file shell/zshrc $HOME/.zshrc
 symlink dir shell/zfunctions $HOME/.zfunctions
+symlink dir shell/zcompletions $HOME/.zcompletions
 symlink dir shell/zmodules $HOME/.zmodules
 
 log "  Email config"

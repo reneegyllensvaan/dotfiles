@@ -8,10 +8,6 @@ export KEYTIMEOUT=1; bindkey -v
 # Set completion to be case-insensitive in unambiguous cases
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
-# autocd makes a directory name in the position of a command implicitly mean
-# "cd <directory>"
-setopt autocd
-
 # misc }}}
 
 # history {{{
@@ -35,6 +31,7 @@ setopt INC_APPEND_HISTORY
 # Prompt {{{
 setopt PROMPT_SUBST
 
+# fpath=$(~/.zcompletions $fpath)
 source "$HOME/.profile"
 source "$HOME/.user-profile"
 source "$HOME/.alias"
@@ -68,10 +65,9 @@ if [ "$USE_EMOJI" = 'random' ]; then
   function prepend_prompt () {
     echo -n "$EMOJI[$RANDOM%$#EMOJI+1]";
   };
-
-function precmd () {
-  prepend_prompt;
-};
+  function precmd () {
+    prepend_prompt;
+  };
 
 elif [ "$USE_EMOJI" = 'success' ]; then
   function prepend_prompt () {
@@ -81,25 +77,31 @@ elif [ "$USE_EMOJI" = 'success' ]; then
       echo -n "$FAILURE_EMOJI[$RANDOM%$#FAILURE_EMOJI+1]"
     fi
   };
-
-function precmd () {
-  cmd_status="$?"
-  prepend_prompt;
-};
+  function precmd () {
+    cmd_status="$?"
+    prepend_prompt;
+  };
 
 else
+  function prepend_prompt () { };
 fi
-function prepend_prompt () { };
 
-  [ $RANGER_LEVEL ] && nesting_prompt="(rr $RANGER_LEVEL) " #
-  [ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
+[ $RANGER_LEVEL ] && nesting_prompt="(rr $RANGER_LEVEL) " #
+[ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
 
 # Set up the prompt template
-PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%}"
+PROMPT="%{$fg[blue]%}%B%~%{$reset_color%}"
 [ $SSH_CLIENT ] \
   && PROMPT="$PROMPT [%n@%m]" \
   || PROMPT="$PROMPT \$(git_prompt_info)"
-  PROMPT="$PROMPT"$'\n$nesting_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
+  PROMPT="$PROMPT"$'$nesting_prompt\$(prepend_prompt)'"%(?.%f.%F{red})\$ %f"
+
+# # Set up the prompt template
+# PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%}"
+# [ $SSH_CLIENT ] \
+#   && PROMPT="$PROMPT [%n@%m]" \
+#   || PROMPT="$PROMPT \$(git_prompt_info)"
+#   PROMPT="$PROMPT"$'\n$nesting_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
 
 # prompt }}}
 
@@ -122,5 +124,8 @@ fi
 
 [ "$ASDF_ZSHRC_PATH" ] && source "$ASDF_ZSHRC_PATH"
 # if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+setopt AUTOCD
+setopt PATH_DIRS
 
 true

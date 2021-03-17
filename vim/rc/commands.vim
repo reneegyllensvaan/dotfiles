@@ -137,3 +137,13 @@ endfunction
 
 command! WipeUnattachedBuffers call <SID>WipeUnattachedBuffers()
 command! BWU WipeUnattachedBuffers
+
+function! ContextAction()
+  let l:cword = expand('<cword>')
+
+  if l:cword == 'true'
+    normal! ciwfalse
+  elseif l:cword == 'false'
+    normal! ciwtrue
+  endif
+endfunction

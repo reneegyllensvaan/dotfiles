@@ -427,6 +427,7 @@ nnoremap q+ :botright cwindow<CR>
 
 " Arborist Mappings:
 nnoremap <C-a> <Nop>
+nnoremap <C-a><C-t> :call ContextAction()<CR>
 " idk, maybe structural editing commands? splitting/joining on expressions etc
 
 " Ftplugin trunk:
