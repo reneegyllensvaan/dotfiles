@@ -205,3 +205,5 @@ vim/pack/plugins/opt/vimacs
 vim/pack/plugins/opt/neomake
 vim/pack/plugins/opt/clap
 vim/pack/plugins/opt/octo
+vim/pack/plugins/opt/hop
+vim/pack/plugins/opt/blame

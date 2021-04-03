@@ -221,7 +221,8 @@ ensure_git_repo vim/pack/plugins/opt/vimacs https://github.com/andrep/vimacs
 ensure_git_repo vim/pack/plugins/opt/neomake https://github.com/neomake/neomake
 ensure_git_repo vim/pack/plugins/opt/clap https://github.com/liuchengxu/vim-clap
 ensure_git_repo vim/pack/plugins/opt/octo https://github.com/pwntester/octo.nvim.git
-
+ensure_git_repo vim/pack/plugins/opt/hop https://github.com/phaazon/hop.nvim
+ensure_git_repo vim/pack/plugins/opt/blame https://github.com/f-person/git-blame.nvim
 
 log "Building shell template files"
 build_template gpg/gpg.conf

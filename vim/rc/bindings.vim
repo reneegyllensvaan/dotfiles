@@ -418,11 +418,15 @@ nnoremap q; A;<Esc>j
 nnoremap q<CR> o<Esc>k
 nnoremap <silent> qd :CocList diagnostics<CR>
 " Quick Commands }}}
-" QuickFix: {{{
+" QuickFix: (LocList) {{{
 nnoremap qj :botright cnext<CR>
 nnoremap qk :botright cprevious<CR>
 nnoremap q+ :botright cwindow<CR>
-" QuickFix }}}
+
+nnoremap <Space>lj :botright lnext<CR>
+nnoremap <Space>lk :botright lprevious<CR>
+nnoremap <Space>ll :botright lwindow<CR>
+" QuickFix (LocList) }}}
 
 
 " Arborist Mappings:
