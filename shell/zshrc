@@ -54,8 +54,8 @@ noglob \
   - `date -r ~/.zcompdump '+%s'` \
   - $completion_cache_time \
   | grep '-' >/dev/null \
-  && compinit -C ~/.zcompdump \
-  || compinit ~/.zcompdump
+  && compinit -u -C ~/.zcompdump \
+  || compinit -u ~/.zcompdump
 
 FAILURE_EMOJI=( 👅 💅 🎀 👛 💗 💓 💕 💖 💞 💘 💋 💝 🌺 🌷 🌸 🐷 💒 👄 👠 🌹 🎈 ⏰ 📮 📌 📛 🎯 🍎 🍒 📍 ♨️🚒 🚨 🚗 🚀 )
 SUCCESS_EMOJI=( 💚 👒 🐸 🐍 🐢 🐉 🍀 🌵 🍃 🌲 🌴 🌳 🍏 🎾 🔋 🏡 🚛 ✅ )

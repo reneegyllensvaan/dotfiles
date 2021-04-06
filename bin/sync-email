@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ "~/email/venv" ] && source ~/email/venv/bin/activate
+[ -d "~/email/venv" ] && source ~/email/venv/bin/activate
 
 stretch_notification () {
   while true; do

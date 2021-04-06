@@ -368,7 +368,7 @@ prompt "Look over these changes, do they look ok? [y/N]"\
 [ -e last_install.log ] && rm last_install.log
 [ -e last_install_errors.log ] && rm last_install_errors.log
 for cmd in $CMDS; do
-  printf "$cmd"
+  echo "$cmd"
   echo "$cmd" >> last_install.log
   sh -c "$cmd" 2>last_install_errors.log
   # printf "\r\033[2K"

@@ -1,6 +1,0 @@
-#!/bin/sh
-if [ "$1" = "pre" ]; then
-  git ls-remote | awk '{print $2}' | sed -nE 's/refs\/heads\///p'
-elif [ "$1" = "post" ]; then
-  cat
-fi
