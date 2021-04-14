@@ -15,3 +15,5 @@ xmodmap ~/.config/colemak_dh_matrix.xmodmap
 
 # set key repeat rate
 xset r rate 200 35
+
+[ -f "~/wallpaper.jpg" ] && feh --bg-scale ~/wallpaper.jpg
