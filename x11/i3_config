@@ -5,6 +5,7 @@ bindsym $mod+Shift+BackSpace restart
 bindsym $mod+Shift+Mod1+BackSpace exit
 new_window pixel 3
 hide_edge_borders smart
+gaps inner 15
 #new_window normal
 
 # Floating window settings
