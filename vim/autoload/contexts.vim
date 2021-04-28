@@ -1,7 +1,7 @@
 let g:prefix_to_context = {
-      \"Projects/cobalt2": "work_cobalt2",
-      \"Projects/frontend": "work_frontend",
-      \"Projects/backend": "work_backend",
+      \"frontend/cobalt_2": "work_cobalt2",
+      \"frontend": "work_frontend",
+      \"backend": "work_backend",
       \}
 
 function! Ctx_work_cobalt2()
@@ -19,12 +19,12 @@ endfunction
 "  ./layers/use_cases/reporting/tests/test_create_or_update_client_email_template.py:13:1: F401 'layers.use_cases.reporting.types.ClientEmailTemplateParamSerializer' imported but unused
 "  ./layers/use_cases/reporting/tests/test_create_or_update_client_email_template.py:78:1: F811 redefinition of unused 'test_create_client_email_template' from line 33
 function! Ctx_work_backend()
-  let &l:makeprg = 'source ../venv/bin/activate && flake8'
+  let &l:makeprg = 'source ~/backend/.venv/bin/activate && flake8'
   let &l:errorformat = "%f:%l:%c: %m"
 
   let g:neomake_flake8_maker = {
-      \ 'exe': 'flake8',
-      \ 'args': [],
+      \ 'exe': glob('~/runbook'),
+      \ 'args': ['flake'],
       \ 'errorformat': '%f:%l:%c: %m',
       \ }
   let b:makecmd = 'verbose Neomake! flake8'

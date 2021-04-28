@@ -7,6 +7,22 @@ function! s:ToggleChecked() abort
   endif
 endfunction
 
+
+function! s:ToggleLineItem() abort
+  let line = getline('.')
+  if line =~ "\^\s*- "
+    normal! ^dw
+  else
+    exec "normal! I-\<Space>"
+  endif
+endfunction
+
+
+nnoremap <silent> <buffer> <C-l><C-i> :call <SID>ToggleLineItem()<CR>
+nnoremap <silent> <buffer> <C-n> <<
+nnoremap <silent> <buffer> <C-e> >>
+nnoremap <silent> <buffer> gqq Vgq
+
 nnoremap <silent> <buffer> <C-c><C-c> :call <SID>ToggleChecked()<CR>
 nnoremap <silent> <buffer> o A<CR>
 

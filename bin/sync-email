@@ -1,19 +1,19 @@
 #!/bin/sh
 
-[ -d "~/email/venv" ] && source ~/email/venv/bin/activate
+source ~/email/venv/bin/activate || exit
 
-stretch_notification () {
-  while true; do
-    osascript -e 'display notification "Stretch!" with title "syncer"';
-    sleep 600;
-    osascript -e 'display notification "Stretch!" with title "syncer"';
-    sleep 600;
-    osascript -e 'display notification "Stretch!" with title "syncer"';
-    sleep 600;
-    osascript -e 'display notification "Move around a bit!" with title "syncer"';
-    sleep 600;
-  done
-}
+# stretch_notification () {
+#   while true; do
+#     osascript -e 'display notification "Stretch!" with title "syncer"';
+#     sleep 600;
+#     osascript -e 'display notification "Stretch!" with title "syncer"';
+#     sleep 600;
+#     osascript -e 'display notification "Stretch!" with title "syncer"';
+#     sleep 600;
+#     osascript -e 'display notification "Move around a bit!" with title "syncer"';
+#     sleep 600;
+#   done
+# }
 
 fetch_email () {
   while true; do

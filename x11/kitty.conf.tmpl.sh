@@ -1,6 +1,6 @@
 #!/bin/sh
 cat << EOF
-# vim:fileencoding=utf-8:ft=conf:foldmethod=marker
+# vim: fileencoding=utf-8:ft=conf:foldmethod=marker
 
 #: Fonts {{{
 
@@ -872,7 +872,7 @@ kitty_mod super+alt+shift
 #:     map kitty_mod+f12 clear_terminal scroll active
 
 #: If you want to operate on all windows instead of just the current
-#: one, use all instead of :italic`active`.
+#: one, use all instead of active.
 
 #: It is also possible to remap Ctrl+L to both scroll the current
 #: screen contents into the scrollback buffer and clear the screen,

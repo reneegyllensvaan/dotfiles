@@ -2,20 +2,44 @@
 cat << EOF
 [core]
   excludesfile = $HOME/.gitignore_global
+
 [status]
 	relativePaths = true
+
 [user]
   name = $USER_NAME
   email = $USER_EMAIL
   `[ "$GIT_SIGNING_KEY" ] && echo "signingkey = $GIT_SIGNING_KEY"`
+
 [commit]
   `[ "$GIT_SIGNING_KEY" ] && echo "gpgsign = true"`
+
 [gpg]
   program = gpg
+
 [github]
   user = $GITHUB_USER
+
+[hub]
+  protocol = ssh
+
 [init]
   defaultBranch = main
+
+[maintenance]
+	strategy = incremental
+	auto = true
+[maintenance "gc"]
+	enable = true
+[maintenance "commit-graph"]
+	enable = true
+[maintenance "prefetch"]
+	enable = true
+[maintenance "loose-objects"]
+	enable = true
+[maintenance "incremental-repack"]
+	enable = true
+
 [alias]
   a   = add
   aa  = add --all
@@ -35,11 +59,16 @@ cat << EOF
   pm  = pull --rebase=false
   pr  = pull --rebase
   pf  = pull --ff-only
+  pushu = "! git push -u origin \`git branch --show-current\`"
   r   = rebase
   rc  = rebase --continue
   ri  = rebase -i
   root = "! git rev-parse --show-toplevel"
   s   = status
+
+  w   = worktree
+  wl  = worktree list
+
   z   = stash
   za  = stash apply
   zl  = stash list
@@ -61,7 +90,6 @@ cat << EOF
 [delta]
     features = side-by-side line-numbers decorations
     whitespace-error-style = 22 reverse
-
 [delta "decorations"]
     commit-decoration-style = bold yellow box ul
     file-style = bold yellow ul

@@ -29,6 +29,10 @@ function! term#singleton_run(mods, cmd, dir, bang)
   setlocal bufhidden=wipe nobuflisted nonumber
   if has('nvim')
     exec "autocmd TermClose <buffer> bd! ".bufnr()
+    let b:prev_mode = 't'
+    autocmd BufEnter <buffer> if (b:prev_mode != 'n') | startinsert | endif
+    autocmd TermEnter <buffer> let b:prev_mode = 't'
+    autocmd TermLeave <buffer> let b:prev_mode = 'n'
   end
   startinsert
 endfunction
@@ -47,23 +51,19 @@ function! term#singleton_shell(mods, cmd, dir) abort
     exec a:mods." call term_start('".($SHELL)."', {'term_name': 'scratchterm', 'cwd': '".a:dir."', 'term_finish': 'close'})"
   endif
   setlocal bufhidden=wipe nobuflisted nonumber
-  nnoremap <buffer> <C-s> <C-w>c
-  tnoremap <buffer> <C-s> <C-w>c
   nnoremap <buffer> <C-Space> <C-w>c
   tnoremap <buffer> <C-Space> <C-w>c
   nnoremap <buffer> <C-@> <C-w>c
   tnoremap <buffer> <C-@> <C-w>c
-  " autocmd BufEnter <buffer> startinsert
+
   if has('nvim')
     autocmd TermClose <buffer> bw!
-    " autocmd BufLeave <buffer> let b:prev_mode = mode() | echo mode()
-    let b:prev_mode = 't'
-    autocmd BufEnter <buffer> if (b:prev_mode != 'n') | startinsert | endif
-    tnoremap <buffer> <C-s> <C-\><C-n><C-w>c
-    nnoremap <buffer> <C-Space> <C-\><C-n>:let b:prev_mode = 'n'<CR><C-w>c
-    tnoremap <buffer> <C-Space> <C-\><C-n>:let b:prev_mode = 't'<CR><C-w>c
+    call s:PersistMode()
+    tnoremap <buffer> <C-s> <C-\><C-n>:let b:prev_mode = 't'<CR><C-w>c
     nnoremap <buffer> <C-@> <C-\><C-n><C-w>c
-    tnoremap <buffer> <C-@> <C-\><C-n><C-w>c
+    tnoremap <buffer> <C-@> <C-\><C-n>:let b:prev_mode = 't'<CR><C-w>c
+    nnoremap <buffer> <C-Space> <C-\><C-n><C-w>c
+    tnoremap <buffer> <C-Space> <C-\><C-n>:let b:prev_mode = 't'<CR><C-w>c
   end
   startinsert
 endfunction
@@ -80,8 +80,7 @@ function! term#run(mods, cmd, dir, bang)
   else
     exec a:mods
           \." call term_start('".l:cmd
-          \."', {'term_name': '"
-          \.(cmd."-".g:term_auto_increment)
+          \."', {'term_name': '".(cmd."-".g:term_auto_increment)
           \."', 'cwd': '".a:dir
           \."', 'term_finish': 'close'})"
   endif
@@ -90,10 +89,16 @@ function! term#run(mods, cmd, dir, bang)
   setlocal nonumber
   nnoremap <buffer> <C-s> <C-w>c
   tnoremap <buffer> <C-s> <C-w>c
-  autocmd BufEnter <buffer> startinsert!
   if has('nvim')
     exec "autocmd TermClose <buffer> bw! ".l:bufnr
+    call s:PersistMode()
   end
   startinsert
 endfunction
 
+function! s:PersistMode()
+    let b:prev_mode = 't'
+    autocmd BufEnter <buffer> if (b:prev_mode != 'n') | startinsert | endif
+    autocmd TermEnter <buffer> let b:prev_mode = 't'
+    tnoremap <silent> <buffer> <C-w>N <C-\><C-n>:let b:prev_mode = 'n'<CR>
+endfunction

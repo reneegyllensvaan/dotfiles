@@ -1,24 +1,53 @@
+" ex: fdm=marker
 packadd nvim-lspconfig
 packadd nvim-treesitter
 packadd completion-nvim
 packadd completion-buffers
 packadd completion-treesitter
 
-" lua require'completion'.on_attach()
-" lua require'nvim_lsp'.tsserver.setup{on_attach=require'completion'.on_attach}
+lua << EOF
+local nvim_lsp = require'lspconfig'
+
+nvim_lsp.pyright.setup{
+}
+
+local on_attach = function(client)
+    require'completion'.on_attach(client)
+end
+
+nvim_lsp.rust_analyzer.setup({
+    on_attach=on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            assist = {
+                importMergeBehavior = "last",
+                importPrefix = "by_self",
+            },
+            cargo = {
+                loadOutDirsFromCheck = true
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+})
+EOF
 
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gD <cmd>lua vim.lsp.buf.implementation()<CR>
+
 " nnoremap <silent> gd <cmd>lua vim.lsp.buf.declaration()<CR>
 " nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 " nnoremap <silent> K <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD <cmd>lua vim.lsp.buf.implementation()<CR>
 " nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> 1gD <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <silent> gr <cmd>lua vim.lsp.buf.references()<CR>
 " nnoremap <silent> g0 <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gf <cmd>lua vim.lsp.buf.formatting()<CR>
 
-" --- completion-nvim ---
+" --- completion-nvim --- {{{
 let g:completion_enable_auto_signature = 0  " crazy slow
 let g:completion_matching_smart_case = 1
 let g:completion_matching_strategy_list = ['exact', 'substring', 'fuzzy', 'all']
@@ -57,8 +86,9 @@ inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 " prevent completion-nvim from conflicting with auto-pairs
 let g:completion_confirm_key = ""
 inoremap <expr> <CR> pumvisible() ? "\<Plug>(completion_confirm_completion)" : "\<CR>"
+" --- completion-nvim --- }}}
 
-" --- diagnostic-nvim ---
+" --- diagnostic-nvim --- {{{
 let g:diagnostic_insert_delay = 1
 let g:diagnostic_enable_virtual_text = 1
 let g:diagnostic_virtual_text_prefix = ''
@@ -70,9 +100,24 @@ sign define LspDiagnosticsErrorSign text=
 sign define LspDiagnosticsWarningSign text=
 sign define LspDiagnosticsInformationSign text=
 sign define LspDiagnosticsHintSign text=➤
+" --- diagnostic-nvim --- }}}
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
 
 " Avoid showing message extra message when using completion
 set shortmess+=c
+
+set hidden
+set nobackup
+set nowritebackup
+set cmdheight=2
+set updatetime=150
+set shortmess+=c
+set signcolumn=yes
+set number
+
+" inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+" inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"

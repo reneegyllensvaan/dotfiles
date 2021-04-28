@@ -4,4 +4,6 @@ cat << EOF
 i write these so i can write the code
 
 EOF
-exit 0
+cat etc/macos-setup.md
+
+exec true

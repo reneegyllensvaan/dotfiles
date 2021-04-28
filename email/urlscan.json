@@ -1,4 +1,5 @@
 {
+    "link_handler": "open",
     "palettes": {
         "default": [
             [ "header", "black", "light gray", "standout" ],

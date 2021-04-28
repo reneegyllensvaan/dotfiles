@@ -255,6 +255,10 @@ ensure_directory $HOME/.config/
 ensure_directory $HOME/.local/bin
 ensure_directory $HOME/.local/share
 ensure_directory $HOME/.tmp
+ensure_directory $HOME/.local/share
+for d in man{1,2,3,4,5,6,7,8}; do
+  ensure_directory $HOME/.local/man/$d
+done
 
 log "  Xorg applications"
 symlink file x11/xinitrc ~/.xinitrc
@@ -339,6 +343,7 @@ symlink file email/neomuttrc $HOME/.neomuttrc
 ensure_directory $HOME/.config/urlscan
 symlink file email/urlscan.json $HOME/.config/urlscan/config.json
 ensure_directory $HOME/email/work
+ensure_directory $HOME/email/home
 
 log "  Symlinked directories"
 symlink dir bin $HOME/.bin

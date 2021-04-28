@@ -1,5 +1,7 @@
 # vim: fdm=marker
 
+ZSH_DISABLE_COMPFIX="true"
+
 # misc {{{
 
 # Set vi mode with no timeout
@@ -39,8 +41,8 @@ source "$HOME/.zfunctions/dir-marks.zsh"
 source "$HOME/.zfunctions/miscellaneous.zsh"
 source "$HOME/.zfunctions/colors.zsh"
 source "$HOME/.zfunctions/git-prompt.zsh"
-source "$HOME/.zfunctions/fzy.zsh"
 source "$HOME/.zfunctions/fzf.zsh"
+source "$HOME/.zfunctions/fzy.zsh"
 source "$HOME/.zfunctions/vim.zsh"
 source "$HOME/.zfunctions/nvim.zsh"
 [ -f "$HOME/.zfunctions/zsh-syntax-highlighting.zsh" ] \
@@ -89,14 +91,14 @@ fi
 [ $RANGER_LEVEL ] && nesting_prompt="(rr $RANGER_LEVEL) " #
 [ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
 
-# Set up the prompt template
+# Set up the prompt template (one line)
 PROMPT="%{$fg[blue]%}%B%~%{$reset_color%}"
 [ $SSH_CLIENT ] \
   && PROMPT="$PROMPT [%n@%m]" \
   || PROMPT="$PROMPT \$(git_prompt_info)"
   PROMPT="$PROMPT"$'$nesting_prompt\$(prepend_prompt)'"%(?.%f.%F{red})\$ %f"
 
-# # Set up the prompt template
+# # Set up the prompt template (multiple lines)
 # PROMPT=$'\n'"%{$fg[blue]%}%B%~%{$reset_color%}"
 # [ $SSH_CLIENT ] \
 #   && PROMPT="$PROMPT [%n@%m]" \
@@ -108,13 +110,12 @@ PROMPT="%{$fg[blue]%}%B%~%{$reset_color%}"
 # GnuPG settings
 export GPG_TTY="$(tty)"
 if [ $GPG_FINGERPRINT ]; then
-  #[ "$SSH_AUTH_SOCK" ] || export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-  # if gpg-agent is not running, start it and load env
+  # If gpg-agent is not running, start it and load env
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon )
 fi
 
-[ -f "$HOME/workmode.zsh" ] && source "$HOME/workmode.zsh"
+[ -f "$HOME/local.zsh" ] && source "$HOME/local.zsh"
 
 # if [[ -r "/usr/local/opt/mcfly/mcfly.zsh" ]]; then
 #   export MCFLY_HISTORY=~/.mcflyhist

@@ -25,10 +25,10 @@ FRONTEND_TRIGGERS=(
   'watcher:'
 )
 for t in $BACKEND_TRIGGERS; do
-  [ `echo $command | grep "$t"` ] && cd ~/Projects/backend/repo
+  [ `echo $command | grep "$t"` ] && cd ~/backend
 done
 for t in $FRONTEND_TRIGGERS; do
-  [ `echo $command | grep "$t"` ] && cd ~/Projects/frontend/repo
+  [ `echo $command | grep "$t"` ] && cd ~/frontend
 done
 
 echo "fab '$command'"

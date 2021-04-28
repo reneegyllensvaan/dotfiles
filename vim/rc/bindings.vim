@@ -39,12 +39,12 @@ inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
 " Insert Mode }}}
 " Microsnippets: {{{
-inoremap <C-n> <Nop>
-inoremap <C-n><C-u> {<Cr>}<C-o>O
-inoremap <C-n><C-e> [<Cr>]<C-o>O
-inoremap <C-n><C-y> (<Cr>)<C-o>O
-inoremap <C-n><C-j> UUID
-inoremap <C-n><C-n> <C-o>:Macrosnippet<CR>
+inoremap <C-e> <Nop>
+inoremap <C-e><C-l> {<Cr>}<C-o>O
+inoremap <C-e><C-y> [<Cr>]<C-o>O
+inoremap <C-e><C-e> (<Cr>)<C-o>O
+inoremap <C-e><C-m> UUID
+" inoremap <C-e><C-b> <C-o>:Macrosnippet<CR>
 
 " Microsnippets }}}
 "  Editing Commands: {{{
@@ -196,6 +196,8 @@ nnoremap <Space>wt/ :vert Term<CR>
 nnoremap <Space>wt_ :Term<CR>
 " Window Mappings }}}
 " Searching And Navigation: {{{
+nnoremap <silent> <A-w> :call searchpos('\<')<CR>
+nnoremap <silent> <A-b> :call searchpos('\<', 'b')<CR>
 nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :RgFromCurrentFile<CR>
 nnoremap <Leader>/ :call myfns#toggle_case_sensitive()<CR>
@@ -290,14 +292,14 @@ nnoremap <silent> <Space>bx :bp\|bw #<CR>
 nnoremap <silent> <Space>b? :w !diff % -<CR>
 " Buffers }}}
 " Git: {{{
-nnoremap <silent> <Space>gO :call fzy#leader_script("gO", ":!git checkout-remote-branch origin ")<CR>
+nnoremap <silent> <Space>gO :call fzy#leader_script("g_o", ":!git checkout-remote-branch origin ")<CR>
 nnoremap <silent> <Space>ga :call fzy#leader_script("ga", ":!git add ")<CR>
 nnoremap <silent> <Space>gf :call fzy#leader_script("gf", ":e ")<CR>
 nnoremap <silent> <Space>gDD :call fzy#leader_script("gf", ":!git checkout -- ")<CR>
 nnoremap <silent> <Space>gz :call fzy#leader_script("gf", ":!git checkout -- ")<CR>
-nnoremap <silent> <Space>ghO :call fzy#leader_script("ghO", ":!hub pr checkout ")<CR>
+nnoremap <silent> <Space>ghO :call fzy#leader_script("gh_o", ":!hub pr checkout ")<CR>
 nnoremap <silent> <Space>gho :call fzy#leader_script("gho", ":!hub pr checkout ")<CR>
-nnoremap <silent> <Space>ghwO :call fzy#leader_script("ghwO", ":!hub pr show ")<CR>
+nnoremap <silent> <Space>ghwO :call fzy#leader_script("ghw_o", ":!hub pr show ")<CR>
 nnoremap <silent> <Space>ghwi :!hub browse -- issues<CR>
 nnoremap <silent> <Space>ghwo :call fzy#leader_script("ghwo", ":!hub pr show ")<CR>
 nnoremap <silent> <Space>ghwp :!hub browse -- pulls<CR>

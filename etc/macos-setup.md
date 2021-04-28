@@ -1,6 +1,3 @@
-# Renee's dotfiles
-i write these so i can write the code
-
 ## OS X-specific setup notes
 
 **GUI file opener**: OS X provides a default `open` program to open files in

@@ -1,24 +1,21 @@
-export PATH=$HOME/.bin:$HOME/code/go/bin:/usr/local/bin:$PATH
-export PATH="/usr/local/opt/python@2/libexec/bin:$PATH"
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
+export PATH="$HOME/.bin:$PATH"
+export PATH="$HOME/code/go/bin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH=/usr/local/opt/texinfo/bin:$PATH
-export PATH=$HOME/.nimble/bin:$PATH
-export PATH="/usr/local/Cellar/janet/1.8.1/lib/janet/bin:$PATH"
-export PATH="/home/renee/.gem/ruby/2.7.0/bin:$PATH"
-[[ -d ~/Library ]] && export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+export PATH="$HOME/.nimble/bin:$PATH"
 [[ -d ~/.skim ]] && export PATH="$HOME/.skim/bin:$PATH"
-which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
-which python2 >/dev/null 2>&1 && PATH="$PATH:`python2 -m site --user-base`/bin"
+# which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
+# which python2 >/dev/null 2>&1 && PATH="$PATH:`python2 -m site --user-base`/bin"
+
+export MANPATH="$HOME/.local/man:$MANPATH"
 
 export VISUAL="nvim"
 export EDITOR="$VISUAL"
 export XDG_CONFIG_HOME="$HOME/.config"
-#export PAGER=`which bat >/dev/null && echo bat || echo less`
-export PAGER=less
-export GIT_EDITOR=nvim
-export GIT_PAGER=less
+export PAGER="less"
+export GIT_EDITOR="nvim"
+export GIT_PAGER="less"
 
 export LEIN_JVM_OPTS="-XX:TieredStopAtLevel=1"
 export GOPATH=$HOME/code/go
@@ -64,7 +61,7 @@ which pbpaste >/dev/null 2>&1 && export CLIPBOARD_PASTE='pbpaste'
 which xsel >/dev/null 2>&1 && export CLIPBOARD_COPY='xsel -b' \
                            && export CLIPBOARD_PASTE='xsel -b'
 
-# The following vars are supposed to be used by the user/interactively
+# Pseudo-aliases for things that are nice to abbreviate
 export Q=/dev/null
 export C=$CLIPBOARD_COPY
 export P=$CLIPBOARD_PASTE
