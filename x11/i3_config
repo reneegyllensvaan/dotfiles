@@ -122,23 +122,23 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
-# i3bar+status config
-bar {
-  font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-  font pango:Iosevka Fixed 6
-  status_command i3status
-  tray_padding 100 px
-  mode dock
-  colors {
-    background #282C34
-    statusline #e7ebed
-    separator #e7ebed
-    focused_workspace  #adf7be #adf7be #1d262a
-    active_workspace   #333333 #5f676a #ffffff
-    inactive_workspace #435b67 #222222 #a1b0b8
-    urgent_workspace   #fc3841 #fc3841 #000000
-  }
-}
+# # i3bar+status config
+# bar {
+#   font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#   font pango:Iosevka Fixed 6
+#   status_command i3status
+#   tray_padding 100 px
+#   mode dock
+#   colors {
+#     background #282C34
+#     statusline #e7ebed
+#     separator #e7ebed
+#     focused_workspace  #adf7be #adf7be #1d262a
+#     active_workspace   #333333 #5f676a #ffffff
+#     inactive_workspace #435b67 #222222 #a1b0b8
+#     urgent_workspace   #fc3841 #fc3841 #000000
+#   }
+# }
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #98ff98 #98ff98 #000000 #fcc6db   #98ff98

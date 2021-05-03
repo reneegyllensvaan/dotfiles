@@ -8,6 +8,7 @@ command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': 
 command! -nargs=* FzyGrep call fzy#in_buffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
 
 command! -nargs=1 Chmod call fileutils#chmod(expand('%'), <q-args>)
+command! -nargs=* Ls echo system('ls --color=always <args>')
 
 command! -bang YankFileNameAbsolute call fileutils#yank_path("+",'%:p', "<bang>")
 command! -bang YankFileNameHomedir call fileutils#yank_path("+",'%:p:~', "<bang>")
@@ -19,9 +20,6 @@ let g:term_should_startinsert = 0
 command! -bang -nargs=* PushTermStartInsert let g:term_should_startinsert = 1
 function! PopTermStartInsert()
   if g:term_should_startinsert
-    startinsert
-  end
-  let g:term_should_startinsert = 0
 endfunction
 augroup term-pop-startinsert
   autocmd!

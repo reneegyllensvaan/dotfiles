@@ -436,6 +436,8 @@ nnoremap <C-a> <Nop>
 nnoremap <C-a><C-t> :call ContextAction()<CR>
 " idk, maybe structural editing commands? splitting/joining on expressions etc
 
+nnoremap <C-n> <Nop>
+
 " Ftplugin trunk:
 nnoremap <C-t> <Nop>
 
