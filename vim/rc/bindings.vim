@@ -37,6 +37,7 @@ inoremap <C-r><C-r> <C-r>"
 inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
+inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
 " Insert Mode }}}
 " Microsnippets: {{{
 inoremap <C-e> <Nop>
@@ -304,6 +305,7 @@ nnoremap <silent> <Space>ghwi :!hub browse -- issues<CR>
 nnoremap <silent> <Space>ghwo :call fzy#leader_script("ghwo", ":!hub pr show ")<CR>
 nnoremap <silent> <Space>ghwp :!hub browse -- pulls<CR>
 nnoremap <silent> <Space>ghwr :!hub browse<CR>
+nnoremap <silent> <Space>gd/ :GitDiff<CR>
 nnoremap <silent> <Space>go :call fzy#leader_script("go", ":!git checkout ")<CR>
 nnoremap <silent> <Space>gs :!git status<CR>
 nnoremap <silent> <Space>gb :call GitBlameLine()<CR>

@@ -145,3 +145,7 @@ function! ContextAction()
     normal! ciwtrue
   endif
 endfunction
+
+command! -bang GitDiff execute "Term! git diff ".["\<C-u>","--staged", ""]
+      \[confirm('git diff', "&staged\n&worktree\n")]
+

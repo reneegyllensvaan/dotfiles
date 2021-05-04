@@ -9,4 +9,5 @@ inoremap <buffer> <C-t><C-n> None
 inoremap <buffer> <C-t><C-a> =<Space>attr.ib(type=)<Left>
 
 command! PythonIgnoreUnusedImport normal!A<Space><Space>#<Space>noqa:<Space>F401,<Space>pylint:<Space>disable=unused-import
-
+command! PythonIgnoreNotAnIterable normal!A<Space><Space>#<Space>pylint:<Space>disable=not-an-iterable
+nnoremap <buffer> <C-s><C-l> :LintBackendFlake8<CR>

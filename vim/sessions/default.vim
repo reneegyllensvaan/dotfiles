@@ -3,32 +3,61 @@ let s:so_save = &g:so | let s:siso_save = &g:siso | setg so=0 siso=0 | setl so=-
 let v:this_session=expand("<sfile>:p")
 silent only
 silent tabonly
-cd ~/sunday/c
+cd ~/backend
 if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
-badd +13 ii_colorize.c
-badd +47 ~/.vim/rc/bindings.vim
-badd +0 /bin/zsh\ -c\ \'/bin/zsh\'-0
-badd +0 ii_irc_example.log
-badd +81 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/strings.h
-badd +82 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/string.h
-badd +106 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/time.h
-badd +31 /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_time_t.h
+badd +72 layers/use_cases/access/tests/test_get_user_access.py
+badd +139 ~/infrastructure/sceptre/templates/lambda/github-webhook-jenkins-forwarder-fn.yaml
+badd +36 gateway/alchemy/company_document.py
+badd +12 gateway/alchemy/document_index.py
+badd +97 ~/frontend/cobalt_2/src/Application.tsx
+badd +115 gateway/alchemy/access.py
+badd +37 userdata/models/access.py
+badd +76 gateway/in_memory/access.py
+badd +154 layers/interfaces/gateway/access.py
+badd +53 layers/use_cases/access/list_access_requests.py
+badd +458 layers/interfaces/gateway/user.py
+badd +150 layers/use_cases/access/handle_access_request.py
+badd +81 ~/frontend/cobalt_2/src/components/investments/CopyExistingRequestContainer.tsx
+badd +136 ~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx
+badd +134 ~/frontend/cobalt_2/src/components/investments/RecurringRequestForm.tsx
+badd +6 ~/frontend/cobalt_2/src/components/investments/utils.ts
 argglobal
 %argdel
-$argadd ii_colorize.c
-edit ii_colorize.c
+set stal=2
+tabnew
+tabnew
+tabrewind
+edit ~/frontend/cobalt_2/src/Application.tsx
+argglobal
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 97 - ((38 * winheight(0) + 40) / 80)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 97
+normal! 042|
+lcd ~/frontend/cobalt_2
+tabnext
+edit ~/backend/layers/use_cases/access/handle_access_request.py
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
 wincmd _ | wincmd |
-split
-1wincmd k
-wincmd _ | wincmd |
 vsplit
 1wincmd h
+wincmd _ | wincmd |
+split
+1wincmd k
 wincmd w
 wincmd w
 let &splitbelow = s:save_splitbelow
@@ -40,13 +69,13 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe '1resize ' . ((&lines * 40 + 41) / 83)
-exe 'vert 1resize ' . ((&columns * 110 + 111) / 222)
-exe '2resize ' . ((&lines * 40 + 41) / 83)
-exe 'vert 2resize ' . ((&columns * 111 + 111) / 222)
-exe '3resize ' . ((&lines * 39 + 41) / 83)
+exe '1resize ' . ((&lines * 39 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 182 + 182) / 365)
+exe '2resize ' . ((&lines * 39 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 365)
+exe 'vert 3resize ' . ((&columns * 182 + 182) / 365)
 argglobal
-balt /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk/usr/include/sys/_types/_time_t.h
+balt ~/backend/gateway/alchemy/access.py
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -55,24 +84,20 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-10
-normal! zo
-34
-normal! zo
-35
-normal! zo
-let s:l = 13 - ((12 * winheight(0) + 20) / 40)
+let s:l = 150 - ((22 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 13
-normal! 010|
+keepjumps 150
+normal! 0
+lcd ~/backend
 wincmd w
 argglobal
-if bufexists("/bin/zsh\ -c\ \'/bin/zsh\'-0") | buffer /bin/zsh\ -c\ \'/bin/zsh\'-0 | else | edit /bin/zsh\ -c\ \'/bin/zsh\'-0 | endif
+if bufexists("~/backend/layers/use_cases/access/list_access_requests.py") | buffer ~/backend/layers/use_cases/access/list_access_requests.py | else | edit ~/backend/layers/use_cases/access/list_access_requests.py | endif
 if &buftype ==# 'terminal'
-  silent file /bin/zsh\ -c\ \'/bin/zsh\'-0
+  silent file ~/backend/layers/use_cases/access/list_access_requests.py
 endif
+balt ~/backend/layers/interfaces/gateway/user.py
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -81,19 +106,20 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 10040 - ((39 * winheight(0) + 20) / 40)
+let s:l = 53 - ((21 * winheight(0) + 19) / 39)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 10040
-normal! 023|
+keepjumps 53
+normal! 09|
+lcd ~/backend
 wincmd w
 argglobal
-if bufexists("ii_irc_example.log") | buffer ii_irc_example.log | else | edit ii_irc_example.log | endif
+if bufexists("~/backend/layers/use_cases/access/tests/test_get_user_access.py") | buffer ~/backend/layers/use_cases/access/tests/test_get_user_access.py | else | edit ~/backend/layers/use_cases/access/tests/test_get_user_access.py | endif
 if &buftype ==# 'terminal'
-  silent file ii_irc_example.log
+  silent file ~/backend/layers/use_cases/access/tests/test_get_user_access.py
 endif
-balt ~/.vim/rc/bindings.vim
+balt ~/backend/userdata/models/access.py
 setlocal fdm=syntax
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -102,19 +128,139 @@ setlocal fdl=99
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-let s:l = 1 - ((0 * winheight(0) + 19) / 39)
+let s:l = 72 - ((39 * winheight(0) + 39) / 79)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 1
-normal! 011|
+keepjumps 72
+normal! 0
+lcd ~/backend
 wincmd w
-exe '1resize ' . ((&lines * 40 + 41) / 83)
-exe 'vert 1resize ' . ((&columns * 110 + 111) / 222)
-exe '2resize ' . ((&lines * 40 + 41) / 83)
-exe 'vert 2resize ' . ((&columns * 111 + 111) / 222)
+exe '1resize ' . ((&lines * 39 + 41) / 83)
+exe 'vert 1resize ' . ((&columns * 182 + 182) / 365)
+exe '2resize ' . ((&lines * 39 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 365)
+exe 'vert 3resize ' . ((&columns * 182 + 182) / 365)
+tabnext
+edit ~/frontend/cobalt_2/src/components/investments/RecurringRequestForm.tsx
+let s:save_splitbelow = &splitbelow
+let s:save_splitright = &splitright
+set splitbelow splitright
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd w
+let &splitbelow = s:save_splitbelow
+let &splitright = s:save_splitright
+wincmd t
+let s:save_winminheight = &winminheight
+let s:save_winminwidth = &winminwidth
+set winminheight=0
+set winheight=1
+set winminwidth=0
+set winwidth=1
+exe 'vert 1resize ' . ((&columns * 182 + 182) / 365)
+exe '2resize ' . ((&lines * 39 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 365)
 exe '3resize ' . ((&lines * 39 + 41) / 83)
-tabnext 1
+exe 'vert 3resize ' . ((&columns * 182 + 182) / 365)
+argglobal
+balt ~/frontend/cobalt_2/src/components/investments/utils.ts
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+73
+normal! zo
+88
+normal! zo
+116
+normal! zo
+118
+normal! zo
+let s:l = 135 - ((39 * winheight(0) + 39) / 79)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 135
+normal! 022|
+lcd ~/frontend/cobalt_2
+wincmd w
+argglobal
+if bufexists("~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx") | buffer ~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx | else | edit ~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx | endif
+if &buftype ==# 'terminal'
+  silent file ~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx
+endif
+balt ~/frontend/cobalt_2/src/components/investments/CopyExistingRequestContainer.tsx
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+120
+normal! zo
+202
+normal! zo
+204
+normal! zo
+206
+normal! zo
+let s:l = 147 - ((19 * winheight(0) + 19) / 39)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 147
+normal! 041|
+lcd ~/frontend/cobalt_2
+wincmd w
+argglobal
+if bufexists("~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx") | buffer ~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx | else | edit ~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx | endif
+if &buftype ==# 'terminal'
+  silent file ~/frontend/cobalt_2/src/components/investments/ActivityAndRequestsContainer.tsx
+endif
+balt ~/frontend/cobalt_2/src/components/investments/CopyExistingRequestContainer.tsx
+setlocal fdm=syntax
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=99
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+120
+normal! zo
+202
+normal! zo
+204
+normal! zo
+206
+normal! zo
+let s:l = 117 - ((19 * winheight(0) + 19) / 39)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 117
+normal! 05|
+lcd ~/frontend/cobalt_2
+wincmd w
+exe 'vert 1resize ' . ((&columns * 182 + 182) / 365)
+exe '2resize ' . ((&lines * 39 + 41) / 83)
+exe 'vert 2resize ' . ((&columns * 182 + 182) / 365)
+exe '3resize ' . ((&lines * 39 + 41) / 83)
+exe 'vert 3resize ' . ((&columns * 182 + 182) / 365)
+tabnext 3
+set stal=1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
@@ -127,7 +273,6 @@ if filereadable(s:sx)
   exe "source " . fnameescape(s:sx)
 endif
 let &g:so = s:so_save | let &g:siso = s:siso_save
-nohlsearch
 doautoall SessionLoadPost
 unlet SessionLoad
 " vim: set ft=vim :
