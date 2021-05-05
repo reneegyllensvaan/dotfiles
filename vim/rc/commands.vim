@@ -20,6 +20,8 @@ let g:term_should_startinsert = 0
 command! -bang -nargs=* PushTermStartInsert let g:term_should_startinsert = 1
 function! PopTermStartInsert()
   if g:term_should_startinsert
+    startinsert
+  endif
 endfunction
 augroup term-pop-startinsert
   autocmd!
