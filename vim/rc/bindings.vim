@@ -351,6 +351,7 @@ nnoremap cr" :call visualops#surround('""')<CR>g@iw
 nnoremap cr` :call visualops#surround('``')<CR>g@iw
 nnoremap cr_ :call visualops#surround('__')<CR>g@iw
 nnoremap cr* :call visualops#surround('**')<CR>g@iw
+nnoremap cr<Space> :call visualops#surround('  ')<CR>g@iw
 nnoremap crf viw:<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
 nnoremap <silent> crg viwA<><C-o>h
 
@@ -375,6 +376,7 @@ nnoremap zs" :call visualops#surround('""')<CR>g@
 nnoremap zs` :call visualops#surround('``')<CR>g@
 nnoremap zs_ :call visualops#surround('__')<CR>g@
 nnoremap zs* :call visualops#surround('**')<CR>g@
+nnoremap zs<Space> :call visualops#surround('  ')<CR>g@
 
 xnoremap s( :<C-u>call visualops#surround_selection('()', 0)<CR>
 xnoremap S( :<C-u>call visualops#surround_selection('()', 1)<CR>
@@ -394,6 +396,8 @@ xnoremap s_ :<C-u>call visualops#surround_selection('__', 0)<CR>
 xnoremap S_ :<C-u>call visualops#surround_selection('__', 1)<CR>
 xnoremap s* :<C-u>call visualops#surround_selection('**', 0)<CR>
 xnoremap S* :<C-u>call visualops#surround_selection('**', 1)<CR>
+xnoremap s<Space> :<C-u>call visualops#surround_selection('  ', 0)<CR>
+xnoremap S<Space> :<C-u>call visualops#surround_selection('  ', 1)<CR>
 xnoremap sf :<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
 xnoremap sr( <Esc>`<r(`>r)gv
 xnoremap sr[ <Esc>`<r[`>r]gv
@@ -403,6 +407,7 @@ xnoremap sr" <Esc>`<r"`>r"gv
 xnoremap sr` <Esc>`<r``>r`gv
 xnoremap sr_ <Esc>`<r_`>r_gv
 xnoremap sr* <Esc>`<r*`>r*gv
+xnoremap sr<Space> <Esc>`<r<Space>`>r<Space>gv
 xnoremap srf <Esc>`>r)`<r(i
 xnoremap sr<BS> <Esc>`>x`<x<Esc>`>hm>gv
 vmap srx sr<BS>
