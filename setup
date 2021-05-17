@@ -227,7 +227,7 @@ ensure_git_repo vim/pack/plugins/opt/blame https://github.com/f-person/git-blame
 log "Building shell template files"
 build_template gpg/gpg.conf
 build_template gpg/gpg-agent.conf
-build_template other/gitconfig
+build_template other/gitconfig-generated
 build_template README.md
 build_template email/neomuttrc-env-home
 build_template email/neomuttrc-env-work
@@ -359,6 +359,7 @@ symlink file shell/user-profile $HOME/.user-profile
 
 symlink file other/editorconfig $HOME/.editorconfig
 symlink file other/gitconfig $HOME/.gitconfig
+symlink file other/gitconfig-generated $HOME/.gitconfig-generated
 symlink file other/tigrc $HOME/.tigrc
 symlink file other/ctags $HOME/.ctags
 

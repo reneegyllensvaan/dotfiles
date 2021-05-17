@@ -18,6 +18,7 @@ brew install          \
   pinentry            \
   python              \
   python@2            \
+  pngpaste            \
   ranger              \
   ruby                \
   sqlite              \

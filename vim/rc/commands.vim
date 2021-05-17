@@ -7,8 +7,7 @@ command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': 
 
 command! -nargs=* FzyGrep call fzy#in_buffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
 
-command! -nargs=1 Chmod call fileutils#chmod(expand('%'), <q-args>)
-command! -nargs=* Ls echo system('ls --color=always <args>')
+command! -nargs=1 Chmod call fileutils#chmod(expand('%'), <q-args>) command! -nargs=* Ls echo system('ls --color=always <args>')
 
 command! -bang YankFileNameAbsolute call fileutils#yank_path("+",'%:p', "<bang>")
 command! -bang YankFileNameHomedir call fileutils#yank_path("+",'%:p:~', "<bang>")
@@ -151,3 +150,5 @@ endfunction
 command! -bang GitDiff execute "Term! git diff ".["\<C-u>","--staged", ""]
       \[confirm('git diff', "&staged\n&worktree\n")]
 
+command! FzyFindFile call fzy#in_buffer("fd . --type f", ":e ", "")
+command! FzyFindFileWindow call fzy#in_buffer("fd . --type f", ":<mods> sp ", "")

@@ -7,7 +7,7 @@ __fzy-expand-file () {
 }
 
 __fzy-git-files () {
-  LBUFFER="$LBUFFER`git status -s | fzy | awk '{print $2}'`"
+  LBUFFER="$LBUFFER`git status -s | fzy | awk '{print $2}' | xargs`"
   local ret=$?
   zle reset-prompt
   return $ret

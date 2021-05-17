@@ -17,6 +17,9 @@ function! s:ToggleLineItem() abort
   endif
 endfunction
 
+" <C-t>: Structural snippets
+nnoremap <buffer> <C-t><C-c> o<Esc>cc<BS><BS>-<Space>[<Space>]<Space>
+nnoremap <buffer> <C-t><C-l> o<Esc>cc<BS><BS>----------------------<Esc>
 
 nnoremap <silent> <buffer> <C-l><C-i> :call <SID>ToggleLineItem()<CR>
 nnoremap <silent> <buffer> <C-n> <<

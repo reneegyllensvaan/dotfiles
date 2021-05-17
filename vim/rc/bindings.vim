@@ -248,18 +248,17 @@ nnoremap <Space>vR_ :call fzy#leader_script("vR", ":sp ")<CR>
 nnoremap <silent> <Space>fw :w<CR>
 nnoremap <expr>   <Space>fc ":lcd ".expand("%:p:h")."\<CR>"
 nnoremap <expr>   <Space>fC ":cd ".expand("%:p:h")."\<CR>"
-nnoremap <silent> <Space>fy :YankFileName<CR>
-nnoremap <silent> <Space>fY :YankFileName!<CR>
-nnoremap <Space>ff :call fzy#in_buffer("fd . --type f", ":e ", "")<CR>
-nnoremap <silent> <Space>f/ :call fzy#in_buffer("fd . --type f", ":vsp ", "")<CR>
-nnoremap <silent> <Space>f_ :call fzy#in_buffer("fd . --type f", ":vsp ", "")<CR>
+nnoremap          <Space>fy :YankFileName<CR>
+nnoremap          <Space>fY :YankFileName!<CR>
+nnoremap          <Space>ff :FzyFindFile<CR>
+nnoremap <silent> <Space>f/ :vert FzyFindFileWindow<CR>
+nnoremap <silent> <Space>f_ :FzyFindFileWindow<CR>
 nnoremap <silent> <Space>fr :call fzy#leader_script("fr", ":e ")<CR>
 nnoremap <silent> <Space>fd :call fzy#leader_script("fd", ":lcd ")<CR>
 nnoremap <silent> <Space>lcd :call fzy#leader_script("lcd", ":lcd ~/")<CR>
 nnoremap <silent> <Space>fn :call fzy#leader_script("fn", ":e ")<CR>
-
 nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
-nnoremap <silent> <Space>E :call feedkeys(":e %:h\<Tab>", 'tn')<CR>
+nnoremap <silent> <Space>E :call feedkeys(":e ".expand("%:h")."\<Tab>", 'tn')<CR>
 " File Actions }}}
 " Hooks For External Files: {{{
 " WorkMode
@@ -413,7 +412,9 @@ xnoremap sr<BS> <Esc>`>x`<x<Esc>`>hm>gv
 vmap srx sr<BS>
 " Surround Mappings }}}
 " Quick Commands: (aliases) {{{
-nmap qf <Space>ff
+nnoremap qf :FzyFindFile<CR>
+nnoremap <M-t> :FzyFindFile<CR>
+nnoremap <M-T> :vert FzyFindFileWindow<CR>
 nmap qb <Space>bb
 nnoremap qn :bn<CR>
 nnoremap qN :bp<CR>

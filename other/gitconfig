@@ -1,30 +1,19 @@
-#!/bin/sh
-cat << EOF
+# ex: fdm=marker
+[include]
+  path = ~/.gitconfig-generated
+
 [core]
-  excludesfile = $HOME/.gitignore_global
-
-[status]
-	relativePaths = true
-
-[user]
-  name = $USER_NAME
-  email = $USER_EMAIL
-  `[ "$GIT_SIGNING_KEY" ] && echo "signingkey = $GIT_SIGNING_KEY"`
-
-[commit]
-  `[ "$GIT_SIGNING_KEY" ] && echo "gpgsign = true"`
-
+  excludesfile = ~/.gitignore_global
 [gpg]
   program = gpg
-
-[github]
-  user = $GITHUB_USER
-
+[status]
+	relativePaths = true
 [hub]
   protocol = ssh
-
 [init]
   defaultBranch = main
+[rerere]
+	enabled = true
 
 [maintenance]
 	strategy = incremental
@@ -41,29 +30,40 @@ cat << EOF
 	enable = true
 
 [alias]
+  # Briefs: {{{
   a   = add
   aa  = add --all
+
   b   = branch
+
   c   = commit
   ca  = commit --amend
   canoe = commit --amend --no-edit
   canoera = commit --amend --no-edit --reset-author
   cp  = cherry-pick
+
   d   = diff
   ds  = diff --staged
+
+  f   = fetch
+  fo  = fetch origin
+
   l   = log
   lo  = log --pretty=oneline
-  ls-files-root = "! git ls-files"
+
   o   = checkout
+
   pop = stash pop
   pm  = pull --rebase=false
   pr  = pull --rebase
   pf  = pull --ff-only
-  pushu = "! git push -u origin \`git branch --show-current\`"
+  pushu   = "! git push -u origin `git branch --show-current`"
+  pushfwl = push --force-with-lease
+
   r   = rebase
   rc  = rebase --continue
   ri  = rebase -i
-  root = "! git rev-parse --show-toplevel"
+
   s   = status
 
   w   = worktree
@@ -73,6 +73,10 @@ cat << EOF
   za  = stash apply
   zl  = stash list
   zs  = stash show
+  # Briefs }}}
+
+  ls-files-root = "! git ls-files"
+  root = "! pwd"
 
 [tig "color"]
 	cursor		= default	0 underline
@@ -94,5 +98,3 @@ cat << EOF
     commit-decoration-style = bold yellow box ul
     file-style = bold yellow ul
     file-decoration-style = none
-EOF
-exit 0

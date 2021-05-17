@@ -62,6 +62,6 @@ which xsel >/dev/null 2>&1 && export CLIPBOARD_COPY='xsel -b' \
                            && export CLIPBOARD_PASTE='xsel -b'
 
 # Pseudo-aliases for things that are nice to abbreviate
-export Q=/dev/null
+export Q=/dev/null  # "Quiet"
 export C=$CLIPBOARD_COPY
 export P=$CLIPBOARD_PASTE
