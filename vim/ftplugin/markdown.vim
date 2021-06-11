@@ -32,8 +32,13 @@ nnoremap <silent> <buffer> o A<CR>
 iabbrev <buffer> -[] -<space>[<space>]
 " iabbrev <buffer> [] []()<Left><Left><Left>
 
+inoreabbrev <buffer> H1 # {{{1<CR><!-- 1}}} --><Up><Left><Left><Left><Left><Left>
+inoreabbrev <buffer> H2 ## {{{2<CR><!-- 2}}} --><Up><Left><Left><Left><Left><Left>
+inoreabbrev <buffer> H3 ### {{{3<CR><!-- 3}}} --><Up><Left><Left><Left><Left><Left>
+
 " Language: (experimental)
 iabbrev <buffer> anoth another
 iabbrev <buffer> dacol Data Collection
 
 setlocal expandtab
+setlocal shiftwidth=2

@@ -42,7 +42,7 @@ if [[ ! -f "./shell/user-profile" ]]; then
   if [ "$?" != "0" ]; then
     fatal "  Error: Vim exited with a non-zero exit code"
     exit $?
-  elif [ "$?" != "0" ]; then
+  elif [ ! -e shell/user-profile ]; then
     fatal "  Vim exited but we can't find a user-profile file"
     exit
   fi
@@ -99,10 +99,10 @@ symlink () {
       if [ ! -d "$2" ]; then
         fatal "  Error: Couldn't find file $2, check setup script."
       elif [ -L "$3" ]; then
-        debug "Compare: <`readlink $3`>"
-        debug "         <$PWD/$2>"
+        debug "Compare: '`readlink $3`' <- '$3'"
+        debug "         '$PWD/$2'"
         if [ "`readlink $3`" = "$PWD/$2" ]; then
-          debug "Identical symlink exists, skipping."
+          debug "    Identical symlink exists, skipping.\n"
           return 0
         fi
         overwrite=' (overwrite)'
@@ -121,8 +121,10 @@ symlink () {
         log "    Found existing file or directory '$3', backing it up as '$3.bak'"
         push_cmd "mv '$PWD/$3' '$PWD/$3.bak'"
       elif [ -L "$3" ]; then
+        debug "Compare: '`readlink $3`' <- '$3'"
+        debug "         '$PWD/$2'"
         if [ "`readlink $3`" = "$PWD/$2" ]; then
-          debug "Identical symlink exists, skipping."
+          debug "    Identical symlink exists, skipping.\n"
           return 0
         fi
         overwrite=' (overwrite)'
@@ -196,7 +198,8 @@ ensure_git_repo vim/pack/plugins/start/gnupg https://github.com/jamessan/vim-gnu
 ensure_git_repo vim/pack/plugins/start/commentary https://github.com/tpope/vim-commentary
 ensure_git_repo vim/pack/plugins/start/editorconfig https://github.com/editorconfig/editorconfig-vim
 ensure_git_repo vim/pack/plugins/start/skim_base https://github.com/lotabout/skim \
-  || ( symlink dir ~/.skim vim/pack/plugins/start/skim_base ; push_cmd 'cd ~/.skim && ./install')
+  || (  push_cmd 'cd ~/.skim && ./install')
+symlink dir vim/pack/plugins/start/skim_base ~/.skim
 ensure_git_repo vim/pack/plugins/start/skim https://github.com/lotabout/skim.vim
 ensure_git_repo vim/pack/plugins/start/eunuch https://github.com/tpope/vim-eunuch
 # Dynamic plugins
@@ -356,6 +359,8 @@ symlink file other/batrc $HOME/.batrc
 symlink file shell/alias $HOME/.alias
 symlink file shell/profile $HOME/.profile
 symlink file shell/user-profile $HOME/.user-profile
+lesskey -o shell/lesskey shell/lesskeyrc
+symlink file shell/lesskey $HOME/.config/lesskey
 
 symlink file other/editorconfig $HOME/.editorconfig
 symlink file other/gitconfig $HOME/.gitconfig
@@ -370,6 +375,7 @@ fi
 
 prompt "Look over these changes, do they look ok? [y/N]"\
   || exit
+echo
 
 # Finally, reconcile commands
 [ -e last_install.log ] && rm last_install.log

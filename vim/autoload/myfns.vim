@@ -31,16 +31,25 @@ function! myfns#to_upper_snake(word)
   return toupper(join(myfns#split_case(a:word), '_'))
 endfunction
 
-function! myfns#inside_snake()
-  call search('\(\<\|_\).', 'Wbce')
+function! myfns#visual_between(from, to)
+  if v:operator == 'v' || v:operator == 'V'
+    normal! <Esc>
+  endif
+  call search(a:from, 'Wbce')
   normal! v
-  call search('.\(\>\|_\)', 'Wc')
+  call search(a:to, 'Wc')
+endfunction
+
+function! myfns#inside_name()
+  call myfns#visual_between('\(^\|[^A-z.]\)[A-z.]', '[A-z.]\($\|[^A-z.]\)')
+endfunction
+
+function! myfns#inside_snake()
+  call myfns#visual_between('\(\<\|_\).', '.\(\>\|_\)')
 endfunction
 
 function! myfns#inside_capital()
-  call search('\(\<\|[A-Z]\)', 'Wbce')
-  normal! v
-  call search('.\(\>\|[A-Z]\)', 'Wc')
+  call myfns#visual_between('\(\<\|[A-Z]\)', '.\(\>\|[A-Z]\)')
 endfunction
 
 function! myfns#split_case(word)

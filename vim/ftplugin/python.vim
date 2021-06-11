@@ -5,6 +5,8 @@ imap <buffer> <C-t><C-t> <C-o>h<Plug>(python-argument-punning)
 
 inoremap <buffer> <C-t><C-l> print("{}".format())<Left><Left>
 
+inoremap <buffer> <C-t><C-u> UUID
+inoremap <buffer> <C-t>u uuid4()<Left>
 inoremap <buffer> <C-t><C-n> None
 inoremap <buffer> <C-t><C-a> =<Space>attr.ib(type=)<Left>
 

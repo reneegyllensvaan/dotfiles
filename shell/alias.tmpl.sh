@@ -16,7 +16,7 @@ try_override () {
 
 try_override  sed   gsed
 try_override  grep  ggrep
-try_override  cat   bat
+# try_override  cat   bat
 try_override  ls    exa
 try_override  vim   nvim
 

@@ -1,5 +1,5 @@
 " vim: ft=sourceonsave.vim fdm=marker foldlevel=0
-" Unmaps: {{{
+" Unmaps: {{{1
 nnoremap <C-s> <Nop>
 nnoremap <C-t> <Nop>
 nnoremap <C-c> <Nop>
@@ -15,8 +15,8 @@ noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <expr> Q (empty(reg_recording()) ? "q".tolower(nr2char(getchar())) : "q")
 nnoremap <C-a><C-a> <C-a>
-" Unmaps }}}
-" Alt Mappings: {{{
+" 1}}}
+" Alt Mappings: {{{1
 nnoremap <A-Up> <C-w>+
 nnoremap <A-Down> <C-w>-
 nnoremap <A-Left> <C-w><<C-w><
@@ -26,8 +26,9 @@ xnoremap <silent> <A-Up> :move '<-2<CR>gv
 xnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
-" Alt Mappings }}}
-" Insert Mode: {{{
+" 1}}}
+" Insert Mode: {{{1
+inoremap <C-g> <Esc>
 inoremap <C-p> <Nop>
 
 inoremap <C-c> <Nop>
@@ -38,17 +39,28 @@ inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
 inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
-" Insert Mode }}}
-" Microsnippets: {{{
+" 1}}}
+" Microsnippets: {{{1
 inoremap <C-e> <Nop>
 inoremap <C-e><C-l> {<Cr>}<C-o>O
 inoremap <C-e><C-y> [<Cr>]<C-o>O
 inoremap <C-e><C-e> (<Cr>)<C-o>O
-inoremap <C-e><C-m> UUID
 " inoremap <C-e><C-b> <C-o>:Macrosnippet<CR>
 
-" Microsnippets }}}
-"  Editing Commands: {{{
+" 1}}}
+"  Folding: {{{1
+
+nnoremap <A-s> za
+
+" Set foldmethod
+nnoremap \ff :set fdm=manual<cr>
+nnoremap \fi :set fdm=indent<cr>
+nnoremap \fm :set fdm=marker<cr>
+nnoremap \fs :set fdm=syntax<cr>
+nnoremap \fd :set fdm=diff<cr>
+
+" 1}}}
+"  Editing Commands: {{{1
 " Line break
 nnoremap <C-j> <Esc>o
 " nnoremap <C-r> "
@@ -72,13 +84,6 @@ nnoremap \> V`]>
 " Format buffer (usually shells out to CoC)
 nnoremap \F :Format<cr>
 nnoremap \T :silent s/\<\(\w\)\(\S*\)/\u\1\L\2/g<cr>:noh<cr>
-
-" Foldmethod
-nnoremap \ff :set fdm=manual<cr>
-nnoremap \fi :set fdm=indent<cr>
-nnoremap \fm :set fdm=marker<cr>
-nnoremap \fs :set fdm=syntax<cr>
-nnoremap \fd :set fdm=diff<cr>
 
 " Make `n` after `#` always search downward
 nnoremap # *NN
@@ -110,8 +115,10 @@ nnoremap <expr> crS "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
 " Extra textobjects for sub-words
 onoremap <silent> i_ :<C-u>call myfns#inside_snake()<CR>
 onoremap <silent> iA :<C-u>call myfns#inside_capital()<CR>
-" Editing Commands }}}
-" Terminal Mode Mappings: {{{
+onoremap <silent> in :<C-u>call myfns#inside_name()<CR>
+vnoremap <silent> in :<C-u>call myfns#inside_name()<CR>
+" 1}}}
+" Terminal Mode Mappings: {{{1
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
 tnoremap <silent> <C-s> <C-W>N
 if has('nvim')
@@ -129,8 +136,8 @@ if has('nvim')
   tnoremap <silent> <C-w>c <C-\><C-n><C-w>c
   tnoremap <silent> <C-w><C-w> <C-\><C-n><C-w><C-w>
 endif
-" Terminal Mode Mappings }}}
-" Terminal Applications: {{{
+" 1}}}
+" Terminal Applications: {{{1
 nnoremap <silent> <Space>am :tab SingletonTerm neomutt<CR>
 nnoremap <Space>ag :tab SingletonTerm tig<CR>
 nnoremap <Space>af :SingletonTerm fish<CR>
@@ -143,8 +150,8 @@ nnoremap <C-@> :tab SingletonShell<CR>
 nnoremap <Space>at :Term $SHELL<CR>
 nnoremap <Space>aT :vert Term $SHELL<CR>
 nnoremap <Space>a<C-t> :tab $SHELL<CR>
-" Terminal Applications }}}
-" Visual Mappings: {{{
+" 1}}}
+" Visual Mappings: {{{1
 nnoremap <Space>y "+y
 xnoremap <Space>y "+y
 nnoremap <Space>p "+p
@@ -175,8 +182,8 @@ xnoremap v v
 " nnoremap v V
 " nnoremap V v
 " nnoremap <C-v> <C-v>
-" Visual Mappings }}}
-" Window Mappings: {{{
+" 1}}}
+" Window Mappings: {{{1
 nnoremap <Right> :call DrillWindowOrTab(0)<CR>
 nnoremap <Left> :call DrillWindowOrTab(1)<CR>
 nnoremap <C-w>/ <C-w>v
@@ -195,8 +202,8 @@ nnoremap <Space>wr <C-w>r
 nnoremap <Space>wm :tab split<CR>
 nnoremap <Space>wt/ :vert Term<CR>
 nnoremap <Space>wt_ :Term<CR>
-" Window Mappings }}}
-" Searching And Navigation: {{{
+" 1}}}
+" Searching And Navigation: {{{1
 nnoremap <silent> <A-w> :call searchpos('\<')<CR>
 nnoremap <silent> <A-b> :call searchpos('\<', 'b')<CR>
 nnoremap <Space>/ :Rg<CR>
@@ -213,8 +220,8 @@ nnoremap <C-c><C-d><C-a> :let ctrl_d_jump = 40<CR>
 nnoremap <C-c><C-d><C-r> :let ctrl_d_jump = 20<CR>
 nnoremap <C-c><C-d><C-s> :let ctrl_d_jump = 10<CR>
 nnoremap <C-c><C-d><C-t> :let ctrl_d_jump = 5<CR>
-" Searching And Navigation }}}
-" Toggles: {{{
+" 1}}}
+" Toggles: {{{1
 nnoremap <Space>tcc :call ToggleCenterCursor()<CR>
 nnoremap <expr> <Space>tch ":set cmdheight=".(&cmdheight == 1 ? '2' : '1')."\<CR>"
 nnoremap <Space>tcl :call ToggleCursorLine()<CR>
@@ -230,8 +237,8 @@ nnoremap <Space>ttw9 :set textwidth=90<CR>
 nnoremap <Space>tw :set list!<CR>
 nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
 nnoremap <expr> <Space>td ":setlocal ".(&l:diff ? "no" : "")."diff\<CR>"
-" Toggles }}}
-" Vim Actions: {{{
+" 1}}}
+" Vim Actions: {{{1
 nnoremap <silent> <Space>vh :exec "hi ".synIDattr(synID(line("."),col("."),1),"name")<CR>
 nnoremap <Space>vH :TSHighlightCapturesUnderCursor<CR>
 nnoremap <silent> <Space>vpa :call feedkeys(":packadd \<Tab>", 'tn')<CR>
@@ -243,8 +250,8 @@ nnoremap <Space>vs :call vimrctools#pick_runtime_file('Source runtime file:', ':
 nnoremap <Space>vRR :call fzy#leader_script("vR", ":e ")<CR>
 nnoremap <Space>vR/ :call fzy#leader_script("vR", ":vsp ")<CR>
 nnoremap <Space>vR_ :call fzy#leader_script("vR", ":sp ")<CR>
-" Vim Actions }}}
-" File Actions: {{{
+" 1}}}
+" File Actions: {{{1
 nnoremap <silent> <Space>fw :w<CR>
 nnoremap <expr>   <Space>fc ":lcd ".expand("%:p:h")."\<CR>"
 nnoremap <expr>   <Space>fC ":cd ".expand("%:p:h")."\<CR>"
@@ -259,8 +266,8 @@ nnoremap <silent> <Space>lcd :call fzy#leader_script("lcd", ":lcd ~/")<CR>
 nnoremap <silent> <Space>fn :call fzy#leader_script("fn", ":e ")<CR>
 nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 nnoremap <silent> <Space>E :call feedkeys(":e ".expand("%:h")."\<Tab>", 'tn')<CR>
-" File Actions }}}
-" Hooks For External Files: {{{
+" 1}}}
+" Module Files: {{{1
 " WorkMode
 nnoremap <Space>oE :e ~/workmode.vim<CR>
 nnoremap <Space>oo :so ~/workmode.vim<CR>
@@ -273,8 +280,8 @@ nnoremap <Space>s+ :call myfns#start_coc()<CR>
 " Bookmarks
 nnoremap <Space>'E :e ~/.vim/files/bookmarks.vim<CR>
 source ~/.vim/files/bookmarks.vim
-" Hooks For External Files }}}
-" Buffers: {{{
+" 1}}}
+" Buffers: {{{1
 nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ", 0)<CR>
 nnoremap <silent> <Space>bB :call fzy#buffer_cmd(":b ", 1)<CR>
 nnoremap <silent> <Space>b/ :call fzy#buffer_cmd(":vert sb ",0)<CR>
@@ -290,8 +297,8 @@ nnoremap <silent> <Space>bn :bn<CR>
 nnoremap <silent> <Space>bd :bp\|bd #<CR>
 nnoremap <silent> <Space>bx :bp\|bw #<CR>
 nnoremap <silent> <Space>b? :w !diff % -<CR>
-" Buffers }}}
-" Git: {{{
+" 1}}}
+" Git: {{{1
 nnoremap <silent> <Space>gO :call fzy#leader_script("g_o", ":!git checkout-remote-branch origin ")<CR>
 nnoremap <silent> <Space>ga :call fzy#leader_script("ga", ":!git add ")<CR>
 nnoremap <silent> <Space>gf :call fzy#leader_script("gf", ":e ")<CR>
@@ -313,8 +320,8 @@ nnoremap <Space>g<C-l> :tab SingletonTerm git log<CR>
 nnoremap <Space>gL :vert SingletonTerm git log<CR>
 nnoremap <Space>gl :SingletonTerm git log<CR>
 nnoremap <silent> <Space>gB :call term#singleton_run('tab', 'tig blame '.expand('%:t'), expand('%:p:h'), '')<CR>
-" Git }}}
-" Snipe Mappings: {{{
+" 1}}}
+" Snipe Mappings: {{{1
 nnoremap <silent> , :<C-u>call SnipeNext(1,"")<CR>
 nnoremap <silent> ; :<C-u>call SnipeNext(0,"")<CR>
 nnoremap <silent> F :<C-u>call Snipe(1, "Fn")<CR>
@@ -339,8 +346,8 @@ onoremap <silent> T :<C-u>call Snipe(1, "To")<CR>
 onoremap <silent> f :<C-u>call Snipe(1, "fo")<CR>
 onoremap <silent> s :<C-u>call Snipe(2, "so")<CR>
 onoremap <silent> t :<C-u>call Snipe(1, "to")<CR>
-" Snipe Mappings }}}
-" Surround Mappings: {{{
+" Snipe Mappings 1}}}
+" Surround Mappings: {{{1
 nnoremap cr( :call visualops#surround('()')<CR>g@iw
 nnoremap cr[ :call visualops#surround('[]')<CR>g@iw
 nnoremap cr{ :call visualops#surround('{}')<CR>g@iw
@@ -410,8 +417,8 @@ xnoremap sr<Space> <Esc>`<r<Space>`>r<Space>gv
 xnoremap srf <Esc>`>r)`<r(i
 xnoremap sr<BS> <Esc>`>x`<x<Esc>`>hm>gv
 vmap srx sr<BS>
-" Surround Mappings }}}
-" Quick Commands: (aliases) {{{
+" 1}}}
+" Quick Commands: (aliases) {{{1
 nnoremap qf :FzyFindFile<CR>
 nnoremap <M-t> :FzyFindFile<CR>
 nnoremap <M-T> :vert FzyFindFileWindow<CR>
@@ -427,8 +434,13 @@ nnoremap q, A,<Esc>j
 nnoremap q; A;<Esc>j
 nnoremap q<CR> o<Esc>k
 nnoremap <silent> qd :CocList diagnostics<CR>
-" Quick Commands }}}
-" QuickFix: (LocList) {{{
+
+" Global Escape:
+noremap <A-g> <Esc>
+inoremap <A-g> <Esc>
+tnoremap <A-g> <C-\><C-n>
+" Quick Commands 1}}}
+" QuickFix: (LocList) {{{1
 nnoremap qj :botright cnext<CR>
 nnoremap qk :botright cprevious<CR>
 nnoremap q+ :botright cwindow<CR>
@@ -436,7 +448,7 @@ nnoremap q+ :botright cwindow<CR>
 nnoremap <Space>lj :botright lnext<CR>
 nnoremap <Space>lk :botright lprevious<CR>
 nnoremap <Space>ll :botright lwindow<CR>
-" QuickFix (LocList) }}}
+" 1}}}
 
 
 " Arborist Mappings:

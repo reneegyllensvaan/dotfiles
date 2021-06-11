@@ -1,8 +1,8 @@
-# vim: fdm=marker
+# vim: fdm=marker foldlevel=0
 
 ZSH_DISABLE_COMPFIX="true"
 
-# misc {{{
+# Misc {{{
 
 # Set vi mode with no timeout
 export KEYTIMEOUT=1; bindkey -v
@@ -10,9 +10,8 @@ export KEYTIMEOUT=1; bindkey -v
 # Set completion to be case-insensitive in unambiguous cases
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
-# misc }}}
-
-# history {{{
+# Misc }}}
+# History {{{
 export HISTSIZE=10000000
 export SAVEHIST=10000000
 export HISTFILE="$HOME/.zhistory"
@@ -29,11 +28,9 @@ setopt HIST_BEEP
 unsetopt SHARE_HISTORY
 setopt INC_APPEND_HISTORY
 # }}}
-
 # Prompt {{{
 setopt PROMPT_SUBST
 
-# fpath=$(~/.zcompletions $fpath)
 source "$HOME/.profile"
 source "$HOME/.user-profile"
 source "$HOME/.alias"
@@ -106,14 +103,14 @@ PROMPT="%{$fg[blue]%}%B%~%{$reset_color%}"
 #   PROMPT="$PROMPT"$'\n$nesting_prompt\$(prepend_prompt) '"%(?.%F{green}.%F{red})> %f "
 
 # prompt }}}
-
-# GnuPG settings
+# GnuPG settings {{{
 export GPG_TTY="$(tty)"
 if [ $GPG_FINGERPRINT ]; then
   export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
   # If gpg-agent is not running, start it and load env
   pgrep gpg-agent >/dev/null || eval $(gpg-agent --options $HOME/.gnupg/gpg-agent.conf --daemon )
 fi
+# GnuPG settings }}}
 
 [ -f "$HOME/local.zsh" ] && source "$HOME/local.zsh"
 
@@ -123,10 +120,13 @@ fi
 #   # export MCFLY_KEY_SCHEME=vim
 # fi
 
+# Environment Plugins {{{
+[ -e ~/.nix-profile/etc/profile.d/nix.sh ] && source ~/.nix-profile/etc/profile.d/nix.sh
 [ "$ASDF_ZSHRC_PATH" ] && source "$ASDF_ZSHRC_PATH"
-# if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
+# Environment Plugins }}}
+# Options {{{
 setopt AUTOCD
 setopt PATH_DIRS
+# Options }}}
 
 true

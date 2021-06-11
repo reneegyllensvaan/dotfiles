@@ -106,7 +106,7 @@ bind index L modify-labels
 bind index Y edit-label
 bind index t tag-thread
 bind index T tag-entry
-bind index \CT tag-pattern
+macro index \CT "<tag-pattern>~"
 bind index <Esc>t untag-pattern
 macro index \CU\CT "<untag-pattern>~A\n<sync-mailbox>"
 macro index + "<modify-labels>+*\n<sync-mailbox>"
@@ -119,7 +119,7 @@ bind index _ collapse-all
 unset collapse_all
 
 # sidebar
-set sidebar_visible = no
+set sidebar_visible = yes
 color sidebar_new yellow default
 # set sidebar_format="%B%> (%Nn %Ff %S)"
 set sidebar_format = "%D%* %?N?%N/?%S"

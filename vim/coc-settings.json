@@ -1,4 +1,6 @@
 {
+  "docker.enable": true,
+
   "coc.preferences.formatOnSaveFiletypes": ["rust"],
   "clangd.semanticHighlighting": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,

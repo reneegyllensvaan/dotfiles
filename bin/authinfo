@@ -1,0 +1,46 @@
+#!/bin/sh
+
+print_usage () {
+  echo '  Usage: authinfo <machine> <attribute>'
+}
+
+if [ -z "$1" ]; then
+  echo 'No machine provided.' 1>&2
+  print_usage
+  exit
+else
+  machine="$1"
+  shift
+fi
+
+if [ -z "$1" ]; then
+  echo 'No attribute provided.' 1>&2
+  print_usage
+  exit
+else
+  attribute="$1"
+  shift
+fi
+
+if [ ! -e ~/.authinfo.gpg ]; then
+  echo 'Authinfo file ~/.authinfo.gpg not found' 1>&2
+  exit
+fi
+
+info="$(gpg --decrypt ~/.authinfo.gpg 2>/dev/null | grep $machine)"
+
+if [ "0" != "$?" ]; then
+  echo "Machine '$machine' not found." 1>&2
+  print_usage
+  exit
+fi
+
+result=$(echo "$info" | sed -nE 's/.*'"$attribute"' +([^ ]+).*/\1/gp')
+
+if [ -z "$result" ]; then
+  echo "Attribute '$attribute' not found for machine '$machine'" 1>&2
+  print_usage
+  exit
+else
+  echo $result
+fi

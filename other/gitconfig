@@ -14,6 +14,16 @@
   defaultBranch = main
 [rerere]
 	enabled = true
+[fetch]
+	prune = true
+[rebase]
+	autostash = true
+	autosquash = true
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+
 
 [maintenance]
 	strategy = incremental
@@ -84,12 +94,6 @@
 	title-focus	= white	blue	bold
 [tig "color.tree"]
 	date		= cyan	default	bold
-
-[core]
-    pager = delta
-
-[interactive]
-    diffFilter = delta --color-only
 
 [delta]
     features = side-by-side line-numbers decorations

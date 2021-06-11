@@ -1,7 +1,8 @@
 " vim: fdm=marker foldlevel=0 ft=sourceonsave.vim
 inoremap <buffer> <C-t> <Nop>
 nmap <buffer> crt cr<
-imap <buffer> <C-t><C-o> : <C-n><C-u>
+inoremap <buffer> <C-t><C-o> : {<CR>}<Esc>O
+inoremap <buffer> <C-t>' : '',<Left><Left>
 
 inoremap <buffer> <C-t><C-l> console.log('value:', value)<Esc>bbb*Ncgn
 
@@ -31,3 +32,6 @@ inoremap <buffer> <C-t><C-t><C-o><C-n> <Left><Space>\|<Space>number
 inoremap <buffer> <C-t><C-t><C-o><C-b> <Left><Space>\|<Space>boolean
 inoremap <buffer> <C-t><C-t><C-o><C-s> <Left><Space>\|<Space>string
 " }}}
+
+inoreabbrev <buffer> FN function(props: Props) {<CR>}<Esc>O<Esc>k$F(i
+inoreabbrev <buffer> KFN function({}: Props) {<CR>}<Esc>O<Esc>k$F(i
