@@ -21,6 +21,7 @@ function! PopTermStartInsert()
   if g:term_should_startinsert
     startinsert
   endif
+  let g:term_should_startinsert = 0
 endfunction
 augroup term-pop-startinsert
   autocmd!
