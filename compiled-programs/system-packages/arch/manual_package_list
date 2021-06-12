@@ -7,6 +7,7 @@ base base-devel
 bzip2 gzip zip unzip
 efibootmgr
 git
+man-pages
 
 # Dev stuff/languages/compilers
 docker
@@ -81,6 +82,6 @@ wpa_supplicant
 dhcpcd
 bluez
 bluez-utils
-acpi 
+acpi
 
 EOF`
