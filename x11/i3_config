@@ -44,6 +44,7 @@ bindsym $mod+Shift+c exec --no-startup-id toggle-compositor
 # screenshot
 bindsym --release $mod+Print exec --no-startup-id "scrot 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h.png' -e 'mv $f ~/img/scrot/ && xclip -t image/png ~/img/scrot/$f -sel clip'"
 bindsym --release $mod+Shift+Print exec --no-startup-id "scrot --select 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h_snip.png' -e 'mv $f ~/img/scrot/ && xclip -t image/png ~/img/scrot/$f -sel clip'"
+bindsym --release $mod+Shift+s exec --no-startup-id "scrot --select 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h_snip.png' -e 'mv $f ~/img/scrot/ && xclip -t image/png ~/img/scrot/$f -sel clip'"
 
 # workspace controls:
 bindsym $mod+Next exec --no-startup-id i3-msg "move workspace to output eDP1"

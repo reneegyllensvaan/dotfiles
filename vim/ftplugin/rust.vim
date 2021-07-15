@@ -2,6 +2,8 @@
 inoremap <buffer> <C-t> <Nop>
 nmap <buffer> crt cr<
 
+inoremap <buffer> <C-t><C-l> println!("value: {:?}", value);<Esc>Fv;*Ncgn
+
 " Arrow
 
 " TF: Tap-Fhrase  {{{
