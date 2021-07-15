@@ -11,7 +11,7 @@ URxvt.scrollBar: false
 URxvt.internalBorder: 0
 ! Disable scrollback
 URxvt*saveLines: 0
-! URxvt*meta8: true
+URxvt*meta8: true
 
 
 ! scale fonts
