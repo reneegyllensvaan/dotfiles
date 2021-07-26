@@ -1,3 +1,6 @@
+" Source the current selection (yank to x, eval x, restore visual)
+vnoremap <buffer> <A-:> "xy:@x<CR>gv
+
 " Write and source file -- good for trying stuff out!
 nnoremap <buffer> <C-c><C-s> :w \| so %<CR>
 

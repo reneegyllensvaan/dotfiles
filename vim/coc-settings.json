@@ -1,6 +1,10 @@
 {
   "docker.enable": true,
 
+  "diagnostic.enable": true,
+  "diagnostic.locationlistUpdate": true,
+  "coc.preferences.useQuickfixForLocations": true,
+
   "coc.preferences.formatOnSaveFiletypes": ["rust"],
   "clangd.semanticHighlighting": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
@@ -11,8 +15,10 @@
   "eslint.enable": false,
   "coc.preferences.enableFloatHighlight": false,
 
-  "python.formatting.blackPath": "/usr/local/bin/black",
   "python.formatting.provider": "black",
+  "python.formatting.blackPath": "/Users/renee/backend/.venv3/bin/black",
+  //"python.formatting.blackArgs": ["--isort", "--diff"],
+
   "python.linting.pylintArgs": [
     "--rcfile",
     "/Users/renee/Projects/backend/pylintrc"

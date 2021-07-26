@@ -4,6 +4,7 @@ nmap <buffer> crt cr<
 inoremap <buffer> <C-t><C-o> : {<CR>}<Esc>O
 inoremap <buffer> <C-t>' : '',<Left><Left>
 
+inoremap <buffer> <C-t><C-u> UUID
 inoremap <buffer> <C-t><C-l> console.log('value:', value)<Esc>bbb*Ncgn
 
 " TF: Tap-Fhrase  {{{

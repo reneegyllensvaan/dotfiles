@@ -102,3 +102,6 @@
     commit-decoration-style = bold yellow box ul
     file-style = bold yellow ul
     file-decoration-style = none
+[filter "tabspace"]
+	smudge = gunexpand --tabs=4 --first-only
+	clean = gexpand --tabs=4 --initial

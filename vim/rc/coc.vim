@@ -63,7 +63,7 @@ command! -nargs=0 OR CocSortImports
 " " provide custom statusline: lightline.vim, vim-airline.
 " set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-imap <C-t> <Plug>(coc-snippets-expand)
+imap <C-t> <C-o><Plug>(coc-snippets-expand)
 vmap <C-j> <Plug>(coc-snippets-select)
 let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'

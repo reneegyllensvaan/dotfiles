@@ -85,7 +85,19 @@ augroup clean-noname-buffers
 augroup END
 
 function! GitBlameLine()
-  echo system("git blame ".expand('%')." -L ".getpos('.')[1].",".getpos('.')[1])
+  return system("git blame ".expand('%')." -L ".getpos('.')[1].",".getpos('.')[1])
+endfunction
+
+function! GitBlameLineFull()
+  let l:blame = GitBlameLine()
+  let l:msg = l:blame
+
+  if l:blame !~# '^[0-9a-f]\{9\} '
+    return l:msg
+  endif
+  let l:hash = l:blame[:8]
+
+  return system("git show --no-patch ".l:hash)
 endfunction
 
 function! ToggleGitGutter()
@@ -123,7 +135,6 @@ augroup quickfixOnMakeFinish
   autocmd QuickFixCmdPost [^l]* botright cwindow
 augroup END
 
-
 function! s:WipeUnattachedBuffers()
   let l:limit = bufnr("$")
   for l:i in range(1, l:limit)
@@ -137,16 +148,6 @@ endfunction
 
 command! WipeUnattachedBuffers call <SID>WipeUnattachedBuffers()
 command! BWU WipeUnattachedBuffers
-
-function! ContextAction()
-  let l:cword = expand('<cword>')
-
-  if l:cword == 'true'
-    normal! ciwfalse
-  elseif l:cword == 'false'
-    normal! ciwtrue
-  endif
-endfunction
 
 command! -bang GitDiff execute "Term! git diff ".["\<C-u>","--staged", ""]
       \[confirm('git diff', "&staged\n&worktree\n")]

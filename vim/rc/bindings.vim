@@ -1,15 +1,35 @@
 " vim: ft=sourceonsave.vim fdm=marker foldlevel=0
+" Idiosyncracies: {{{1
+" This section contains all the weird and/or non-standard vim stuff I use. It
+" should be
+"
+" I use C-p/C-d for longer vertical navigation, it's a more natural position
+" with Mod-DH and GACS home row mods
+nnoremap <C-u> <Nop>
+
+" I've never used these two actively ('wq<C-m> is quicker anyway), would
+" rather free them up for bindings
+noremap ZZ <Nop>
+noremap ZQ <Nop>
+
+" The modified miryoku I use has the apostrophe in the P position; this way
+" commands are modless. Regular ' is moved to the Delete key, as it's
+" duplicated by x. Alt also adds an external command bang.
+nnoremap ' :
+nnoremap <A-'> :!
+nnoremap <Delete> '
+
+" yy is a duplicate of Y anyway, so unbind it to make room for other
+" operations
+noremap Y <Nop>
+" 1}}}
 " Unmaps: {{{1
 nnoremap <C-s> <Nop>
 nnoremap <C-t> <Nop>
 nnoremap <C-c> <Nop>
-nnoremap <C-u> <Nop>
 nnoremap <C-c><C-c> <Nop>
 nnoremap <C-a> <Nop>
 noremap <Space> <Nop>
-noremap ZZ <Nop>
-noremap ZQ <Nop>
-noremap Y <Nop>
 noremap q <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
@@ -26,6 +46,9 @@ xnoremap <silent> <A-Up> :move '<-2<CR>gv
 xnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
+
+nnoremap <A-o> :lnext<CR>
+nnoremap <A-i> :lprevious<CR>
 " 1}}}
 " Insert Mode: {{{1
 inoremap <C-g> <Esc>
@@ -314,7 +337,7 @@ nnoremap <silent> <Space>ghwr :!hub browse<CR>
 nnoremap <silent> <Space>gd/ :GitDiff<CR>
 nnoremap <silent> <Space>go :call fzy#leader_script("go", ":!git checkout ")<CR>
 nnoremap <silent> <Space>gs :!git status<CR>
-nnoremap <silent> <Space>gb :call GitBlameLine()<CR>
+nnoremap <silent> <Space>gb :echo GitBlameLine()<CR>
 nnoremap <silent> <Space>gc :Term! git commit<CR>
 nnoremap <Space>g<C-l> :tab SingletonTerm git log<CR>
 nnoremap <Space>gL :vert SingletonTerm git log<CR>
@@ -451,10 +474,31 @@ nnoremap <Space>ll :botright lwindow<CR>
 " 1}}}
 
 
-" Arborist Mappings:
+" Miscellaneous Ctrl Mappings:
 nnoremap <C-a> <Nop>
+function! ContextAction() " {{{1
+  let l:cword = expand('<cword>')
+
+  if l:cword == 'true'
+    normal! ciwfalse
+  elseif l:cword == 'false'
+    normal! ciwtrue
+  endif
+endfunction
+" 1}}}
 nnoremap <C-a><C-t> :call ContextAction()<CR>
 " idk, maybe structural editing commands? splitting/joining on expressions etc
+
+nnoremap qj :botright cnext<CR>
+nnoremap qk :botright cprevious<CR>
+nnoremap q+ :botright cwindow<CR>
+nnoremap qq :botright cwindow<CR>
+nnoremap <A-q> :botright cnext<CR>
+nnoremap <A-Q> :botright cprevious<CR>
+
+nnoremap <Space>lj :botright lnext<CR>
+nnoremap <Space>lk :botright lprevious<CR>
+nnoremap <Space>ll :botright lwindow<CR>
 
 nnoremap <C-n> <Nop>
 
@@ -465,7 +509,8 @@ nnoremap <C-t> <Nop>
 nnoremap <C-c> <Nop>
 nnoremap <silent> <C-c><C-c> :w<CR>:Make<CR>
 nnoremap <expr> <C-c><C-r> ":Rename ".expand("%:t")
-nnoremap <silent> <C-c><C-b> :call GitBlameLine()<CR>
+nnoremap <C-c><C-b> :echo GitBlameLine()<CR>
+nnoremap <C-c>b :echo GitBlameLineFull()<CR>
 nnoremap <expr> <C-c><C-w> ":set bufhidden=".(&bufhidden == 'wipe' ? '' : 'wipe')."\<CR>"
 
 " Actions

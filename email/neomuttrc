@@ -1,3 +1,4 @@
+set nm_default_uri="notmuch:///Users/renee/email/work"
 source ~/.neomuttrc-user
 source ~/.neomuttrc-unbind
 
@@ -56,12 +57,12 @@ set pager_index_lines=10
 set virtual_spoolfile = yes
 set hidden_tags=""
 set nm_exclude_tags = "spam,deleted"
-set nm_open_timeout = 5
+set nm_open_timeout = 0
 set nm_query_type = threads  # messages | threads
 set nm_unread_tag = "unread"
 
 set nm_db_limit = 0
-set nm_default_url = ""
+#set nm_default_url = ""
 set nm_query_type = messages
 # Tags that should be removed or added to the to the messages stored in the NeoMutt record.
 # example:
@@ -119,7 +120,7 @@ bind index _ collapse-all
 unset collapse_all
 
 # sidebar
-set sidebar_visible = yes
+set sidebar_visible = no
 color sidebar_new yellow default
 # set sidebar_format="%B%> (%Nn %Ff %S)"
 set sidebar_format = "%D%* %?N?%N/?%S"

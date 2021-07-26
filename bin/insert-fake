@@ -8,8 +8,8 @@ target="$1"
 shift
 
 if [ "$target" = 'uuid' ]; then
-  hasprog  uuid     &&  exec  uuid     $@
-  hasprog  uuidgen  &&  exec  uuidgen  $@
+  hasprog  uuid     &&  exec  uuid     $@ | tr A-Z a-z
+  hasprog  uuidgen  &&  exec  uuidgen  $@ | tr A-Z a-z
 fi
 
 if [ "$target" = 'name' ]; then

@@ -236,7 +236,7 @@ build_template email/neomuttrc-env-home
 build_template email/neomuttrc-env-work
 build_template email/notmuch-config-home
 build_template email/notmuch-config-work
-build_template shell/alias
+build_template shell/alias-generated
 build_template x11/zathurarc
 build_template x11/xres/colors
 build_template x11/dunstrc
@@ -356,6 +356,7 @@ symlink dir shell/fish $HOME/.config/fish
 
 log "  Other configs"
 symlink file other/batrc $HOME/.batrc
+symlink file shell/alias-generated $HOME/.alias-generated
 symlink file shell/alias $HOME/.alias
 symlink file shell/profile $HOME/.profile
 symlink file shell/user-profile $HOME/.user-profile
@@ -367,6 +368,11 @@ symlink file other/gitconfig $HOME/.gitconfig
 symlink file other/gitconfig-generated $HOME/.gitconfig-generated
 symlink file other/tigrc $HOME/.tigrc
 symlink file other/ctags $HOME/.ctags
+
+if [ -e ~/.zcompdump ]; then
+  log "Clearing zsh completion cache"
+  push_cmd "rm ~/.zcompdump"
+fi
 
 if [ '' != "$FATAL" ]; then
   fatal "There were errors during setup, please fix them and re-run"
