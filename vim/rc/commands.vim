@@ -9,6 +9,17 @@ command! -nargs=* FzyGrep call fzy#in_buffer("rg <args> \| cut -c -250", ':echo 
 
 command! -nargs=1 Chmod call fileutils#chmod(expand('%'), <q-args>) command! -nargs=* Ls echo system('ls --color=always <args>')
 
+let g:gist_urls = []
+function! s:PublishGist()
+  redir! > ~/.tmp/vim-gist-urls
+  silent write !hub gist create
+  redir END
+  let l:url = readfile(glob('~/.tmp/vim-gist-urls'))
+  call add(g:gist_urls, l:url)
+  echo "Created new gist: " . l:url[2]
+endfunction
+command! Gist call <SID>PublishGist()
+
 command! -bang YankFileNameAbsolute call fileutils#yank_path("+",'%:p', "<bang>")
 command! -bang YankFileNameHomedir call fileutils#yank_path("+",'%:p:~', "<bang>")
 command! -bang YankFileNameRelative call fileutils#yank_path("+",'%', "<bang>")
