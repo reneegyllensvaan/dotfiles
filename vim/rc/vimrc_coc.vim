@@ -76,8 +76,4 @@ else
   source ~/.vim/rc/bindings.vim
 end
 
-if !has('gui_running')
-  source ~/.vim/rc/highlights.vim
-endif
-
 source ~/.local.vim

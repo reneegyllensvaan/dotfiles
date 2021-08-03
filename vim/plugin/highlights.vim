@@ -1,6 +1,6 @@
 " vim: fdm=marker ft=sourceonsave.vim
 " nnoremap <Space>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
-set t_Co=16
+" set t_Co=16
 
 " hi CursorLine cterm=none ctermbg=236
 hi CursorLine cterm=none ctermbg=0
