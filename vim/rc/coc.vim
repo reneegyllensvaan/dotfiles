@@ -128,6 +128,9 @@ omap ac <Plug>(coc-classobj-a)
 
 " Goto:
 nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> <M-u>d <C-w>vgd
+nmap <silent> <M-u><M-d> <C-w>sgd
+nmap <silent> <C-u><C-u>gd <C-w>sgd
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
