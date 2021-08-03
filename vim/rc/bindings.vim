@@ -13,11 +13,11 @@ noremap ZZ <Nop>
 noremap ZQ <Nop>
 
 " The modified miryoku I use has the apostrophe in the P position; this way
-" commands are modless. Regular ' is moved to the Delete key, as it's
-" duplicated by x. Alt also adds an external command bang.
-nnoremap ' :
-nnoremap <A-'> :!
-nnoremap <Delete> '
+" commands are on the base layer. Regular ' is moved to the Delete key, as
+" it's duplicated by x. Alt also adds an external command bang.
+noremap ' :
+noremap <A-'> :!
+noremap <Delete> '
 
 " yy is a duplicate of Y anyway, so unbind it to make room for other
 " operations
