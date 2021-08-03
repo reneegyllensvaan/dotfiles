@@ -44,9 +44,6 @@ endfunction
 nnoremap <silent> . :call DoRepeat()<CR>
 
 source ~/.vim/rc/options.vim
-if !has('gui_running')
-  source ~/.vim/rc/highlights.vim
-endif
 source ~/.vim/rc/commands.vim
 source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/snipe.vim
@@ -78,5 +75,9 @@ if exists('$SPACELAB')
 else
   source ~/.vim/rc/bindings.vim
 end
+
+if !has('gui_running')
+  source ~/.vim/rc/highlights.vim
+endif
 
 source ~/.local.vim
