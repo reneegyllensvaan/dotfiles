@@ -1,8 +1,9 @@
 " vim: fdm=marker ft=sourceonsave.vim
 set encoding=utf-8
 
-" Enable line numbers by default
+" Enable line numbers and gutters by default
 set number
+set signcolumn=yes
 
 " Traversing braces should not open folds
 set foldopen-=block
@@ -19,10 +20,10 @@ set shortmess=A
 set autoread
 
 " Indent according to previous line.
-" Indent according to previous line.
 set autoindent
 
-set expandtab      " Use spaces instead of tabs.
+set expandtab    " Use spaces instead of tabs.
+set tabstop=2      " Tab key indents by 2 spaces.
 set softtabstop=2  " Tab key indents by 2 spaces.
 set shiftwidth=2   " >> indents by 2 spaces.
 set shiftround     " >> indents to next multiple of 'shiftwidth'.
@@ -52,17 +53,17 @@ if has('nvim')
   set inccommand=nosplit
 end
 
-set ttyfast                       " Faster redrawing.
-set lazyredraw                    " Only redraw when necessary.
+set ttyfast          " Faster redrawing.
+set lazyredraw       " Only redraw when necessary.
 
-set splitbelow                    " Open new windows below the current window.
-set splitright                    " Open new windows right of the current window.
+set splitbelow       " Open new windows below the current window.
+set splitright       " Open new windows right of the current window.
 
-set wrapscan                      " Searches wrap around end-of-file.
-set report      =0                " Always report changed lines.
-set synmaxcol   =800              " Only highlight the first 200 columns.
-set timeoutlen=2000                " Timeout for code updates
-set ttimeoutlen=0                 " Timeout for mode updates
+set wrapscan         " Searches wrap around end-of-file.
+set report      =0   " Always report changed lines.
+set synmaxcol   =800 " Only highlight the first N columns.
+set timeoutlen=1000  " Timeout for code updates
+set ttimeoutlen=0    " Timeout for mode updates
 set so=999   " Keeps cursor in center of window by default.
 
 set ignorecase  " Case-insensitive :commands and /search
@@ -94,3 +95,7 @@ set undodir     =$HOME/.vim/files/undo/
 if !has('nvim')
   set viminfo     ='100,n$HOME/.vim/files/info/viminfo
 end
+
+" Use `rg` as grep provider
+let &grepprg = "gr-vim"
+set grepformat=%f:%l:%c:%m

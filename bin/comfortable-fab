@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env zsh
+[ "$BISON_BACKEND" ] && source $BISON_BACKEND/.venv/bin/activate
+
 function join {
   delim="$1";
   shift
@@ -19,16 +21,16 @@ fi
 BACKEND_TRIGGERS=(
   'command:api'
   'webserver:'
-  'db_(restore\|upgrade\|revision\|downgrade)'
+  'db_'
 )
 FRONTEND_TRIGGERS=(
   'watcher:'
 )
 for t in $BACKEND_TRIGGERS; do
-  [ `echo $command | grep "$t"` ] && cd ~/backend
+  echo $command | grep -E "$t">/dev/null && cd ~/backend
 done
 for t in $FRONTEND_TRIGGERS; do
-  [ `echo $command | grep "$t"` ] && cd ~/frontend
+  echo $command | grep -E "$t" >/dev/null && cd ~/frontend
 done
 
 echo "fab '$command'"

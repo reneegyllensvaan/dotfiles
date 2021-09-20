@@ -11,7 +11,7 @@
 [hub]
   protocol = ssh
 [init]
-  defaultBranch = main
+  defaultBranch = trunk
 [rerere]
 	enabled = true
 [fetch]
@@ -63,7 +63,6 @@
 
   o   = checkout
 
-  pop = stash pop
   pm  = pull --rebase=false
   pr  = pull --rebase
   pf  = pull --ff-only
@@ -85,6 +84,8 @@
   zs  = stash show
   # Briefs }}}
 
+  pop = stash pop
+  fixup = "! hash=$(git log --pretty=oneline | head -n 100 | fzy) && git commit --fixup $(echo $hash | awk '{print $1}')"
   ls-files-root = "! git ls-files"
   root = "! pwd"
 
@@ -105,3 +106,11 @@
 [filter "tabspace"]
 	smudge = gunexpand --tabs=4 --first-only
 	clean = gexpand --tabs=4 --initial
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[user]
+	name = Renée Gyllensvaan
+	email = rgyllensvaan@cobaltgp.com

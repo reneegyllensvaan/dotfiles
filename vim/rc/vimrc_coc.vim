@@ -48,7 +48,7 @@ source ~/.vim/rc/commands.vim
 source ~/.vim/rc/look_and_feel.vim
 source ~/.vim/rc/snipe.vim
 source ~/.vim/rc/textobject.vim
-source ~/.vim/rc/autocorrect.vim
+source ~/.vim/rc/abbrev.vim
 
 function! UseTreesitter()
   " source ~/.vim/rc/lsp.vim

@@ -105,3 +105,11 @@ function! myfns#toggle_search_direction()
   call setreg('/', l:sq)
   echo l:sq
 endfunction
+
+function! myfns#delete_function_call()
+  call search('\<', 'Wbce')
+  " Set up 3 marks for the parts we want to delete
+  normal! mzf(mx%mc
+  " Then delete them
+  normal! `cx`xv`zd
+endfunction

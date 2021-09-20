@@ -1,12 +1,17 @@
 #!/bin/sh
 while [ "$1" = "--" ]; do shift ; done
 
+
 if [ "$NVIM_LISTEN_ADDRESS" ]; then
-  exec nvr --servername $NVIM_LISTEN_ADDRESS --remote-tab-wait $1
+  if [ "$NVIM_USE_TABS" = "1" ]; then
+    exec nvr --servername $NVIM_LISTEN_ADDRESS --remote-tab-wait $1
+  else
+    exec nvr --servername $NVIM_LISTEN_ADDRESS -cc 'wincmd v | wincmd l' --remote-wait $1
+  fi
 fi
 
 vimprog=vim
 if [ "$MACVIM_RUNNING" = "yes" ]; then
   vimprog=mvim
 fi
-$vimprog --servername $VIM_SERVERNAME --remote-tab-wait $@
+$vimprog --servername $VIM_SERVERNAME --remote-wait $flags $@

@@ -35,7 +35,7 @@ export DEFERRED_COMMANDS_FILE="$HOME/.deferred"
 
 export BAT_CONFIG_PATH="$HOME/.batrc"
 export CLICOLOR=1
-export CLICOLOR_FORCE=1
+unset CLICOLOR_FORCE
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export KEYTIMEOUT=1
 #export FZF_ALT_C_OPTS="--preview 'tree -C {} | head -200'"
@@ -62,3 +62,4 @@ which xsel >/dev/null 2>&1 && export CLIPBOARD_COPY='xsel -b' \
 export Q=/dev/null  # "Quiet"
 export C=$CLIPBOARD_COPY
 export P=$CLIPBOARD_PASTE
+if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

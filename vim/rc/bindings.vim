@@ -51,6 +51,8 @@ nnoremap <A-o> :lnext<CR>
 nnoremap <A-i> :lprevious<CR>
 " 1}}}
 " Insert Mode: {{{1
+inoremap <Tab> <C-t>
+inoremap <S-Tab> <C-d>
 inoremap <C-g> <Esc>
 inoremap <C-p> <Nop>
 
@@ -62,6 +64,8 @@ inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
 inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
+inoremap <expr> <C-c><C-i>d system("date '+%F'")[:-2]
+inoremap <expr> <C-c><C-i><C-t> system("date '+%s'")[:-2]
 " 1}}}
 " Microsnippets: {{{1
 inoremap <C-e> <Nop>
@@ -129,6 +133,8 @@ nnoremap <expr> crp "ciw".myfns#to_pascal(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crs "ciw".myfns#to_snake(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crS "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
 
+nnoremap dC :call myfns#delete_function_call()<CR>
+
 " TODO: Try out these approaches to make case conversion repeatable
 " onoremap rc
 " onoremap rp
@@ -188,8 +194,8 @@ xnoremap zl <Esc>`<mz`>mx`zjm<`xkm>gv
 xnoremap < <gv
 xnoremap > >gv
 xnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
-xnoremap \C :!column -t<cr>
-xnoremap <CR> <Esc>`>a<CR><Esc>m>`<i<CR><Esc>==
+xnoremap \C :!column -t<CR>gv
+xnoremap <CR> <Esc>`<mz`>mx`xa<CR><Esc>`zi<CR><Esc>=j
 xnoremap \sl :sort<CR>
 
 " Don't include trailing line ending on $ in visual mode
@@ -299,6 +305,7 @@ nnoremap <Space>o  :so ~/workmode.vim<CR>
 " Coc
 nnoremap <Space>s- :CocDisable<CR>
 nnoremap <Space>s+ :call myfns#start_coc()<CR>
+nnoremap <Space>S+ :source ~/.vim/rc/lsp.vim<CR>
 
 " Bookmarks
 nnoremap <Space>'E :e ~/.vim/files/bookmarks.vim<CR>
@@ -495,6 +502,7 @@ nnoremap q+ :botright cwindow<CR>
 nnoremap qq :botright cwindow<CR>
 nnoremap <A-q> :botright cnext<CR>
 nnoremap <A-Q> :botright cprevious<CR>
+nnoremap qt :Tags<CR>
 
 nnoremap <Space>lj :botright lnext<CR>
 nnoremap <Space>lk :botright lprevious<CR>

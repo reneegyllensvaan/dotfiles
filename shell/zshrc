@@ -130,3 +130,4 @@ setopt PATH_DIRS
 # Options }}}
 
 true
+if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

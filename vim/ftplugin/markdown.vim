@@ -1,3 +1,5 @@
+packadd fastfold
+
 function! s:ToggleChecked() abort
   let line = getline('.')
   if line =~ "- \\[ \\]"
@@ -32,7 +34,11 @@ nnoremap <silent> <buffer> <C-e> >>
 nnoremap <silent> <buffer> gqq Vgq
 
 nnoremap <silent> <buffer> <C-c><C-c> :call <SID>ToggleChecked()<CR>
+
+" List item management:
+" nnoremap <silent> <buffer> o A<CR>
 nnoremap <silent> <buffer> o A<CR>
+nnoremap <silent> <buffer> <C-c><C-i> o<C-d><C-d>-<Space>
 
 iabbrev <buffer> -[] -<space>[<space>]
 " iabbrev <buffer> [] []()<Left><Left><Left>

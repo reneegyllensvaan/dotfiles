@@ -6,6 +6,8 @@ command! -bang -nargs=* RgFromCurrentFile Rg exec "Rg ".expand('%:h')
 command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': '30%'})
 
 command! -nargs=* FzyGrep call fzy#in_buffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
+command! Fixme let g:grepprg = &grepprg | set grepprg=rg\ --vimgrep | grep FIXME .  --iglob '!*pylint*' | let &grepprg = g:grepprg
+command! FIXME Fixme
 
 command! -nargs=1 Chmod call fileutils#chmod(expand('%'), <q-args>) command! -nargs=* Ls echo system('ls --color=always <args>')
 
@@ -150,15 +152,14 @@ function! s:WipeUnattachedBuffers()
   let l:limit = bufnr("$")
   for l:i in range(1, l:limit)
     if bufnr(l:i) > 0
-      if win_findbuf(l:i) == []
+      if win_findbuf(l:i) == [] && bufname(l:i) != 'scratchterm'
         exec (l:i)."bw"
       endif
     endif
   endfor
 endfunction
-
 command! WipeUnattachedBuffers call <SID>WipeUnattachedBuffers()
-command! BWU WipeUnattachedBuffers
+command! BWU silent WipeUnattachedBuffers
 
 command! -bang GitDiff execute "Term! git diff ".["\<C-u>","--staged", ""]
       \[confirm('git diff', "&staged\n&worktree\n")]

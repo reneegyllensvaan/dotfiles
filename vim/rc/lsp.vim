@@ -90,7 +90,7 @@ inoremap <expr> <CR> pumvisible() ? "\<Plug>(completion_confirm_completion)" : "
 
 " --- diagnostic-nvim --- {{{
 let g:diagnostic_insert_delay = 1
-let g:diagnostic_enable_virtual_text = 1
+let g:diagnostic_enable_virtual_text = 0
 let g:diagnostic_virtual_text_prefix = ''
 
 " sign define LspDiagnosticsErrorSign text=✖
