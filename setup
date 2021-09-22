@@ -202,6 +202,7 @@ ensure_git_repo vim/pack/plugins/start/skim_base https://github.com/lotabout/ski
 symlink dir vim/pack/plugins/start/skim_base ~/.skim
 ensure_git_repo vim/pack/plugins/start/skim https://github.com/lotabout/skim.vim
 ensure_git_repo vim/pack/plugins/start/eunuch https://github.com/tpope/vim-eunuch
+ensure_git_repo vim/pack/plugins/start/fastfold https://github.com/Konfekt/FastFold.git
 # Dynamic plugins
 ensure_git_repo vim/pack/plugins/opt/vinegar https://github.com/tpope/vim-vinegar
 ensure_git_repo vim/pack/plugins/opt/gitgutter https://github.com/airblade/vim-gitgutter.git
@@ -226,7 +227,6 @@ ensure_git_repo vim/pack/plugins/opt/clap https://github.com/liuchengxu/vim-clap
 ensure_git_repo vim/pack/plugins/opt/octo https://github.com/pwntester/octo.nvim.git
 ensure_git_repo vim/pack/plugins/opt/hop https://github.com/phaazon/hop.nvim
 ensure_git_repo vim/pack/plugins/opt/blame https://github.com/f-person/git-blame.nvim
-ensure_git_repo vim/pack/plugins/opt/fastfold https://github.com/Konfekt/FastFold.git
 
 log "Building shell template files"
 build_template gpg/gpg.conf
