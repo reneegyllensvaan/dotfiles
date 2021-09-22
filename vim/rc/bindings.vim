@@ -59,13 +59,6 @@ inoremap <C-p> <Nop>
 inoremap <C-c> <Nop>
 inoremap <C-c><C-s> <C-o>:w<CR>
 inoremap <C-r><C-r> <C-r>"
-
-inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
-inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
-inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
-inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
-inoremap <expr> <C-c><C-i>d system("date '+%F'")[:-2]
-inoremap <expr> <C-c><C-i><C-t> system("date '+%s'")[:-2]
 " 1}}}
 " Microsnippets: {{{1
 inoremap <C-e> <Nop>
@@ -74,6 +67,12 @@ inoremap <C-e><C-y> [<Cr>]<C-o>O
 inoremap <C-e><C-e> (<Cr>)<C-o>O
 " inoremap <C-e><C-b> <C-o>:Macrosnippet<CR>
 
+inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
+inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
+inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
+inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
+inoremap <expr> <C-c><C-i>d system("date '+%F'")[:-2]
+inoremap <expr> <C-c><C-i><C-t> system("date '+%s'")[:-2]
 " 1}}}
 "  Folding: {{{1
 

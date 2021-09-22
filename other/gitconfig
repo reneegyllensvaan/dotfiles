@@ -72,6 +72,8 @@
   r   = rebase
   rc  = rebase --continue
   ri  = rebase -i
+  r-h  = reset --hard
+  back  = "! git reset --hard @~${1}"
 
   s   = status
 

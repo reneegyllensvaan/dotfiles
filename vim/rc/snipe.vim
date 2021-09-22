@@ -13,7 +13,7 @@
 "     very rarely find any bigrams with backslashes, but more often I do want to
 "     find the next alpha-symbol with `s\<`, so I don't handle escapes.
 
-let g:snipe_min_highlight_length = 1
+let g:snipe_min_highlight_length = 2
 
 let s:snipe_just_moved = 0
 let s:snipe_op = ""

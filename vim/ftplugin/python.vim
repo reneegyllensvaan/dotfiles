@@ -24,6 +24,7 @@ inoremap <buffer> <C-t><C-a> <Space>=<Space>attr.ib(type=)<Left>
 
 command! PythonBlack %!black -q -
 nnoremap <buffer> <C-s>F :PythonBlack<CR>
+command! PB PythonBlack
 
 command! PythonIgnoreUnusedImport normal!A<Space><Space>#<Space>noqa:<Space>F401,<Space>pylint:<Space>disable=unused-import
 command! PythonIgnoreNotAnIterable normal!A<Space><Space>#<Space>pylint:<Space>disable=not-an-iterable
