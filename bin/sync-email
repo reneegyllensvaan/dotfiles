@@ -1,6 +1,15 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
-source ~/email/venv/bin/activate || exit
+out=$HOME/.local/log/sync-email.out
+err=$HOME/.local/log/sync-email.err
+
+once=0
+while [ "$1" ]; do
+  case "$1" in
+    "--once") once=1 ;;
+  esac
+  shift
+done
 
 # stretch_notification () {
 #   while true; do
@@ -16,7 +25,12 @@ source ~/email/venv/bin/activate || exit
 # }
 
 fetch_email () {
+  source $HOME/email/venv/bin/activate || exit
+  source $HOME/.user-profile || exit
   while true; do
+    echo "\n==================================  Starting new run  =================================="
+    echo "\n==================================  Starting new run  ==================================" >&2
+
     # Purge everything in trash from other tags
     [ "$USER_HOME_EMAIL" ] && notmuch-home new
     [ "$USER_WORK_EMAIL" ] && notmuch-work new
@@ -32,9 +46,10 @@ fetch_email () {
                               ; ln -sf ~/.notmuch-config-work ~/.notmuch-config \
                               ; cd ~/email/work && gmi sync)
 
+    [ "$1" = "1" ] && return
     sleep $EMAIL_SYNC_INTERVAL;
   done
 }
 
 #fetch_email & stretch_notification
-fetch_email
+fetch_email $once >>$out 2>>$err

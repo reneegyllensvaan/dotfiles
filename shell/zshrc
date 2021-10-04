@@ -23,11 +23,17 @@ export KEYTIMEOUT=1; bindkey -v
 # # Set completion to be case-insensitive in unambiguous cases
 # zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
+# zmodload zsh/complist
+# zstyle ':completion:*' menu select
+# bindkey -M menuselect '^[[Z' reverse-menu-complete
+
 zstyle ':completion:*' matcher-list '' \
   'm:{a-z\-}={A-Z\_}' \
-  'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
-  'r:|?=** m:{a-z\-}={A-Z\_}'
+  'r:[[:alpha:]]||[[:alpha:]]=** m:{a-z\-}={A-Z\-}'
 
+  # 'r:|?=** m:{a-z\-}={A-Z\_}'  # Case insensitive matching
+
+  #'r:[^[:alpha:]]||[[:alpha:]]=** r:|=* m:{a-z\-}={A-Z\_}' \
 # Misc }}}
 # History {{{
 export HISTSIZE=10000000
@@ -93,7 +99,6 @@ fi
 [ $RANGER_LEVEL ] && nesting_prompt="(rr $RANGER_LEVEL) " #
 [ $NNNLVL ] && nesting_prompt="(nnn $NNNLVL) " #
 
-# Set up the prompt template (one line)
 PROMPT="%{$fg[blue]%}%B%~%{$reset_color%}"
 [ $SSH_CLIENT ] \
   && PROMPT="$PROMPT [%n@%m]" \
@@ -136,3 +141,12 @@ setopt PATH_DIRS
 
 true
 if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+
+__reload_zsh () {
+  source ~/.zshrc
+  echo "source ~/.zshrc"
+  zle reset-prompt
+}
+zle -N __reload_zsh
+bindkey '^Y' __reload_zsh

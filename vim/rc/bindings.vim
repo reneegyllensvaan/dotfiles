@@ -73,6 +73,7 @@ inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
 inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
 inoremap <expr> <C-c><C-i>d system("date '+%F'")[:-2]
 inoremap <expr> <C-c><C-i><C-t> system("date '+%s'")[:-2]
+inoremap <C-c><C-i><C-b> <C-v>u2022
 " 1}}}
 "  Folding: {{{1
 
@@ -485,10 +486,17 @@ nnoremap <C-a> <Nop>
 function! ContextAction() " {{{1
   let l:cword = expand('<cword>')
 
+  if l:cword =~ '^\d\{10\}$'
+    !gdate -d@<cword>
+    return
+  endif
+
   if l:cword == 'true'
     normal! ciwfalse
+    return
   elseif l:cword == 'false'
     normal! ciwtrue
+    return
   endif
 endfunction
 " 1}}}

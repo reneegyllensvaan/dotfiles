@@ -105,8 +105,8 @@ function! GitBlameLineFull()
   let l:blame = GitBlameLine()
   let l:msg = l:blame
 
-  if l:blame !~# '^[0-9a-f]\{9\} '
-    return l:msg
+  if l:blame !~ '^[0-9a-f]\{10\} '
+    return "weird blame: ".l:msg
   endif
   let l:hash = l:blame[:8]
 

@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+out=$HOME/.local/log/upgrade-packages.out
+err=$HOME/.local/log/upgrade-packages.err
+
+if [ "$OPERATING_SYSTEM" = "osx" ]; then
+  brew upgrade >>$out 2>>$err
+fi

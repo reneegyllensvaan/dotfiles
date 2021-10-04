@@ -21,6 +21,7 @@ hi  CocGitRemovedSign        cterm=none  ctermbg=red     ctermfg=black
 hi  CocGitTopRemovedSign     cterm=none  ctermbg=none    ctermfg=red
 hi  CocRustTypeHint          cterm=none  ctermbg=none    ctermfg=yellow
 hi  CocRustChainingHint      cterm=none  ctermbg=none    ctermfg=blue
+hi  CocUnusedHighlight       cterm=none  ctermbg=none    ctermfg=darkgray
 
 
 hi  User1               cterm=none  ctermbg=0        ctermfg=white
