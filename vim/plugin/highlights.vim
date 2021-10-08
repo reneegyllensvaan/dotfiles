@@ -1,4 +1,8 @@
 " vim: fdm=marker ft=sourceonsave.vim
+if has('gui_running')
+  finish
+endif
+
 " nnoremap <Space>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 " set t_Co=16
 
@@ -113,6 +117,9 @@ hi CursorLineNr cterm=none ctermbg=none ctermfg=white
 
 " C++
 hi cIncluded cterm=none ctermbg=none ctermfg=green
+
+" Python
+hi pythonSpaceError cterm=none ctermbg=red ctermfg=white
 
 " Vimscript
 hi vimNotation cterm=none ctermbg=none ctermfg=blue

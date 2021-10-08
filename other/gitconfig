@@ -91,6 +91,9 @@
   ls-files-root = "! git ls-files"
   root = "! pwd"
 
+[advice]
+  addEmptyPathspec = false
+
 [tig "color"]
 	cursor		= default	0 underline
 	title-blur	= white	blue
@@ -113,6 +116,3 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
-[user]
-	name = Renée Gyllensvaan
-	email = rgyllensvaan@cobaltgp.com
