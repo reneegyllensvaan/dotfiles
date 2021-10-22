@@ -1,8 +1,8 @@
 " vim: fdm=marker ft=sourceonsave.vim
 
-function! myfns#to_pascal(word)
+function! editfns#to_pascal(word)
   let l:s = ''
-  for word in myfns#split_case(a:word)
+  for word in editfns#split_case(a:word)
     if !len(word)
       continue
     endif
@@ -11,8 +11,8 @@ function! myfns#to_pascal(word)
   return l:s
 endfunction
 
-function! myfns#to_camel(word)
-  let l:words = myfns#split_case(a:word)
+function! editfns#to_camel(word)
+  let l:words = editfns#split_case(a:word)
   let l:s = l:words[0]
   for word in l:words[1:]
     if !len(word)
@@ -23,15 +23,15 @@ function! myfns#to_camel(word)
   return l:s
 endfunction
 
-function! myfns#to_snake(word)
-  return join(myfns#split_case(a:word), '_')
+function! editfns#to_snake(word)
+  return join(editfns#split_case(a:word), '_')
 endfunction
 
-function! myfns#to_upper_snake(word)
-  return toupper(join(myfns#split_case(a:word), '_'))
+function! editfns#to_upper_snake(word)
+  return toupper(join(editfns#split_case(a:word), '_'))
 endfunction
 
-function! myfns#visual_between(from, to)
+function! editfns#visual_between(from, to)
   if v:operator == 'v' || v:operator == 'V'
     normal! <Esc>
   endif
@@ -40,19 +40,19 @@ function! myfns#visual_between(from, to)
   call search(a:to, 'Wc')
 endfunction
 
-function! myfns#inside_name()
-  call myfns#visual_between('\(^\|[^A-z.]\)[A-z.]', '[A-z.]\($\|[^A-z.]\)')
+function! editfns#inside_name()
+  call editfns#visual_between('\(^\|[^A-z.]\)[A-z.]', '[A-z.]\($\|[^A-z.]\)')
 endfunction
 
-function! myfns#inside_snake()
-  call myfns#visual_between('\(\<\|_\).', '.\(\>\|_\)')
+function! editfns#inside_snake()
+  call editfns#visual_between('\(\<\|_\).', '.\(\>\|_\)')
 endfunction
 
-function! myfns#inside_capital()
-  call myfns#visual_between('\(\<\|[A-Z]\)', '.\(\>\|[A-Z]\)')
+function! editfns#inside_capital()
+  call editfns#visual_between('\(\<\|[A-Z]\)', '.\(\>\|[A-Z]\)')
 endfunction
 
-function! myfns#split_case(word)
+function! editfns#split_case(word)
   let l:ignorecase = &ignorecase
   set noignorecase
   let l:words = split(tolower(substitute(a:word, '\([a-z]\)\([A-Z]\)', '\1_\2', 'g')), '_')
@@ -60,7 +60,7 @@ function! myfns#split_case(word)
   return l:words
 endfunction
 
-function! myfns#start_coc()
+function! editfns#start_coc()
   " call EnsurePluginLoaded('coc')
   " runtime plugin/coc.vim
   packadd coc
@@ -74,7 +74,7 @@ function! myfns#start_coc()
   endif
 endfunction
 
-function! myfns#toggle_syntax()
+function! editfns#toggle_syntax()
   if !exists("g:syntax_on") || !g:syntax_on
     syntax on
   else
@@ -82,7 +82,7 @@ function! myfns#toggle_syntax()
   endif
 endfunction
 
-function! myfns#toggle_case_sensitive()
+function! editfns#toggle_case_sensitive()
   let l:sq = getreg('/')
   if l:sq =~# '\/c$'
     let l:sq = l:sq[:-3].'/C'
@@ -95,7 +95,7 @@ function! myfns#toggle_case_sensitive()
   echo l:sq
 endfunction
 
-function! myfns#toggle_search_direction()
+function! editfns#toggle_search_direction()
   let l:sq = getreg('/')
   if l:sq =~# '\/e$'
     let l:sq = l:sq[:-3]
@@ -106,7 +106,7 @@ function! myfns#toggle_search_direction()
   echo l:sq
 endfunction
 
-function! myfns#delete_function_call()
+function! editfns#delete_function_call()
   call search('\<', 'Wbce')
   " Set up 3 marks for the parts we want to delete
   normal! mzf(mx%mc

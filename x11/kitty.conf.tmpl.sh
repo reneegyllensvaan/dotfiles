@@ -24,7 +24,11 @@ cat << EOF
 #:     italic_font      Operator Mono Book Italic
 #:     bold_italic_font Operator Mono Medium Italic
 
-font_family Iosevka Fixed
+font_family      Iosevka Nerd Font Mono Regular
+bold_font        Iosevka Nerd Font Mono Bold
+italic_font      Iosevka Nerd Font Mono Italic
+bold_italic_font Iosevka Nerd Font Mono Bold Italic
+#font_family Iosevka Fixed
 font_size 11.0
 
 #: Font size (in pts)

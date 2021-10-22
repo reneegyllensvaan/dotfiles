@@ -20,16 +20,17 @@ source "$HOME/.zfunctions/nvim.zsh"
 # Set vi mode with no timeout
 export KEYTIMEOUT=1; bindkey -v
 
-# # Set completion to be case-insensitive in unambiguous cases
-# zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
 
-# zmodload zsh/complist
-# zstyle ':completion:*' menu select
-# bindkey -M menuselect '^[[Z' reverse-menu-complete
+zmodload zsh/complist
+zstyle ':completion:*' menu select
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 
-zstyle ':completion:*' matcher-list '' \
-  'm:{a-z\-}={A-Z\_}' \
-  'r:[[:alpha:]]||[[:alpha:]]=** m:{a-z\-}={A-Z\-}'
+# Set completion to be case-insensitive in unambiguous cases
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}'
+
+# zstyle ':completion:*' matcher-list '' \
+#   'm:{a-z\-}={A-Z\_}' \
+#   'r:[[:alpha:]]||[[:alpha:]]=** m:{a-z\-}={A-Z\-}'
 
   # 'r:|?=** m:{a-z\-}={A-Z\_}'  # Case insensitive matching
 

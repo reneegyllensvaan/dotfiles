@@ -1,0 +1,12 @@
+#!/bin/sh
+
+which jq || exit
+
+file="${JSON_CONFIG_PATH}"
+
+while "$1" | grep -E '^-'; do
+  case "$1" in
+    "-f"|"--file") file="$2";shift ;;
+  esac
+  shift
+done

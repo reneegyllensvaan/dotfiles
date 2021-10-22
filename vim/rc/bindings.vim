@@ -46,9 +46,6 @@ xnoremap <silent> <A-Up> :move '<-2<CR>gv
 xnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
-
-nnoremap <A-o> :lnext<CR>
-nnoremap <A-i> :lprevious<CR>
 " 1}}}
 " Insert Mode: {{{1
 inoremap <Tab> <C-t>
@@ -128,12 +125,14 @@ xnoremap <silent> gj :move '>+1<CR>gv
 xnoremap <silent> gk :move '<-2<CR>gv
 
 " Toggle identifier case
-nnoremap <expr> crc "ciw".myfns#to_camel(expand("<cword>"))."\<Esc>"
-nnoremap <expr> crp "ciw".myfns#to_pascal(expand("<cword>"))."\<Esc>"
-nnoremap <expr> crs "ciw".myfns#to_snake(expand("<cword>"))."\<Esc>"
-nnoremap <expr> crS "ciw".myfns#to_upper_snake(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crc "ciw".editfns#to_camel(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crp "ciw".editfns#to_pascal(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crs "ciw".editfns#to_snake(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crS "ciw".editfns#to_upper_snake(expand("<cword>"))."\<Esc>"
 
-nnoremap dC :call myfns#delete_function_call()<CR>
+nnoremap dC :call editfns#delete_function_call()<CR>
+
+nnoremap c~ ~hi<Space><C-o>h
 
 " TODO: Try out these approaches to make case conversion repeatable
 " onoremap rc
@@ -142,10 +141,10 @@ nnoremap dC :call myfns#delete_function_call()<CR>
 " onoremap rS
 
 " Extra textobjects for sub-words
-onoremap <silent> i_ :<C-u>call myfns#inside_snake()<CR>
-onoremap <silent> iA :<C-u>call myfns#inside_capital()<CR>
-onoremap <silent> in :<C-u>call myfns#inside_name()<CR>
-vnoremap <silent> in :<C-u>call myfns#inside_name()<CR>
+onoremap <silent> i_ :<C-u>call editfns#inside_snake()<CR>
+onoremap <silent> iA :<C-u>call editfns#inside_capital()<CR>
+onoremap <silent> in :<C-u>call editfns#inside_name()<CR>
+vnoremap <silent> in :<C-u>call editfns#inside_name()<CR>
 " 1}}}
 " Terminal Mode Mappings: {{{1
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
@@ -196,8 +195,10 @@ xnoremap > >gv
 xnoremap q<CR> :<C-u>call visualops#break_lines()<CR>
 xnoremap \C :!column -t<CR>gv
 xnoremap <CR> <Esc>`<mz`>mx`xa<CR><Esc>`zi<CR><Esc>=j
+" sort lines
 xnoremap \sl :sort<CR>
-
+" search for current selection
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " Don't include trailing line ending on $ in visual mode
 xnoremap $ $h
 
@@ -237,8 +238,8 @@ nnoremap <silent> <A-w> :call searchpos('\<')<CR>
 nnoremap <silent> <A-b> :call searchpos('\<', 'b')<CR>
 nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :RgFromCurrentFile<CR>
-nnoremap <Leader>/ :call myfns#toggle_case_sensitive()<CR>
-nnoremap <Leader>? :call myfns#toggle_search_direction()<CR>
+nnoremap <Leader>/ :call editfns#toggle_case_sensitive()<CR>
+nnoremap <Leader>? :call editfns#toggle_search_direction()<CR>
 
 let g:ctrl_d_jump = 10
 nnoremap <expr> <silent> <C-d> g:ctrl_d_jump."j"
@@ -259,7 +260,7 @@ nnoremap <Space>tgg :call ToggleGitGutter()<CR>
 nnoremap <Space>tn :set number!<CR>
 nnoremap <Space>tr :set relativenumber!<CR>
 nnoremap <Space>tsL :set laststatus=0<CR>
-nnoremap <Space>tss :call myfns#toggle_syntax()<CR>
+nnoremap <Space>tss :call editfns#toggle_syntax()<CR>
 nnoremap <Space>ttw0 :set textwidth=100<CR>
 nnoremap <Space>ttw8 :set textwidth=80<CR>
 nnoremap <Space>ttw9 :set textwidth=90<CR>
@@ -304,7 +305,7 @@ nnoremap <Space>o  :so ~/workmode.vim<CR>
 
 " Coc
 nnoremap <Space>s- :CocDisable<CR>
-nnoremap <Space>s+ :call myfns#start_coc()<CR>
+nnoremap <Space>s+ :call editfns#start_coc()<CR>
 nnoremap <Space>S+ :source ~/.vim/rc/lsp.vim<CR>
 
 " Bookmarks
@@ -470,14 +471,21 @@ noremap <A-g> <Esc>
 inoremap <A-g> <Esc>
 tnoremap <A-g> <C-\><C-n>
 " Quick Commands 1}}}
-" QuickFix: (LocList) {{{1
+" QuickFix: (and LocList) {{{1
 nnoremap qj :botright cnext<CR>
 nnoremap qk :botright cprevious<CR>
 nnoremap q+ :botright cwindow<CR>
+nnoremap q- :cclose<CR>
 
 nnoremap <Space>lj :botright lnext<CR>
 nnoremap <Space>lk :botright lprevious<CR>
 nnoremap <Space>ll :botright lwindow<CR>
+
+nnoremap <A-o> :lnext<CR>
+nnoremap <A-i> :lprevious<CR>
+
+nnoremap <A-q> :cnext<CR>
+nnoremap <A-Q> :cprevious<CR>
 " 1}}}
 
 
@@ -510,10 +518,6 @@ nnoremap qq :botright cwindow<CR>
 nnoremap <A-q> :botright cnext<CR>
 nnoremap <A-Q> :botright cprevious<CR>
 nnoremap qt :Tags<CR>
-
-nnoremap <Space>lj :botright lnext<CR>
-nnoremap <Space>lk :botright lprevious<CR>
-nnoremap <Space>ll :botright lwindow<CR>
 
 nnoremap <C-n> <Nop>
 

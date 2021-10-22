@@ -1,0 +1,9 @@
+#!/bin/sh
+_stop () {
+  echo "$ vagrant halt"
+  vagrant halt
+}
+trap _stop INT
+
+vagrant up && vagrant rsync-auto
+wait
