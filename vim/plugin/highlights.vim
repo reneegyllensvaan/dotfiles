@@ -55,7 +55,7 @@ hi  ColorColumn  cterm=none      ctermbg=0             ctermfg=none
 hi  IncSearch    cterm=none      cterm=reverse
 hi  ModeMsg      cterm=none      cterm=bold
 hi  MoreMsg      cterm=none      ctermfg=DarkGreen
-hi  NonText      cterm=none      ctermbg=none          ctermfg=Blue
+hi  NonText      cterm=none      ctermbg=none          ctermfg=darkgray
 hi  Pmenu        cterm=none      ctermbg=black         ctermfg=white
 hi  PmenuSel     cterm=none      ctermbg=blue          ctermfg=black
 hi  Question     cterm=none      ctermbg=black         ctermfg=DarkGreen

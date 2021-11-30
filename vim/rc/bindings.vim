@@ -22,6 +22,12 @@ noremap <Delete> '
 " yy is a duplicate of Y anyway, so unbind it to make room for other
 " operations
 noremap Y <Nop>
+
+" Swap `v` and `V`. This 'breaks' some stuff, or at least exposes that some
+" functions expect you to use inline visual mode by default.
+nnoremap v V
+nnoremap V v
+xnoremap v v
 " 1}}}
 " Unmaps: {{{1
 nnoremap <C-s> <Nop>
@@ -46,10 +52,14 @@ xnoremap <silent> <A-Up> :move '<-2<CR>gv
 xnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
+
+nnoremap <expr> <M-%> getline(".")[getpos(".")[2]-1] =~# '[\[\]\{\}\(\)]' ? "v\%" : ":call editfns#around_delimiters()<CR>"
 " 1}}}
 " Insert Mode: {{{1
-inoremap <Tab> <C-t>
-inoremap <S-Tab> <C-d>
+if !hasmapto("\<Tab>")
+  inoremap <Tab> <C-t>
+  inoremap <S-Tab> <C-d>
+endif
 inoremap <C-g> <Esc>
 inoremap <C-p> <Nop>
 
@@ -63,6 +73,10 @@ inoremap <C-e><C-l> {<Cr>}<C-o>O
 inoremap <C-e><C-y> [<Cr>]<C-o>O
 inoremap <C-e><C-e> (<Cr>)<C-o>O
 " inoremap <C-e><C-b> <C-o>:Macrosnippet<CR>
+inoremap <M-e> <Space>==<Space>
+inoremap <M-E> <Space>!=<Space>
+
+inoremap <C-t><C-u> UUID
 
 inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
@@ -125,6 +139,7 @@ xnoremap <silent> gj :move '>+1<CR>gv
 xnoremap <silent> gk :move '<-2<CR>gv
 
 " Toggle identifier case
+nnoremap <expr> crk "ciw".editfns#to_kebab(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crc "ciw".editfns#to_camel(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crp "ciw".editfns#to_pascal(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crs "ciw".editfns#to_snake(expand("<cword>"))."\<Esc>"
@@ -201,17 +216,6 @@ xnoremap \sl :sort<CR>
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 " Don't include trailing line ending on $ in visual mode
 xnoremap $ $h
-
-nnoremap v V
-nnoremap V v
-xnoremap v v
-" " v key cycles V -> ^V -> v -> ...
-" vnoremap <expr> mode() == 'V' ? "\<C-v>" : (mode() == "\<C-v>" ? 'v' : 'V')
-" " Rotate the default mappings a bit based on most common cases
-" " This is a work in progress, it messes with `viw` motions and similar
-" nnoremap v V
-" nnoremap V v
-" nnoremap <C-v> <C-v>
 " 1}}}
 " Window Mappings: {{{1
 nnoremap <Right> :call DrillWindowOrTab(0)<CR>
@@ -235,7 +239,7 @@ nnoremap <Space>wt_ :Term<CR>
 " 1}}}
 " Searching And Navigation: {{{1
 nnoremap <silent> <A-w> :call searchpos('\<')<CR>
-nnoremap <silent> <A-b> :call searchpos('\<', 'b')<CR>
+nnoremap <silent> <A-W> :call searchpos('\<', 'b')<CR>
 nnoremap <Space>/ :Rg<CR>
 nnoremap <Space>? :RgFromCurrentFile<CR>
 nnoremap <Leader>/ :call editfns#toggle_case_sensitive()<CR>

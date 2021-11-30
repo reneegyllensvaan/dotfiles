@@ -69,9 +69,10 @@ set so=999   " Keeps cursor in center of window by default.
 set ignorecase  " Case-insensitive :commands and /search
 set smartcase   " Case-sensitive search if query contains an uppercase letter
 
-set nolist                          " Show non-printable characters.
+set nolist  " Show non-printable characters.
 if has('multi_byte') && &encoding ==# 'utf-8'
-  let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+  " let &listchars = 'tab:▸ ,extends:❯,precedes:❮,nbsp:±'
+  let &listchars = 'tab:│ ,trail:·,extends:→,precedes:❮,nbsp:±'
 else
   let &listchars = 'tab:> ,extends:>,precedes:<,nbsp:.'
 endif

@@ -105,7 +105,7 @@ function! GitBlameLineFull()
   let l:blame = GitBlameLine()
   let l:msg = l:blame
 
-  if l:blame !~ '^[0-9a-f]\{10\} '
+  if l:blame !~ '^[0-9a-f]\+ '
     return "weird blame: ".l:msg
   endif
   let l:hash = l:blame[:8]
@@ -150,16 +150,19 @@ augroup END
 
 function! s:WipeUnattachedBuffers()
   let l:limit = bufnr("$")
+  let l:count = 0
   for l:i in range(1, l:limit)
     if bufnr(l:i) > 0
       if win_findbuf(l:i) == [] && bufname(l:i) != 'scratchterm'
-        exec (l:i)."bw"
+        silent exec (l:i)."bw"
+        let l:count += 1
       endif
     endif
   endfor
+  echo "Wiped ".l:count." buffer".(l:count == 1 ? '' : 's')."."
 endfunction
 command! WipeUnattachedBuffers call <SID>WipeUnattachedBuffers()
-command! BWU silent WipeUnattachedBuffers
+command! BWU WipeUnattachedBuffers
 
 command! -bang GitDiff execute "Term! git diff ".["\<C-u>","--staged", ""]
       \[confirm('git diff', "&staged\n&worktree\n")]

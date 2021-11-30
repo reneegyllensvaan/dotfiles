@@ -2,7 +2,7 @@
 
 function! editfns#to_pascal(word)
   let l:s = ''
-  for word in editfns#split_case(a:word)
+  for word in editfns#split_symbol(a:word)
     if !len(word)
       continue
     endif
@@ -12,7 +12,7 @@ function! editfns#to_pascal(word)
 endfunction
 
 function! editfns#to_camel(word)
-  let l:words = editfns#split_case(a:word)
+  let l:words = editfns#split_symbol(a:word)
   let l:s = l:words[0]
   for word in l:words[1:]
     if !len(word)
@@ -23,25 +23,32 @@ function! editfns#to_camel(word)
   return l:s
 endfunction
 
+function! editfns#to_kebab(word)
+  return join(editfns#split_symbol(a:word), '-')
+endfunction
+
 function! editfns#to_snake(word)
-  return join(editfns#split_case(a:word), '_')
+  return join(editfns#split_symbol(a:word), '_')
 endfunction
 
 function! editfns#to_upper_snake(word)
-  return toupper(join(editfns#split_case(a:word), '_'))
+  return toupper(join(editfns#split_symbol(a:word), '_'))
 endfunction
 
 function! editfns#visual_between(from, to)
   if v:operator == 'v' || v:operator == 'V'
     normal! <Esc>
   endif
-  call search(a:from, 'Wbce')
+  call searchpos(a:from, 'Wbce')
   normal! v
-  call search(a:to, 'Wc')
+  call searchpos(a:to, 'Wc')
 endfunction
 
 function! editfns#inside_name()
-  call editfns#visual_between('\(^\|[^A-z.]\)[A-z.]', '[A-z.]\($\|[^A-z.]\)')
+  let l:old_isk = &l:isk
+  setlocal isk+=.
+  normal! viw
+  let &l:isk = l:old_isk
 endfunction
 
 function! editfns#inside_snake()
@@ -52,10 +59,11 @@ function! editfns#inside_capital()
   call editfns#visual_between('\(\<\|[A-Z]\)', '.\(\>\|[A-Z]\)')
 endfunction
 
-function! editfns#split_case(word)
+function! editfns#split_symbol(word)
   let l:ignorecase = &ignorecase
   set noignorecase
-  let l:words = split(tolower(substitute(a:word, '\([a-z]\)\([A-Z]\)', '\1_\2', 'g')), '_')
+  let l:word = substitute(a:word, '-', '_', 'g')
+  let l:words = split(tolower(substitute(l:word, '\([a-z]\)\([A-Z]\)', '\1_\2', 'g')), '_')
   let &ignorecase = l:ignorecase
   return l:words
 endfunction
@@ -72,6 +80,15 @@ function! editfns#start_coc()
       execute 'CocStart'
     endif
   endif
+endfunction
+
+function! editfns#around_delimiters()
+  if getline(".")[getpos(".")[2]-1] =~# '[\[\]\{\}\(\)]'
+    normal! v%
+    return
+  endif
+  call searchpos('[\[\(\{]', 'Wbce')
+  normal! v%
 endfunction
 
 function! editfns#toggle_syntax()
