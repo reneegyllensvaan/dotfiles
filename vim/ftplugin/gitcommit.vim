@@ -1,1 +1,1 @@
-nnoremap <buffer> <C-c><C-c> :w<CR>:bd<CR>
+source ~/.vim/ftplugin/transient.vim
