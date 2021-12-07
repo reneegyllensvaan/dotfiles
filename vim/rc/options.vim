@@ -84,18 +84,16 @@ if &shell =~# 'fish$'
 endif
 
 " Put all temporary files under the same directory.
+let s:base_dir = $HOME."/.vim/files/".(has('nvim') ? 'nvim' : 'vim')
+let &backupdir = s:base_dir."/backup/"
+let &directory = s:base_dir."/swap//"
+let &undodir   = s:base_dir."/undo/"
+let &viminfo = "100,n".s:base_dir."/info/viminfo"
 set backup
-set backupdir   =$HOME/.vim/files/backup/
 set backupext   =-vimbackup
 set backupskip  =
-set directory   =$HOME/.vim/files/swap//
 set updatecount =100
 set undofile
-set undodir     =$HOME/.vim/files/undo/
-
-if !has('nvim')
-  set viminfo     ='100,n$HOME/.vim/files/info/viminfo
-end
 
 " Use `rg` as grep provider
 let &grepprg = "gr-vim"

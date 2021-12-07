@@ -12,8 +12,10 @@ source "$HOME/.zfunctions/fzf.zsh"
 source "$HOME/.zfunctions/fzy.zsh"
 source "$HOME/.zfunctions/vim.zsh"
 source "$HOME/.zfunctions/nvim.zsh"
+source "$HOME/.zfunctions/numeric.zsh"
 [ -f "$HOME/.zfunctions/zsh-syntax-highlighting.zsh" ] \
   && source "$HOME/.zfunctions/zsh-syntax-highlighting.zsh"
+
 
 # Misc {{{
 
@@ -136,8 +138,14 @@ fi
 [ "$ASDF_ZSHRC_PATH" ] && source "$ASDF_ZSHRC_PATH"
 # Environment Plugins }}}
 # Options {{{
+# autocd: invoking just a directory name as a command will cd to that directory
 setopt AUTOCD
-setopt PATH_DIRS
+
+# pathdirs: invoking `foo/bar.sh` will run `/usr/bin/foo/bar.sh`
+setopt pathdirs
+
+# beep: should we send a beep character on errors?
+unsetopt beep
 # Options }}}
 
 true

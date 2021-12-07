@@ -10,6 +10,10 @@ indent_style = space
 indent_size = 2
 tab_width = 4
 
+[*.c]
+indent_style = space
+indent_size = 2
+
 [*.go]
 indent_style = space
 indent_size = 2

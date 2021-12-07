@@ -1,15 +1,23 @@
 " ex: ft=sourceonsave.vim
 
-function! s:SendKeys(keys)
+function! s:SendKeysRaw(keys, newline)
     let pane_count = str2nr(trim(system('tmux list-panes | wc -l')))
     if pane_count > 1
         let clear_line_cmd = 'tmux send-keys -t+ C-u'
         call system(clear_line_cmd)
-        let cmd = "tmux send-keys -t+ -l -- ".a:keys."\<C-m>"
+        let cmd = "tmux send-keys -t+ -l -- ".a:keys.(a:newline ? "\<C-m>" : "")
         call system(cmd)
     else
         echohl WarningMsg | echo 'No other tmux pane exists' | echohl None
     endif
+endfunction
+
+function! s:SendKeys(keys)
+    return s:SendKeysRaw(a:keys, 1)
+endfunction
+
+function! s:SendInterrupt()
+    call s:SendKeysRaw("\<C-c>", 0)
 endfunction
 
 function! s:SendMakeCmd()
@@ -53,9 +61,11 @@ command! -nargs=* TmuxSendKeys call <SID>SendKeys(<q-args>)
 command! TmuxSendLine call <SID>SendLine()
 command! TmuxSendSelection call <SID>SendSelection(v:operator == 'v' ? 'char' : 'line')
 command! TmuxSendSelectedLines call <SID>SendSelectedLines()
+command! TmuxSendInterrupt call <SID>SendInterrupt()
 
 nnoremap <buffer> <C-t><C-t> :TmuxSendLine<CR>
 vnoremap <buffer> <C-t><C-t> :<C-u>TmuxSendSelectedLines<CR>
+nnoremap <buffer> <C-t><C-c> :TmuxSendInterrupt<CR>
 
 " sbcl-specific, move out at some point i suppose
 noremap <buffer> <C-t>3 :<C-u>TmuxSendKeys 3<CR>

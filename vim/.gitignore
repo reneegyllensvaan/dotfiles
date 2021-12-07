@@ -1,11 +1,12 @@
-files/undo/*
 plugged/*
-files/backup/*
-files/swap/*
-files/info/*
+
+spell
+
+files/vim/*
+files/nvim/*
 files/recent.log
 files/recent-write.log
 files/bookmarks.vim
+
 pack/plugins/start/*
 pack/plugins/opt/*
-spell

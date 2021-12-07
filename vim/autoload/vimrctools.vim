@@ -3,6 +3,7 @@ let s:options = {
       \'C': '~/.vim/rc/commands.vim',
       \'E': '~/.vim/autoload/vimrctools.vim',
       \'p': '{ftplugin}',
+      \'f': '{ftplugin-any}',
       \'F': '~/.vim/autoload/fzy.vim',
       \'G': '~/.vim/rc/golden.vim',
       \'S': '~/.vim/autoload/visualops.vim',
@@ -10,7 +11,6 @@ let s:options = {
       \'a': '~/.vim/rc/autocorrect.vim',
       \'b': '~/.vim/rc/bindings.vim',
       \'c': '~/.vim/rc/coc.vim',
-      \'f': '%',
       \'g': '~/.vim/rc/gvimrc.vim',
       \'h': '~/.vim/autoload/highlights.vim',
       \'l': '~/.vim/rc/look_and_feel.vim',
@@ -32,7 +32,9 @@ function! vimrctools#pick_runtime_file(prompt, cmd)
   let l:target = get(s:options, nr2char(getchar()), '')
   let &cmdheight = l:cmdheight
   if !empty(l:target)
-    if l:target == '{ftplugin}'
+    if l:target == '{ftplugin-any}'
+      call feedkeys(":e ~/.vim/ftplugin/\<Tab>", 'tn')
+    elseif l:target == '{ftplugin}'
       exec a:cmd.expand("~/.vim/ftplugin/".(&filetype).".vim")
     else
       exec a:cmd.expand(l:target)

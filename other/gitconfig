@@ -68,6 +68,7 @@
   pf  = pull --ff-only
   pushu   = "! git push -u origin `git branch --show-current`"
   pushfwl = push --force-with-lease
+  p-f = push --force-with-lease
 
   r   = rebase
   rc  = rebase --continue

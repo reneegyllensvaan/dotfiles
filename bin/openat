@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Use `open` if it exists (OS X), otherwise use xdg-open
+open=xdg-open
+which open >/dev/null 2>/dev/null && open=open
+
+echo "open '$(xp)'" | at $@
