@@ -87,6 +87,7 @@
   zs  = stash show
   # Briefs }}}
 
+  linted = "! git add . && git commit -mlint"
   pop = stash pop
   fixup = "! hash=$(git log --pretty=oneline | head -n 100 | fzy) && git commit --fixup $(echo $hash | awk '{print $1}')"
   ls-files-root = "! git ls-files"

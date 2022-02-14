@@ -57,6 +57,7 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 CocSortImports call CocAction('runCommand', 'editor.action.organizeImport')
 command! -nargs=0 OR CocSortImports
+command! -nargs=0 CC CocCommand
 
 " " Add (Neo)Vim's native statusline support.
 " " NOTE: Please see `:h coc-status` for integrations with external plugins that
@@ -69,6 +70,8 @@ let g:coc_snippet_next = '<c-j>'
 let g:coc_snippet_prev = '<c-k>'
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 nmap <silent> K :call <SID>show_documentation()<CR>
+" Use C-Space in insert mode to show completion
+inoremap <silent><expr> <C-Space> coc#refresh()
 
 
 nnoremap <silent><nowait> <Space>sR  :CocRestart<cr>

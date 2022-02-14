@@ -59,7 +59,6 @@ function! term#singleton_shell(mods, cmd, dir) abort
   if has('nvim')
     autocmd TermClose <buffer> bw!
     call s:PersistMode()
-    tnoremap <buffer> <C-s> <C-\><C-n>:let b:prev_mode = 't'<CR><C-w>c
     nnoremap <buffer> <C-@> <C-\><C-n><C-w>c
     tnoremap <buffer> <C-@> <C-\><C-n>:let b:prev_mode = 't'<CR><C-w>c
     nnoremap <buffer> <C-Space> <C-\><C-n><C-w>c
@@ -87,8 +86,6 @@ function! term#run(mods, cmd, dir, bang)
   let g:term_auto_increment += 1
   let l:bufnr = bufnr()
   setlocal nonumber
-  nnoremap <buffer> <C-s> <C-w>c
-  tnoremap <buffer> <C-s> <C-w>c
   if has('nvim')
     exec "autocmd TermClose <buffer> bw! ".l:bufnr
     call s:PersistMode()

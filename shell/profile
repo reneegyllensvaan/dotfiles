@@ -10,6 +10,7 @@ export PATH="$HOME/.nimble/bin:$PATH"
 # which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
 # which python2 >/dev/null 2>&1 && PATH="$PATH:`python2 -m site --user-base`/bin"
 
+export NODE_OPTIONS='--max-old-space-size=8192'
 export MANPATH="$HOME/.local/man:$MANPATH"
 
 export VISUAL="nvim"
@@ -25,7 +26,6 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 export NNN_USE_EDITOR=1
 export NNN_OPENER="$HOME/.bin/topen"
 export NNN_COLORS="#0a1b2c3d"
-export ASDF_DIR=/usr/local/opt/asdf
 
 export LESSKEY="$HOME/.config/lesskey"
 
@@ -62,4 +62,3 @@ which xsel >/dev/null 2>&1 && export CLIPBOARD_COPY='xsel -b' \
 export Q=/dev/null  # "Quiet"
 export C=$CLIPBOARD_COPY
 export P=$CLIPBOARD_PASTE
-if [ -e /Users/renee/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/renee/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer

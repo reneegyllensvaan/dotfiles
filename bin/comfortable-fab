@@ -21,6 +21,7 @@ fi
 BACKEND_TRIGGERS=(
   'command:api'
   'webserver:'
+  'systemctl'
   'db_'
 )
 FRONTEND_TRIGGERS=(

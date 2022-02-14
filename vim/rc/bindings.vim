@@ -53,6 +53,8 @@ xnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
 
+nnoremap <M-/> :%s///<Left><Left>
+vnoremap <M-/> :s///<Left><Left>
 nnoremap <expr> <M-%> getline(".")[getpos(".")[2]-1] =~# '[\[\]\{\}\(\)]' ? "v\%" : ":call editfns#around_delimiters()<CR>"
 " 1}}}
 " Insert Mode: {{{1
@@ -66,6 +68,7 @@ inoremap <C-p> <Nop>
 inoremap <C-c> <Nop>
 inoremap <C-c><C-s> <C-o>:w<CR>
 inoremap <C-r><C-r> <C-r>"
+inoremap <C-s> <C-w>
 " 1}}}
 " Microsnippets: {{{1
 inoremap <C-e> <Nop>
@@ -126,6 +129,9 @@ nnoremap \T :silent s/\<\(\w\)\(\S*\)/\u\1\L\2/g<cr>:noh<cr>
 " Make `n` after `#` always search downward
 nnoremap # *NN
 
+" Y yanks rest of line; like D
+nnoremap Y y$
+
 " Replace word and put into search register
 nnoremap <silent> c* *Ncgn
 nnoremap <silent> c# #Ncgn
@@ -163,10 +169,10 @@ vnoremap <silent> in :<C-u>call editfns#inside_name()<CR>
 " 1}}}
 " Terminal Mode Mappings: {{{1
 tnoremap <silent> <C-v> <C-\><C-n>:call term_sendkeys(bufnr(), getreg(nr2char(getchar())))<CR>
-tnoremap <silent> <C-s> <C-W>N
+tnoremap <silent> <C-s> <C-w>
 if has('nvim')
   tnoremap <silent> <C-w>N <C-\><C-n>
-  tnoremap <silent> <C-s> <C-\><C-n>
+  tnoremap <silent> <C-s> <C-w>
   tnoremap <silent> <C-w>h <C-\><C-n><C-w>h
   tnoremap <silent> <C-w>j <C-\><C-n><C-w>j
   tnoremap <silent> <C-w>k <C-\><C-n><C-w>k
@@ -214,6 +220,8 @@ xnoremap <CR> <Esc>`<mz`>mx`xa<CR><Esc>`zi<CR><Esc>=j
 xnoremap \sl :sort<CR>
 " search for current selection
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+" cgn current selection
+vnoremap /c y/\V<C-R>=escape(@",'/\')<CR><CR>Ncgn
 " Don't include trailing line ending on $ in visual mode
 xnoremap $ $h
 " 1}}}
@@ -299,7 +307,7 @@ nnoremap <silent> <Space>fd :call fzy#leader_script("fd", ":lcd ")<CR>
 nnoremap <silent> <Space>lcd :call fzy#leader_script("lcd", ":lcd ~/")<CR>
 nnoremap <silent> <Space>fn :call fzy#leader_script("fn", ":e ")<CR>
 nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
-nnoremap <silent> <Space>E :call feedkeys(":e ".expand("%:h")."\<Tab>", 'tn')<CR>
+nnoremap <silent> <Space>E :call feedkeys(":e ".expand("%:h")."/\<Tab>", 'tn')<CR>
 " 1}}}
 " Module Files: {{{1
 " WorkMode
@@ -476,9 +484,12 @@ inoremap <A-g> <Esc>
 tnoremap <A-g> <C-\><C-n>
 " Quick Commands 1}}}
 " QuickFix: (and LocList) {{{1
-nnoremap qj :botright cnext<CR>
-nnoremap qk :botright cprevious<CR>
+nnoremap qj :cnext<CR>
+nnoremap qk :cprevious<CR>
 nnoremap q+ :botright cwindow<CR>
+nnoremap qq :ToggleQuickfix<CR>
+nnoremap <A-q> :cnext<CR>
+nnoremap <A-Q> :cprevious<CR>
 nnoremap q- :cclose<CR>
 
 nnoremap <Space>lj :botright lnext<CR>
@@ -488,8 +499,6 @@ nnoremap <Space>ll :botright lwindow<CR>
 nnoremap <A-o> :lnext<CR>
 nnoremap <A-i> :lprevious<CR>
 
-nnoremap <A-q> :cnext<CR>
-nnoremap <A-Q> :cprevious<CR>
 " 1}}}
 
 
@@ -515,12 +524,6 @@ endfunction
 nnoremap <C-a><C-t> :call ContextAction()<CR>
 " idk, maybe structural editing commands? splitting/joining on expressions etc
 
-nnoremap qj :botright cnext<CR>
-nnoremap qk :botright cprevious<CR>
-nnoremap q+ :botright cwindow<CR>
-nnoremap qq :botright cwindow<CR>
-nnoremap <A-q> :botright cnext<CR>
-nnoremap <A-Q> :botright cprevious<CR>
 nnoremap qt :Tags<CR>
 
 nnoremap <C-n> <Nop>

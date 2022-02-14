@@ -4,8 +4,6 @@ source ~/.vim/ftplugin/javascript.vim
 inoremap <buffer> <C-t> <Nop>
 nmap <buffer> crt cr<
 
-inoremap <buffer> <C-t><C-l> console.log('value:', value)<Esc>bbb*Ncgn
-
 " TF: Tap-Fhrase  {{{
 nnoremap <buffer> <Plug>(object-string-entry) o:<Space>'',<Left><Left><Left><Left><Left>
 inoremap <buffer> <Plug>(object-string-entry) <C-o>A:<Space>'',<Left><Left>

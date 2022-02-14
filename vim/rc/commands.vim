@@ -103,12 +103,12 @@ endfunction
 
 function! GitBlameLineFull()
   let l:blame = GitBlameLine()
-  let l:msg = l:blame
+  let l:msg = substitute(l:blame, '^\^', '', '')
 
-  if l:blame !~ '^[0-9a-f]\+ '
+  if l:msg !~ '^[0-9a-f]\+ '
     return "weird blame: ".l:msg
   endif
-  let l:hash = l:blame[:8]
+  let l:hash = l:msg[:8]
 
   return system("git show --no-patch ".l:hash)
 endfunction
@@ -147,6 +147,16 @@ augroup quickfixOnMakeFinish
   autocmd!
   autocmd QuickFixCmdPost [^l]* botright cwindow
 augroup END
+function! ToggleQF()
+  let l:winid = getqflist({'winid': 1})['winid']
+  let l:winnr = win_id2win(l:winid)
+  if l:winid && l:winnr
+    cclose
+  else
+    botright cwindow
+  endif
+endfunction
+command! ToggleQuickfix call ToggleQF()
 
 function! s:WipeUnattachedBuffers()
   let l:limit = bufnr("$")
@@ -169,3 +179,10 @@ command! -bang GitDiff execute "Term! git diff ".["\<C-u>","--staged", ""]
 
 command! FzyFindFile call fzy#in_buffer("fd . --type f", ":e ", "")
 command! FzyFindFileWindow call fzy#in_buffer("fd . --type f", ":<mods> sp ", "")
+
+" Filetype detection {{{
+augroup detect-file-types
+  autocmd!
+  autocmd BufNewFile,BufRead PULLREQ_EDITMSG set ft=githubpullrequest
+augroup END
+" }}}

@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -e
+
+# Lists all branches minus the first two marker characters.
+#
+# Omits the active branch, as idk why we'd want to delete it.
+# Also skips symbolic refs, as I don't manage them often enough to care in this script.
+list_branches () {
+  git branch | awk '$1 != "*" { print $0 }' | sed -E 's/^[* ] //' | grep -v ' -> '
+}
+
+# Shove all the branch names to a temp file
+selection="$(mktemp)"
+all_branches="$(mktemp)"
+actions="$(mktemp)"
+list_branches | tee $all_branches >$selection
+
+# Edit the temp file
+"${VISUAL-EDITOR}" "$selection" || (echo 'Editor ended with non-zero exit code; stopping.' ; exit)
+
+# Filter out any branches we've deleted.
+# We sort the names first so we aren't order-sensitive.
+sort "$selection" -o "$selection"
+sort "$all_branches" -o "$all_branches"
+diff "$all_branches" "$selection" | awk '
+  # Deleted branches:
+  $1 == "<" {
+    cmd = "git branch -D " $2
+    system(cmd)
+  }
+
+  # There are more things to handle I suppose (branch creation, renaming), but
+  # this is what I need for now.
+' -
+
+# Cleanup
+rm "$selection"
+rm "$all_branches"
+rm "$actions"

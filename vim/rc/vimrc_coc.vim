@@ -27,7 +27,7 @@ endif
 " Project Ideas }}}
 
 " Plugin Config: {{{
-let g:skim_history_dir = '~/.local/share/skim-history'
+let g:skim_history_dir = $HOME.'/.local/share/skim-history'
 let g:floaterm_autoclose = 2
 " Plugin Config }}}
 

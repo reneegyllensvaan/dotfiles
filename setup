@@ -199,6 +199,7 @@ ensure_git_repo vim/pack/plugins/start/commentary https://github.com/tpope/vim-c
 ensure_git_repo vim/pack/plugins/start/editorconfig https://github.com/editorconfig/editorconfig-vim
 ensure_git_repo vim/pack/plugins/start/skim_base https://github.com/lotabout/skim \
   || (  push_cmd 'cd ~/.skim && ./install')
+ensure_directory ~/.local/share/skim-history
 symlink dir vim/pack/plugins/start/skim_base ~/.skim
 ensure_git_repo vim/pack/plugins/start/skim https://github.com/lotabout/skim.vim
 ensure_git_repo vim/pack/plugins/start/eunuch https://github.com/tpope/vim-eunuch
@@ -228,6 +229,7 @@ ensure_git_repo vim/pack/plugins/opt/octo https://github.com/pwntester/octo.nvim
 ensure_git_repo vim/pack/plugins/opt/hop https://github.com/phaazon/hop.nvim
 ensure_git_repo vim/pack/plugins/opt/blame https://github.com/f-person/git-blame.nvim
 ensure_git_repo vim/pack/plugins/opt/coverage https://github.com/ruanyl/coverage.vim
+ensure_git_repo vim/pack/plugins/opt/mundo https://github.com/simnalamburt/vim-mundo
 
 log "Building shell template files"
 build_template gpg/gpg.conf

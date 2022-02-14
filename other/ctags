@@ -1,14 +1,19 @@
 --recurse=yes
 --tag-relative=yes
 --exclude=*.git*
---exclude=*.pyc
---exclude=*.pyo
 --exclude=.DS_Store
 --exclude=*.md
 --exclude=*.mkd
---exclude=node_modules/**/*
+--exclude=.vim
+
+# Javascript excludes
+--exclude=node_modules
+--exclude=package-lock.json
+--exclude=tsconfig.json
 
 # Python excludes
+--exclude=*.pyc
+--exclude=*.pyo
 --exclude=bandit.json
 --exclude=.mypy_cache
 --exclude=.venv
@@ -21,6 +26,19 @@
 
 # Work
 --exclude=name_match/**/*.json
+# Exclude all CSS kinds:
+#  c: class
+#  i: id
+#  s: selector
+--kinds-CSS=-cis
+# Exclude some javascript:
+#  c: class
+#  i: id
+#  s: selector
+# --kinds-Javascript=-cis
+
+# Exclude some JSON types:
+# --kinds-JSON=-k
 
 # --langdef=Python
 # --langmap=Python:.py

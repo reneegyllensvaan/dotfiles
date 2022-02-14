@@ -1,3 +1,4 @@
 #!/bin/sh
 cd ~/email/work
-exec gmi send $@
+source ../venv/bin/activate
+exec gmi send -C ~/email/work -t $@

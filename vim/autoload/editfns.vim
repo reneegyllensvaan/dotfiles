@@ -62,8 +62,8 @@ endfunction
 function! editfns#split_symbol(word)
   let l:ignorecase = &ignorecase
   set noignorecase
-  let l:word = substitute(a:word, '-', '_', 'g')
-  let l:words = split(tolower(substitute(l:word, '\([a-z]\)\([A-Z]\)', '\1_\2', 'g')), '_')
+  let l:word = substitute(a:word, '-', '_', 'gi')
+  let l:words = split(tolower(substitute(l:word, '\([a-z]\)\([A-Z]\)', '\1_\2', 'gi')), '_')
   let &ignorecase = l:ignorecase
   return l:words
 endfunction
