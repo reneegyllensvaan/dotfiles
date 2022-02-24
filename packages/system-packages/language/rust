@@ -6,7 +6,7 @@ fi
 source ~/.cargo/env
 cargo install fd-find \
               ripgrep \
-              handlr \
               sd \
               git-delta \
+              exa \
               bat

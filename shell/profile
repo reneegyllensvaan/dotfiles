@@ -1,12 +1,13 @@
-export PATH='/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/pkg/sbin:/opt/pkg/bin'
+[ -e /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/pkg/sbin:/opt/pkg/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="/usr/share/bcc/tools:$PATH"
 export PATH="$HOME/code/go/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/.nimble/bin:$PATH"
 [ -e ~/.skim ] && export PATH="$HOME/.skim/bin:$PATH"
 [ -e ~/.roswell ] && export PATH="$HOME/.roswell/bin:$PATH"
+[ -e ~/.cargo/env ] && source "$HOME/.cargo/env"
 # which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
 # which python2 >/dev/null 2>&1 && PATH="$PATH:`python2 -m site --user-base`/bin"
 

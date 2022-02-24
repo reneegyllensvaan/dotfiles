@@ -97,7 +97,7 @@ symlink () {
   case "$1" in
     "dir")
       if [ ! -d "$2" ]; then
-        fatal "  Error: Couldn't find file $2, check setup script."
+        warn "  Error: Couldn't find file $2, check setup script."
       elif [ -L "$3" ]; then
         debug "Compare: '`readlink $3`' <- '$3'"
         debug "         '$PWD/$2'"
@@ -230,6 +230,7 @@ ensure_git_repo vim/pack/plugins/opt/hop https://github.com/phaazon/hop.nvim
 ensure_git_repo vim/pack/plugins/opt/blame https://github.com/f-person/git-blame.nvim
 ensure_git_repo vim/pack/plugins/opt/coverage https://github.com/ruanyl/coverage.vim
 ensure_git_repo vim/pack/plugins/opt/mundo https://github.com/simnalamburt/vim-mundo
+ensure_git_repo vim/pack/plugins/opt/vimspector https://github.com/puremourning/vimspector
 
 log "Building shell template files"
 build_template gpg/gpg.conf
