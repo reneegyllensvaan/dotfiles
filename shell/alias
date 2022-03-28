@@ -3,26 +3,29 @@
 
 source ~/.alias-generated
 
-alias sed='gsed'
-alias ls='exa'
-alias vim='nvim'
-
 alias f='pop-mark'
 alias m='mark-dir'
 
-alias lass='exa -lahg --color=always | less -R'
+# I always forget the OS X lld equivalent :/
+which lld >/dev/null 2>&1 || alias lld='otool -L'
+
 alias arst='asdf'
 alias ncdu="ncdu --color dark -rr -x"
 # alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
 alias nim="nim --outdir:~/.nimble/_out"
-alias kak="kak -c default"
 alias openv="eval \$(opam env)"
 
-alias fim='f=`fd . -t f | fzy` && vim $f' # use fzf to select a file but only open on return 1
+alias fim='f=`fd . -t f | fzy` && ${VISUAL:-$EDITOR} "$f"' # use fzf to select a file but only open on return 1
 
-# shortcut commands
+# Default flags:
+alias diff='diff -u'
+alias kak="kak -c default"
+
+# Shortcuts:
 alias g='git'
 alias gs='git status'
+alias gr='grep'
+alias l='less'
 alias v='vagrant'
 alias rr='ranger'
 alias sx='startx;exit'
@@ -31,9 +34,9 @@ alias fab=comfortable-fab
 alias nm1=notmuch-primary
 alias nm2=notmuch-secondary
 alias hed='head -n 20'
-alias hed10='head -n 10'
-alias hed20='head -n 20'
-alias hed30='head -n 30'
+alias hed1='head -n 10'
+alias hed2='head -n 20'
+alias hed3='head -n 30'
 
 # unglob some commands
 alias fd='noglob fd'

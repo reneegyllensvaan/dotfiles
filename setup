@@ -245,7 +245,7 @@ build_template shell/alias-generated
 build_template x11/zathurarc
 build_template x11/xres/colors
 build_template x11/dunstrc
-build_template x11/kitty.conf
+build_template config/kitty/colors.conf
 
 if which yq >/dev/null 2>&1; then
   if [ -e ~/.config/textmateSnippets ]; then
@@ -267,6 +267,7 @@ ensure_directory $HOME/.local/share
 for d in man{1,2,3,4,5,6,7,8}; do
   ensure_directory $HOME/.local/man/$d
 done
+symlink dir config/kitty $HOME/.config/kitty
 
 log "  Xorg applications"
 symlink file x11/xinitrc ~/.xinitrc
@@ -278,8 +279,6 @@ ensure_directory $HOME/.config/i3
 symlink file x11/i3_config $HOME/.config/i3/config
 ensure_directory $HOME/.config/zathura
 symlink file x11/zathurarc $HOME/.config/zathura/zathurarc
-ensure_directory $HOME/.config/kitty
-symlink file x11/kitty.conf $HOME/.config/kitty/kitty.conf
 symlink file x11/picom.conf $HOME/.config/picom.conf
 ensure_directory $HOME/.config/alacritty
 symlink file x11/alacritty.yml $HOME/.config/alacritty/alacritty.yml
