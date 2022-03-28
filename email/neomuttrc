@@ -1,4 +1,3 @@
-set nm_default_uri="notmuch:///Users/renee/email/work"
 source ~/.neomuttrc-user
 source ~/.neomuttrc-unbind
 
@@ -18,20 +17,6 @@ set crypt_verify_sig = yes
 set crypt_autosign = yes
 # set crypt_opportunistic_encrypt = yes
 # message-hook '!~g !~G ~b "^-----BEGIN PGP (SIGNED )?MESSAGE"' 'exec check-traditional-pgp'
-
-tag-transforms \
-    "TheNewPaper" "TNP"\
-    "github" "GH"\
-    "notifications" "n"\
-    "newsletters" "N"\
-    "trello" "T"\
-    "lists" "L"\
-    "inbox" "i"\
-    "signed" "s"\
-    "attachment" "A"\
-    "important" "!"\
-    "unread" "?"\
-    "deleted" "d"
 
 # set date_format='%Y-%m-%d'
 # set index_format='%4C %Z %D %-20.20n [%e/%E] %s (%J)'
@@ -53,48 +38,7 @@ macro index ot "<sort-reverse>d"
 set beep = no
 set pager_index_lines=10
 set edit_headers
-# set mbox_type = Maildir
 
-# notmuch
-# set virtual_spoolfile='yes'
-set virtual_spoolfile = yes
-set hidden_tags=""
-set nm_exclude_tags = "spam,deleted"
-set nm_open_timeout = 0
-set nm_query_type = threads  # messages | threads
-set nm_unread_tag = "unread"
-
-set nm_db_limit = 0
-#set nm_default_url = ""
-set nm_query_type = messages
-# Tags that should be removed or added to the to the messages stored in the NeoMutt record.
-# example:
-#   set record = "~/sent-mails"
-#   set nm_record = yes
-#   set nm_record_tags = "-inbox,archive,me"
-set nm_record = no
-set nm_record_tags = ""
-# This variable specifies notmuch tag which is used for unread messages.
-set nm_unread_tag = unread
-# This variable allows you to customize the file browser display for virtual
-# folders to your personal taste.
-# %C   current folder number
-# %f   folder name (description)
-# %m   number of messages in the mailbox *
-# %n   number of unread messages in the mailbox *
-# %N   N if mailbox has new mail, blank otherwise
-# %>X  right justify the rest of the string and pad with character ``X''
-# %|X  pad to the end of the line with character ``X''
-# %*X  soft-fill with character ``X'' as pad
-set vfolder_format = "%6n(%6N) %f"
-# # setup time window preferences
-# # first setup the duration, and then the time unit of that duration
-# # when set to 0 (the default) the search window feature is disabled
-# set nm_query_window_duration=2
-# set nm_query_window_timebase="week" # or "hour", "day", "week", "month", "year"
-
-#message-hook ~A "<modify-labels>-unread\n"
-# set the default vfolder
 # notmuch bindings
 source ~/.neomuttrc-mbox-primary
 macro index <F1> ":source ~/.neomuttrc-mbox-primary\n"
