@@ -276,7 +276,7 @@ nnoremap <Space>tss :call editfns#toggle_syntax()<CR>
 nnoremap <Space>ttw0 :set textwidth=100<CR>
 nnoremap <Space>ttw8 :set textwidth=80<CR>
 nnoremap <Space>ttw9 :set textwidth=90<CR>
-nnoremap <Space>tw :set list!<CR>
+nnoremap <expr> <Space>tw &list ? ":set nolist\<CR>" : ":set list\<CR>"
 nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
 nnoremap <expr> <Space>td ":setlocal ".(&l:diff ? "no" : "")."diff\<CR>"
 " 1}}}

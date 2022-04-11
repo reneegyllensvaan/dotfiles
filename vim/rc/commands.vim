@@ -184,5 +184,6 @@ command! FzyFindFileWindow call fzy#in_buffer("fd . --type f", ":<mods> sp ", ""
 augroup detect-file-types
   autocmd!
   autocmd BufNewFile,BufRead PULLREQ_EDITMSG set ft=githubpullrequest
+  autocmd BufNewFile,BufRead *.sls set ft=yaml
 augroup END
 " }}}
