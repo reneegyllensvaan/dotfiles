@@ -56,6 +56,11 @@ unsetopt SHARE_HISTORY
 setopt INC_APPEND_HISTORY
 # }}}
 
+# Make fpath a unique array
+typeset -U fpath
+fpath+=("$HOME/.zfunctions")
+fpath+=("$HOME/.zfunc")
+
 autoload -U compinit
 # cache zsh completions for 22 hours
 completion_cache_time=`noglob expr 22 * 3600`

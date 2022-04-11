@@ -1,5 +1,5 @@
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/pkg/sbin:/opt/pkg/bin"
 [ -e /opt/homebrew/bin/brew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/pkg/sbin:/opt/pkg/bin:$PATH"
 export PATH="$HOME/.bin:$PATH"
 export PATH="/usr/share/bcc/tools:$PATH"
 export PATH="$HOME/code/go/bin:$PATH"
@@ -43,12 +43,6 @@ export KEYTIMEOUT=1
 
 # configs for dotfile scripts
 export EMAIL_SYNC_INTERVAL=120 # seconds
-
-# if we're a zsh, export fpath
-if ps -o command='' -p $$ | grep zsh >/dev/null 2>&1; then
-  export FPATH="$HOME/.zfunctions:$FPATH"
-fi
-
 
 # set the clipboard variables based on available clipboard applications
 # OSX
