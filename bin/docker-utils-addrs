@@ -1,0 +1,10 @@
+#!/bin/sh
+
+docker inspect "$@" | jq -r '
+[ ["Name", "Network", "IPAddress"],
+  ( .[] |
+    [ .Name,
+    ( .NetworkSettings.Networks | to_entries | .[]
+    | .key, .value.IPAddress ) ] )
+] | .[] | @csv
+' | xsv table
