@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+hash="$(git log --pretty=oneline | head -n 100 | fzy)"
+git commit --fixup "$(echo $hash | awk '{print $1}')"
