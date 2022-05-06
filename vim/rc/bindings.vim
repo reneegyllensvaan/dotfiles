@@ -34,13 +34,11 @@ nnoremap <C-s> <Nop>
 nnoremap <C-t> <Nop>
 nnoremap <C-c> <Nop>
 nnoremap <C-c><C-c> <Nop>
-nnoremap <C-a> <Nop>
 noremap <Space> <Nop>
 noremap q <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
 noremap <expr> Q (empty(reg_recording()) ? "q".tolower(nr2char(getchar())) : "q")
-nnoremap <C-a><C-a> <C-a>
 " 1}}}
 " Alt Mappings: {{{1
 nnoremap <A-Up> <C-w>+
@@ -131,6 +129,8 @@ nnoremap # *NN
 
 " Y yanks rest of line; like D
 nnoremap Y y$
+" typing 'yi' is awkward on colemak
+nnoremap <C-y> yi
 
 " Replace word and put into search register
 nnoremap <silent> c* *Ncgn
@@ -503,25 +503,26 @@ nnoremap <A-i> :lprevious<CR>
 
 
 " Miscellaneous Ctrl Mappings:
-nnoremap <C-a> <Nop>
 function! ContextAction() " {{{1
   let l:cword = expand('<cword>')
 
-  if l:cword =~ '^\d\{10\}$'
-    !gdate -d@<cword>
-    return
+  if l:cword == 'true'
+    return "ciwfalse\<Esc>"
+  elseif l:cword == 'false'
+    return "ciwtrue\<Esc>"
   endif
 
-  if l:cword == 'true'
-    normal! ciwfalse
-    return
-  elseif l:cword == 'false'
-    normal! ciwtrue
-    return
-  endif
+  return "\<C-a>"
 endfunction
 " 1}}}
-nnoremap <C-a><C-t> :call ContextAction()<CR>
+nnoremap <expr> <C-a> ContextAction()
+
+function! TransformWord()
+  if l:cword =~ '^\d\{10\}$'
+    !gdate -d@<cword>
+  endif
+endfunction
+nnoremap <A-C-a> :call TransformWord()<CR>
 " idk, maybe structural editing commands? splitting/joining on expressions etc
 
 nnoremap qt :Tags<CR>

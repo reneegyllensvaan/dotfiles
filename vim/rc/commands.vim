@@ -8,6 +8,7 @@ command! -nargs=* Fd call skim#run({'source': "fd <args>", 'sink': 'e', 'down': 
 command! -nargs=* FzyGrep call fzy#in_buffer("rg <args> \| cut -c -250", ':echo ', "-q : \| grep -Eo '^[^:]'")
 command! Fixme let g:grepprg = &grepprg | set grepprg=rg\ --vimgrep | grep FIXME .  --iglob '!*pylint*' | let &grepprg = g:grepprg
 command! FIXME Fixme
+command! TO 0tabmove | tabonly
 
 command! -nargs=1 Chmod call fileutils#chmod(expand('%'), <q-args>) command! -nargs=* Ls echo system('ls --color=always <args>')
 
@@ -143,9 +144,10 @@ if exists('g:autoread_timer_id')
   let g:autoread_timer_id = timer_start(1000, function('s:checktime'), {'repeat': -1})
 endif
 
-augroup quickfixOnMakeFinish
+augroup quickfix-auto
   autocmd!
   autocmd QuickFixCmdPost [^l]* botright cwindow
+  autocmd FileType qf wincmd J
 augroup END
 function! ToggleQF()
   let l:winid = getqflist({'winid': 1})['winid']
@@ -173,6 +175,7 @@ function! s:WipeUnattachedBuffers()
 endfunction
 command! WipeUnattachedBuffers call <SID>WipeUnattachedBuffers()
 command! BWU WipeUnattachedBuffers
+
 
 command! -bang GitDiff execute "Term! git diff ".["\<C-u>","--staged", ""]
       \[confirm('git diff', "&staged\n&worktree\n")]

@@ -231,6 +231,16 @@ ensure_git_repo vim/pack/plugins/opt/blame https://github.com/f-person/git-blame
 ensure_git_repo vim/pack/plugins/opt/coverage https://github.com/ruanyl/coverage.vim
 ensure_git_repo vim/pack/plugins/opt/mundo https://github.com/simnalamburt/vim-mundo
 ensure_git_repo vim/pack/plugins/opt/vimspector https://github.com/puremourning/vimspector
+ensure_git_repo vim/pack/plugins/opt/which-key https://github.com/folke/which-key.nvim
+ensure_git_repo vim/pack/plugins/opt/asyncrun https://github.com/skywind3000/asyncrun.vim
+ensure_git_repo vim/pack/plugins/opt/asynctasks https://github.com/skywind3000/asynctasks.vim
+
+ensure_git_repo vim/pack/plugins/opt/lsp-extensions https://github.com/nvim-lua/lsp_extensions.nvim
+ensure_git_repo vim/pack/plugins/opt/nvim-cmp https://github.com/hrsh7th/nvim-cmp
+ensure_git_repo vim/pack/plugins/opt/cmp-nvim-lsp https://github.com/hrsh7th/cmp-nvim-lsp
+ensure_git_repo vim/pack/plugins/opt/cmp-path https://github.com/hrsh7th/cmp-path
+ensure_git_repo vim/pack/plugins/opt/cmp-buffer https://github.com/hrsh7th/cmp-buffer
+ensure_git_repo vim/pack/plugins/opt/rust-tools https://github.com/simrat39/rust-tools.nvim
 
 log "Building shell template files"
 build_template gpg/gpg.conf

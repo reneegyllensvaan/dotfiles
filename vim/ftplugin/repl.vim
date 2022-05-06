@@ -20,6 +20,10 @@ function! s:SendInterrupt()
     call s:SendKeysRaw("\<C-c>", 0)
 endfunction
 
+function! s:SendClear()
+    call s:SendKeysRaw("\<C-l>", 0)
+endfunction
+
 function! s:SendMakeCmd()
     let make_list = split(&makeprg)
     let make_cmd = map(make_list, 'expand(v:val)')
@@ -62,10 +66,12 @@ command! TmuxSendLine call <SID>SendLine()
 command! TmuxSendSelection call <SID>SendSelection(v:operator == 'v' ? 'char' : 'line')
 command! TmuxSendSelectedLines call <SID>SendSelectedLines()
 command! TmuxSendInterrupt call <SID>SendInterrupt()
+command! TmuxSendClear call <SID>SendClear()
 
 nnoremap <buffer> <C-t><C-t> :TmuxSendLine<CR>
 vnoremap <buffer> <C-t><C-t> :<C-u>TmuxSendSelectedLines<CR>
 nnoremap <buffer> <C-t><C-c> :TmuxSendInterrupt<CR>
+nnoremap <buffer> <C-t><C-l> :TmuxSendClear<CR>
 
 " sbcl-specific, move out at some point i suppose
 noremap <buffer> <C-t>3 :<C-u>TmuxSendKeys 3<CR>

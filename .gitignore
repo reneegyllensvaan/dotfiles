@@ -212,3 +212,12 @@ vim/pack/plugins/start/fastfold
 vim/pack/plugins/opt/coverage
 vim/pack/plugins/opt/mundo
 vim/pack/plugins/opt/vimspector
+vim/pack/plugins/opt/which-key
+vim/pack/plugins/opt/asynctasks
+vim/pack/plugins/opt/asyncrun
+vim/pack/plugins/opt/lsp-extensions
+vim/pack/plugins/opt/nvim-cmp
+vim/pack/plugins/opt/cmp-nvim-lsp
+vim/pack/plugins/opt/cmp-path
+vim/pack/plugins/opt/rust-tools
+vim/pack/plugins/opt/cmp-buffer

@@ -3,46 +3,50 @@
   path = ~/.gitconfig-generated
 
 [core]
-	excludesfile = /Users/rgyllensva/.gitignore_global
+  excludesfile = /Users/rgyllensva/.gitignore_global
+  pager = delta
 [gpg]
   program = gpg
 [status]
-	relativePaths = true
+  relativePaths = true
 [hub]
   protocol = ssh
 [init]
   defaultBranch = trunk
 [rerere]
-	enabled = true
+  enabled = true
 [fetch]
-	prune = true
+  prune = true
 [rebase]
-	autostash = true
-	autosquash = true
-[core]
-    pager = delta
+  autostash = true
+  autosquash = true
 [interactive]
-    diffFilter = delta --color-only
+  diffFilter = delta --color-only
+[log]
+  date = iso
+[blame]
+  date = iso
 
 
 [maintenance]
-	strategy = incremental
-	auto = true
+  strategy = incremental
+  auto = true
 [maintenance "gc"]
-	enable = true
+  enable = true
 [maintenance "commit-graph"]
-	enable = true
+  enable = true
 [maintenance "prefetch"]
-	enable = true
+  enable = true
 [maintenance "loose-objects"]
-	enable = true
+  enable = true
 [maintenance "incremental-repack"]
-	enable = true
+  enable = true
 
 [alias]
   # Briefs: {{{
   a   = add
   aa  = add --all
+  aac  = "! git add --all && git commit"
 
   b   = branch
 
@@ -97,24 +101,24 @@
   addEmptyPathspec = false
 
 [tig "color"]
-	cursor		= default	0 underline
-	title-blur	= white	blue
-	title-focus	= white	blue	bold
+  cursor		= default	0 underline
+  title-blur	= white	blue
+  title-focus	= white	blue	bold
 [tig "color.tree"]
-	date		= cyan	default	bold
+  date		= cyan	default	bold
 
 [delta]
-    features = side-by-side line-numbers decorations
-    whitespace-error-style = 22 reverse
+  features = side-by-side line-numbers decorations
+  whitespace-error-style = 22 reverse
 [delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none
+  commit-decoration-style = bold yellow box ul
+  file-style = bold yellow ul
+  file-decoration-style = none
 [filter "tabspace"]
-	smudge = gunexpand --tabs=4 --first-only
-	clean = gexpand --tabs=4 --initial
+  smudge = gunexpand --tabs=4 --first-only
+  clean = gexpand --tabs=4 --initial
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f

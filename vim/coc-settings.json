@@ -3,7 +3,7 @@
 
   "diagnostic.enable": true,
   "diagnostic.locationlistUpdate": true,
-  "coc.preferences.useQuickfixForLocations": true,
+  "coc.preferences.useQuickfixForLocations": false,
 
   "coc.preferences.formatOnSaveFiletypes": ["rust"],
   "clangd.semanticHighlighting": false,
@@ -34,5 +34,6 @@
   "clangd.path": "/Users/renee/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
 
   "rust-analyzer.procMacro.enable": true,
-  "rust-analyzer.updates.prompt": false
+  "rust-analyzer.updates.prompt": false,
+  "rust-analyzer.inlayHints.enable": true
 }
