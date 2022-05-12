@@ -86,6 +86,33 @@ inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
 inoremap <expr> <C-c><C-i>d system("date '+%F'")[:-2]
 inoremap <expr> <C-c><C-i><C-t> system("date '+%s'")[:-2]
 inoremap <C-c><C-i><C-b> <C-v>u2022
+
+" Box Drawing Characters:
+" Corners
+inoremap <C-c><C-b><C-x> <C-v>u2517
+inoremap <C-c><C-b><C-d> <C-v>u251b
+inoremap <C-c><C-b><C-w> <C-v>u250f
+inoremap <C-c><C-b><C-p> <C-v>u2513
+" Walls
+inoremap <C-c><C-b><C-f> <C-v>u2501
+inoremap <C-c><C-b><C-c> <C-v>u2501
+inoremap <C-c><C-b><C-r> <C-v>u2503
+inoremap <C-c><C-b><C-t> <C-v>u2503
+" Walls with inward line
+inoremap <C-c><C-b><C-f><C-s> <C-v>u2533
+inoremap <C-c><C-b><C-r><C-s> <C-v>u2523
+inoremap <C-c><C-b><C-t><C-s> <C-v>u252b
+inoremap <C-c><C-b><C-c><C-s> <C-v>u253b
+inoremap <C-c><C-b><C-s> <C-v>u254b
+"           0	1	2	3	4	5	6	7	8	9	A	B	C	D	E	F
+" U+250x	─	━	│	┃	┄	┅	┆	┇	┈	┉	┊	┋	┌	┍	┎	┏
+" U+251x	┐	┑	┒	┓	└	┕	┖	┗	┘	┙	┚	┛	├	┝	┞	┟
+" U+252x	┠	┡	┢	┣	┤	┥	┦	┧	┨	┩	┪	┫	┬	┭	┮	┯
+" U+253x	┰	┱	┲	┳	┴	┵	┶	┷	┸	┹	┺	┻	┼	┽	┾	┿
+" U+254x	╀	╁	╂	╃	╄	╅	╆	╇	╈	╉	╊	╋	╌	╍	╎	╏
+" U+255x	═	║	╒	╓	╔	╕	╖	╗	╘	╙	╚	╛	╜	╝	╞	╟
+" U+256x	╠	╡	╢	╣	╤	╥	╦	╧	╨	╩	╪	╫	╬	╭	╮	╯
+
 " 1}}}
 "  Folding: {{{1
 
@@ -506,9 +533,15 @@ nnoremap <A-i> :lprevious<CR>
 function! ContextAction() " {{{1
   let l:cword = expand('<cword>')
 
-  if l:cword == 'true'
+  if l:cword ==# 'True'
+    return "ciwFalse\<Esc>"
+  elseif l:cword ==# 'False'
+    return "ciwTrue\<Esc>"
+  endif
+
+  if l:cword ==# 'true'
     return "ciwfalse\<Esc>"
-  elseif l:cword == 'false'
+  elseif l:cword ==# 'false'
     return "ciwtrue\<Esc>"
   endif
 
@@ -517,12 +550,12 @@ endfunction
 " 1}}}
 nnoremap <expr> <C-a> ContextAction()
 
-function! TransformWord()
-  if l:cword =~ '^\d\{10\}$'
+function! TransformWord(cword)
+  if a:cword =~ '^\d\{10\}$'
     !gdate -d@<cword>
   endif
 endfunction
-nnoremap <A-C-a> :call TransformWord()<CR>
+nnoremap <A-C-a> :call TransformWord("<cword>")<CR>
 " idk, maybe structural editing commands? splitting/joining on expressions etc
 
 nnoremap qt :Tags<CR>
