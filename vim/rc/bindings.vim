@@ -532,18 +532,31 @@ nnoremap <A-i> :lprevious<CR>
 " Miscellaneous Ctrl Mappings:
 function! ContextAction() " {{{1
   let l:cword = expand('<cword>')
+  let l:cchar = matchstr(getline('.'), '\%' . col('.') . 'c.')
 
-  if l:cword ==# 'True'
-    return "ciwFalse\<Esc>"
-  elseif l:cword ==# 'False'
-    return "ciwTrue\<Esc>"
+  " boolean swap
+      if l:cword ==# 'True'  | return "ciwFalse\<Esc>"
+  elseif l:cword ==# 'False' | return "ciwTrue\<Esc>"
+  elseif l:cword ==# 'true'  | return "ciwfalse\<Esc>"
+  elseif l:cword ==# 'false' | return "ciwtrue\<Esc>"
   endif
 
-  if l:cword ==# 'true'
-    return "ciwfalse\<Esc>"
-  elseif l:cword ==# 'false'
-    return "ciwtrue\<Esc>"
-  endif
+  " Cycle between box-drawing character styles
+  let l:cycle_table = [
+        \['┏', '╭', '╔'],
+        \['┓', '╮', '╗'],
+        \['┗', '╰', '╚'],
+        \['┛', '╯', '╝'],
+        \['┃', '┇', '║'],
+        \['━', '┅', '═'],
+        \]
+  for l:charset in l:cycle_table
+    for l:ix in range(len(l:charset))
+      if l:cchar ==# l:charset[l:ix]
+        return "cl".l:charset[(l:ix+1) % len(l:charset)]."\<Esc>"
+      endif
+    endfor
+  endfor
 
   return "\<C-a>"
 endfunction
