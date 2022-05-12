@@ -96,6 +96,7 @@
   pop = stash pop
   ls-files-root = "! git ls-files"
   root = "! pwd"
+	l2 = log -n 2
 
 [advice]
   addEmptyPathspec = false
