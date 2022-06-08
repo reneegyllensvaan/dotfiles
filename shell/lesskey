@@ -154,9 +154,9 @@ ZZ         quit
 #env
 # Less flags:
 #   -S: don't wrap long lines, use horizontal navigation instead
-#   -R: keep color control characters in raw form
+#   -r/R: don't/keep color control characters in raw form
 #   -X: don't send xterm clear chars
 #   -F: don't paginate if less than one screen high
 #   -i: search case insensitively by default
-LESS = -SXRi
+LESS = -SXri
 LESSCHARSET = latin1
