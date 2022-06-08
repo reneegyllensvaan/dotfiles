@@ -31,7 +31,7 @@
       "trace.server": "verbose"
     }
   },
-  "clangd.path": "/Users/renee/.config/coc/extensions/coc-clangd-data/install/12.0.1/clangd_12.0.1/bin/clangd",
+  "clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.3/clangd_14.0.3/bin/clangd",
 
   "rust-analyzer.procMacro.enable": true,
   "rust-analyzer.updates.prompt": false,

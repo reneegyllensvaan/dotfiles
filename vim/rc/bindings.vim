@@ -74,7 +74,7 @@ inoremap <C-e><C-l> {<Cr>}<C-o>O
 inoremap <C-e><C-y> [<Cr>]<C-o>O
 inoremap <C-e><C-e> (<Cr>)<C-o>O
 " inoremap <C-e><C-b> <C-o>:Macrosnippet<CR>
-inoremap <M-e> <Space>==<Space>
+inoremap <M-C-e> <Space>==<Space>
 inoremap <M-E> <Space>!=<Space>
 
 inoremap <C-t><C-u> UUID
@@ -139,7 +139,7 @@ nnoremap <bs> @q
 nnoremap \= gg=G``
 
 " Spellcheck
-nnoremap \S :spellgood <C-r><C-w>
+nnoremap \sg :spellgood <C-r><C-w>
 nnoremap \sa yiw:e ~/.vim/rc/autocorrect.vim<CR>Goiab <C-r>0 <C-r>0
 nnoremap <expr> <Space>ta ":setlocal ".(&l:spell ? "no" : "")."spell\<CR>"
 
@@ -225,6 +225,8 @@ nnoremap <C-Space> :tab SingletonShell<CR>
 nnoremap <C-@> :tab SingletonShell<CR>
 nnoremap <Space>at :Term $SHELL<CR>
 nnoremap <Space>aT :vert Term $SHELL<CR>
+nnoremap <Space>ap :Term python<CR>
+nnoremap <Space>aP :vert Term python<CR>
 nnoremap <Space>a<C-t> :tab $SHELL<CR>
 " 1}}}
 " Visual Mappings: {{{1
@@ -338,9 +340,9 @@ nnoremap <silent> <Space>E :call feedkeys(":e ".expand("%:h")."/\<Tab>", 'tn')<C
 " 1}}}
 " Module Files: {{{1
 " WorkMode
-nnoremap <Space>oE :e ~/workmode.vim<CR>
-nnoremap <Space>oo :so ~/workmode.vim<CR>
-nnoremap <Space>o  :so ~/workmode.vim<CR>
+nnoremap <Space>oE :e ~/.workmode.vim<CR>
+nnoremap <Space>oo :so ~/.workmode.vim<CR>
+nnoremap <Space>o  :so ~/.workmode.vim<CR>
 
 " Coc
 nnoremap <Space>s- :CocDisable<CR>

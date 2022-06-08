@@ -1,4 +1,8 @@
 function! visualops#surround_selection(seps, around)
+  if visualmode() ==# 'V'
+    exec "normal! >`>o".a:seps[1]."\<Esc>`<O".a:seps[0]."\<Esc>gv"
+    return
+  endif
   call setpos('.', getpos("'<"))
   normal! mz
   call setpos('.', getpos("'>"))

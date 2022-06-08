@@ -1,15 +1,12 @@
 " ex: ft=sourceonsave.vim
 
+let g:remote_session = 'remote:1.0'
+
 function! s:SendKeysRaw(keys, newline)
-    let pane_count = str2nr(trim(system('tmux list-panes | wc -l')))
-    if pane_count > 1
-        let clear_line_cmd = 'tmux send-keys -t+ C-u'
-        call system(clear_line_cmd)
-        let cmd = "tmux send-keys -t+ -l -- ".a:keys.(a:newline ? "\<C-m>" : "")
-        call system(cmd)
-    else
-        echohl WarningMsg | echo 'No other tmux pane exists' | echohl None
-    endif
+    let clear_line_cmd = 'tmux send-keys -t '.g:remote_session.' C-u'
+    call system(clear_line_cmd)
+    let cmd = "tmux send-keys -t ".g:remote_session." -l -- ".a:keys.(a:newline ? "\<C-m>" : "")
+    call system(cmd)
 endfunction
 
 function! s:SendKeys(keys)
@@ -68,20 +65,20 @@ function! s:SendSelection()
     let @a = current_a_register
 endfunction
 
-command! -nargs=* TmuxSendKeys call <SID>SendKeys(<q-args>)
-command! TmuxSendLine call <SID>SendLine()
-command! TmuxSendSelection call <SID>SendSelection(v:operator == 'v' ? 'char' : 'line')
-command! TmuxSendSelectedLines call <SID>SendSelectedLines()
-command! TmuxSendBuffer call <SID>SendBuffer()
-command! TmuxSendInterrupt call <SID>SendInterrupt()
-command! TmuxSendClear call <SID>SendClear()
+command! -nargs=* RemoteSendKeys call <SID>SendKeys(<q-args>)
+command! RemoteSendLine call <SID>SendLine()
+command! RemoteSendSelection call <SID>SendSelection(v:operator == 'v' ? 'char' : 'line')
+command! RemoteSendSelectedLines call <SID>SendSelectedLines()
+command! RemoteSendBuffer call <SID>SendBuffer()
+command! RemoteSendInterrupt call <SID>SendInterrupt()
+command! RemoteSendClear call <SID>SendClear()
 
-nnoremap <buffer> <C-t><C-t> :TmuxSendLine<CR>
-vnoremap <buffer> <C-t><C-t> :<C-u>TmuxSendSelectedLines<CR>
-vnoremap <buffer> <C-t><C-a> :<C-u>TmuxSendBuffer<CR>
-nnoremap <buffer> <C-t><C-c> :TmuxSendInterrupt<CR>
-nnoremap <buffer> <C-t><C-l> :TmuxSendClear<CR>
+nnoremap <C-t><C-t> :RemoteSendLine<CR>
+vnoremap <C-t><C-t> :<C-u>RemoteSendSelectedLines<CR>
+vnoremap <C-t><C-a> :<C-u>RemoteSendBuffer<CR>
+nnoremap <C-t><C-c> :RemoteSendInterrupt<CR>
+nnoremap <C-t><C-l> :RemoteSendClear<CR>
 
 " sbcl-specific, move out at some point i suppose
-noremap <buffer> <C-t>3 :<C-u>TmuxSendKeys 3<CR>
-noremap <buffer> <C-t>4 :<C-u>TmuxSendKeys 4<CR>
+noremap <C-t>3 :<C-u>RemoteSendKeys 3<CR>
+noremap <C-t>4 :<C-u>RemoteSendKeys 4<CR>
