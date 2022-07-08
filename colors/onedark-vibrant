@@ -1,3 +1,4 @@
+# ex: ft=sh
 export FOREGROUND='#abb2bf'
 export BACKGROUND='#282c34'
 export CURSOR_COLOR='#abb2bf'
@@ -8,8 +9,13 @@ export COLOR03='#d19a66'
 export COLOR04='#61afef'
 export COLOR05='#c678dd'
 export COLOR06='#56b6c2'
-export COLOR07='#5c6370'
-export COLOR08='#4b5263'
+
+# export COLOR07='#5c6370'  # regular dark is a bit too dark for daytime comments
+export COLOR07='#4b515c'
+
+# export COLOR08='#4b5263'  # Make this one a bit darker as well, used for folds and faded text
+export COLOR08='#777d8c'
+
 export COLOR09='#e06c75'
 export COLOR10='#98c379'
 export COLOR11='#e5c07b'
