@@ -33,3 +33,8 @@ indent_size = 4
 [*.rs]
 indent_style = space
 indent_size = 2
+
+[*.pdf]
+indent_style = space
+indent_size = 3
+trim_trailing_whitespace = false
