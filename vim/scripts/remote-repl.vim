@@ -78,6 +78,7 @@ vnoremap <C-t><C-t> :<C-u>RemoteSendSelectedLines<CR>
 vnoremap <C-t><C-a> :<C-u>RemoteSendBuffer<CR>
 nnoremap <C-t><C-c> :RemoteSendInterrupt<CR>
 nnoremap <C-t><C-l> :RemoteSendClear<CR>
+nnoremap <C-t>q :call <SID>SendKeys('q')<CR>
 
 " sbcl-specific, move out at some point i suppose
 noremap <C-t>3 :<C-u>RemoteSendKeys 3<CR>

@@ -1,6 +1,5 @@
 " vim: fdm=marker ft=sourceonsave.vim
 
-
 if has('gui_running')
   packadd onedark
   colorscheme onedark

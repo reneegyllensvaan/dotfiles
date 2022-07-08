@@ -50,7 +50,7 @@ hi  DiffText     cterm=none      ctermbg=Red           cterm=bold
 hi  Directory    cterm=none      ctermfg=DarkBlue
 hi  ErrorMsg     cterm=none      ctermbg=none          ctermfg=red
 hi  FoldColumn   cterm=none      ctermbg=Grey          ctermfg=DarkBlue
-hi  Folded       cterm=none      ctermbg=8             ctermfg=blue
+hi  Folded       cterm=none      ctermbg=7             ctermfg=blue
 hi  ColorColumn  cterm=none      ctermbg=0             ctermfg=none
 hi  IncSearch    cterm=none      cterm=reverse
 hi  ModeMsg      cterm=none      cterm=bold

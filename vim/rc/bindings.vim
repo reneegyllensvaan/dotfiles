@@ -51,6 +51,8 @@ xnoremap <silent> <A-Down> :move '>+1<CR>gv
 inoremap <silent> <A-Up> <C-o>:<C-u>move -2<CR>
 inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
 
+nnoremap <M-C-d> :tabnext<CR>
+nnoremap <M-C-c> :tabprevious<CR>
 nnoremap <M-/> :%s///<Left><Left>
 vnoremap <M-/> :s///<Left><Left>
 nnoremap <expr> <M-%> getline(".")[getpos(".")[2]-1] =~# '[\[\]\{\}\(\)]' ? "v\%" : ":call editfns#around_delimiters()<CR>"
@@ -535,6 +537,11 @@ nnoremap <A-i> :lprevious<CR>
 function! ContextAction() " {{{1
   let l:cword = expand('<cword>')
   let l:cchar = matchstr(getline('.'), '\%' . col('.') . 'c.')
+
+  " const/let swap
+      if l:cword ==# 'const'  | return "ciwlet\<Esc>"
+  elseif l:cword ==# 'let' | return "ciwconst\<Esc>"
+  endif
 
   " boolean swap
       if l:cword ==# 'True'  | return "ciwFalse\<Esc>"
