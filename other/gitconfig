@@ -1,4 +1,4 @@
-# ex: fdm=marker
+# ex: fdm=marker ft=gitconfig
 [include]
   path = ~/.gitconfig-generated
 
@@ -96,7 +96,8 @@
   pop = stash pop
   ls-files-root = "! git ls-files"
   root = "! pwd"
-	l2 = log -n 2
+  l2 = log -n 2
+  setme = "! git symbolic-ref refs/heads/me refs/heads/$(git rev-parse --abbrev-ref @)"
 
 [advice]
   addEmptyPathspec = false
