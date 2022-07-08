@@ -158,5 +158,5 @@ ZZ         quit
 #   -X: don't send xterm clear chars
 #   -F: don't paginate if less than one screen high
 #   -i: search case insensitively by default
-LESS = -SXri
+LESS = -SrXi
 LESSCHARSET = latin1
