@@ -81,6 +81,7 @@ vnoremap <buffer> <C-t><C-t> :<C-u>TmuxSendSelectedLines<CR>
 vnoremap <buffer> <C-t><C-a> :<C-u>TmuxSendBuffer<CR>
 nnoremap <buffer> <C-t><C-c> :TmuxSendInterrupt<CR>
 nnoremap <buffer> <C-t><C-l> :TmuxSendClear<CR>
+nnoremap <buffer> <C-t>q :call <SID>SendKeys('q')<CR>
 
 " sbcl-specific, move out at some point i suppose
 noremap <buffer> <C-t>3 :<C-u>TmuxSendKeys 3<CR>
