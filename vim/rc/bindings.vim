@@ -356,12 +356,12 @@ nnoremap <Space>'E :e ~/.vim/files/bookmarks.vim<CR>
 source ~/.vim/files/bookmarks.vim
 " 1}}}
 " Buffers: {{{1
-nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ", 0)<CR>
-nnoremap <silent> <Space>bB :call fzy#buffer_cmd(":b ", 1)<CR>
-nnoremap <silent> <Space>b/ :call fzy#buffer_cmd(":vert sb ",0)<CR>
-nnoremap <silent> <Space>b_ :call fzy#buffer_cmd(":sb ",0)<CR>
-nnoremap <silent> <Space>bD :call fzy#buffer_cmd(":bd ",0)<CR>
-nnoremap <silent> <Space>bW :call fzy#buffer_cmd(":bwipe ",1)<CR>
+nnoremap <silent> <Space>bb :call fzy#buffer_cmd(":b ", 0, 0)<CR>
+nnoremap <silent> <Space>bB :call fzy#buffer_cmd(":b ", 1, 0)<CR>
+nnoremap <silent> <Space>b/ :call fzy#buffer_cmd(":vert sb ", 0, 0)<CR>
+nnoremap <silent> <Space>b_ :call fzy#buffer_cmd(":sb ", 0, 0)<CR>
+nnoremap <silent> <Space>bD :call fzy#buffer_cmd(":bd ", 0, 0)<CR>
+nnoremap <silent> <Space>bW :call fzy#buffer_cmd(":bwipe ",1, 0)<CR>
 nnoremap <silent> <Space>br :e<CR>
 nnoremap <silent> <Space>bR :e!<CR>
 nnoremap <silent> <Space>fb :Buffers<CR>
@@ -496,7 +496,8 @@ vmap srx sr<BS>
 nnoremap qf :FzyFindFile<CR>
 nnoremap <M-t> :FzyFindFile<CR>
 nnoremap <M-T> :vert FzyFindFileWindow<CR>
-nmap qb <Space>bb
+nnoremap qb :call fzy#buffer_cmd(":b ", 0, 1)<CR>
+nnoremap qB :call fzy#buffer_cmd(":b ", 0, 0)<CR>
 nnoremap qn :bn<CR>
 nnoremap qN :bp<CR>
 nnoremap <S-Esc> :noh<CR>

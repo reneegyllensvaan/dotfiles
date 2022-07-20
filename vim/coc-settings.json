@@ -5,7 +5,7 @@
   "diagnostic.locationlistUpdate": true,
   "coc.preferences.useQuickfixForLocations": false,
 
-  "coc.preferences.formatOnSaveFiletypes": ["rust"],
+  "coc.preferences.formatOnSaveFiletypes": ["rust", "python"],
   "clangd.semanticHighlighting": false,
   "coc.preferences.currentFunctionSymbolAutoUpdate": false,
   "coc.source.buffer.ignoreGitignore": true,
@@ -14,10 +14,6 @@
   "snippets.textmateSnippetsRoots": ["~/.config/textmateSnippets"],
   "eslint.enable": false,
   "coc.preferences.enableFloatHighlight": false,
-
-  "python.formatting.provider": "black",
-  "python.formatting.blackPath": "/Users/renee/backend/.venv3/bin/black",
-  //"python.formatting.blackArgs": ["--isort", "--diff"],
 
   "python.linting.pylintArgs": [
     "--rcfile",

@@ -29,7 +29,6 @@ alias l='less'
 alias v='vagrant'
 alias rr='ranger'
 alias sx='startx;exit'
-alias up='cd ..'
 alias fab=comfortable-fab
 alias nm1=notmuch-primary
 alias nm2=notmuch-secondary

@@ -1,7 +1,12 @@
+#!/usr/bin/env zsh
+
 # Enable hold-for-special-character-menu
 defaults write -g ApplePressAndHoldEnabled -bool true
-# # Disable hold-for-special-character-menu
-# defaults write -g ApplePressAndHoldEnabled -bool false
 
 # Specifically for vscode
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
+# Decrease time a key needs to be held to repeat
+defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
+# Decrease repeat interval
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)

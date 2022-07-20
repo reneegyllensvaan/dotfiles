@@ -14,7 +14,7 @@
 [init]
   defaultBranch = trunk
 [rerere]
-  enabled = true
+  enabled = false
 [fetch]
   prune = true
 [rebase]

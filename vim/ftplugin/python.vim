@@ -15,14 +15,14 @@ nmap <buffer> crG e[]<Left>
 nmap <buffer> crl cr[iList<Esc>
 nmap <buffer> cro cr[iOptional<Esc>
 
-inoremap <buffer> <C-t><C-l> print("{}".format())<Left><Left>
+inoremap <buffer> <C-t><C-l> print("value: {}".format(value))<Esc>Fv;*Ncgn
 
 inoremap <buffer> <C-t><C-u> UUID
 inoremap <buffer> <C-t>u uuid4()<Left>
 inoremap <buffer> <C-t><C-n> None
 inoremap <buffer> <C-t><C-a> <Space>=<Space>attr.ib(type=)<Left>
 
-command! PythonBlack %!black -q -
+command! PythonBlack %!~/.local/bin/black -ql100 -tpy27 -
 nnoremap <buffer> <C-s>F :PythonBlack<CR>
 command! PB PythonBlack
 

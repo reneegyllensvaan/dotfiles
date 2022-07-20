@@ -4,7 +4,7 @@
 
 ! Gray
 *.color0:       #2c303a
-*.color8:       #4b5263
+*.color8:       #777d8c
 
 ! Red
 *.color1:       #e06c75
@@ -31,5 +31,5 @@
 *.color14:      #56b6c2
 
 ! White
-*.color7:       #5c6370
+*.color7:       #4b515c
 *.color15:      #abb2bf

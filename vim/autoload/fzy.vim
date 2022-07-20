@@ -63,9 +63,11 @@ function! s:DumpBuffers(has_bang)
   redir END
 endfunction
 
-function! fzy#buffer_cmd(cmd, has_bang)
+function! fzy#buffer_cmd(cmd, has_bang, local_only)
   call s:DumpBuffers(a:has_bang)
-  call fzy#in_buffer("cat ~/.tmp/vim-buffers", a:cmd, "\| awk '{gsub(\"u\", \"\", $1);print $1}'")
+  call fzy#in_buffer(
+        \"cat ~/.tmp/vim-buffers".(a:local_only ? ' | grep -v "~"' : ''),
+        \ a:cmd, "\| awk '{gsub(\"u\", \"\", $1);print $1}'")
 endfunction
 
 function! GitCommand()

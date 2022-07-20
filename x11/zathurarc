@@ -22,7 +22,7 @@ set inputbar-bg                 "#282c34" # base01
 set inputbar-fg                 "#abb2bf" # base2
 
 set statusbar-bg                "#282c34" # base02
-set statusbar-fg                "#5c6370" # base1
+set statusbar-fg                "#4b515c" # base1
 
 set highlight-color             "#2c303a" # base00
 set highlight-active-color      "#61afef" # blue

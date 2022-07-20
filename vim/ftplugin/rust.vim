@@ -3,6 +3,8 @@ inoremap <buffer> <C-t> <Nop>
 nmap <buffer> crt cr<
 
 inoremap <buffer> <C-t><C-l> println!("value: {:?}", value);<Esc>Fv;*Ncgn
+inoremap <buffer> <C-t><C-u> Uuid
+inoremap <buffer> <C-t>u None
 
 " Arrow
 

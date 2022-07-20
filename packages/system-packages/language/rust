@@ -9,4 +9,7 @@ cargo install fd-find \
               sd \
               git-delta \
               exa \
-              bat
+              bat \
+              hexyl \
+              tokei \
+              xsv
