@@ -9,6 +9,10 @@ command! -nargs=* FzyGrep call fzy#in_buffer("rg <args> \| cut -c -250", ':echo 
 command! Fixme let g:grepprg = &grepprg | set grepprg=rg\ --vimgrep | grep FIXME .  --iglob '!*pylint*' | let &grepprg = g:grepprg
 command! FIXME Fixme
 command! TO 0tabmove | tabonly
+command! -nargs=* Match match UserMatch /<args>/
+command! MatchNone match none
+command! MN MatchNone
+
 
 command! -nargs=1 Chmod call fileutils#chmod(expand('%'), <q-args>) command! -nargs=* Ls echo system('ls --color=always <args>')
 

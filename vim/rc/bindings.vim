@@ -56,6 +56,7 @@ nnoremap <M-C-c> :tabprevious<CR>
 nnoremap <M-/> :%s///<Left><Left>
 vnoremap <M-/> :s///<Left><Left>
 nnoremap <expr> <M-%> getline(".")[getpos(".")[2]-1] =~# '[\[\]\{\}\(\)]' ? "v\%" : ":call editfns#around_delimiters()<CR>"
+nnoremap <M-*> /\<\><Left><Left>
 " 1}}}
 " Insert Mode: {{{1
 if !hasmapto("\<Tab>")
@@ -78,16 +79,24 @@ inoremap <C-e><C-e> (<Cr>)<C-o>O
 " inoremap <C-e><C-b> <C-o>:Macrosnippet<CR>
 inoremap <M-C-e> <Space>==<Space>
 inoremap <M-E> <Space>!=<Space>
-
 inoremap <C-t><C-u> UUID
 
 inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
 inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
-inoremap <expr> <C-c><C-i>d system("date '+%F'")[:-2]
+inoremap <expr> <C-c>id system("date '+%F'")[:-2]
 inoremap <expr> <C-c><C-i><C-t> system("date '+%s'")[:-2]
 inoremap <C-c><C-i><C-b> <C-v>u2022
+
+" Modified Regular Characters:
+inoremap <M-=> ≈
+inoremap <M-a> å
+inoremap <M-A> Å
+inoremap <M-r> ä
+inoremap <M-R> Ä
+inoremap <M-o> ö
+inoremap <M-O> Ö
 
 " Box Drawing Characters:
 " Corners
@@ -573,12 +582,15 @@ endfunction
 " 1}}}
 nnoremap <expr> <C-a> ContextAction()
 
-function! TransformWord(cword)
-  if a:cword =~ '^\d\{10\}$'
-    !gdate -d@<cword>
+function! TransformWord()
+  let l:cword = expand('<cword>')
+  echo "cword:".l:cword
+  if l:cword =~ '^\d\{10\}$'
+    let l:timestamp = trim(system("gdate -d@".l:cword." +'%F %H:%M'"))
+    return "ciw".l:timestamp."\<Esc>"
   endif
 endfunction
-nnoremap <A-C-a> :call TransformWord("<cword>")<CR>
+nnoremap <expr> <A-C-a> TransformWord()
 " idk, maybe structural editing commands? splitting/joining on expressions etc
 
 nnoremap qt :Tags<CR>

@@ -99,6 +99,10 @@
   l2 = log -n 2
   setme = "! git symbolic-ref refs/heads/me refs/heads/$(git rev-parse --abbrev-ref @)"
 
+  # Hub aliases
+  prl = "! hub pr list -f \"%>(16)%au %pC%>(8)%i%Creset  %t%  l%n\" | cat"
+  prlme = "! hub pr list -f \"%au %>(8)%pC%i%Creset  %t%  l%n\" --color=always | sed -nE \"s/^\\s*$(git config --get github.user)\\s*//p\""
+
 [advice]
   addEmptyPathspec = false
 

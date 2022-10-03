@@ -4,9 +4,11 @@ function! s:SendKeysRaw(keys, newline)
     let pane_count = str2nr(trim(system('tmux list-panes | wc -l')))
     if pane_count > 1
         let clear_line_cmd = 'tmux send-keys -t+ C-u'
-        call system(clear_line_cmd)
-        let cmd = "tmux send-keys -t+ -l -- ".a:keys.(a:newline ? "\<C-m>" : "")
+        let l:keys = substitute(a:keys, ';', "\\\\;", 'g')
+        let cmd = "tmux send-keys -t+ -l -- ".l:keys.""
         call system(cmd)
+        let cr_cmd = 'tmux send-keys -t+ C-m'
+        call system(cr_cmd)
     else
         echohl WarningMsg | echo 'No other tmux pane exists' | echohl None
     endif

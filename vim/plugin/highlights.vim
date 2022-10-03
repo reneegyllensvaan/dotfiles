@@ -16,6 +16,8 @@ hi GitGutterRemove ctermbg=none ctermfg=red
 hi GitGutterDelete ctermbg=none ctermfg=red
 hi GitGutterChange ctermbg=none ctermfg=darkyellow
 
+hi UserMatch cterm=none ctermbg=cyan ctermfg=black
+
 hi  CocHighlightText         ctermbg=0
 hi  CocGitAddedSign          cterm=none  ctermbg=green   ctermfg=black
 hi  CocGitChangeAddedSign    cterm=none  ctermbg=yellow  ctermfg=green
@@ -26,6 +28,16 @@ hi  CocGitTopRemovedSign     cterm=none  ctermbg=none    ctermfg=red
 hi  CocRustTypeHint          cterm=none  ctermbg=none    ctermfg=yellow
 hi  CocRustChainingHint      cterm=none  ctermbg=none    ctermfg=blue
 hi  CocUnusedHighlight       cterm=none  ctermbg=none    ctermfg=darkgray
+
+" hi  CocPumDeprecated   cterm=none  ctermbg=none       ctermfg=none
+" hi  CocPumDetail       cterm=none  ctermbg=none       ctermfg=none
+" hi  CocPumMenu         cterm=none  ctermbg=none       ctermfg=none
+" hi  CocPumSearch       cterm=none  ctermbg=none       ctermfg=none
+" hi  CocPumShortcut     cterm=none  ctermbg=none       ctermfg=none
+" hi  CocPumVirtualText  cterm=none  ctermbg=none       ctermfg=none
+hi  CocMenuSel         cterm=none  ctermbg=lightgray  ctermfg=none
+hi  Pmenu              cterm=none  ctermbg=black      ctermfg=white
+hi  PmenuSel           cterm=none  ctermbg=darkgray   ctermfg=black
 
 
 hi  User1               cterm=none  ctermbg=0        ctermfg=white
@@ -43,6 +55,10 @@ hi  TabLineFill         cterm=none  ctermbg=black    ctermfg=white
 hi  TabLineSel          cterm=bold  ctermbg=black    ctermfg=white
 hi  TabLine             cterm=none  ctermbg=black    ctermfg=gray
 
+" These are used by `prr`, idk about elsewhere
+hi  DiffAdded    cterm=none      ctermbg=none         ctermfg=darkgreen
+hi  DiffRemoved  cterm=none      ctermbg=none         ctermfg=red
+
 hi  DiffAdd      cterm=none      ctermbg=darkgreen    ctermfg=black
 hi  DiffChange   cterm=none      ctermbg=darkyellow   ctermfg=black
 hi  DiffDelete   cterm=none      ctermfg=red          ctermbg=black
@@ -56,8 +72,6 @@ hi  IncSearch    cterm=none      cterm=reverse
 hi  ModeMsg      cterm=none      cterm=bold
 hi  MoreMsg      cterm=none      ctermfg=DarkGreen
 hi  NonText      cterm=none      ctermbg=none          ctermfg=darkgray
-hi  Pmenu        cterm=none      ctermbg=black         ctermfg=white
-hi  PmenuSel     cterm=none      ctermbg=blue          ctermfg=black
 hi  Question     cterm=none      ctermbg=black         ctermfg=DarkGreen
 hi  Todo         cterm=none      ctermbg=black         ctermfg=magenta
 hi  MatchParen   ctermbg=black   ctermfg=blue          cterm=bold,underline
