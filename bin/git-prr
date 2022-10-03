@@ -1,0 +1,37 @@
+#!/bin/sh
+recents_file="$HOME/.local/share/prr/_recent"
+action="$1"
+shift
+number="$1"
+shift
+if [ ! "$action" = "get" ] && [ ! "$action" = "submit" ]; then
+  echo "Usage: git prr <get|submit> [number]"
+  exit
+fi
+
+set -e
+url="$(hub browse --url 2>/dev/null || (echo 'Not in a github repo' >&2 && exit))"
+repo_path="$(echo "$url" | sed -En 's~^.*\.[a-z]+/([^/]*/[^/]*).*$~\1~p')"
+
+# If no `number` argument is provided, offer a selection of what's available using `fzy`
+if [ "$action" = "get" ]; then
+  if [ -z "$number" ]; then
+    # Prompt for which PR to review
+    choices="$(hub pr list)"
+    choice_line="$(echo "$choices" | fzy)"
+    number="$(echo "$choice_line" | sed -E 's/ *#([0-9]+).*/\1/g')"
+    echo "$repo_path|$choice_line" >> "$recents_file"
+  else
+    echo "$repo_path|$number" >> "$recents_file"
+  fi
+  file="$(prr $action "$repo_path/$number")"
+  # Print the file to stdout so we see it when the editor fails/exits
+  echo $file
+  "${VISUAL:-EDITOR}" "$file"
+else
+  # Offer to submit any PRs that have recently been accessed
+  choices="$(sed -En 's~^'"$repo_path"'\|(.*)~\1~p' "$recents_file")"
+  choice_line="$(echo "$choices" | fzy)"
+  number="$(echo "$choice_line" | sed -E 's/ *#([0-9]+).*/\1/g')"
+  prr $action "$repo_path/$number"
+fi
