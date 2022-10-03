@@ -38,3 +38,6 @@ indent_size = 2
 indent_style = space
 indent_size = 3
 trim_trailing_whitespace = false
+
+[*.prr]
+trim_trailing_whitespace = false
