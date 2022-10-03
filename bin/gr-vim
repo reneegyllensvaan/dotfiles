@@ -1,2 +1,2 @@
 #!/bin/sh
-exec rg --vimgrep -e "$(echo "$@")" .
+exec rg --vimgrep --smart-case -e "$@"
