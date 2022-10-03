@@ -21,7 +21,7 @@ chpwd() {
 }
 
 # Open files in the host vim session
-export EDITOR="host-vim"
+export EDITOR="host-vim-wait"
 export VISUAL="$EDITOR"
 
 # Use blocking mode for git, so it can wait for editing to finish

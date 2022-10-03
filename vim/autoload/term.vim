@@ -5,7 +5,7 @@ if has('gui_macvim') && has('gui_running')
   let $MACVIM_RUNNING = "yes"
 end
 let $PYTHONUNBUFFERED = 1
-let $EDITOR = "host-vim"
+let $EDITOR = "host-vim-wait"
 let $VISUAL = $EDITOR
 let $GIT_EDITOR = "host-vim-wait"
 
