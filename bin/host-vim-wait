@@ -2,11 +2,11 @@
 while [ "$1" = "--" ]; do shift ; done
 
 
-if [ "$NVIM_LISTEN_ADDRESS" ]; then
+if [ "$NVIM" ]; then
   if [ "$NVIM_USE_TABS" = "1" ]; then
-    exec nvr --servername $NVIM_LISTEN_ADDRESS --remote-tab-wait $1
+    exec nvr --servername $NVIM --remote-tab-wait $1
   else
-    exec nvr --servername $NVIM_LISTEN_ADDRESS -cc 'wincmd v | wincmd l' --remote-wait $1
+    exec nvr --servername $NVIM -cc 'wincmd v | wincmd l' --remote-wait $1
   fi
 fi
 

@@ -1,8 +1,8 @@
 #!/bin/sh
 while [ "$1" = "--" ]; do shift ; done
 
-if [ "$NVIM_LISTEN_ADDRESS" ]; then
-  exec nvr --servername $NVIM_LISTEN_ADDRESS --remote $1
+if [ "$NVIM" ]; then
+  exec nvr --servername $NVIM --remote $1
 fi
 
 vimprog=vim
