@@ -182,6 +182,9 @@ nnoremap gk ddkP
 xnoremap <silent> gj :move '>+1<CR>gv
 xnoremap <silent> gk :move '<-2<CR>gv
 
+" cr... mappings: do some action on the word under the cursor
+nnoremap crr "_diwP
+nnoremap cra viwp
 " Toggle identifier case
 nnoremap <expr> crk "ciw".editfns#to_kebab(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crc "ciw".editfns#to_camel(expand("<cword>"))."\<Esc>"

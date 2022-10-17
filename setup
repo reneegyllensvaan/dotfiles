@@ -323,8 +323,9 @@ ensure_directory $HOME/.gnupg
 safe_copy gpg/gpg.conf $HOME/.gnupg/gpg.conf
 safe_copy gpg/gpg-agent.conf $HOME/.gnupg/gpg-agent.conf
 ensure_directory $HOME/.ssh
+ensure_directory $HOME/.ssh/local
 safe_copy other/ssh_config $HOME/.ssh/config
-ensure_file $HOME/.ssh/user_config
+ensure_file $HOME/.ssh/local/user.sshconfig
 
 log "  Tmux config"
 symlink file other/tmux.conf $HOME/.tmux.conf

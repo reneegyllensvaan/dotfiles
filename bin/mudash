@@ -1,0 +1,23 @@
+#!/bin/sh
+cur=~/.local/share/pasteboard.cur
+old=~/.local/share/pasteboard.old
+echo > $cur
+echo > $old
+
+render () {
+    printf "Primary: "
+    cat $cur
+    echo
+}
+
+while true; do
+  should_render=0
+  xp > $cur
+  if ! diff --brief $cur $old >/dev/null; then
+    should_render=1
+    cat $cur > $old
+  fi
+
+  [ 1 = "$should_render" ] && clear && render
+  sleep 1
+done

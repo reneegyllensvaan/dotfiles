@@ -12,7 +12,7 @@
 [hub]
   protocol = ssh
 [init]
-  defaultBranch = trunk
+  defaultBranch = main
 [rerere]
   enabled = false
 [fetch]
@@ -26,7 +26,6 @@
   date = iso
 [blame]
   date = iso
-
 
 [maintenance]
   strategy = incremental
@@ -88,7 +87,7 @@
   z   = stash -u
   za  = stash apply
   zl  = stash list
-  zs  = stash show
+  zs  = stash show -u
 
   # Briefs }}}
 
