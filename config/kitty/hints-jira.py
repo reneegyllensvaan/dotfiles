@@ -22,6 +22,4 @@ def mark(text, args, Mark, extra_cli_args, *a):
 
 def handle_result(args, data, target_window_id, boss, extra_cli_args, *a):
     url = str(data['groupdicts'][0]['url'])
-    # with open("/Users/rgyllensva/pipe", 'w') as f:
-    #     f.write(url)
     boss.open_url(url)
