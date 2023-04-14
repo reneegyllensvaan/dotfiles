@@ -7,10 +7,12 @@
 " with Mod-DH and GACS home row mods
 nnoremap <C-u> <Nop>
 
-" I've never used these two actively ('wq<C-m> is quicker anyway), would
-" rather free them up for bindings
-noremap ZZ <Nop>
-noremap ZQ <Nop>
+" ZZ/ZQ are a footgun for me when I'm in a long-lived session -- usually I
+" want to act on the buffer instead of the window. They're neat for stuff like
+" quickly finishing git commit messages, though, so they retain their normal
+" behavior for buffer 1.
+noremap <expr> ZZ bufnr() == 1 ? "ZZ" : ":w\|bw\<CR>"
+noremap <expr> ZQ bufnr() == 1 ? "ZQ" : ":bw!\<CR>"
 
 " The modified miryoku I use has the apostrophe in the P position; this way
 " commands are on the base layer. Regular ' is moved to the Delete key, as
@@ -54,7 +56,9 @@ inoremap <silent> <A-Down> <C-o>:<C-u>move +1<CR>
 nnoremap <M-C-d> :tabnext<CR>
 nnoremap <M-C-c> :tabprevious<CR>
 nnoremap <M-/> :%s///<Left><Left>
+nnoremap <M-?> :%s///g<Left><Left><Left>
 vnoremap <M-/> :s///<Left><Left>
+vnoremap <M-?> :s///g<Left><Left><Left>
 nnoremap <expr> <M-%> getline(".")[getpos(".")[2]-1] =~# '[\[\]\{\}\(\)]' ? "v\%" : ":call editfns#around_delimiters()<CR>"
 nnoremap <M-*> /\<\><Left><Left>
 " 1}}}
@@ -81,13 +85,13 @@ inoremap <M-C-e> <Space>==<Space>
 inoremap <M-E> <Space>!=<Space>
 inoremap <C-t><C-u> UUID
 
-inoremap <expr> <C-c><C-i><C-u> system('insert-fake uuid')[:-2]
-inoremap <expr> <C-c><C-i><C-n> system('insert-fake name')[:-3]
-inoremap <expr> <C-c><C-i><C-g> system('insert-fake country')[:-3]
-inoremap <expr> <C-c><C-i><C-d> system("date '+%F %H:%M'")[:-2]
-inoremap <expr> <C-c>id system("date '+%F'")[:-2]
-inoremap <expr> <C-c><C-i><C-t> system("date '+%s'")[:-2]
-inoremap <C-c><C-i><C-b> <C-v>u2022
+inoremap <expr> <C-c><Tab><C-u> system('insert-fake uuid')[:-2]
+inoremap <expr> <C-c><Tab><C-n> system('insert-fake name')[:-3]
+inoremap <expr> <C-c><Tab><C-g> system('insert-fake country')[:-3]
+inoremap <expr> <C-c><Tab><C-d> system("date '+%F %H:%M'")[:-2]
+inoremap <expr> <C-c><Tab>d system("date '+%F'")[:-2]
+inoremap <expr> <C-c>id system("date '+%s'")[:-2]
+inoremap <C-c><Tab><C-b> <C-v>u2022
 
 " Modified Regular Characters:
 inoremap <M-=> ≈
@@ -360,7 +364,7 @@ nnoremap <Space>o  :so ~/.workmode.vim<CR>
 
 " Coc
 nnoremap <Space>s- :CocDisable<CR>
-nnoremap <Space>s+ :call editfns#start_coc()<CR>
+nnoremap <Space>s+ :source ~/.vim/rc/coc.vim<CR>
 nnoremap <Space>S+ :source ~/.vim/rc/lsp.vim<CR>
 
 " Bookmarks

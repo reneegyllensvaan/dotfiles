@@ -68,20 +68,6 @@ function! editfns#split_symbol(word)
   return l:words
 endfunction
 
-function! editfns#start_coc()
-  " call EnsurePluginLoaded('coc')
-  " runtime plugin/coc.vim
-  packadd coc
-  execute 'CocEnable'
-  if !exists("g:coc_is_sourced")
-    let g:coc_is_sourced = 1
-    execute 'source' "~/.vim/rc/coc.vim"
-    if has('gui_running')
-      execute 'CocStart'
-    endif
-  endif
-endfunction
-
 function! editfns#around_delimiters()
   if getline(".")[getpos(".")[2]-1] =~# '[\[\]\{\}\(\)]'
     normal! v%

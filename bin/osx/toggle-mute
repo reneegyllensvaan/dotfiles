@@ -1,0 +1,12 @@
+#!/bin/sh
+osascript -e '
+  tell application "System Events"
+    if input volume of (get volume settings) > 0 then
+      display notification "muted input"
+      set volume input volume 0
+    else
+      display notification "unmuted input"
+      set volume input volume 25
+    end if
+  end tell
+'

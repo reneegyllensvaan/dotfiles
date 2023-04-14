@@ -1,4 +1,9 @@
 " vim: ft=vim fdm=marker
+
+packadd coc
+execute 'CocEnable'
+doautocmd ColorScheme
+
 " TextEdit might fail if hidden is not set.
 set hidden
 
@@ -106,11 +111,15 @@ function! CheckBackspace() abort
 endfunction
 
 inoremap <silent><expr> <c-@> coc#refresh()
+
 inoremap <silent><expr> <TAB>
       \ coc#pum#visible() ? coc#pum#next(1) :
-      \ CheckBackspace() ? "\<C-t>" :
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-d>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
 inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
@@ -118,7 +127,11 @@ inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
 xmap <Leader>a  <Plug>(coc-codeaction-selected)
 nmap <Leader>a  <Plug>(coc-codeaction-selected)
 nmap <Leader>ac  <Plug>(coc-codeaction)
-nmap <Leader>rn <Plug>(coc-rename)
+
+xmap <Space>sa  <Plug>(coc-codeaction-selected)
+nmap <Space>sa  <Plug>(coc-codeaction-selected)
+nmap <Space>ac  <Plug>(coc-codeaction)
+nmap <Space>sr <Plug>(coc-rename)
 
 " QuickFix:
 nmap <Space>qf  <Plug>(coc-fix-current)

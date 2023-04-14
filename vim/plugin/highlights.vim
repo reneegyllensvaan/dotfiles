@@ -28,6 +28,7 @@ hi  CocGitTopRemovedSign     cterm=none  ctermbg=none    ctermfg=red
 hi  CocRustTypeHint          cterm=none  ctermbg=none    ctermfg=yellow
 hi  CocRustChainingHint      cterm=none  ctermbg=none    ctermfg=blue
 hi  CocUnusedHighlight       cterm=none  ctermbg=none    ctermfg=darkgray
+hi  CocInlayHintType         cterm=none  ctermbg=none    ctermfg=8
 
 " hi  CocPumDeprecated   cterm=none  ctermbg=none       ctermfg=none
 " hi  CocPumDetail       cterm=none  ctermbg=none       ctermfg=none

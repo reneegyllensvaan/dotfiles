@@ -8,3 +8,5 @@ inoremap <buffer> <C-t>l console.log({})<Left><Left>
 " Override default operator behavior, thanks javascript
 inoremap <buffer> <M-C-E> <Space>===<Space>
 inoremap <buffer> <M-E> <Space>!==<Space>
+
+setlocal fdm=manual

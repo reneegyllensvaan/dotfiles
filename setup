@@ -380,6 +380,8 @@ symlink file shell/profile $HOME/.profile
 symlink file shell/user-profile $HOME/.user-profile
 lesskey -o shell/lesskey shell/lesskeyrc
 symlink file shell/lesskey $HOME/.config/lesskey
+ensure_directory $HOME/.config/karabiner
+symlink dir config/karabiner.json $HOME/.config/karabiner/karabiner.json
 
 symlink file other/editorconfig $HOME/.editorconfig
 symlink file other/gitconfig $HOME/.gitconfig

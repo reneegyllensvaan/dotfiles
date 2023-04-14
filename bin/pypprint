@@ -1,0 +1,15 @@
+#!/bin/sh
+
+strip_object () {
+  sed -E 's/<([a-zA-Z\.]+) object at 0x[a-fA-F0-9]+>/\1/g'
+}
+
+strip_enum () {
+  sed -E 's/<([a-zA-Z\._]+): [0-9A-Za-z_]+>/\1/g'
+}
+
+strip_typevar () {
+  sed -E "s/<type '([a-zA-Z\\.]+)'>/Type[\1]/g"
+}
+
+strip_object | strip_enum | strip_typevar | black -q -

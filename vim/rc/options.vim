@@ -88,7 +88,7 @@ let s:base_dir = $HOME."/.vim/files/".(has('nvim') ? 'nvim' : 'vim')
 let &backupdir = s:base_dir."/backup/"
 let &directory = s:base_dir."/swap//"
 let &undodir   = s:base_dir."/undo/"
-let &viminfo = "100,n".s:base_dir."/info/viminfo"
+let &viminfo = "100,n".(s:base_dir)."/info/viminfo"
 set backup
 set backupext   =-vimbackup
 set backupskip  =
