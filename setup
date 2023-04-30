@@ -140,6 +140,7 @@ symlink () {
 safe_copy () {
   # just copy and overwrite if force_overwrite is on
   [ $force_overwrite ] && cat $1 > $2 && return 0
+  which sha256sum >/dev/null 2>&1 && hash_command='sha256sum'
   which shasum >/dev/null 2>&1 && hash_command='shasum'
   hash_new=`$hash_command $1 | head -c 40`
   hash_old=`$hash_command $2 | head -c 40`

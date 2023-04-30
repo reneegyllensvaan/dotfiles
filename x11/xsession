@@ -15,6 +15,6 @@ xmodmap ~/.config/colemak_dh_matrix.xmodmap
 
 # set key repeat rate
 xset r rate 200 35
-(sleep 4 && exec polybar -c ~/dotfiles/x11/polybar.conf example) &
+(sleep 4 && exec polybar -c ~/code/dotfiles/x11/polybar.conf example) &
 
 [ -f ~/wallpaper.jpg ] && feh --bg-scale ~/wallpaper.jpg
