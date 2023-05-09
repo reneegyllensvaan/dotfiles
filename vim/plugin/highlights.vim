@@ -2,6 +2,7 @@
 if has('gui_running')
   finish
 endif
+set notermguicolors
 
 " nnoremap <Space>vh :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 " set t_Co=16
@@ -51,6 +52,7 @@ hi  StatusLineNormal    cterm=none  ctermbg=green    ctermfg=black
 hi  StatusLineInsert    cterm=none  ctermbg=blue     ctermfg=black
 hi  StatusLineVisual    cterm=none  ctermbg=magenta  ctermfg=black
 hi  StatusLineReplace   cterm=none  ctermbg=red      ctermfg=black
+hi  StatusLineCommand   cterm=none  ctermbg=yellow   ctermfg=black
 hi  StatusLineDisabled  cterm=none  ctermbg=white    ctermfg=black
 hi  TabLineFill         cterm=none  ctermbg=black    ctermfg=white
 hi  TabLineSel          cterm=bold  ctermbg=black    ctermfg=white

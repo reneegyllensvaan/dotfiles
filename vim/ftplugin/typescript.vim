@@ -33,3 +33,6 @@ inoremap <buffer> <C-t><C-t><C-o><C-s> <Left><Space>\|<Space>string
 
 inoreabbrev <buffer> FN function(props: Props) {<CR>}<Esc>O<Esc>k$F(i
 inoreabbrev <buffer> KFN function({}: Props) {<CR>}<Esc>O<Esc>k$F(i
+
+inoreabbrev <buffer> str string
+inoreabbrev <buffer> bool boolean

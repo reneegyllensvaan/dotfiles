@@ -1,0 +1,17 @@
+#!/bin/sh
+# pick columns. i forget cut syntax and awk is a verbose way to shuffle around
+# some columns of text. here's a janky shell script to dynamically generate an
+# awk program :3
+
+if [ "" = "$1" ]; then
+  echo "usage: pc <1..>"
+  exit
+fi
+
+script='{ print '
+for col in "$@"; do
+  script="$script \$($col) \" \""
+done
+script="$script ; }"
+
+exec awk "$script"

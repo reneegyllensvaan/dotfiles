@@ -1,6 +1,8 @@
 " vim: fdm=marker ft=sourceonsave.vim
 set encoding=utf-8
 
+set mouse=  " disable mouse input
+
 " Enable line numbers and gutters by default
 set number
 set signcolumn=yes

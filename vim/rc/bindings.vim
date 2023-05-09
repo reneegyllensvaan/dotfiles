@@ -36,6 +36,7 @@ nnoremap <C-s> <Nop>
 nnoremap <C-t> <Nop>
 nnoremap <C-c> <Nop>
 nnoremap <C-c><C-c> <Nop>
+nnoremap <M-u> <Nop>
 noremap <Space> <Nop>
 noremap q <Nop>
 noremap <Left> <Nop>
@@ -85,12 +86,12 @@ inoremap <M-C-e> <Space>==<Space>
 inoremap <M-E> <Space>!=<Space>
 inoremap <C-t><C-u> UUID
 
-inoremap <expr> <C-c><Tab><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><Tab><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><Tab><C-g> system('insert-fake country')[:-3]
+inoremap <expr> <C-c><Tab><C-u> system('insert-fake uuid')[:-2]
 inoremap <expr> <C-c><Tab><C-d> system("date '+%F %H:%M'")[:-2]
 inoremap <expr> <C-c><Tab>d system("date '+%F'")[:-2]
-inoremap <expr> <C-c>id system("date '+%s'")[:-2]
+inoremap <expr> <C-c><Tab>D system("date '+%s'")[:-2]
 inoremap <C-c><Tab><C-b> <C-v>u2022
 
 " Modified Regular Characters:
@@ -128,17 +129,18 @@ inoremap <C-c><C-b><C-s> <C-v>u254b
 " U+255x	═	║	╒	╓	╔	╕	╖	╗	╘	╙	╚	╛	╜	╝	╞	╟
 " U+256x	╠	╡	╢	╣	╤	╥	╦	╧	╨	╩	╪	╫	╬	╭	╮	╯
 
+inoremap <M-e> <Esc>:call fzy#insert_emoji()<CR>
 " 1}}}
 "  Folding: {{{1
 
 nnoremap <A-s> za
 
 " Set foldmethod
-nnoremap \ff :set fdm=manual<cr>
-nnoremap \fi :set fdm=indent<cr>
-nnoremap \fm :set fdm=marker<cr>
-nnoremap \fs :set fdm=syntax<cr>
-nnoremap \fd :set fdm=diff<cr>
+nnoremap \sff :set fdm=manual<cr>
+nnoremap \sfi :set fdm=indent<cr>
+nnoremap \sfm :set fdm=marker<cr>
+nnoremap \sfs :set fdm=syntax<cr>
+nnoremap \sfd :set fdm=diff<cr>
 
 " 1}}}
 "  Editing Commands: {{{1
@@ -195,6 +197,7 @@ nnoremap <expr> crc "ciw".editfns#to_camel(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crp "ciw".editfns#to_pascal(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crs "ciw".editfns#to_snake(expand("<cword>"))."\<Esc>"
 nnoremap <expr> crS "ciw".editfns#to_upper_snake(expand("<cword>"))."\<Esc>"
+nnoremap <expr> crt "ciw".editfns#to_title(expand("<cword>"))."\<Esc>"
 
 nnoremap dC :call editfns#delete_function_call()<CR>
 
@@ -492,6 +495,7 @@ xnoremap s_ :<C-u>call visualops#surround_selection('__', 0)<CR>
 xnoremap S_ :<C-u>call visualops#surround_selection('__', 1)<CR>
 xnoremap s* :<C-u>call visualops#surround_selection('**', 0)<CR>
 xnoremap S* :<C-u>call visualops#surround_selection('**', 1)<CR>
+xnoremap s$ :<C-u>call visualops#surround_selection('{}', 1)<CR><Esc>`<i$<Esc>
 xnoremap s<Space> :<C-u>call visualops#surround_selection('  ', 0)<CR>
 xnoremap S<Space> :<C-u>call visualops#surround_selection('  ', 1)<CR>
 xnoremap sf :<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
@@ -575,6 +579,11 @@ function! ContextAction() " {{{1
         \['┛', '╯', '╝'],
         \['┃', '┇', '║'],
         \['━', '┅', '═'],
+        \['┣', '╠'],
+        \['┫', '╣'],
+        \['┳', '╦'],
+        \['┻', '╩'],
+        \['╋', '╬'],
         \]
   for l:charset in l:cycle_table
     for l:ix in range(len(l:charset))

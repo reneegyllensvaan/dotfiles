@@ -55,6 +55,10 @@ function! fzy#file_with_base(base_dir)
   call fzy#in_buffer("fd . --type f --base-directory ~/".a:base_dir."", ":e ~/".a:base_dir, "")
 endfunction
 
+function! fzy#insert_emoji() abort
+  call fzy#in_buffer("cat ".glob("~/.vim/assets/emojis.txt"), ":normal! a", "\| awk '{print $1 \"\"}'")
+endfunction
+
 let g:fzy_actions = ['Files', 'Buffers']
 
 function! s:DumpBuffers(has_bang)

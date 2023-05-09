@@ -1,0 +1,2 @@
+#!/bin/sh
+printf "echo '$(echo $@ | base64)' | base64 -d" | xc

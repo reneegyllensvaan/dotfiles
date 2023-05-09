@@ -1,12 +1,16 @@
 " ex: ft=sourceonsave.vim
 
-let g:remote_session = 'remote:1.0'
+let g:remote_session = 'remote'
 
 function! s:SendKeysRaw(keys, newline)
     let clear_line_cmd = 'tmux send-keys -t '.g:remote_session.' C-u'
     call system(clear_line_cmd)
-    let cmd = "tmux send-keys -t ".g:remote_session." -l -- ".a:keys.(a:newline ? "\<C-m>" : "")
+    let cmd = "tmux send-keys -t ".g:remote_session." -l -- ".a:keys
     call system(cmd)
+    if a:newline
+        let cmd = "tmux send-keys -t ".g:remote_session." 'C-m'"
+        call system(cmd)
+    endif
 endfunction
 
 function! s:SendKeys(keys)

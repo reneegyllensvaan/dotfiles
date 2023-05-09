@@ -1,0 +1,2 @@
+#!/bin/sh
+exec awk '{ tot += $1; count += 1 } END { print tot / count }'

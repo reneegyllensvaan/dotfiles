@@ -18,6 +18,7 @@ if has('gui_running')
   hi StatusLineInsert    guibg=#56B6C2 guifg=black
   hi StatusLineVisual    guibg=#C678DD guifg=black
   hi StatusLineReplace   guibg=#E06C75 guifg=black
+  hi StatusLineCommand   guibg=#E06C75 guifg=black
   hi StatusLineDisabled  guibg=#6F6F6F guifg=black
 endif
 
@@ -35,6 +36,7 @@ let g:statusline_active = join([
       \"%#StatusLineInsert#%{(mode()=='i') ? '  INSERT ' : ''}",
       \"%#StatusLineVisual#%{(mode()=='v'||mode()=='\<C-v>') ? '  VISUAL ' : ''}",
       \"%#StatusLineReplace#%{(mode()=='r') ? '  REPLACE ' : ''}",
+      \"%#StatusLineCommand#%{(mode()=='c') ? '  COMMAND ' : ''}",
       \'%1* %t%=%*%3*%h%m%r%3*%3*%c:%3*%l/%L|%3*%y%{mode()}'], '')
 let g:statusline_disabled = join([
       \"%#StatusLineDisabled#%{'         '}",
@@ -92,9 +94,9 @@ let g:netrw_banner=0
 let g:netrw_browse_split=4
 let g:netrw_altv=1
 let g:netrw_liststyle=3
-let g:netrw_list_hide=netrw_gitignore#Hide()
-let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_list_hide.=',\.(pyc)$'
+" let g:netrw_list_hide=netrw_gitignore#Hide()
+" let g:netrw_list_hide.=',\(^\|\s\s\)\zs\.\S\+'
+" let g:netrw_list_hide.=',\.(pyc)$'
 
 function! ToggleVExplorer()
   if exists("t:expl_buf_num")

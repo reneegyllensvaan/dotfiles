@@ -23,6 +23,20 @@ function! editfns#to_camel(word)
   return l:s
 endfunction
 
+function! editfns#to_title(word)
+  let l:s = ''
+  for word in editfns#split_symbol(a:word)
+    if !len(word)
+      continue
+    endif
+    if len(l:s)
+      let l:s .= ' '
+    endif
+    let l:s .= toupper(word[0]).word[1:]
+  endfor
+  return l:s
+endfunction
+
 function! editfns#to_kebab(word)
   return join(editfns#split_symbol(a:word), '-')
 endfunction

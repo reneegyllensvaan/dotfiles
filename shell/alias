@@ -12,7 +12,6 @@ which lld >/dev/null 2>&1 || alias lld='otool -L'
 alias arst='asdf'
 alias ncdu="ncdu --color dark -rr -x"
 # alias ncdu="ncdu --color dark -rr -x --exclude .git --exclude node_modules"
-alias nim="nim --outdir:~/.nimble/_out"
 alias openv="eval \$(opam env)"
 
 alias fim='f=`fd . -t f | fzy` && ${VISUAL:-$EDITOR} "$f"' # use fzf to select a file but only open on return 1
