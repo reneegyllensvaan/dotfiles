@@ -45,8 +45,10 @@
   # Briefs: {{{
   a   = add
   aa  = add --all
-  aac  = "! git add --all && git commit"
-  aaf  = "! git add --all && git fixup"
+  aac  = "! git aa && git commit"
+  aaf  = "! git aa && git fixup"
+  aarc = "! git aa && git rc"
+  aarcne = "! git aa && git rcne"
 
   b   = branch
 
@@ -76,7 +78,9 @@
 
   r   = rebase
   rc  = rebase --continue
+  rcne = "! git -c core.editor=true rebase --continue"
   ri  = rebase -i
+  rab = rebase --abort
   r-h  = reset --hard
   back  = "! git reset --hard @~${1}"
 
@@ -89,6 +93,25 @@
   za  = stash apply
   zl  = stash list
   zs  = stash show -u
+
+  ## common sequences:
+  aacanoe   = "! git aa && git canoe"
+  aacanoera = "! git aa && git canoera"
+  aarc      = "! git aa && git rc"
+  prush     = "! git pr && git push"
+  prushu    = "! git pr && git pushu"
+  pfush     = "! git pf && git push"
+  pfushu    = "! git pf && git pushu"
+  ### long bois
+  aacanoeprush   = "! git aacanoe && git prush"
+  aacanoeprushu  = "! git aacanoe && git prushu"
+  aacanoeraprush   = "! git aacanoera && git prush"
+  aacanoeraprushu  = "! git aacanoera && git prushu"
+  aacanoepfush   = "! git aacanoe && git pfush"
+  aacanoepfushu  = "! git aacanoe && git pfushu"
+  aacanoerapfush   = "! git aacanoera && git pfush"
+  aacanoerapfushu  = "! git aacanoera && git pfushu"
+  ## (yes i know these look like gibberish but there's probably a system to it)
 
   # Briefs }}}
 

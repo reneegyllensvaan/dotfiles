@@ -90,7 +90,7 @@ inoremap <expr> <C-c><Tab><C-n> system('insert-fake name')[:-3]
 inoremap <expr> <C-c><Tab><C-g> system('insert-fake country')[:-3]
 inoremap <expr> <C-c><Tab><C-d> system("date '+%F %H:%M'")[:-2]
 inoremap <expr> <C-c><Tab>d system("date '+%F'")[:-2]
-inoremap <expr> <C-c>id system("date '+%s'")[:-2]
+inoremap <expr> <C-c><Tab>D system("date '+%s'")[:-2]
 inoremap <C-c><Tab><C-b> <C-v>u2022
 
 " Modified Regular Characters:
@@ -492,6 +492,7 @@ xnoremap s_ :<C-u>call visualops#surround_selection('__', 0)<CR>
 xnoremap S_ :<C-u>call visualops#surround_selection('__', 1)<CR>
 xnoremap s* :<C-u>call visualops#surround_selection('**', 0)<CR>
 xnoremap S* :<C-u>call visualops#surround_selection('**', 1)<CR>
+xnoremap s$ :<C-u>call visualops#surround_selection('{}', 1)<CR><Esc>`<i$<Esc>
 xnoremap s<Space> :<C-u>call visualops#surround_selection('  ', 0)<CR>
 xnoremap S<Space> :<C-u>call visualops#surround_selection('  ', 1)<CR>
 xnoremap sf :<C-u>call visualops#surround_selection('()', 0)<CR><Esc>`<hi
