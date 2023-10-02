@@ -159,3 +159,4 @@ for f in ~/.zshrc.d/*; do
 done
 
 true
+export MAGICK_HOME=$(echo /opt/homebrew/Cellar/imagemagick/*(On:Y1))

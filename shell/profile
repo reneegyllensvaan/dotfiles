@@ -8,8 +8,7 @@ export PATH="$HOME/.nimble/bin:$PATH"
 export PATH="$HOME/.deno/bin:$PATH"
 [ -e ~/.skim ] && export PATH="$HOME/.skim/bin:$PATH"
 [ -e ~/.roswell ] && export PATH="$HOME/.roswell/bin:$PATH"
-[ -e ~/.cargo/env ] && source "$HOME/.cargo/env"
-# which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
+[ -e ~/.cargo/env ] && # which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
 # which python2 >/dev/null 2>&1 && PATH="$PATH:`python2 -m site --user-base`/bin"
 
 export NODE_OPTIONS='--max-old-space-size=8192'
@@ -58,3 +57,4 @@ which xsel >/dev/null 2>&1 && export CLIPBOARD_COPY='xsel -b' \
 export Q=/dev/null  # "Quiet"
 export C=$CLIPBOARD_COPY
 export P=$CLIPBOARD_PASTE
+. "$HOME/.cargo/env"

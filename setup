@@ -235,6 +235,7 @@ ensure_git_repo vim/pack/plugins/opt/vimspector https://github.com/puremourning/
 ensure_git_repo vim/pack/plugins/opt/which-key https://github.com/folke/which-key.nvim
 ensure_git_repo vim/pack/plugins/opt/asyncrun https://github.com/skywind3000/asyncrun.vim
 ensure_git_repo vim/pack/plugins/opt/asynctasks https://github.com/skywind3000/asynctasks.vim
+ensure_git_repo vim/pack/plugins/opt/easymotion https://github.com/easymotion/vim-easymotion
 
 ensure_git_repo vim/pack/plugins/opt/lsp-extensions https://github.com/nvim-lua/lsp_extensions.nvim
 ensure_git_repo vim/pack/plugins/opt/nvim-cmp https://github.com/hrsh7th/nvim-cmp

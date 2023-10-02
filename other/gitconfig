@@ -103,25 +103,24 @@
   pfush     = "! git pf && git push"
   pfushu    = "! git pf && git pushu"
   ### long bois
+  aacprush   = "! git aac && git prush"
   aacanoeprush   = "! git aacanoe && git prush"
   aacanoeprushu  = "! git aacanoe && git prushu"
   aacanoeraprush   = "! git aacanoera && git prush"
   aacanoeraprushu  = "! git aacanoera && git prushu"
-  aacanoepfush   = "! git aacanoe && git pfush"
-  aacanoepfushu  = "! git aacanoe && git pfushu"
-  aacanoerapfush   = "! git aacanoera && git pfush"
-  aacanoerapfushu  = "! git aacanoera && git pfushu"
   ## (yes i know these look like gibberish but there's probably a system to it)
 
   # Briefs }}}
 
   linted = "! git add . && git commit -mlint"
+  lintedp = "! git linted && git push"
   pop = stash pop
   ls-files-root = "! git ls-files"
   root = "! pwd"
   l2 = log -n 2
   setme = "! git symbolic-ref refs/heads/me refs/heads/$(git rev-parse --abbrev-ref @)"
   forio = ! git fetch origin && git rebase --interactive origin/HEAD
+  xapply = "! (xp && echo) | git apply"
 
   # Hub aliases
   prl = "! hub pr list -f \"%>(16)%au %pC%>(8)%i%Creset  %t%  l%n\" | cat"

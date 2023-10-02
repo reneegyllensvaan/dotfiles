@@ -221,3 +221,4 @@ vim/pack/plugins/opt/cmp-nvim-lsp
 vim/pack/plugins/opt/cmp-path
 vim/pack/plugins/opt/rust-tools
 vim/pack/plugins/opt/cmp-buffer
+vim/pack/plugins/opt/easymotion

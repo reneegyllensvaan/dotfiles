@@ -14,7 +14,7 @@ nmap <buffer> crG e[]<Left>
 nmap <buffer> crl cr[iList<Esc>
 nmap <buffer> cro cr[iOptional<Esc>
 
-inoremap <buffer> <C-t><C-l> print("value = {}".format(value))<Esc>Fv;*Ncgn
+inoremap <buffer> <C-t><C-l> print(f"value = {value}")<Esc>Fv;*N"_cgn
 
 " Type Shorthands:
 inoremap <buffer> <C-t><C-t><C-u> UUID
