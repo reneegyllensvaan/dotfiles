@@ -1,0 +1,596 @@
+#!/usr/bin/env python3
+"""Proof of concept: layout chart for combination hierarchies.
+
+Input is a set of clauses of the form:
+
+    parent1 + parent2 -> child1 + child2 + child3
+
+Parents combine into a "union" (drawn as a horizontal marriage line), and a
+line drops down from that union and splits into one branch per child -- the way
+ancestry / genealogy charts are usually drawn.
+
+Clauses may also have a single parent, or no children at all.
+
+Outputs a standalone SVG file.
+"""
+
+from __future__ import annotations
+
+from collections import defaultdict
+from dataclasses import dataclass, field
+
+DUMMY_PREFIX = "\0dummy"
+
+
+@dataclass
+class Union:
+    parents: list[str]
+    children: list[str]
+
+
+@dataclass
+class Node:
+    name: str
+    level: int = 0
+    x: float = 0.0
+
+
+def parse_clauses(text: str) -> list[Union]:
+    unions: list[Union] = []
+    for raw in text.strip().splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        parents_part, _, children_part = line.partition("->")
+        parents = [p.strip() for p in parents_part.split("+") if p.strip()]
+        children = [c.strip() for c in children_part.split("+") if c.strip()]
+        unions.append(Union(parents=parents, children=children))
+    return unions
+
+
+def collect_nodes(unions: list[Union]) -> dict[str, Node]:
+    nodes: dict[str, Node] = {}
+    for union in unions:
+        for name in union.parents + union.children:
+            nodes.setdefault(name, Node(name))
+    return nodes
+
+
+def assign_levels(nodes: dict[str, Node], unions: list[Union]) -> None:
+    """Assign a generation level to each node via a fixpoint relaxation.
+
+    Three constraints are enforced together (each can only push a node further
+    down, so the relaxation converges):
+      * a child sits one level below each of its parents,
+      * partners in a union share a level (so a married-in spouse with no known
+        ancestors is pulled down next to their partner instead of floating up),
+      * a node with children is pulled down to just above its nearest child, so
+        an otherwise-unanchored parent pair does not float to the top and drag a
+        long edge across unrelated unions.
+    """
+    level = {name: 0 for name in nodes}
+    children_of: dict[str, set[str]] = {name: set() for name in nodes}
+    for union in unions:
+        for parent in union.parents:
+            children_of[parent].update(union.children)
+
+    for _ in range(len(nodes) + 1):
+        changed = False
+        for union in unions:
+            for child in union.children:
+                want = max((level[p] + 1 for p in union.parents), default=0)
+                if level[child] < want:
+                    level[child] = want
+                    changed = True
+            partner_level = max((level[p] for p in union.parents), default=0)
+            for parent in union.parents:
+                if level[parent] < partner_level:
+                    level[parent] = partner_level
+                    changed = True
+        for name, kids in children_of.items():
+            if not kids:
+                continue
+            want = min(level[c] for c in kids) - 1
+            if level[name] < want:
+                level[name] = want
+                changed = True
+        if not changed:
+            break
+
+    for name, node in nodes.items():
+        node.level = level[name]
+
+
+# --- layout -----------------------------------------------------------------
+
+H_SPACING = 140.0  # minimum horizontal gap between node centers
+V_SPACING = 130.0  # vertical gap between generations
+BOX_W = 110.0
+BOX_H = 40.0
+MARGIN = 40.0
+
+
+def _build_layers(
+    nodes: dict[str, Node], unions: list[Union]
+) -> tuple[
+    dict[int, list[str]],
+    dict[str, list[str]],
+    dict[str, list[str]],
+    dict[tuple[int, str], list[str]],
+]:
+    """Build ordered layers plus up/down adjacency, splitting any edge that
+    spans more than one level into a chain of dummy nodes so the long edge has a
+    routable corridor on every intermediate row.
+
+    Returns the dummy chain for each long ``(union index, child)`` edge so the
+    renderer can route the line through the reserved corridor instead of drawing
+    a straight vertical through whatever box happens to sit at the child's x.
+    """
+    order: dict[int, list[str]] = defaultdict(list)
+    for node in nodes.values():
+        order[node.level].append(node.name)
+
+    up: dict[str, list[str]] = defaultdict(list)
+    down: dict[str, list[str]] = defaultdict(list)
+    routes: dict[tuple[int, str], list[str]] = {}
+    dummies = 0
+
+    for union_index, union in enumerate(unions):
+        parent_level = max(nodes[p].level for p in union.parents)
+        for child in union.children:
+            if nodes[child].level - parent_level <= 1:
+                for parent in union.parents:
+                    down[parent].append(child)
+                    up[child].append(parent)
+                continue
+
+            chain = []
+            for level in range(parent_level + 1, nodes[child].level):
+                dummy = f"{DUMMY_PREFIX}{dummies}"
+                dummies += 1
+                order[level].append(dummy)
+                chain.append(dummy)
+            for parent in union.parents:
+                down[parent].append(chain[0])
+                up[chain[0]].append(parent)
+            for upper, lower in zip(chain, chain[1:]):
+                down[upper].append(lower)
+                up[lower].append(upper)
+            down[chain[-1]].append(child)
+            up[child].append(chain[-1])
+            routes[(union_index, child)] = chain
+
+    return order, up, down, routes
+
+
+def _median(positions: list[int]) -> float:
+    if not positions:
+        return -1.0
+    positions.sort()
+    mid = len(positions) // 2
+    if len(positions) % 2 == 1:
+        return float(positions[mid])
+    return (positions[mid - 1] + positions[mid]) / 2
+
+
+def _reorder_by(layer: list[str], key_of: dict[str, float]) -> list[str]:
+    """Sort a layer by each node's key, leaving keyless nodes (-1) in place."""
+    movable = sorted((n for n in layer if key_of[n] >= 0), key=lambda n: key_of[n])
+    movable_iter = iter(movable)
+    return [n if key_of[n] < 0 else next(movable_iter) for n in layer]
+
+
+def _count_crossings(upper: list[str], lower: list[str], down: dict[str, list[str]]) -> int:
+    rank = {n: i for i, n in enumerate(lower)}
+    endpoints = [rank[v] for u in upper for v in sorted(down.get(u, []), key=lambda x: rank[x])]
+    crossings = 0
+    for i in range(len(endpoints)):
+        for j in range(i + 1, len(endpoints)):
+            if endpoints[i] > endpoints[j]:
+                crossings += 1
+    return crossings
+
+
+def _minimize_crossings(
+    order: dict[int, list[str]], up: dict[str, list[str]], down: dict[str, list[str]]
+) -> dict[int, list[str]]:
+    levels = sorted(order)
+
+    def total_crossings(o: dict[int, list[str]]) -> int:
+        return sum(
+            _count_crossings(o[levels[i]], o[levels[i + 1]], down) for i in range(len(levels) - 1)
+        )
+
+    best = {lvl: list(names) for lvl, names in order.items()}
+    best_score = total_crossings(best)
+
+    for _ in range(8):
+        for i in range(1, len(levels)):
+            rank = {n: idx for idx, n in enumerate(order[levels[i - 1]])}
+            keys = {
+                n: _median([rank[u] for u in up.get(n, []) if u in rank]) for n in order[levels[i]]
+            }
+            order[levels[i]] = _reorder_by(order[levels[i]], keys)
+        for i in range(len(levels) - 2, -1, -1):
+            rank = {n: idx for idx, n in enumerate(order[levels[i + 1]])}
+            keys = {
+                n: _median([rank[d] for d in down.get(n, []) if d in rank])
+                for n in order[levels[i]]
+            }
+            order[levels[i]] = _reorder_by(order[levels[i]], keys)
+
+        score = total_crossings(order)
+        if score < best_score:
+            best_score = score
+            best = {lvl: list(names) for lvl, names in order.items()}
+
+    return best
+
+
+def _collect_component(start: str, partner_adj: dict[str, set[str]], present: set[str]) -> set[str]:
+    component: set[str] = set()
+    stack = [start]
+    while stack:
+        node = stack.pop()
+        if node in component:
+            continue
+        component.add(node)
+        stack.extend(m for m in partner_adj[node] if m in present and m not in component)
+    return component
+
+
+def _order_chain(
+    component: set[str], partner_adj: dict[str, set[str]], rank: dict[str, int]
+) -> list[str]:
+    """Order a partner group as a chain so each node sits beside its partner(s);
+    a node with two partners ends up between them. Falls back to rank order for
+    branching groups (a node with 3+ partners can't be adjacent to all of them).
+    """
+    if len(component) == 1:
+        return list(component)
+    degree = {n: len(partner_adj[n] & component) for n in component}
+    endpoints = sorted((n for n in component if degree[n] <= 1), key=lambda n: rank[n])
+    if any(d > 2 for d in degree.values()) or not endpoints:
+        return sorted(component, key=lambda n: rank[n])
+
+    path: list[str] = []
+    prev, current = None, endpoints[0]
+    while current is not None:
+        path.append(current)
+        nxt = [m for m in partner_adj[current] & component if m != prev and m not in path]
+        prev, current = current, (nxt[0] if nxt else None)
+    return path
+
+
+def _partner_adjacency(unions: list[Union], nodes: dict[str, Node]) -> dict[str, set[str]]:
+    partner_adj: dict[str, set[str]] = defaultdict(set)
+    for union in unions:
+        by_level: dict[int, list[str]] = defaultdict(list)
+        for parent in union.parents:
+            by_level[nodes[parent].level].append(parent)
+        for members in by_level.values():
+            for parent in members:
+                partner_adj[parent].update(m for m in members if m != parent)
+    return partner_adj
+
+
+def _group_partners(
+    order: dict[int, list[str]],
+    up: dict[str, list[str]],
+    down: dict[str, list[str]],
+    unions: list[Union],
+    nodes: dict[str, Node],
+) -> dict[int, list[str]]:
+    """Collapse each union's same-level parents into one contiguous block, then
+    re-run crossing reduction treating those blocks as atomic units. This keeps
+    partners together (no marriage line through an unrelated node) while letting
+    siblings stay adjacent, so the layout doesn't strand subtrees."""
+    partner_adj = _partner_adjacency(unions, nodes)
+
+    block_order: dict[int, list[str]] = defaultdict(list)
+    members: dict[str, list[str]] = {}
+    node_block: dict[str, str] = {}
+    for level, names in order.items():
+        present = set(names)
+        rank = {name: i for i, name in enumerate(names)}
+        seen: set[str] = set()
+        for name in names:
+            if name in seen:
+                continue
+            component = _collect_component(name, partner_adj, present)
+            seen |= component
+            block_id = f"B{level}_{len(block_order[level])}"
+            members[block_id] = _order_chain(component, partner_adj, rank)
+            block_order[level].append(block_id)
+            for member in members[block_id]:
+                node_block[member] = block_id
+
+    block_up: dict[str, list[str]] = defaultdict(list)
+    block_down: dict[str, list[str]] = defaultdict(list)
+    for block_id, block_members in members.items():
+        for member in block_members:
+            block_up[block_id].extend(node_block[u] for u in up.get(member, []))
+            block_down[block_id].extend(node_block[d] for d in down.get(member, []))
+
+    block_order = _minimize_crossings(block_order, block_up, block_down)
+    return {level: [n for b in blocks for n in members[b]] for level, blocks in block_order.items()}
+
+
+def layout(
+    nodes: dict[str, Node], unions: list[Union]
+) -> tuple[dict[str, float], dict[tuple[int, str], list[str]]]:
+    order, up, down, routes = _build_layers(nodes, unions)
+    order = _minimize_crossings(order, up, down)
+    order = _group_partners(order, up, down, unions, nodes)
+
+    pos: dict[str, float] = {}
+    for names in order.values():
+        for i, name in enumerate(names):
+            pos[name] = i * H_SPACING
+
+    neighbours: dict[str, list[str]] = defaultdict(list)
+    for node, related in up.items():
+        neighbours[node].extend(related)
+    for node, related in down.items():
+        neighbours[node].extend(related)
+    for union in unions:
+        for parent in union.parents:
+            neighbours[parent].extend(p for p in union.parents if p != parent)
+
+    # Every dummy on a long edge tracks its terminal child's x, so the chain
+    # stays vertically aligned and the edge renders as a straight corridor.
+    dummy_target = {d: child for (_, child), chain in routes.items() for d in chain}
+
+    for _ in range(60):
+        for names in order.values():
+            for name in names:
+                if name in dummy_target:
+                    pos[name] = pos[dummy_target[name]]
+                    continue
+                related = neighbours[name]
+                if related:
+                    pos[name] = sum(pos[r] for r in related) / len(related)
+            for i in range(1, len(names)):
+                min_x = pos[names[i - 1]] + H_SPACING
+                if pos[names[i]] < min_x:
+                    pos[names[i]] = min_x
+
+    shift = min(pos[name] for name in nodes)
+    for name in pos:
+        pos[name] -= shift
+    for name, node in nodes.items():
+        node.x = pos[name]
+    return pos, routes
+
+
+# --- rendering --------------------------------------------------------------
+
+
+@dataclass
+class Svg:
+    parts: list[str] = field(default_factory=list)
+
+    def line(self, x1: float, y1: float, x2: float, y2: float) -> None:
+        self.parts.append(
+            f'<line x1="{x1:.1f}" y1="{y1:.1f}" x2="{x2:.1f}" y2="{y2:.1f}" '
+            f'stroke="#444" stroke-width="2" />'
+        )
+
+    def box(self, cx: float, cy: float, text: str) -> None:
+        x = cx - BOX_W / 2
+        y = cy - BOX_H / 2
+        self.parts.append(
+            f'<rect x="{x:.1f}" y="{y:.1f}" width="{BOX_W}" height="{BOX_H}" rx="6" '
+            f'fill="#eef3fb" stroke="#3b6fb0" stroke-width="2" />'
+            f'<text x="{cx:.1f}" y="{cy + 5:.1f}" text-anchor="middle" '
+            f'font-family="sans-serif" font-size="14" fill="#1b2a3a">{text}</text>'
+        )
+
+
+def node_y(level: int) -> float:
+    return MARGIN + BOX_H / 2 + level * V_SPACING
+
+
+def render(
+    nodes: dict[str, Node],
+    unions: list[Union],
+    pos: dict[str, float],
+    routes: dict[tuple[int, str], list[str]],
+) -> str:
+    svg = Svg()
+
+    for union_index, union in enumerate(unions):
+        draw_union(svg, nodes, union, union_index, pos, routes)
+
+    for node in nodes.values():
+        svg.box(node.x, node_y(node.level), node.name)
+
+    xs = [n.x for n in nodes.values()]
+    levels = [n.level for n in nodes.values()]
+    width = max(xs) + BOX_W / 2 + MARGIN
+    height = node_y(max(levels)) + BOX_H / 2 + MARGIN
+    min_x = min(xs) - BOX_W / 2 - MARGIN
+
+    body = "\n  ".join(svg.parts)
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" '
+        f'viewBox="{min_x:.1f} 0 {width - min_x:.1f} {height:.1f}" '
+        f'width="{width - min_x:.0f}" height="{height:.0f}">\n'
+        f'  <rect x="{min_x:.1f}" y="0" width="{width - min_x:.1f}" height="{height:.1f}" '
+        f'fill="white" />\n  {body}\n</svg>\n'
+    )
+
+
+def draw_union(
+    svg: Svg,
+    nodes: dict[str, Node],
+    union: Union,
+    union_index: int,
+    pos: dict[str, float],
+    routes: dict[tuple[int, str], list[str]],
+) -> None:
+    parents = [nodes[p] for p in union.parents]
+    parent_level = max(p.level for p in parents)
+    parent_bottom = node_y(parent_level) + BOX_H / 2
+
+    union_x = sum(p.x for p in parents) / len(parents)
+
+    if len(parents) > 1:
+        ys = node_y(parent_level)
+        left, right = min(p.x for p in parents), max(p.x for p in parents)
+        svg.line(left, ys, right, ys)  # marriage line
+
+    if not union.children:
+        return
+
+    bus_y = parent_bottom + (V_SPACING - BOX_H) / 2
+
+    # With two parents the drop starts at the marriage line (box centre); with a
+    # single parent there is no marriage line, so it starts at the box bottom.
+    drop_top = node_y(parent_level) if len(parents) > 1 else parent_bottom
+    svg.line(union_x, drop_top, union_x, bus_y)  # drop from union
+
+    # A child leaves the bus at its own x, unless the edge spans several levels:
+    # then it leaves at the first dummy's x so it follows the reserved corridor.
+    branch_xs = [
+        pos[routes[(union_index, child)][0]] if (union_index, child) in routes else nodes[child].x
+        for child in union.children
+    ]
+    svg.line(min(branch_xs + [union_x]), bus_y, max(branch_xs + [union_x]), bus_y)  # sibling bus
+
+    for child, branch_x in zip(union.children, branch_xs):
+        _draw_child_edge(svg, nodes, union_index, child, branch_x, bus_y, parent_level, pos, routes)
+
+
+def _draw_orthogonal(svg: Svg, points: list[tuple[float, float]]) -> None:
+    for (x1, y1), (x2, y2) in zip(points, points[1:]):
+        if y1 != y2:
+            svg.line(x1, y1, x1, y2)
+        if x1 != x2:
+            svg.line(x1, y2, x2, y2)
+
+
+def _draw_child_edge(
+    svg: Svg,
+    nodes: dict[str, Node],
+    union_index: int,
+    child: str,
+    branch_x: float,
+    bus_y: float,
+    parent_level: int,
+    pos: dict[str, float],
+    routes: dict[tuple[int, str], list[str]],
+) -> None:
+    child_top = node_y(nodes[child].level) - BOX_H / 2
+    route = routes.get((union_index, child))
+    if not route:
+        svg.line(branch_x, bus_y, branch_x, child_top)
+        return
+
+    points = [(branch_x, bus_y)]
+    for i, dummy in enumerate(route):
+        points.append((pos[dummy], node_y(parent_level + 1 + i)))
+    points.append((nodes[child].x, child_top))
+    _draw_orthogonal(svg, points)
+
+
+def build_svg(text: str) -> str:
+    unions = parse_clauses(text)
+    nodes = collect_nodes(unions)
+    assign_levels(nodes, unions)
+    pos, routes = layout(nodes, unions)
+    return render(nodes, unions, pos, routes)
+
+
+def build_graphviz(text: str) -> str:
+    unions = parse_clauses(text)
+    sb = list()
+    sb.append("digraph G {")
+    # When a parent is shared by several unions, keeping it on the same end of
+    # each union's flat chain turns it into a "star" and leaves the unions free
+    # to order arbitrarily, which crosses edges. Orienting each union so a shared
+    # parent sits on opposite ends links the chains into one clean line.
+    side_count: dict[tuple[str, str], int] = {}
+
+    def orient(parents: list[str]) -> list[str]:
+        if len(parents) != 2:
+            return parents
+        a, b = parents
+        keep = side_count.get((a, "L"), 0) + side_count.get((b, "R"), 0)
+        flip = side_count.get((b, "L"), 0) + side_count.get((a, "R"), 0)
+        if flip < keep:
+            a, b = b, a
+        side_count[(a, "L")] = side_count.get((a, "L"), 0) + 1
+        side_count[(b, "R")] = side_count.get((b, "R"), 0) + 1
+        return [a, b]
+
+    for ix, u in enumerate(unions):
+        if len(u.parents) > 1:
+            union = f"union{ix}"
+            sb.append(f"  \"{union}\" [shape=point width=0.01 style=invis]")
+            parents = orient(u.parents)
+            mid = len(parents) // 2
+            order = parents[:mid] + [union] + parents[mid:]
+            sb.append("  {rank=same " + " ".join([f"\"{p}\"" for p in order]) + "}")
+            for left, right in zip(order, order[1:]):
+                sb.append(f"  \"{left}\" -> \"{right}\" [arrowhead=none]")
+            for child in u.children:
+                sb.append(f"  \"{union}\" -> \"{child}\"")
+        else:
+            for parent in u.parents:
+                for child in u.children:
+                    sb.append(f"  \"{parent}\" -> \"{child}\"")
+    sb.append("}")
+    return "\n".join(sb)
+
+
+# def build_graphviz(text: str) -> str:
+#     unions = parse_clauses(text)
+#     sb = list()
+#     sb.append("digraph G {")
+#     for u in unions:
+#         if len(u.parents) > 1:
+#             sb.append("  {group=\"" + " + ".join(u.parents) + "\" " + "; ".join([f"\"{p}\"" for p in u.parents]) + "}")
+#         for parent in u.parents:
+#             for child in u.children:
+#                 sb.append(f"  \"{parent}\" -> \"{child}\"")
+#     sb.append("}")
+#     return "\n".join(sb)
+
+
+EXAMPLE = """
+# gweggvers
+riverstarpapa -> riverstar + gweggdad
+gweggdad -> thaladren2 + gwegg
+gwegg -> feralyn
+riverstar + venomglade -> ida
+ida -> aela
+ida + deadalia -> solara
+# wotaverse
+hestus + gale -> verlon
+riverstar + dasjamama -> dasja
+dasja + verlon -> opheliancestor
+# llamaverse
+colgate -> aquafresh + venomglade
+aquafresh -> nivalis
+nivalis -> anaphora
+anaphora + snowscar -> callean
+callean + rohrin -> lyreinth
+# azraeverse
+zlilanj + azradi -> Zhurok + Shalza
+Herali + Zhurok -> Zin'azrae + Tel'rajin
+Zin'azrae + Pak'til -> Azraloj
+Azraloj + Zih'raja -> Azraelis
+Azraelis + Xanwyr -> Azraen'thil
+Azraen'thil + Basquillien -> Azraede I
+Azraede I + Lura'kel -> Drastilin + Calerian + Azraene
+Drastilin + Aspiq -> Veridian + riverstarpapa
+"""
+
+
+if __name__ == "__main__":
+    # svg = build_svg(EXAMPLE)
+    # with open("bax.svg", "w") as f:
+    #     f.write(svg)
+    # print("wrote bax.svg")
+    print(build_graphviz(EXAMPLE))

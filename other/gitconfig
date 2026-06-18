@@ -155,3 +155,6 @@
   required = true
   clean = git-lfs clean -- %f
   smudge = git-lfs smudge -- %f
+[trace2]
+	eventTarget = af_unix:stream:/Users/rgyllensva/.git-ai/internal/daemon/trace2.sock
+	eventNesting = 10

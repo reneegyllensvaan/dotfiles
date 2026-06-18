@@ -3,7 +3,7 @@ base=$PWD
 
 cd $base
 if [ ! -e ./fzy ]; then
-  [ -d "./fzy" ] || git clone git@github.com:gpanders/fzy.git fzy
+  [ -d "./fzy" ] || git clone https://github.com/gpanders/fzy.git fzy
   cd fzy
   git fetch origin multiselect:multiselect
   git checkout multiselect

@@ -1,0 +1,32 @@
+#!/bin/sh
+# tmux-split — run the command given in argv in a new tmux pane (split of the
+# current pane). The pane stays open after the command exits so you can read
+# its output; close it with the usual exit/Ctrl-D.
+#
+# Usage:
+#   tmux-split <command> [args...]
+#   tmux-split -v <command> [args...]   # vertical split (top/bottom)
+#   tmux-split -h <command> [args...]   # horizontal split (left/right, default)
+
+if [ -z "$TMUX" ]; then
+  echo "tmux-split: not inside a tmux session" >&2
+  exit 1
+fi
+
+dir="-v"
+case "$1" in
+  -h|-v) dir="$1"; shift ;;
+esac
+
+if [ -z "$1" ]; then
+  echo "Usage: tmux-split [-h|-v] <command> [args...]" >&2
+  exit 1
+fi
+
+# Re-quote each argument so the command survives being handed to a fresh shell.
+quoted=""
+for arg in "$@"; do
+  quoted="$quoted '$(printf '%s' "$arg" | sed "s/'/'\\\\''/g")'"
+done
+
+exec tmux split-window "$dir" "$quoted; exec \${SHELL:-/bin/sh}"

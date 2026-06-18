@@ -158,7 +158,7 @@ nnoremap \= gg=G``
 " Spellcheck
 nnoremap \sg :spellgood <C-r><C-w>
 nnoremap \sa yiw:e ~/.vim/rc/autocorrect.vim<CR>Goiab <C-r>0 <C-r>0
-nnoremap <expr> <Space>ta ":setlocal ".(&l:spell ? "no" : "")."spell\<CR>"
+nnoremap <Space>ta :setlocal spell!<CR>
 
 " Keep visual selection on indent
 nnoremap \< V`]<
@@ -328,7 +328,7 @@ nnoremap <Space>ttw8 :set textwidth=80<CR>
 nnoremap <Space>ttw9 :set textwidth=90<CR>
 nnoremap <expr> <Space>tw &list ? ":set nolist\<CR>" : ":set list\<CR>"
 nnoremap <expr> <Space>tsl ":set laststatus=".(1+(&laststatus)%2)."\<CR>"
-nnoremap <expr> <Space>td ":setlocal ".(&l:diff ? "no" : "")."diff\<CR>"
+nnoremap <Space>td :setlocal diff!<CR>
 " 1}}}
 " Vim Actions: {{{1
 nnoremap <silent> <Space>vh :exec "hi ".synIDattr(synID(line("."),col("."),1),"name")<CR>
@@ -360,11 +360,6 @@ nnoremap <silent> <Space>e :call feedkeys(":e \<Tab>", 'tn')<CR>
 nnoremap <silent> <Space>E :call feedkeys(":e ".expand("%:h")."/\<Tab>", 'tn')<CR>
 " 1}}}
 " Module Files: {{{1
-" WorkMode
-nnoremap <Space>oE :e ~/.workmode.vim<CR>
-nnoremap <Space>oo :so ~/.workmode.vim<CR>
-nnoremap <Space>o  :so ~/.workmode.vim<CR>
-
 " Coc
 nnoremap <Space>s- :CocDisable<CR>
 nnoremap <Space>s+ :source ~/.vim/rc/coc.vim<CR>
