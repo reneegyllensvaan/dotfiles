@@ -1,164 +1,224 @@
-# base i3 settings and bindings
 set $mod Mod4
-font pango:monospace 7
-bindsym $mod+Shift+BackSpace restart
-bindsym $mod+Shift+Mod1+BackSpace exit
-new_window pixel 3
-hide_edge_borders smart
-gaps inner 15
-#new_window normal
-
-# Floating window settings
+font pango:Hack 9
 floating_modifier $mod
-bindsym $mod+Shift+space floating toggle
-for_window [title="feh"] floating enable
 
-# launching programs
-bindsym $mod+Return exec --no-startup-id "urxvtc -e 'urxvtmux'"
-bindsym $mod+Shift+Return exec --no-startup-id urxvtc
-bindsym $mod+z exec --no-startup-id "rofi -modi run,drun,ssh,window -show drun"
-bindsym $mod+Shift+z exec --no-startup-id "rofi -modi run,drun,ssh,window -show run"
-bindsym $mod+Shift+w exec --no-startup-id "rofi -modi window -show window"
-bindsym $mod+Shift+e exec --no-startup-id "rofi -modi emoji -show emoji"
-bindsym $mod+space focus mode_toggle
-bindsym $mod+c exec --no-startup-id "clipmenu && xsel -o"
-#bindsym $mod+F1 exec --no-startup-id "guake -t" //commented because terminal trigger has bad dbus lag
-bindsym $mod+F10 bar mode toggle
+# start a terminal
+set $term urxvt
+bindsym $mod+Return exec $term
 
-# launcher hotkeys
-bindsym $mod+Mod1+w exec --no-startup-id "GTK_THEME=Adwaita:light chromium"
-bindsym $mod+Mod1+g exec --no-startup-id "gvim"
-
-
-# core controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
-# bindsym $mod+F6 exec --no-startup-id xbacklight -inc 10 # increase screen brightness
-# bindsym $mod+F5 exec --no-startup-id xbacklight -dec 10 # decrease screen brightness
-bindsym $mod+Shift+Delete exec --no-startup-id "i3lock-fancy"
-bindsym $mod+Shift+c exec --no-startup-id toggle-compositor
-
-# screenshot
-bindsym --release $mod+Print exec --no-startup-id "scrot 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h.png' -e 'mv $f ~/img/scrot/ && xclip -t image/png ~/img/scrot/$f -sel clip'"
-bindsym --release $mod+Shift+Print exec --no-startup-id "scrot --select 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h_snip.png' -e 'mv $f ~/img/scrot/ && xclip -t image/png ~/img/scrot/$f -sel clip'"
-bindsym --release $mod+Shift+s exec --no-startup-id "scrot --select 'scrot-%Y-%m-%d_%h-%m-%s_$wx$h_snip.png' -e 'mv $f ~/img/scrot/ && xclip -t image/png ~/img/scrot/$f -sel clip'"
-
-# workspace controls:
-bindsym $mod+Next exec --no-startup-id i3-msg "move workspace to output eDP1"
-bindsym $mod+Prior exec --no-startup-id i3-msg "move workspace to output HDMI1"
-# open dmenu selector containing entries from ~/.screenlayout with xrandr profiles
-#bindsym $mod+Shift+F10 exec --no-startup-id sh "echo \"$(printf '~/.screenlayout/';ls ~/.screenlayout | dmenu -l 6))\" | sh 2>/dev/null"
-bindsym $mod+F11 gaps inner current minus 15
-bindsym $mod+F12 gaps inner current plus 15
-
-
-###################### base key binds below
-# split/stack/orientation
-bindsym $mod+q layout splith
-bindsym $mod+a layout splitv
-bindsym $mod+w layout tabbed
-bindsym $mod+r layout stacked
-bindsym $mod+f split h
-bindsym $mod+s split v
-
-# window controls
+# kill focused window
 bindsym $mod+Shift+q kill
-bindsym $mod+v fullscreen toggle
-bindsym $mod+t focus parent
-bindsym $mod+p focus child
 
-# change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+# start dmenu (a program launcher)
+#bindsym ctrl+space exec rofi -show run
+bindsym $mod+space exec "rofi -show combi -modi window,run,combi -combi-modi window,run"
+#bindsym ctrl+space exec dmenu_run
+
+# alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+# alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
-# resize focused window
-bindsym $mod+Mod1+h resize shrink width 5 px or 5 ppt
-bindsym $mod+Mod1+j resize grow height 5 px or 5 ppt
-bindsym $mod+Mod1+k resize shrink height 5 px or 5 ppt
-bindsym $mod+Mod1+l resize grow width 5 px or 5 ppt
-bindsym $mod+Mod1+Left resize shrink width 5 px or 5 ppt
-bindsym $mod+Mod1+Down resize grow height 5 px or 5 ppt
-bindsym $mod+Mod1+Up resize shrink height 5 px or 5 ppt
-bindsym $mod+Mod1+Right resize grow width 5 px or 5 ppt
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+bindsym $mod+t split toggle
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+w sticky toggle
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+grave focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
 
 # switch to workspace
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
 
-# # i3bar+status config
-# bar {
-#   font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-#   font pango:Iosevka Fixed 6
-#   status_command i3status
-#   tray_padding 100 px
-#   mode dock
-#   colors {
-#     background #282C34
-#     statusline #e7ebed
-#     separator #e7ebed
-#     focused_workspace  #adf7be #adf7be #1d262a
-#     active_workspace   #333333 #5f676a #ffffff
-#     inactive_workspace #435b67 #222222 #a1b0b8
-#     urgent_workspace   #fc3841 #fc3841 #000000
-#   }
-# }
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# class                 border  backgr. text    indicator child_border
-client.focused          #98ff98 #98ff98 #000000 #fcc6db   #98ff98
-client.focused_inactive #435b67 #435b67 #ffffff #484e50   #5f676a
-client.unfocused        #333333 #222222 #e7ebed #292d2e   #222222
-client.urgent           #2f343a #900000 #ffffff #900000   #900000
-client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
-client.background       #ffffff
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
 
-# Launching mode hotkeys
-mode "launcher" {
-  # Bind this as a leader for launching applications
-  bindsym q           exec --no-startup-id qutebrowser    ; mode "default"
-  bindsym w           exec --no-startup-id chromium       ; mode "default"
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 5 px or 5 ppt
+        bindsym Down resize grow height 5 px or 5 ppt
+        bindsym Up resize shrink height 5 px or 5 ppt
+        bindsym Right resize grow width 5 px or 5 ppt
 
-  # back to normal: Enter or Escape or Mod1+r
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
-  bindsym Mod1+r mode "default"
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
 }
 
-bindsym Mod1+Mod4+z mode "launcher"
+bindsym $mod+r mode "resize"
+
+
+#
+# Status Bar:
+#
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #000000 #000000 #ffffff #000000   #000000
+client.focused_inactive #000000 #000000 #ffffff #000000   #000000
+client.unfocused        #000000 #000000 #888888 #000000   #000000
+client.urgent           #000000 #000000 #ffffff #000000   #000000
+client.placeholder      #000000 #000000 #ffffff #000000   #000000
+client.background       #ffffff
+
+########################################################################
+########################################################################
+####
+####                   Workplaces layout
+####
+########################################################################
+########################################################################
+
+exec --no-startup-id "i3-msg 'workspace 1; exec urxvt'"
+
+########################################################################
+########################################################################
+####
+####                   Floated windows
+####
+########################################################################
+########################################################################
+
+for_window [title="Calculator"] floating enable
+for_window [title="Timer"] floating enable
+for_window [class="^.*"] border pixel 1
+for_window [class="librewolf"] border none
+for_window [class="firefox"] border none
+for_window [class="mpv"] floating enable
+for_window [class="imv"] floating enable
+for_window [class="zenity"] floating enable
+for_window [class="cachyos-welcome"] floating enable
+for_window [class="spectacle"] floating enable
+
+
+########################################################################
+########################################################################
+####
+####                   HOTKEYS
+####
+########################################################################
+########################################################################
+
+
+bindsym XF86AudioRaiseVolume exec "pamixer -ui 3 && pamixer --get-volume > /tmp/xobpipe"
+bindsym XF86AudioLowerVolume exec "pamixer -ud 3 && pamixer --get-volume > /tmp/xobpipe"
+# mute sound
+bindsym XF86AudioMute exec "amixer sset Master toggle | sed -En '/\[on\]/ s/.*\[([0-9]+)%\].*/\1/ p; /\[off\]/ s/.*/0/p' | head -1 > /tmp/xobpipe"
+
+# screen backlight
+bindsym XF86MonBrightnessUp exec brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
+
+bindsym $mod+Shift+p exec gnome-calculator
+#bindsym $mod+p exec ~/.scripts/dmshot
+
+## Lock screen
+bindsym $mod+l exec "sleep 0.1 && i3lock --blur 5"
+
+########################################################################
+########################################################################
+####
+####                   AUTOLOAD
+####
+########################################################################
+########################################################################
+
+# Force a visible border/indicator on urgent windows
+force_display_urgency_hint 500 ms
+
+# Keyboard layout: US only, set via ~/.xprofile
+
+exec --no-startup-id xrandr --output DP-2 --mode 1920x1080 --rate 144
+#exec xrandr --output HDMI-1 --mode 1920x1080 --rate 60 --scale 1x1
+#exec xrandr --auto --output HDMI-1 --mode 1920x1080 --above HDMI-2
+
+exec feh --bg-fill ~/.config/i3/wallpaper.png
+
+exec --no-startup-id clipmenud
+exec --no-startup-id dunst
+# exec --no-startup-id picom
+# exec --no-startup-id redshift
+exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+
+# # Screenshots
+# bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date)"
+# bindsym $mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) "/home/$USER/Pictures/$(date)"
+# bindsym Shift+Print exec --no-startup-id maim --select "/home/$USER/Pictures/$(date)"
+# ## Clipboard Screenshots
+# bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+# bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+# bindsym $mod+Shift+s exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
+# bindsym $mod+Shift+s exec --no-startup-id spectacle -brc
+bindsym $mod+Shift+s exec --no-startup-id ~/dotfiles/bin/flameshot-gui --clipboard --accept-on-select
+bindsym $mod+ctrl+s exec --no-startup-id ~/dotfiles/bin/flameshot-gui
+
+exec_always [ -p /tmp/xobpipe ] || mkfifo /tmp/xobpipe; killall -q xob 2>/dev/null; tail -f /tmp/xobpipe | xob -t 2170 & disown
+#exec ~/.i3/launch.sh

@@ -1,6 +1,7 @@
 #!/bin/sh
 [ "$USER_WORK_EMAIL" ] || exit 1
 cat << EOF
+# Generated from dotfiles/email/notmuch-config-work.tmpl.sh
 # .notmuch-config - Configuration file for the notmuch mail system
 #
 # For more information about notmuch, see https://notmuchmail.org

@@ -1,5 +1,6 @@
 #!/bin/sh
 cat << EOF
+# Generated from dotfiles/x11/zathurarc.tmpl.sh
 set font "Iosevka Fixed 13"
 set notification-error-bg       "$BACKGROUND" # base01  # seem not work
 set notification-error-fg       "$COLOR09" # red

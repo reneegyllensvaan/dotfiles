@@ -1,20 +1,9 @@
-(cd ~/.xres && ./init)
+#!/bin/sh
+# Used by startx / xinit. Display managers use ~/.xprofile instead.
 
-disable bell beep
-xset b off
+# Source pre-WM config (keyboard, Xresources, xset)
+[ -f "$HOME/.xprofile" ] && . "$HOME/.xprofile"
+
+# Daemons (display manager users get these from i3 config exec)
 dunst &
-urxvtd &
 clipmenud &
-hsetroot &
-
-# Keyboard config
-# setxkbmap -layout "us,se" -option "grp:caps_switch"
-# setxkbmap -layout "us" -variant colemak -option 'caps:escape' -option 'ctrl:ralt_rctrl'
-setxkbmap -option 'caps:escape'
-xmodmap ~/.config/colemak_dh_matrix.xmodmap
-
-# set key repeat rate
-xset r rate 200 35
-(sleep 4 && exec polybar -c ~/code/dotfiles/x11/polybar.conf example) &
-
-[ -f ~/wallpaper.jpg ] && feh --bg-scale ~/wallpaper.jpg

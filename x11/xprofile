@@ -1,0 +1,16 @@
+#!/bin/sh
+# Sourced by display manager (SDDM, GDM, LightDM) before the window manager.
+# Put keyboard layout, Xresources, and other pre-WM X configuration here.
+# This replaces ~/.xinitrc for DM-based login.
+
+# X resources (colors, rofi theme, urxvt config)
+[ -x "$HOME/.xres/init" ] && "$HOME/.xres/init"
+
+# Disable audible bell
+xset b off
+
+# Key repeat rate
+xset r rate 200 35
+
+# Keyboard: Colemak-DH Ortholinear + Caps→Escape
+xmodmap "$HOME/.config/colemak_dh_ortho.xmodmap"

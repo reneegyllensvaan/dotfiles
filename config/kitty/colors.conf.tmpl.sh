@@ -1,5 +1,6 @@
 #!/bin/sh
 cat << EOF
+# Generated from dotfiles/config/kitty/colors.conf.tmpl.sh
 # vim: fileencoding=utf-8:ft=conf:foldmethod=marker
 
 # Generated colors

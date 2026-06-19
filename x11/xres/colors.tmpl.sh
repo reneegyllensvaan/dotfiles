@@ -1,5 +1,6 @@
 #!/bin/sh
 cat << EOF
+! Generated from dotfiles/x11/xres/colors.tmpl.sh
 *.foreground:   $FOREGROUND
 *.background:   $BACKGROUND
 *.cursorColor:  $CURSOR_COLOR

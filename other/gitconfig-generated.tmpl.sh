@@ -1,5 +1,7 @@
 #!/bin/sh
 cat << EOF
+# Generated from dotfiles/other/gitconfig-generated.tmpl.sh
+
 [user]
   name = $USER_NAME
   email = $USER_EMAIL

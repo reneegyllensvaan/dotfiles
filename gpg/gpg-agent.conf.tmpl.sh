@@ -1,5 +1,6 @@
 #!/bin/sh
 cat << EOF
+# Generated from dotfiles/gpg/gpg-agent.conf.tmpl.sh
 default-cache-ttl 600
 max-cache-ttl 7200
 enable-ssh-support

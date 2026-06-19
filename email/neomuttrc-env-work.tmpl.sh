@@ -1,5 +1,6 @@
 #!/bin/sh
 cat << EOF
+# Generated from dotfiles/email/neomuttrc-env-work.tmpl.sh
 # vim: ft=neomuttrc
 set folder="$HOME/email/work"
 set nm_default_uri="notmuch:///$HOME/email/work"

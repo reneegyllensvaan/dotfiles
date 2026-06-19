@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd "$(dirname "$0")"
+
 xrdb colors
 xrdb -merge xresources-rofi
 xrdb -merge xresources-urxvt

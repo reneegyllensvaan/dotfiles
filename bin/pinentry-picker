@@ -2,7 +2,7 @@
 which pinentry-mac >/dev/null 2>&1 \
   && exec pinentry-mac $@
 
+which pinentry-gtk-2 >/dev/null 2>&1 && exec pinentry-gtk-2 $@
 which pinentry-qt >/dev/null 2>&1 && exec pinentry-qt $@
-which pinentry-gtk >/dev/null 2>&1 && exec pinentry-gtk $@
 which pinentry-curses >/dev/null 2>&1 && exec pinentry-curses $@
 echo 'found no pinentry'

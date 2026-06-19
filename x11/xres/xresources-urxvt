@@ -9,10 +9,9 @@ URxvt.font: xft:Iosevka Fixed:Regular:size=10
 URxvt.iso14755: false
 URxvt.scrollBar: false
 URxvt.internalBorder: 0
-! Disable scrollback
-URxvt*saveLines: 0
+URxvt*saveLines: 10000
 URxvt*meta8: true
-
+URxvt*scrollTtyOutput: false
 
 ! scale fonts
 URxvt.keysym.C-equal: font-size:increase
@@ -21,7 +20,10 @@ URxvt.keysym.C-zero: font-size:reset
 
 ! Copy to secondary
 URxvt.clipboard.autocopy: true
+URxvt.clipboard.copycmd:  xclip -i -selection clipboard
+URxvt.clipboard.pastecmd: xclip -o -selection clipboard
 URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.C-S-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 
 URxvt*keysym.Shift-Control-V: perl:clipboard:paste

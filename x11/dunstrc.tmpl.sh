@@ -1,5 +1,7 @@
 #!/bin/sh
 cat << EOF
+# Generated from dotfiles/x11/dunstrc.tmpl.sh
+
 [global]
     ### Display ###
 

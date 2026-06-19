@@ -3,7 +3,7 @@
   path = ~/.gitconfig-generated
 
 [core]
-  excludesfile = /Users/rgyllensva/.gitignore_global
+  excludesfile = ~/.gitignore_global
   pager = delta
 [gpg]
   program = gpg

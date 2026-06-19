@@ -285,6 +285,8 @@ symlink dir config/kitty $HOME/.config/kitty
 log "  Xorg applications"
 symlink file x11/xinitrc ~/.xinitrc
 symlink file x11/xsession ~/.xsession
+symlink file x11/xprofile ~/.xprofile
+
 symlink dir x11/xres ~/.xres
 ensure_directory ~/.config/dunst
 symlink file x11/dunstrc ~/.config/dunst/dunstrc
@@ -293,10 +295,11 @@ symlink file x11/i3_config $HOME/.config/i3/config
 ensure_directory $HOME/.config/zathura
 symlink file x11/zathurarc $HOME/.config/zathura/zathurarc
 symlink file x11/picom.conf $HOME/.config/picom.conf
-ensure_directory $HOME/.config/alacritty
-symlink file x11/alacritty.yml $HOME/.config/alacritty/alacritty.yml
-symlink file x11/colemak_dh_matrix.xmodmap $HOME/.config/colemak_dh_matrix.xmodmap
+symlink file x11/colemak_dh_ortho.xmodmap $HOME/.config/colemak_dh_ortho.xmodmap
 symlink file x11/miryoku.kbd $HOME/.config/miryoku.kbd
+ensure_directory $HOME/.config/polybar
+symlink file x11/polybar.conf $HOME/.config/polybar/config
+symlink file x11/polybar_launch.sh $HOME/.config/polybar/launch.sh
 
 
 log "  Urxvt conf"

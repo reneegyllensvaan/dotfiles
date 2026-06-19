@@ -15,7 +15,7 @@ tag-transforms \
     "deleted" "d"
 
 
-set nm_default_uri="notmuch:///Users/renee/email/home"
+set nm_default_uri="notmuch:///$HOME/email/home"
 
 # This variable allows you to customize the file browser display for virtual
 # folders to your personal taste.

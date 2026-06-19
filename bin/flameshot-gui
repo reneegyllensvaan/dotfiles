@@ -1,0 +1,11 @@
+#!/bin/bash
+# Wrapper: re-fullscreens the game window after flameshot closes.
+# flameshot's screen-grab makes the game drop fullscreen.
+# i3 can't prevent this (overlay is override-redirect).
+
+was_fullscreen=$(i3-msg -t get_tree 2>/dev/null | \
+  jq -r 'recurse(.nodes[]?) | select(.focused==true) | .fullscreen_mode' 2>/dev/null)
+
+flameshot gui "$@"
+
+[ "$was_fullscreen" = "1" ] && i3-msg fullscreen enable >/dev/null 2>&1
