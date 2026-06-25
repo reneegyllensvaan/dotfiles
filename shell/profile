@@ -10,6 +10,8 @@ export PATH="$HOME/.nimble/bin:$PATH"
 [ -e ~/.skim ] && export PATH="$HOME/.skim/bin:$PATH"
 [ -e ~/.roswell ] && export PATH="$HOME/.roswell/bin:$PATH"
 [ -e ~/.cargo/env ] && # which python3 >/dev/null 2>&1 && PATH="$PATH:`python3 -m site --user-base`/bin"
+
+[ -e /var/lib/snapd/snap/bin ] && export PATH="$PATH:/var/lib/snapd/snap/bin"
 # which python2 >/dev/null 2>&1 && PATH="$PATH:`python2 -m site --user-base`/bin"
 
 export NODE_OPTIONS='--max-old-space-size=8192'
@@ -61,3 +63,4 @@ export P=$CLIPBOARD_PASTE
 . "$HOME/.cargo/env"
 
 export PATH="$HOME/.elan/bin:$PATH"
+
