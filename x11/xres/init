@@ -2,6 +2,7 @@
 
 cd "$(dirname "$0")"
 
-xrdb colors
-xrdb -merge xresources-rofi
-xrdb -merge xresources-urxvt
+xrdb colors 2>/dev/null
+xrdb -merge xresources-rofi 2>/dev/null
+# urxvt is X11-only; silently skip if no X display
+xrdb -merge xresources-urxvt 2>/dev/null

@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# Show each Sway window tagged with its backend: xdg_shell (Wayland) or xwayland.
+# Usage: sway-window-backends              # all windows
+#        sway-window-backends xwayland     # only XWayland windows
+
+filter="${1:-}"
+
+swaymsg -t get_tree | jq -r --arg filter "$filter" '
+  def color($shell):
+    if $shell == "xwayland" then "\u001b[1;33m"    # bold yellow
+    elif $shell == "xdg_shell" then "\u001b[1;36m" # bold cyan
+    else "" end;
+
+  recurse(.nodes[]?, .floating_nodes[]?)
+  | select(.pid)
+  | select($filter == "" or .shell == $filter)
+  | "\(color(.shell))\(.shell // "unknown")\u001b[0m  \(.name // "(unnamed)")"
+'

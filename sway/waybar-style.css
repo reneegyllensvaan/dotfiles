@@ -1,0 +1,62 @@
+* {
+    font-family: Hack, "Font Awesome 6 Free", "Font Awesome 6 Brands";
+    font-size: 12px;
+    min-height: 22px;
+}
+
+window#waybar {
+    background: #1e2127;
+    color: #abb2bf;
+}
+
+#workspaces button {
+    padding: 0 4px;
+    color: #abb2bf;
+    background: #1e2127;
+}
+
+#workspaces button.focused {
+    background: #abb2bf;
+    color: #1e2127;
+}
+
+#workspaces button.urgent {
+    background: #e06c75;
+    color: #1e2127;
+}
+
+#workspaces button:hover {
+    background: #5c6370;
+    color: #abb2bf;
+}
+
+#custom-hackspeed,
+#custom-network,
+#pulseaudio,
+#custom-brightness,
+#battery,
+#custom-updates,
+#clock {
+    padding: 0 6px;
+    color: #abb2bf;
+}
+
+#pulseaudio.muted {
+    color: #5c6370;
+}
+
+#battery.charging {
+    color: #98c379;
+}
+
+#battery.low {
+    color: #e06c75;
+}
+
+#battery.full {
+    color: #61afef;
+}
+
+#custom-updates {
+    color: #d19a66;
+}

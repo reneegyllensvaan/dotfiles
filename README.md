@@ -1,3 +1,4 @@
+<!-- Generated from dotfiles/README.md.tmpl.sh -->
 # Renee's dotfiles
 i write these so i can write the code
 

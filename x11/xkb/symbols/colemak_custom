@@ -1,0 +1,13 @@
+// Colemak-DH Ortholinear with apostrophe/semicolon swapped
+// Matches the xmodmap in ~/.config/colemak_dh_ortho.xmodmap
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    include "us(colemak_dh_ortho)"
+
+    // Swap apostrophe and semicolon vs standard Colemak-DH Ortho
+    key <AD10> { [   apostrophe,     quotedbl,          otilde,           Otilde ] };
+    key <AC11> { [    semicolon,        colon,      odiaeresis,       Odiaeresis ] };
+
+    // Caps Lock as Escape
+    // key <CAPS> { [ Escape ] };
+};

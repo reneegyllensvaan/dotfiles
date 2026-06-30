@@ -1,14 +1,15 @@
 #!/bin/bash
+# Shared: network status for waybar.
+# Same logic as polybar/scripts/network.sh
+
 IFACE=wlan0
 
-# Get WiFi info
 ssid=$(iw dev "$IFACE" info 2>/dev/null | awk '/ssid/ {sub(/^[[:space:]]*ssid /,""); print}')
 signal=$(awk -v iface="$IFACE:" '$1==iface {print int($3)}' /proc/net/wireless 2>/dev/null)
 ip=$(ip -br addr show "$IFACE" 2>/dev/null | awk '{print $3}' | cut -d/ -f1)
 
-# # Transfer rates (delta from last poll)
-# rx_file="/tmp/polybar_net_rx_$IFACE"
-# tx_file="/tmp/polybar_net_tx_$IFACE"
+# rx_file="/tmp/waybar_net_rx_$IFACE"
+# tx_file="/tmp/waybar_net_tx_$IFACE"
 # rx_cur=$(awk -v iface="$IFACE:" '$1==iface {print $2}' /proc/net/dev)
 # tx_cur=$(awk -v iface="$IFACE:" '$1==iface {print $10}' /proc/net/dev)
 # rx_prev=$(cat "$rx_file" 2>/dev/null || echo "$rx_cur")

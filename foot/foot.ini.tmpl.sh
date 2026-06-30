@@ -1,0 +1,52 @@
+#!/bin/sh
+cat << 'FOOTEOF'
+# vim: ft=dosini
+# Generated from dotfiles/foot/foot.ini.tmpl.sh
+# Migrated from x11/xres/xresources-urxvt
+
+include=~/.config/foot/colors.ini
+
+# ── Font ────────────────────────────────────────────────────────────────────
+# urxvt: URxvt.font: xft:Iosevka Fixed:Regular:size=10
+font=Iosevka Fixed:size=13
+
+# ── Terminal identity ───────────────────────────────────────────────────────
+# urxvt: URxvt*meta8: true (8-bit meta) — Foot handles meta correctly by default
+term=xterm-256color
+
+# ── Cursor ─────────────────────────────────────────────────────────────────
+[cursor]
+unfocused-style=hollow
+
+# ── Padding ─────────────────────────────────────────────────────────────────
+# urxvt: URxvt.internalBorder: 0
+[main]
+pad=0x0
+
+# ── Scrollback ──────────────────────────────────────────────────────────────
+# urxvt: URxvt*saveLines: 10000
+[scrollback]
+lines=10000
+indicator-position=relative
+
+# ── Key bindings ────────────────────────────────────────────────────────────
+# Mapped from urxvt:
+#   C-equal / C-minus / C-zero → font-size increase/decrease/reset
+#   M-u → URL selection (urxvt url-select extension)
+#   M-Escape → scrollback search (urxvt keyboard-select extension)
+#   Control+Shift+u → copy URLs (overrides default unicode-input)
+# Clipboard is native via Ctrl+Shift+C/V (no perl extension needed).
+[key-bindings]
+# Font size (same defaults as urxvt font-size extension)
+font-increase=Control+equal
+font-decrease=Control+minus
+font-reset=Control+0
+# URL mode (urxvt: URxvt.keysym.M-u → url-select:select_next)
+show-urls-launch=Mod1+u
+# URL copy (needs unicode-input unmapped first)
+unicode-input=none
+show-urls-copy=Control+Shift+u
+# Scrollback search (urxvt: URxvt.keysym.M-Escape → keyboard-select:activate)
+search-start=Mod1+Escape
+FOOTEOF
+exit 0

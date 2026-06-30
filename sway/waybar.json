@@ -1,0 +1,80 @@
+{
+    "layer": "bottom",
+    "position": "bottom",
+    "height": 24,
+    "spacing": 0,
+    "margin-top": 0,
+    "margin-bottom": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-center": [],
+    "modules-right": [
+        "custom/network",
+        "pulseaudio",
+        "custom/brightness",
+        "battery",
+        "custom/updates",
+        "clock"
+    ],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": false,
+        "format": "{icon}",
+        "format-icons": {
+            "1": "1",
+            "2": "2",
+            "3": "3",
+            "4": "4",
+            "5": "5",
+            "6": "6",
+            "7": "7",
+            "8": "8",
+            "9": "9",
+            "10": "10"
+        }
+    },
+    "custom/network": {
+        "exec": "~/.config/sway/scripts/network.sh",
+        "interval": 2,
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{icon} Vol:{volume}%",
+        "format-muted": "MUTED",
+        "format-icons": {
+            "default": ["", ""]
+        },
+        "on-click": "pamixer -t",
+        "tooltip": false
+    },
+    "custom/brightness": {
+        "exec": "~/.config/sway/scripts/brightness.sh",
+        "interval": 2,
+        "tooltip": false
+    },
+    "battery": {
+        "format": "bat {capacity}%",
+        "format-charging": "chr {capacity}%",
+        "format-full": "full {capacity}%",
+        "states": {
+            "low": 15
+        },
+        "format-low": "! {capacity}%",
+        "full-at": 99,
+        "bat": "BAT1",
+        "tooltip": false
+    },
+    "custom/updates": {
+        "exec": "~/.config/sway/scripts/arch_updates.sh",
+        "interval": 600,
+        "tooltip": false
+    },
+    "clock": {
+        "format": "{:%Y-%m-%d %H:%M}",
+        "interval": 1,
+        "tooltip": false
+    }
+}

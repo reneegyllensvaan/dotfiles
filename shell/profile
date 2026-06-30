@@ -64,3 +64,4 @@ export P=$CLIPBOARD_PASTE
 
 export PATH="$HOME/.elan/bin:$PATH"
 
+SWAY_UNSUPPORTED_GPU=true

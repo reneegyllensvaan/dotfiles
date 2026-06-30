@@ -228,7 +228,6 @@ ensure_git_repo vim/pack/plugins/opt/vimacs https://github.com/andrep/vimacs
 ensure_git_repo vim/pack/plugins/opt/neomake https://github.com/neomake/neomake
 ensure_git_repo vim/pack/plugins/opt/clap https://github.com/liuchengxu/vim-clap
 ensure_git_repo vim/pack/plugins/opt/octo https://github.com/pwntester/octo.nvim.git
-ensure_git_repo vim/pack/plugins/opt/hop https://github.com/phaazon/hop.nvim
 ensure_git_repo vim/pack/plugins/opt/blame https://github.com/f-person/git-blame.nvim
 ensure_git_repo vim/pack/plugins/opt/coverage https://github.com/ruanyl/coverage.vim
 ensure_git_repo vim/pack/plugins/opt/mundo https://github.com/simnalamburt/vim-mundo
@@ -259,6 +258,9 @@ build_template x11/zathurarc
 build_template x11/xres/colors
 build_template x11/dunstrc
 build_template config/kitty/colors.conf
+build_template foot/colors.ini
+build_template foot/foot.ini
+build_template sway/fuzzel.ini
 
 if which yq >/dev/null 2>&1; then
   if [ -e ~/.config/textmateSnippets ]; then
@@ -300,9 +302,36 @@ symlink file x11/miryoku.kbd $HOME/.config/miryoku.kbd
 ensure_directory $HOME/.config/polybar
 symlink file x11/polybar.conf $HOME/.config/polybar/config
 symlink file x11/polybar_launch.sh $HOME/.config/polybar/launch.sh
+symlink dir x11/polybar/scripts $HOME/.config/polybar/scripts
 
+log "  Sway (Wayland) applications"
+ensure_directory $HOME/.config/sway
+symlink file sway/config $HOME/.config/sway/config
+ensure_directory $HOME/.config/sway/scripts
+symlink file sway/scripts/hackspeed.sh $HOME/.config/sway/scripts/hackspeed.sh
+symlink file sway/scripts/network.sh $HOME/.config/sway/scripts/network.sh
+symlink file sway/scripts/brightness.sh $HOME/.config/sway/scripts/brightness.sh
+symlink file sway/scripts/arch_updates.sh $HOME/.config/sway/scripts/arch_updates.sh
+symlink file sway/scripts/faugus-desktop-gen $HOME/.config/sway/scripts/faugus-desktop-gen
+symlink file sway/scripts/screenshot-fullscreen-wrap.sh $HOME/.config/sway/scripts/screenshot-fullscreen-wrap.sh
+ensure_directory $HOME/.config/waybar
+symlink file sway/waybar.json $HOME/.config/waybar/config
+symlink file sway/waybar-style.css $HOME/.config/waybar/style.css
+ensure_directory $HOME/.config/mako
+symlink file sway/mako.conf $HOME/.config/mako/config
+ensure_directory $HOME/.config/fuzzel
+symlink file sway/fuzzel.ini $HOME/.config/fuzzel/fuzzel.ini
+# Try to register Sway with display manager (may need sudo)
+if [ -d /usr/share/wayland-sessions ]; then
+  push_cmd "sudo cp '$PWD/sway/sway-session.desktop' /usr/share/wayland-sessions/sway.desktop"
+fi
 
-log "  Urxvt conf"
+log "  Foot terminal (Wayland)"
+ensure_directory $HOME/.config/foot
+symlink file foot/foot.ini $HOME/.config/foot/foot.ini
+symlink file foot/colors.ini $HOME/.config/foot/colors.ini
+
+log "  Urxvt conf (X11, legacy)"
 ensure_directory $HOME/.urxvt
 symlink dir urxvt-ext $HOME/.urxvt/ext
 

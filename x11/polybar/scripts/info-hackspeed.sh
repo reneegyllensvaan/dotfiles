@@ -33,7 +33,7 @@ case "$METRIC" in
     *) echo "Unsupported metric \"$METRIC\""; exit 1; ;;
 esac
 
-hackspeed_cache="$(mktemp hackspeed_cache.XXXXX)"
+hackspeed_cache="$(mktemp -p '' hackspeed_cache.XXXXX)"
 trap 'rm "$hackspeed_cache"' EXIT
 
 # Write a dot to our cache for each key press

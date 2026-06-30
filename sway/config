@@ -1,0 +1,190 @@
+# Sway config — ported from i3_config
+# Keybindings and behavior mirror i3 setup for concurrent use.
+
+set $mod Mod4
+font pango:Hack 13
+floating_modifier $mod
+
+# ── Terminal ────────────────────────────────────────────────────────────────
+# i3 uses urxvt; on Wayland use kitty or foot.
+# Both are configured in this dotfiles repo.
+#   kitty: ~/.config/kitty/kitty.conf
+#   foot:  ~/.config/foot/foot.ini
+set $term foot
+bindsym $mod+Return exec $term
+
+# ── Kill window ─────────────────────────────────────────────────────────────
+bindsym $mod+Shift+q kill
+
+# ── Launcher ────────────────────────────────────────────────────────────────
+# i3 uses rofi. On Wayland: fuzzel (simple, native) or rofi-wayland.
+# fuzzel is the lighter choice and doesn't need X resources.
+bindsym $mod+space exec fuzzel --show run
+
+# ── Focus ───────────────────────────────────────────────────────────────────
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# ── Move ────────────────────────────────────────────────────────────────────
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# ── Split ───────────────────────────────────────────────────────────────────
+bindsym $mod+h split h
+bindsym $mod+v split v
+bindsym $mod+t split toggle
+
+# ── Fullscreen ──────────────────────────────────────────────────────────────
+bindsym $mod+f fullscreen toggle
+
+# ── Layout ──────────────────────────────────────────────────────────────────
+bindsym $mod+s       layout stacking
+bindsym $mod+w       layout tabbed
+bindsym $mod+e       layout toggle split
+bindsym $mod+Shift+w sticky toggle
+
+# ── Float / tiling ──────────────────────────────────────────────────────────
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+grave       focus mode_toggle
+
+# ── Parent ──────────────────────────────────────────────────────────────────
+bindsym $mod+a focus parent
+
+# ── Workspaces ──────────────────────────────────────────────────────────────
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
+set $ws10 "10"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# ── Reload / restart / exit ─────────────────────────────────────────────────
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'Exit Sway? This will end your session.' -b 'Yes, exit' 'swaymsg exit'"
+
+# ── Resize mode ─────────────────────────────────────────────────────────────
+mode "resize" {
+    bindsym Left  resize shrink width 5 px or 5 ppt
+    bindsym Down  resize grow height 5 px or 5 ppt
+    bindsym Up    resize shrink height 5 px or 5 ppt
+    bindsym Right resize grow width 5 px or 5 ppt
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# ── Gaps (Sway-only) ────────────────────────────────────────────────────────
+gaps inner 0
+gaps outer 0
+smart_gaps on
+
+# Hide borders when workspace has only one window
+smart_borders on
+default_border pixel 2
+default_floating_border pixel 2
+hide_edge_borders --i3 smart
+
+# ── Colors ──────────────────────────────────────────────────────────────────
+# Same OneDark-inspired dark scheme as i3
+client.focused          #61afef #303849 #abb2bf #61afef #61afef
+client.focused_inactive #1e2127 #1e2127 #abb2bf #1e2127 #1e2127
+client.unfocused        #1e2127 #1e2127 #5c6370 #1e2127 #1e2127
+client.urgent           #1e2127 #1e2127 #e06c75 #1e2127 #1e2127
+client.placeholder      #1e2127 #1e2127 #abb2bf #1e2127 #1e2127
+client.background       #1e2127
+
+# ── Floating rules ──────────────────────────────────────────────────────────
+for_window [title="Calculator"] floating enable
+for_window [title="Timer"]      floating enable
+for_window [app_id=".*"]        border pixel 1
+for_window [app_id="librewolf"]    border none
+for_window [app_id="firefox"]      border none
+for_window [app_id="mpv"]          floating enable
+for_window [app_id="imv"]          floating enable
+for_window [app_id="zenity"]       floating enable
+for_window [app_id="spectacle"]    floating enable
+
+# ── Output / display ────────────────────────────────────────────────────────
+# i3 uses xrandr, Sway uses output. Adjust to your monitor.
+output eDP-1 adaptive_sync on
+output eDP-1 mode 1920x1080@144Hz position 0,0
+output * bg ~/.config/sway/wallpaper.png fill
+
+# ── Input (keyboard) ────────────────────────────────────────────────────────
+# i3 uses xmodmap+xset via ~/.xprofile. Sway does it natively.
+input * {
+    xkb_layout colemak_custom
+    # xkb_options caps:escape
+    repeat_delay 200
+    repeat_rate 35
+}
+
+# ── Volume keys ─────────────────────────────────────────────────────────────
+bindsym XF86AudioRaiseVolume exec pamixer -ui 3 && pamixer --get-volume > /tmp/wobpipe
+bindsym XF86AudioLowerVolume exec pamixer -ud 3 && pamixer --get-volume > /tmp/wobpipe
+bindsym XF86AudioMute        exec pamixer -t; pamixer --get-mute | grep -q true && echo 0 > /tmp/wobpipe || pamixer --get-volume > /tmp/wobpipe
+
+# ── Brightness keys ─────────────────────────────────────────────────────────
+bindsym XF86MonBrightnessUp   exec brightnessctl set +5% && brightnessctl -m | cut -d, -f4 | tr -d '%' > /tmp/wobpipe
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- && brightnessctl -m | cut -d, -f4 | tr -d '%' > /tmp/wobpipe
+
+# ── Misc hotkeys ────────────────────────────────────────────────────────────
+bindsym $mod+Shift+p exec gnome-calculator
+bindsym $mod+l       exec swaylock -f --image ~/.config/sway/wallpaper.png
+
+# ── Screenshots ─────────────────────────────────────────────────────────────
+# grim + slurp (Wayland-native). Clip to clipboard via wl-copy.
+bindsym $mod+Shift+s       exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+ctrl+s         exec grim - | wl-copy
+
+# ── Startup daemons ─────────────────────────────────────────────────────────
+# exec --no-startup-id ~/.config/sway/scripts/smart-borders.sh
+exec --no-startup-id waybar
+exec --no-startup-id mako
+# Volume/brightness overlay (wob = Wayland equivalent of xob)
+exec_always [ -p /tmp/wobpipe ] || mkfifo /tmp/wobpipe; killall -q wob 2>/dev/null; tail -f /tmp/wobpipe | wob -t 2170 & disown
+exec --no-startup-id dex -a -s /etc/xdg/autostart/:~/.config/autostart/
+exec --no-startup-id ~/.config/sway/scripts/faugus-desktop-gen
+exec --no-startup-id /usr/lib/polkit-kde-authentication-agent-1
+
+# ── Urgency hint ────────────────────────────────────────────────────────────
+force_display_urgency_hint 500 ms
+
+# ── Open terminal on workspace 1 at start ───────────────────────────────────
+exec --no-startup-id "swaymsg 'workspace 1; exec $term'"
+
+# ── Include user-local overrides ────────────────────────────────────────────
+include ~/.config/sway/local.conf
